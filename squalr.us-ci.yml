@@ -17,7 +17,7 @@ steps:
     sourcePath: '$(Build.Repository.LocalPath)/site'
     azureSubscription: conn
     destination: azureBlob
-    storage: squalrusdev
-    containerName: "web"
+    storage: squalrus
+    containerName: "dev"
 
 - task: PublishBuildArtifacts@1

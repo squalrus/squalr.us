@@ -23,11 +23,98 @@
             text-align: center;
             color: #fff;
         }
+
+        h2 {
+            color: #fff;
+            text-transform: uppercase;
+            border-bottom: 2px solid #ffffffbb;
+            display: inline-block;
+            margin-bottom: -2px;
+        }
+
+        .heading {
+            color: #fff;
+            text-transform: uppercase;
+            border-bottom: 2px solid #ffffff55;
+            margin-bottom: 24px;
+        }
+
+        .container {
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .entity {
+            background-color: rgba(255, 255, 255, 0.75);
+            display: inline-block;
+            width: 300px;
+        }
+
+        .entity__metadata {
+            margin: 12px;
+        }
+
+        .entity__title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .entity__date {
+            text-transform: uppercase;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .entity__comment {
+            font-style: italic;
+            font-size: 14px;
+        }
     </style>
 </head>
 
 <body>
-    <h1>squalr.us</h1>
+    <div class="container">
+        <h1>squalr.us</h1>
+
+        <div class="heading">
+            <h2>Pop Culture</h2>
+        </div>
+
+        <div id="pop-culture"></div>
+    </div>
+
+    <script>
+        const pc = document.getElementById('pop-culture');
+        let data;
+
+        var request = new XMLHttpRequest();
+
+        request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+                if (request.status === 200) {
+                    data = JSON.parse(request.responseText);
+
+                    pc.insertAdjacentHTML('beforebegin', `${data.map(element => `
+                        <article class="entity">
+                            <img src="https://placekitten.com/300/300" /><!-- ${element.image} -->
+                            <div class="entity__metadata">
+                                <div class="entity__title">${ element.title }</div>
+                                <div class="entity__date">${ element.friendlyDate }</div>
+                                <div class="entity__comment">${ element.comment }</div>
+                            </div>
+                        </article>
+                    `).join('')}`);
+                    pc.parentNode.removeChild(pc);
+                } else {
+                    pc.innerHTML = 'An error occurred during your request: ' + request.status + ' ' + request.statusText;
+                }
+            }
+        }
+
+        request.open('get', `https://squalrus.azurewebsites.net/api/popculture`);
+        request.send();
+    </script>
 </body>
 
 </html>

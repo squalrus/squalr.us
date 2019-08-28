@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>squalr.us</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body,
+        html {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background: url(../stars.gif);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        h1 {
+            font-size: 40px;
+            text-align: center;
+            color: #000000;
+        }
+
+        img{
+            max-width: 100%;
+        }
+
+        .container {
+            max-width: 950px;
+            background: #f9f9f9;
+            margin: 0 auto;
+            padding: 25px;
+        }
+    </style>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-10469485-9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-10469485-9');
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="party-boat-piranha-pbp-game-design-document">Party Boat Piranha (PBP) Game Design Document</h1>
+        <p>Side-scrolling shooter where the player defends their party boat from airborne piranhas.</p>
+        <p>By: squalrus</p>
+        <h2 id="concept">Concept</h2>
+        <p>A pontoon boat filled with partying twenty-somethings is cruising down a river. The boat includes men and
+            women in
+            bathing suits, a keg of beer, inner tubes, a radio playing party music, and one rad dude at the bow of the
+            boat with
+            a t-shirt cannon.</p>
+        <p>Suddenly the partygoers find themselves in trouble as piranhas start jumping out of the water flying toward
+            the boat.
+            Thinking on his feet, the rad dude takes aim with the t-shirt cannon and starts firing t-shirts at the
+            oncoming
+            piranhas. Every piranha hit with a t-shirt becomes wrapped in one and falls back into the water.</p>
+        <p>The party boat continues down the river in an attempt to escape the never-ending barrage of fish, but how
+            long can
+            they fend them off?</p>
+        <h3 id="concept-sketch">Concept sketch</h3>
+        <p><img src="./concept.jpg" alt="hand-drawn sketch of concept layout"></p>
+        <h2 id="user-interface">User interface</h2>
+        <h3 id="title-screen">Title screen</h3>
+        <p>Depicts the scene of a party boat cruising down a river with the game title and a &quot;click to start&quot;
+            text.
+        </p>
+        <h3 id="game-over-screen">Game over screen</h3>
+        <p>As an homage to Grand Theft Auto, once the party boat hits 0% health, the screen shows &quot;wasted&quot;.
+            The score
+            will be recapped on a stats screen and the player will be brought back to the title screen.</p>
+        <h2 id="gameplay">Gameplay</h2>
+        <p>As piranhas fly out of the water at varying arcs and velocities, the player takes aim by tapping in the
+            direction the
+            t-shirt cannon will fire.</p>
+        <p>The user must manage their t-shirt inventory and overall boat health while trying to get the highest score by
+            hitting
+            the most piranhas, getting combos, and landing multipliers (same piranha, multiple t-shirts).</p>
+        <h2 id="assets">Assets</h2>
+        <p>The 2D assets list for PBP that are located in <code>/Unity/Assets/Art</code>. Any <strong>STRETCH</strong>
+            indicates
+            that an asset is not strictly required for v1.0, based on time, availability, and complexity.</p>
+        <p>During design the assets are being managed in <a
+                href="https://www.dropbox.com/home/Chad%20Schulz">Dropbox</a>.</p>
+        <h3 id="enemies">Enemies</h3>
+        <ul>
+            <li><code>piranha.png</code> : The primary antagonist of PBP. A blood-thirsty piranha, modeled after the
+                red-bellied
+                piranha, that has both a closed and open mouth state in a single sprite sheet.</li>
+            <li><code>piranha_alt.png</code> : <strong>STRETCH</strong> An alternate version of the main piranha.</li>
+            <li><code>piranha_shirt.png</code> : The main piranha, but a bit dazed and wearing one of the t-shirts that
+                has been
+                fired at it.</li>
+        </ul>
+        <h3 id="boat">Boat</h3>
+        <ul>
+            <li><code>boat.png</code> : The party boat the player is riding on. This boat has several beverages strewn
+                about,
+                covered with party-goers, and has a protagonist that holds the t-shirt cannon.</li>
+            <li><code>boat_life_25.png</code> : <strong>STRETCH</strong> Same boat, but after taking damage that
+                represents 25%
+                health. The hull has taken more severe damaged and some of the people on the boat have now become
+                bloody.</li>
+            <li><code>boat_life_50.png</code> : Same boat, but after taking damage that represents 50% health. The hull
+                is
+                damaged and some of the people on the boat have become bruised.</li>
+        </ul>
+        <h3 id="backgrounds">Backgrounds</h3>
+        <ul>
+            <li><code>background_back.png</code> : The parallax background back layer. Darker in color, silhouettes
+                mostly of
+                trees and environment.</li>
+            <li><code>background_fore.png</code> : <strong>STRETCH</strong> The parallax foreground layer. Blurred
+                vegetation
+                that gives an even further level of depth.</li>
+            <li><code>background_front.png</code> : The parallax background front layer. Tree line, bank, and water --
+                primary
+                environment layer in vivid detail.</li>
+            <li><code>background_mid.png</code> : The parallax background middle layer. Less feature-rich environment
+                with some
+                level of noticeable detail.</li>
+        </ul>
+        <h3 id="miscellaneous">Miscellaneous</h3>
+        <ul>
+            <li><code>cannon.png</code> : The t-shirt cannon held by the player that can move/rotate independently of
+                the
+                player.</li>
+            <li><code>shirt_bundle.png</code> : A bundle of t-shirts that can be collected as ammunition.</li>
+            <li><code>shirt_single.png</code> : The single t-shirt that is fired out of the t-shirt cannon.</li>
+            <li><code>splash_boat.png</code> : <strong>STRETCH</strong> Splashing water that would be caused by the
+                boat.
+                Alternatively the boat asset could be a sprite and have the splashing built into the animation of the
+                boat.</li>
+            <li><code>splash_generic.png</code> : <strong>STRETCH</strong> A generic splash animation in the form of a
+                sprite
+                that could be used for items entering/exiting the water.</li>
+        </ul>
+        <h3 id="miscellaneous-assets">Miscellaneous assets</h3>
+        <ul>
+            <li>2+ screenshots of the game</li>
+            <li>app icons of various sizes (TBD)</li>
+            <li>font recommendation</li>
+            <li>logo</li>
+            <li>UI elements</li>
+        </ul>
+    </div>
+</body>
+
+</html>

@@ -2,9 +2,9 @@ name: Merge Bot
 
 on:
   pull_request_review:
-    types: [submitted, dismissed]
+    types: [submitted, edited, dismissed]
   pull_request:
-    types: [labeled, unlabeled]
+    types: [labeled, unlabeled, requested, removed]
 
 jobs:
   merge:
@@ -12,9 +12,11 @@ jobs:
     name: Merge
     steps:
     - name: Integration check
-      uses: squalrus/merge-bot@master
+      uses: squalrus/merge-bot@update-2
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        test: false
         reviewers: false
-        labels: ready
-        method: 'squash'
+        labels: ready, question
+        blocking-labels: do not merge
+        method: squash

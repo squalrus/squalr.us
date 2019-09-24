@@ -1,10 +1,9 @@
 name: Merge Bot
 
 on:
-  pull_request_review:
-    types: [submitted, edited, dismissed]
   pull_request:
-    types: [labeled, unlabeled, requested, removed]
+    types: [labeled, unlabeled, review_requested, review_request_removed]
+  pull_request_review:
 
 jobs:
   merge:
@@ -16,7 +15,7 @@ jobs:
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         test: false
-        reviewers: false
-        labels: ready, question
+        reviewers: true
+        labels: ready
         blocking-labels: do not merge
         method: squash

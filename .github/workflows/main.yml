@@ -14,7 +14,7 @@ jobs:
       uses: squalrus/merge-bot@add-tests
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        test: true
+        test: false
         reviewers: false
         labels: ready
         blocking-labels: do not merge

@@ -1,11 +1,36 @@
 baseURL: https://squalr.us/
 languageCode: en-us
 defaultContentLanguage: en
-title: Squalr.us
+title: Chad Schulz
 theme: hermit
+googleAnalytics: UA-10469485-9
+copyright: Chad Schulz # This message is only used by the RSS template.
+
 
 params:
   dateform: Jan 2, 2006
   dateformShort: Jan 2
   dateformNum: 2006-01-02
   dateformNumTime: 2006-01-02 15:04 -0700
+
+  # homeSubtitle: info and stuff
+  footerCopyright: Chad Schulz
+
+  social:
+  - name: twitter
+    url: https://twitter.com/chadschulz
+  - name: instagram
+    url: https://instagram.com/chadschulz
+  - name: github
+    url: https://github.com/squalrus
+  - name: linkedin
+    url: https://www.linkedin.com/in/chadschulz/
+  - name: email
+    url: mailto:chad.awesome@gmail.com
+
+menu:
+  main:
+  - identifier: blog
+    name: blog
+    url: /blog/
+    weight: 10

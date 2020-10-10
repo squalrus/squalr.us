@@ -1,6 +1,6 @@
 ---
-title: A new page
-date: 2020-09-30T09:29:00+00:00
+title: Another post
+date: 2020-10-08
 draft: false
 images:
   - https://picsum.photos/1024/768/?random
@@ -12,4 +12,4 @@ tag:
   - copy
 ---
 
-Some copy!
+This is another post.

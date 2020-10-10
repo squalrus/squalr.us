@@ -6,6 +6,8 @@ theme: hermit
 googleAnalytics: UA-10469485-9
 copyright: Chad Schulz # This message is only used by the RSS template.
 
+permalinks:
+  blog: /:year/:month/:title/
 
 params:
   dateform: Jan 2, 2006
@@ -34,3 +36,7 @@ menu:
     name: blog
     url: /blog/
     weight: 10
+  - identifier: about
+    name: about
+    url: /about/
+    weight: 20

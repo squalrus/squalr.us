@@ -19,4 +19,4 @@ jobs:
         labels: ready
         blocking_labels: do not merge
         method: squash
-        delete_source_branch: true
+        delete_source_branch: false

@@ -1,6 +1,6 @@
 baseURL: https://squalr.us/
 title: Chad Schulz
-theme: hugo-notepadium
+theme: m10c
 copyright: "©2021 Chad Schulz"
 
 languageCode: en-us
@@ -12,20 +12,33 @@ permalinks:
   blog: /:year/:month/:title/
 
 params:
-  style: "auto"
+  style:
+    darkestColor: "#d35050"
+    darkColor: "#212121"
+    lightColor: "#f5e3e0"
+    lightestColor: "#f5f5f5"
+    primaryColor: "#fff"
+  author: Chad Schulz
+  description: ""
+  avatar: ""
+  menu_item_separator: "-"
+  favicon: ""
   dateFormat: "Monday, January 2, 2006"
   slogan: ""
 
   # homeSubtitle: info and stuff
   footerCopyright: Chad Schulz
 
-  nav:
-    showCategories: false
-    showTags: false
-    custom:
-    - title: "GitHub"
-      url: "https://github.com/squalrus"
-    - title: "Twitter"
-      url: "https://twitter.com/chadschulz"
-    - title: "LinkedIn"
-      url: "https://www.linkedin.com/in/chadschulz/"
+  social:
+  - name: "github"
+    url: "https://github.com/squalrus"
+  - name: "twitter"
+    url: "https://twitter.com/chadschulz"
+  - name: "linkedin"
+    url: "https://www.linkedin.com/in/chadschulz/"
+
+menu:
+  main:
+    - identifier: "tags"
+      name: "Tags"
+      url: "/tags/"

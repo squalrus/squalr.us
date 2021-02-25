@@ -34,6 +34,15 @@ params:
 
 menu:
   main:
+    - identifier: "home"
+      name: "Home"
+      url: "/home/"
+      weight: 10
     - identifier: "tags"
       name: "Tags"
       url: "/tags/"
+      weight: 20
+    - identifier: "chillout"
+      name: "Chillout"
+      url: "/chillout-with-chad/"
+      weight: 30

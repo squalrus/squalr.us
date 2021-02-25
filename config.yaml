@@ -39,7 +39,7 @@ menu:
   main:
     - identifier: "home"
       name: "Home"
-      url: "/home/"
+      url: "/"
       weight: 10
     - identifier: "tags"
       name: "Tags"

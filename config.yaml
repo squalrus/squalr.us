@@ -2,6 +2,7 @@ baseURL: https://squalr.us/
 title: Chad Schulz
 theme: m10c
 copyright: "©2021 Chad Schulz"
+paginate: 10
 
 languageCode: en-us
 enableRobotsTXT: true
@@ -12,16 +13,18 @@ permalinks:
   blog: /:year/:month/:title/
 
 params:
+  author: 'Chad Schulz'
+  description: "Senior SDE Manager at Microsoft. Currently working on azure.com."
+  avatar: "/img/bio.jpg"
+  menu_item_separator: "-"
+  favicon: "/img/favicon.ico"
   style:
     darkestColor: "#242930"
     darkColor: "#353b43"
     lightColor: "#afbac4"
     lightestColor: "#ffffff"
     primaryColor: "#52F0E0"
-  description: "Senior SDE Manager at Microsoft. Currently working on azure.com."
-  avatar: "/img/bio.jpg"
-  menu_item_separator: "-"
-  favicon: "/img/favicon.ico"
+
   dateFormat: "Monday, January 2, 2006"
 
   social:

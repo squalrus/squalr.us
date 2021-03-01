@@ -3,6 +3,8 @@ title: GitHub Pull Request Automation with GitHub Actions
 date: 2019-10-17T00:00:00+00:00
 tags:
   - project
+  - github
+  - workflow
 ---
 
 ![](/img/blog/github-pull-request-management-with-github-actions/cover.jpg)

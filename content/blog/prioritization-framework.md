@@ -2,7 +2,8 @@
 title: "Prioritization Framework"
 date: 2021-02-21T20:57:43-08:00
 tags:
-- workflow
+  - process
+  - workflow
 ---
 
 An overwhelmingly large backlog can be a challenging thing to manage. To get it under control a "prioritization framework" may be the solution.

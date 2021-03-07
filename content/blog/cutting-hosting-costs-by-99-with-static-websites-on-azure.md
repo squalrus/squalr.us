@@ -1,7 +1,9 @@
 ---
 title: Cutting hosting costs by 99% with static websites on Azure
 date: 2018-07-31T00:00:00+00:00
-draft: true
+tags:
+  - azure
+  - website
 ---
 
 Microsoft Azure now offers static website hosting through Azure Storage and it will save you a ton of money. The static websites feature, currently in preview, was [launched](https://azure.microsoft.com/en-us/blog/azure-storage-static-web-hosting-public-preview/) on June 28, 2018.

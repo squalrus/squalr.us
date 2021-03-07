@@ -1,7 +1,9 @@
 ---
 title: Using Azure Static Websites for production
 date: 2019-08-18T00:00:00+00:00
-draft: true
+tags:
+  - azure
+  - website
 ---
 
 This is a follow-up to my previous article [Cutting hosting costs by 99% with static websites on Azure](https://medium.com/@squalrus/cutting-hosting-costs-by-99-with-static-websites-on-azure-44483b6b2c3f) in which I describe the basics of setting up the feature as well as discuss the cost benefits. I realized there were a few configuration issues that needed to be solved for websites to be production ready.

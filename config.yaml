@@ -43,11 +43,15 @@ menu:
       name: 'Home'
       url: '/'
       weight: 10
+    - identifier: "about"
+      name: "About"
+      url: "https://github.com/squalrus"
+      weight: 20
     - identifier: 'tags'
       name: 'Tags'
       url: '/tags/'
-      weight: 20
+      weight: 30
     - identifier: 'chillout'
       name: 'Chillout'
       url: '/chillout-with-chad/'
-      weight: 30
+      weight: 40

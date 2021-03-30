@@ -1,6 +1,9 @@
 ---
 title: "The Importance of Software Documentation"
 date: 2021-03-28T20:55:27-07:00
+tags:
+  - process
+  - workflow
 ---
 
 The first time I heard the term "durable artifact" was from [Isaac Hepworth](https://twitter.com/isaach) about a year and a half ago. At the time we were part of an evolving web team with a lot of opportunity for process and workflow improvements. Fast-forward to today and this same team is broken into specialized groups, planning out sprints and quarters, and working on complex site-wide features (during a global pandemic) and documentation has become more relevant than ever.
@@ -32,7 +35,7 @@ While a product/project manager may be the "owner" of the document, the responsi
 
 Ability to collaborate is one of the greatest strengths of the document. A project document will keep everyone on the same page with the information up-to-date and available at a moment's notice. This canonical document can also replace, what could be, several meetings and the struggles that come with them: finding time that works for everyone, capturing notes from meetings, and pulling people away from actually _doing_ the work. Instead, the team is able to work through the document asynchronously and have an ongoing ping-pong of questions and answers as the document comes to life.
 
-As for the best tools for the job, something that allows for co-authoring and commenting within the document, like [Microsoft Word](https://www.microsoft.com/en-us/microsoft-365/word) would be my recommendation.
+As for the best tools for the job, something that allows for co-authoring and commenting within the document, like [Microsoft Word](https://www.microsoft.com/en-us/microsoft-365/word), would be my recommendation.
 
 ## Team Documentation
 

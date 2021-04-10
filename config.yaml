@@ -28,11 +28,11 @@ params:
   dateFormat: "Monday, January 2, 2006"
 
   social:
-  - name: "github"
+  - icon: "github"
     url: "https://github.com/squalrus"
-  - name: "twitter"
+  - icon: "twitter"
     url: "https://twitter.com/chadschulz"
-  - name: "linkedin"
+  - icon: "linkedin"
     url: "https://www.linkedin.com/in/chadschulz/"
 
 menu:

@@ -6,6 +6,8 @@
             "serve": "/404.html"
         }
     ],
-    "defaultHeaders": {},
+    "defaultHeaders": {
+        "cache-control": "must-revalidate, max-age=86400"
+    },
     "mimeTypes": {}
 }

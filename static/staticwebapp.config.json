@@ -1,0 +1,21 @@
+{
+    "routes": [
+        {
+            "route": "/img/*",
+            "headers": {
+                "cache-control": "must-revalidate, max-age=15770000"
+            }
+        }
+    ],
+    "responseOverrides": {
+        "404": {
+            "rewrite": "/404.html"
+        }
+    },
+    "defaultHeaders": {
+        "cache-control": "must-revalidate, max-age=86400",
+        "Content-Security-Policy": "default-src 'self'; script-src 'self' https://www.google-analytics.com",
+        "X-Frame-Options": "DENY"
+    },
+    "mimeTypes": {}
+}

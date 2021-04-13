@@ -6,6 +6,7 @@ Weekly listening party and social chat.
 
 ## Past
 
+- `2021.04.12`: [Episode 20: 80s Pop](https://music.youtube.com/playlist?list=PLH7YWwiPIVPsqoKltWLFfARxTLsbZ_xYS)
 - `2021.04.05`: [Episode 19](https://music.youtube.com/playlist?list=PLH7YWwiPIVPuO9PQAH33EGinU3Nb8nfwT)
 - `2021.03.29`: [Episode 18: Anjunabeats Volume 10](https://music.youtube.com/playlist?list=OLAK5uy_kOuvQbJqZS235F2O0oGXXwTBsw9Kz-8YU)
 - `2021.03.22`: [Episode 17](https://music.youtube.com/playlist?list=PLH7YWwiPIVPsK2WI4FEFPv1RB7elh19bi)

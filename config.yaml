@@ -18,6 +18,8 @@ params:
   avatar: "/img/bio.jpg"
   menu_item_separator: "-"
   favicon: "/img/favicon.ico"
+  images:
+  - img/bio.jpg
   style:
     darkestColor: "#242930"
     darkColor: "#353b43"

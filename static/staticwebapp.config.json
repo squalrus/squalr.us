@@ -14,7 +14,7 @@
     },
     "globalHeaders": {
         "cache-control": "must-revalidate, max-age=604800",
-        "content-security-policy": "default-src 'self' https://squalr.us/; script-src 'self' https://www.google-analytics.com 'sha256-d8WoQSinwBfvQBSI1cIf68DLqh2eUwA1HYB0xu6gBsA=' https://platform.twitter.com; style-src 'self' https://squalr.us/ 'unsafe-inline'; frame-src https://platform.twitter.com; connect-src https://www.google-analytics.com",
+        "content-security-policy": "default-src 'self' https://squalr.us; script-src 'self' https://www.google-analytics.com 'sha256-d8WoQSinwBfvQBSI1cIf68DLqh2eUwA1HYB0xu6gBsA=' https://platform.twitter.com https://gist.github.com; style-src 'self' https://squalr.us/ https://github.githubassets.com 'unsafe-inline'; frame-src https://platform.twitter.com; connect-src https://www.google-analytics.com",
         "x-frame-options": "DENY"
     },
     "mimeTypes": {}

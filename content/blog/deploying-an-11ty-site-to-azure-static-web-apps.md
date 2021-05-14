@@ -19,7 +19,9 @@ After authenticating with GitHub (and grant permission), choose the Organization
 
 The previous step will add a GitHub Action YAML file to the repository in the `.github/workflows/` folder, something like `azure-static-web-apps-lively-forest-064040d1e.yml`. This file handles the CI/CD for both production _and_ pull requests deployments.
 
-~~The GitHub Action YAML needs to be modified slightly to build the 11ty site.~~ Add a "build" script to `package.json` and ~~add it as the build command in the GitHub Action YAML as `app_build_command: "npm run build"` ([example](https://github.com/squalrus/11ty-demo/blob/96be3e0e749661ee3885d21e367b1e6ffa18cd5f/.github/workflows/azure-static-web-apps-lively-forest-064040d1e.yml#L28)).~~ the GitHub Action workflow will run `npm run build` by default (as pointed out by [@nthonyChu](https://twitter.com/nthonyChu/status/1393297396281405441)).
+~~The GitHub Action YAML needs to be modified slightly to build the 11ty site. Add a "build" script to `package.json` and add it as the build command in the GitHub Action YAML as `app_build_command: "npm run build"` ([example](https://github.com/squalrus/11ty-demo/blob/96be3e0e749661ee3885d21e367b1e6ffa18cd5f/.github/workflows/azure-static-web-apps-lively-forest-064040d1e.yml#L28)).~~ 
+
+Add a "build" script to `package.json` and the GitHub Action workflow will run `npm run build` by default (as [pointed out by @nthonyChu](https://twitter.com/nthonyChu/status/1393297396281405441)).
 
 ```
 // package.json

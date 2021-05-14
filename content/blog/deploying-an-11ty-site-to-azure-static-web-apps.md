@@ -19,18 +19,13 @@ After authenticating with GitHub (and grant permission), choose the Organization
 
 The previous step will add a GitHub Action YAML file to the repository in the `.github/workflows/` folder, something like `azure-static-web-apps-lively-forest-064040d1e.yml`. This file handles the CI/CD for both production _and_ pull requests deployments.
 
-The GitHub Action YAML needs to be modified slightly to build the 11ty site. Add a "build" script to `package.json` and add it as the build command in the GitHub Action YAML as `app_build_command: "npm run build"` ([example](https://github.com/squalrus/11ty-demo/blob/96be3e0e749661ee3885d21e367b1e6ffa18cd5f/.github/workflows/azure-static-web-apps-lively-forest-064040d1e.yml#L28)).
+~The GitHub Action YAML needs to be modified slightly to build the 11ty site.~ Add a "build" script to `package.json` and ~add it as the build command in the GitHub Action YAML as `app_build_command: "npm run build"` ([example](https://github.com/squalrus/11ty-demo/blob/96be3e0e749661ee3885d21e367b1e6ffa18cd5f/.github/workflows/azure-static-web-apps-lively-forest-064040d1e.yml#L28)).~ the GitHub Action workflow will run `npm run build` by default (as pointed out by [@nthonyChu](https://twitter.com/nthonyChu)).
 
 ```
 // package.json
 "scripts": {
     "build": "eleventy"
 }
-```
-
-```
-// .github/workflows/azure-static-web-apps-*.yml
-app_build_command: "npm run build"
 ```
 
 The production GitHub Action will kick off immediately and deploy the site to a domain with a name similar to the generated name + identifier used for the YAML file, like https://lively-forest-064040d1e.azurestaticapps.net/. Any pull request created will automatically be deployed to `https://lively-forest-064040d1e-{pr-number}.azurestaticapps.net/` (where `{pr-number}` is the number of the GitHub pull request) for testing and verification. When a pull request is merged, the GitHub Action will run to remove the temporary environment and deploy the latest in `main` to the production environment. The free tier of Azure Static Web Apps offers up to 3 pre-production environments.

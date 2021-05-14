@@ -11,11 +11,11 @@ Azure offers the [Azure Static Web Apps CLI](https://github.com/Azure/static-web
 
 From the Azure Portal [Create an new Static Web App](https://portal.azure.com/#create/Microsoft.StaticApp). Configure the Subscription, Resource Group, Web App Name, and Region that best fits your site's needs.
 
-![](/img/blog/deploying-an-11ty-site-to-azure-static-web-apps/1-new-static-web-app.png)
+![Create Static Web App screenshot from the Azure Portal](/img/blog/deploying-an-11ty-site-to-azure-static-web-apps/1-new-static-web-app.png)
 
 After authenticating with GitHub (and grant permission), choose the Organization, Repository, and Branch to be used for the production deployment of the site. For Build Details, chose "Custom" (Azure does not currently offer an 11ty preset), keep App location set to "/", and update Output location to be "_site" (the default output directory for 11ty). _Note: the Build Details values can be updated later if needed._
 
-![](/img/blog/deploying-an-11ty-site-to-azure-static-web-apps/2-github-authentication.png)
+![Deployment details and Build details screenshot from the Azure Portal](/img/blog/deploying-an-11ty-site-to-azure-static-web-apps/2-github-authentication.png)
 
 The previous step will add a GitHub Action YAML file to the repository in the `.github/workflows/` folder, something like `azure-static-web-apps-lively-forest-064040d1e.yml`. This file handles the CI/CD for both production _and_ pull requests deployments.
 
@@ -37,9 +37,10 @@ The production GitHub Action will kick off immediately and deploy the site to a 
 
 Finally, add your custom domain by adding a `CNAME` or `TXT` record through your DNS provider to validate the domain ownership.
 
-![](/img/blog/deploying-an-11ty-site-to-azure-static-web-apps/3-custom-domain.png)
+![Custom domains configuration screenshot from the Azure Portal](/img/blog/deploying-an-11ty-site-to-azure-static-web-apps/3-custom-domain.png)
 
 ## Resources & Further Reading
 
 - [API support in Azure Static Web Apps with Azure Functions](https://docs.microsoft.com/en-us/azure/static-web-apps/apis)
 - [Authentication and authorization for Azure Static Web Apps](https://docs.microsoft.com/en-us/azure/static-web-apps/authentication-authorization)
+- [Static Web Apps pricing](https://azure.microsoft.com/en-us/pricing/details/app-service/static/)

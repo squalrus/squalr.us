@@ -41,6 +41,7 @@ Finally, add your custom domain by adding a `CNAME` or `TXT` record through your
 
 ## Resources & Further Reading
 
+- [Configure Azure Static Web Apps](https://docs.microsoft.com/en-us/azure/static-web-apps/configuration)
 - [API support in Azure Static Web Apps with Azure Functions](https://docs.microsoft.com/en-us/azure/static-web-apps/apis)
 - [Authentication and authorization for Azure Static Web Apps](https://docs.microsoft.com/en-us/azure/static-web-apps/authentication-authorization)
 - [Static Web Apps pricing](https://azure.microsoft.com/en-us/pricing/details/app-service/static/)

@@ -6,6 +6,11 @@ Weekly listening party and social chat.
 
 ## Past
 
+- `2021.06.01`: [Episode 26](https://music.youtube.com/playlist?list=PLH7YWwiPIVPtIGItmpyQ2cxvzHbgn0pYk)
+- `2021.05.18`: [Episode 25](https://music.youtube.com/playlist?list=PLH7YWwiPIVPvwKSy8A-5Hr6iiErCfNAlD)
+- `2021.05.11`: [Episode 24](https://music.youtube.com/playlist?list=PLH7YWwiPIVPsGxrVj4cjUrL9zKz7TntqZ)
+- `2021.05.04`: [Episode 23](https://music.youtube.com/playlist?list=PLH7YWwiPIVPvysCKw0RvxEHc8-R5r_9m9)
+- `2021.04.26`: [Episode 22](https://music.youtube.com/playlist?list=PLH7YWwiPIVPtnAyH2Syqw2fCfIG0AhzS4)
 - `2021.04.19`: [Episode 21: 2000s Rock](https://music.youtube.com/playlist?list=PLH7YWwiPIVPt0MNCJQ8V8BttGVYL5pBqe)
 - `2021.04.12`: [Episode 20: 80s Pop](https://music.youtube.com/playlist?list=PLH7YWwiPIVPsqoKltWLFfARxTLsbZ_xYS)
 - `2021.04.05`: [Episode 19](https://music.youtube.com/playlist?list=PLH7YWwiPIVPuO9PQAH33EGinU3Nb8nfwT)

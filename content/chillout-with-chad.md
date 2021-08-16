@@ -6,6 +6,11 @@ Weekly listening party and social chat.
 
 ## Past
 
+- `2021.09.13`: [Episode 34](https://music.youtube.com/playlist?list=PLH7YWwiPIVPt67VVMquTFJ7O_wKZ5Du7J)
+- `2021.08.23`: [Episode 33](https://music.youtube.com/playlist?list=PLH7YWwiPIVPsoVwcqfl_vPDoDfRtYjRSV)
+- `2021.08.16`: [Episode 32](https://music.youtube.com/playlist?list=PLH7YWwiPIVPsoVwcqfl_vPDoDfRtYjRSV)
+- `2021.08.09`: [Episode 31](https://music.youtube.com/playlist?list=PLH7YWwiPIVPu3FaVPv5j_1f9dMvLZLIUr)
+- `2021.08.02`: [Episode 30](https://music.youtube.com/playlist?list=PLH7YWwiPIVPv8lTHdtSgyxnBaOJOPu_vU)
 - `2021.07.26`: [Episode 29](https://music.youtube.com/playlist?list=PLH7YWwiPIVPuEu_VAc0wTWmvpdHEj2DP4)
 - `2021.07.12`: [Episode 28](https://music.youtube.com/playlist?list=PLH7YWwiPIVPv9nDjNkaGkYJduBGVbjQHH)
 - `2021.06.21`: [Episode 27](https://music.youtube.com/playlist?list=PLH7YWwiPIVPvUkRHmRg9z0Z0ynQv7DdSJ)

@@ -4,9 +4,12 @@ title: "Chillout with Chad 🎧"
 
 Weekly listening party and social chat.
 
+<!-- https://www.reddit.com/r/AskReddit/comments/pqwt7w/in_your_opinion_what_is_an_album_with_no_bad_songs/?sort=top -->
+
 ## Past
 
-- `2021.09.13`: [Episode 34](https://music.youtube.com/playlist?list=PLH7YWwiPIVPt67VVMquTFJ7O_wKZ5Du7J)
+- `2021.09.20`: [Episode 35: Fleetwood Mac "Rumours"](https://music.youtube.com/playlist?list=OLAK5uy_keqotLYhIED047BDDByl-r-jTAhYu3V2I)
+- `2021.09.13`: [Episode 34](https://music.youtube.com/playlist?list=PLH7YWwiPIVPunQc5wDCyJC-Xrn_r7aMdk)
 - `2021.08.23`: [Episode 33](https://music.youtube.com/playlist?list=PLH7YWwiPIVPu9lG2odIaodkfbqSqXRrlr)
 - `2021.08.16`: [Episode 32](https://music.youtube.com/playlist?list=PLH7YWwiPIVPsoVwcqfl_vPDoDfRtYjRSV)
 - `2021.08.09`: [Episode 31](https://music.youtube.com/playlist?list=PLH7YWwiPIVPu3FaVPv5j_1f9dMvLZLIUr)
@@ -40,11 +43,3 @@ Weekly listening party and social chat.
 - `2020.11.23`: [Episode 3: 90s/00s](https://music.youtube.com/playlist?list=PLH7YWwiPIVPuHvIKabHPywRyumOOe-WSt)
 - `2020.11.16`: [Episode 2](https://music.youtube.com/playlist?list=PLH7YWwiPIVPsa9pj63B_26UXu1aaU1lJB)
 - `2020.11.09`: [Episode 1](https://music.youtube.com/playlist?list=PLH7YWwiPIVPt2m_nJ3WYlyxf-BIdAUmUr)
-
-## Upcoming
-
-- [Mix: General III](https://music.youtube.com/playlist?list=PLH7YWwiPIVPs5VAI8gILnPiiqz4aFN8WW)
-- [Mix: Mat Zo](https://music.youtube.com/playlist?list=PLH7YWwiPIVPu6sk4VaeKnrC23E2xtqPYB)
-- [Mix: Above & Beyond](https://music.youtube.com/playlist?list=PLH7YWwiPIVPv3sH7Nea7IgzC-56vfEqGQ)
-- [Mix: Ratatat](https://music.youtube.com/playlist?list=PLH7YWwiPIVPuwOdW83DnlCACby_CzWyAS)
-- [Mix: Prog](https://music.youtube.com/playlist?list=PLH7YWwiPIVPvmC_mDSNVl39PeK-hy0hKe)

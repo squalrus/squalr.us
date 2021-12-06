@@ -8,9 +8,7 @@ Weekly listening party and social chat.
 
 ## Upcoming
 
--   [The Cure "Disintegration"](https://music.youtube.com/playlist?list=OLAK5uy_mUuAURd9jPo3N3xkkMSWV4isdR3gNSMb0)
--   [Led Zeppelin "Led Zeppelin IV"](https://music.youtube.com/playlist?list=OLAK5uy_lzZvS4QYhfLUAS-jJV_rtQwalwEh9CYPQ)
--   [Pink Floyd "Wish You Were Here"](https://music.youtube.com/playlist?list=OLAK5uy_klU9jB4SMO5SqEyFazPAVbDek2j0JVQxY)
+-   **NEXT** [Pink Floyd "Wish You Were Here"](https://music.youtube.com/playlist?list=OLAK5uy_klU9jB4SMO5SqEyFazPAVbDek2j0JVQxY)
 -   [Nirvana "MTV Unplugged In New York"](https://music.youtube.com/playlist?list=OLAK5uy_ky-ihvTuvMxTWOsW_ICT6ZQQgqU62NrTA)
 -   [Black Sabbath "Black Sabbath"](https://music.youtube.com/playlist?list=OLAK5uy_mhoU3URgsWoEi1S-3dG_Dbn3lLUc4vQ0I)
 -   [The Dave Brubeck Quartet "Time Out"](https://music.youtube.com/playlist?list=OLAK5uy_kT4WsarfRaytnvA8aSj-Wq-JtcFN8JQyc)
@@ -30,6 +28,8 @@ Weekly listening party and social chat.
 
 ## Past
 
+-   `2021.12.06`: [Episode 43: Led Zeppelin "Led Zeppelin IV"](https://music.youtube.com/playlist?list=OLAK5uy_lzZvS4QYhfLUAS-jJV_rtQwalwEh9CYPQ)
+-   `2021.11.29`: [Episode 42: The Cure "Disintegration"](https://music.youtube.com/playlist?list=OLAK5uy_mUuAURd9jPo3N3xkkMSWV4isdR3gNSMb0)
 -   `2021.11.15`: [Episode 41: David Bowie "The Rise and Fall of Ziggy Stardust and the Spiders from Mars"](https://music.youtube.com/playlist?list=OLAK5uy_klxWDedbSRqgjGzYYSvyq3KdHY1wbTt_U)
 -   `2021.11.08`: [Episode 40: Talking Heads "Stop Making Sense"](https://music.youtube.com/playlist?list=OLAK5uy_l19G6wJHl6GVhyWiarlzRlILJmodnDw0Q)
 -   `2021.11.01`: [Episode 39: Daft Punk "Discovery"](https://music.youtube.com/playlist?list=OLAK5uy_mz6eafmqdRHSaR4IwG0ll6J6rgv0_ZpGw)

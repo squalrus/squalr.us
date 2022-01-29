@@ -8,7 +8,7 @@ Weekly listening party and social chat.
 
 ## Upcoming
 
-- **NEXT** [Nirvana "MTV Unplugged In New York"](https://music.youtube.com/playlist?list=OLAK5uy_ky-ihvTuvMxTWOsW_ICT6ZQQgqU62NrTA)
+- **NEXT** [Caravan Palace "<|º_º|>"](https://music.youtube.com/playlist?list=OLAK5uy_n6vE4QTcYNqXc91m8eMW7p6lpMUakjLH0)
 - [Black Sabbath "Black Sabbath"](https://music.youtube.com/playlist?list=OLAK5uy_mhoU3URgsWoEi1S-3dG_Dbn3lLUc4vQ0I)
 - [The Dave Brubeck Quartet "Time Out"](https://music.youtube.com/playlist?list=OLAK5uy_kT4WsarfRaytnvA8aSj-Wq-JtcFN8JQyc)
 - [Pixies "Doolittle"](https://music.youtube.com/playlist?list=OLAK5uy_lf6jsYkBOcfA6eAzNNIr2PeQv0Cns519A)
@@ -24,12 +24,12 @@ Weekly listening party and social chat.
 - [Pink Floyd "The Dark Side of the Moon"](https://music.youtube.com/playlist?list=OLAK5uy_mXoi-FuQb9Gw7Mguhdx5F4jltT0L1qOCw)
 - [Paul Simon "Graceland"](https://music.youtube.com/playlist?list=OLAK5uy_nrTf4uK4d14vKnEk4dm0MBhS_nF2fAY0I)
 - [Various Artists "O Brother, Where Art Thou? (Original Motion Picture Soundtrack)"](https://music.youtube.com/playlist?list=OLAK5uy_k3ohClUglkvoiE9kkrMpPbBNxpNOZPj-4)
-- **NEW** [Caravan Palace "<|º_º|>"](https://music.youtube.com/playlist?list=OLAK5uy_n6vE4QTcYNqXc91m8eMW7p6lpMUakjLH0)
 - **NEW** [Starcadian "Radio Galaxy"](https://music.youtube.com/playlist?list=OLAK5uy_nMulQU6u2DXmC-1fJfGvwZAjpa_nhj6cc)
 - **NEW** [The Album Leaf "Into The Blue Again"](https://music.youtube.com/playlist?list=OLAK5uy_m7JyUXsRVJKt6pfZPx7MFjYk9bYJ2EpNM)
 
 ## Past
 
+- `2022.01.24`: [Episode 45: Nirvana "MTV Unplugged In New York"](https://music.youtube.com/playlist?list=OLAK5uy_ky-ihvTuvMxTWOsW_ICT6ZQQgqU62NrTA)
 - `2022.01.03`: [Episode 44: Pink Floyd "Wish You Were Here"](https://music.youtube.com/playlist?list=OLAK5uy_klU9jB4SMO5SqEyFazPAVbDek2j0JVQxY)
 - `2021.12.06`: [Episode 43: Led Zeppelin "Led Zeppelin IV"](https://music.youtube.com/playlist?list=OLAK5uy_lzZvS4QYhfLUAS-jJV_rtQwalwEh9CYPQ)
 - `2021.11.29`: [Episode 42: The Cure "Disintegration"](https://music.youtube.com/playlist?list=OLAK5uy_mUuAURd9jPo3N3xkkMSWV4isdR3gNSMb0)

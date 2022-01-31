@@ -1,7 +1,7 @@
 baseURL: https://squalr.us/
 title: Chad Schulz
 theme: m10c
-copyright: "©2022 Chad Schulz"
+copyright: '©2022 Chad Schulz'
 paginate: 15
 
 languageCode: en-us
@@ -14,40 +14,40 @@ permalinks:
 
 params:
   author: 'Chad Schulz'
-  description: "Principal SDE Manager at Microsoft. Currently working on azure.com."
-  avatar: "/img/bio.jpg"
-  menu_item_separator: "-"
-  favicon: "/img/favicon.ico"
+  description: 'Principal SDE Manager at Microsoft. Currently working on azure.com.'
+  avatar: '/img/bio.jpg'
+  menu_item_separator: '-'
+  favicon: '/img/favicon.ico'
   images:
-  - img/bio.jpg
+    - img/bio.jpg
   style:
-    darkestColor: "#242930"
-    darkColor: "#353b43"
-    lightColor: "#afbac4"
-    lightestColor: "#ffffff"
-    primaryColor: "#52F0E0"
+    darkestColor: '#242930'
+    darkColor: '#353b43'
+    lightColor: '#afbac4'
+    lightestColor: '#ffffff'
+    primaryColor: '#52F0E0'
 
-  dateFormat: "Monday, January 2, 2006"
+  dateFormat: 'Monday, January 2, 2006'
 
   social:
-  - icon: "github"
-    url: "https://github.com/squalrus"
-  - icon: "twitter"
-    url: "https://twitter.com/chadschulz"
-  - icon: "linkedin"
-    url: "https://www.linkedin.com/in/chadschulz/"
+    - icon: 'github'
+      url: 'https://github.com/squalrus'
+    - icon: 'twitter'
+      url: 'https://twitter.com/chadschulz'
+    - icon: 'linkedin'
+      url: 'https://www.linkedin.com/in/chadschulz/'
 
 menu:
   main:
-    - identifier: "home"
-      name: "Home"
-      url: "/"
+    - identifier: 'home'
+      name: 'Home'
+      url: '/'
       weight: 10
-    - identifier: "tags"
-      name: "Tags"
-      url: "/tags/"
+    - identifier: 'tags'
+      name: 'Tags'
+      url: '/tags/'
       weight: 20
-    - identifier: "chillout"
-      name: "Chillout"
-      url: "/chillout-with-chad/"
+    - identifier: 'chillout'
+      name: 'Chillout'
+      url: '/chillout-with-chad/'
       weight: 30

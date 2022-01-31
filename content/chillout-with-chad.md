@@ -1,5 +1,5 @@
 ---
-title: "Chillout with Chad 🎧"
+title: 'Chillout with Chad 🎧'
 ---
 
 Weekly listening party and social chat.

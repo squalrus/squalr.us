@@ -9,6 +9,9 @@ title: 'Chad @ Work'
 <p>Drag these to your browser bookmark bar.</p>
 
 <dl>
+  <dt><a href="javascript:(() => { const pageUrl = window.location.href; if (pageUrl.includes('?debug')) { window.location.href = pageUrl.replace('?debug=modules', ''); } else { window.location.search = 'debug=modules'; }})();">debug=modules</a></dt>
+  <dd>toggle debug='modules' querystring</dd>
+  
   <dt><a href="javascript:window.location += '?noise=off';">noise=off</a></dt>
   <dd>turn on the noise='off' querystring</dd>
 

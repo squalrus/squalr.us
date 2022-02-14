@@ -8,11 +8,10 @@ Weekly listening party and social chat.
 
 ## Upcoming
 
-- **NEXT** [Caravan Palace "<|º_º|>"](https://music.youtube.com/playlist?list=OLAK5uy_n6vE4QTcYNqXc91m8eMW7p6lpMUakjLH0)
-- [Black Sabbath "Black Sabbath"](https://music.youtube.com/playlist?list=OLAK5uy_mhoU3URgsWoEi1S-3dG_Dbn3lLUc4vQ0I)
-- [The Dave Brubeck Quartet "Time Out"](https://music.youtube.com/playlist?list=OLAK5uy_kT4WsarfRaytnvA8aSj-Wq-JtcFN8JQyc)
+- **NEXT** [The Dave Brubeck Quartet "Time Out"](https://music.youtube.com/playlist?list=OLAK5uy_kT4WsarfRaytnvA8aSj-Wq-JtcFN8JQyc)
 - [Pixies "Doolittle"](https://music.youtube.com/playlist?list=OLAK5uy_lf6jsYkBOcfA6eAzNNIr2PeQv0Cns519A)
 - [Gorillaz "Demon Days"](https://music.youtube.com/playlist?list=OLAK5uy_msC_GYWaz8ESAiX9d41hRIs2uhcL8t_aw)
+- [Black Sabbath "Black Sabbath"](https://music.youtube.com/playlist?list=OLAK5uy_mhoU3URgsWoEi1S-3dG_Dbn3lLUc4vQ0I)
 - [The Strokes "Is This It"](https://music.youtube.com/playlist?list=OLAK5uy_miNTti5IWtAjX_RgVvK7lWMRGwnOB5IaE)
 - [Radiohead "OK Computer"](https://music.youtube.com/playlist?list=OLAK5uy_nc6afxSnmK8OFML8dF9q_0D1MBMXsGnL4)
 - [Queens of the Stone Age "Songs For The Deaf"](https://music.youtube.com/playlist?list=OLAK5uy_miT4yxiBPPyV6xHClICCWbkb68VV9CEKE)
@@ -29,6 +28,7 @@ Weekly listening party and social chat.
 
 ## Past
 
+- `2022.01.31`: [Episode 46: Caravan Palace "<|º_º|>"](https://music.youtube.com/playlist?list=OLAK5uy_n6vE4QTcYNqXc91m8eMW7p6lpMUakjLH0)
 - `2022.01.24`: [Episode 45: Nirvana "MTV Unplugged In New York"](https://music.youtube.com/playlist?list=OLAK5uy_ky-ihvTuvMxTWOsW_ICT6ZQQgqU62NrTA)
 - `2022.01.03`: [Episode 44: Pink Floyd "Wish You Were Here"](https://music.youtube.com/playlist?list=OLAK5uy_klU9jB4SMO5SqEyFazPAVbDek2j0JVQxY)
 - `2021.12.06`: [Episode 43: Led Zeppelin "Led Zeppelin IV"](https://music.youtube.com/playlist?list=OLAK5uy_lzZvS4QYhfLUAS-jJV_rtQwalwEh9CYPQ)

@@ -8,8 +8,7 @@ Weekly listening party and social chat.
 
 ## Upcoming
 
-- **NEXT** [The Dave Brubeck Quartet "Time Out"](https://music.youtube.com/playlist?list=OLAK5uy_kT4WsarfRaytnvA8aSj-Wq-JtcFN8JQyc)
-- [Pixies "Doolittle"](https://music.youtube.com/playlist?list=OLAK5uy_lf6jsYkBOcfA6eAzNNIr2PeQv0Cns519A)
+- **NEXT** [Pixies "Doolittle"](https://music.youtube.com/playlist?list=OLAK5uy_lf6jsYkBOcfA6eAzNNIr2PeQv0Cns519A)
 - [Gorillaz "Demon Days"](https://music.youtube.com/playlist?list=OLAK5uy_msC_GYWaz8ESAiX9d41hRIs2uhcL8t_aw)
 - [Black Sabbath "Black Sabbath"](https://music.youtube.com/playlist?list=OLAK5uy_mhoU3URgsWoEi1S-3dG_Dbn3lLUc4vQ0I)
 - [The Strokes "Is This It"](https://music.youtube.com/playlist?list=OLAK5uy_miNTti5IWtAjX_RgVvK7lWMRGwnOB5IaE)
@@ -28,6 +27,7 @@ Weekly listening party and social chat.
 
 ## Past
 
+- `2022.02.14`: [Episode 47: The Dave Brubeck Quartet "Time Out"](https://music.youtube.com/playlist?list=OLAK5uy_kT4WsarfRaytnvA8aSj-Wq-JtcFN8JQyc)
 - `2022.01.31`: [Episode 46: Caravan Palace "<|º_º|>"](https://music.youtube.com/playlist?list=OLAK5uy_n6vE4QTcYNqXc91m8eMW7p6lpMUakjLH0)
 - `2022.01.24`: [Episode 45: Nirvana "MTV Unplugged In New York"](https://music.youtube.com/playlist?list=OLAK5uy_ky-ihvTuvMxTWOsW_ICT6ZQQgqU62NrTA)
 - `2022.01.03`: [Episode 44: Pink Floyd "Wish You Were Here"](https://music.youtube.com/playlist?list=OLAK5uy_klU9jB4SMO5SqEyFazPAVbDek2j0JVQxY)

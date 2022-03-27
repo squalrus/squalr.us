@@ -8,8 +8,7 @@ Weekly listening party and social chat.
 
 ## Upcoming
 
-- **NEXT** [Pixies "Doolittle"](https://music.youtube.com/playlist?list=OLAK5uy_lf6jsYkBOcfA6eAzNNIr2PeQv0Cns519A)
-- [Gorillaz "Demon Days"](https://music.youtube.com/playlist?list=OLAK5uy_msC_GYWaz8ESAiX9d41hRIs2uhcL8t_aw)
+- **NEXT** [Gorillaz "Demon Days"](https://music.youtube.com/playlist?list=OLAK5uy_msC_GYWaz8ESAiX9d41hRIs2uhcL8t_aw)
 - [Black Sabbath "Black Sabbath"](https://music.youtube.com/playlist?list=OLAK5uy_mhoU3URgsWoEi1S-3dG_Dbn3lLUc4vQ0I)
 - [The Strokes "Is This It"](https://music.youtube.com/playlist?list=OLAK5uy_miNTti5IWtAjX_RgVvK7lWMRGwnOB5IaE)
 - [Radiohead "OK Computer"](https://music.youtube.com/playlist?list=OLAK5uy_nc6afxSnmK8OFML8dF9q_0D1MBMXsGnL4)
@@ -22,11 +21,13 @@ Weekly listening party and social chat.
 - [Pink Floyd "The Dark Side of the Moon"](https://music.youtube.com/playlist?list=OLAK5uy_mXoi-FuQb9Gw7Mguhdx5F4jltT0L1qOCw)
 - [Paul Simon "Graceland"](https://music.youtube.com/playlist?list=OLAK5uy_nrTf4uK4d14vKnEk4dm0MBhS_nF2fAY0I)
 - [Various Artists "O Brother, Where Art Thou? (Original Motion Picture Soundtrack)"](https://music.youtube.com/playlist?list=OLAK5uy_k3ohClUglkvoiE9kkrMpPbBNxpNOZPj-4)
+- **NEW** [Zero 7 "Simple Things"](https://tidal.com/album/94765781)
 - **NEW** [Starcadian "Radio Galaxy"](https://music.youtube.com/playlist?list=OLAK5uy_nMulQU6u2DXmC-1fJfGvwZAjpa_nhj6cc)
 - **NEW** [The Album Leaf "Into The Blue Again"](https://music.youtube.com/playlist?list=OLAK5uy_m7JyUXsRVJKt6pfZPx7MFjYk9bYJ2EpNM)
 
 ## Past
 
+- `2022.03.21`: [Episode 48: Pixies "Doolittle"](https://music.youtube.com/playlist?list=OLAK5uy_lf6jsYkBOcfA6eAzNNIr2PeQv0Cns519A)
 - `2022.02.14`: [Episode 47: The Dave Brubeck Quartet "Time Out"](https://music.youtube.com/playlist?list=OLAK5uy_kT4WsarfRaytnvA8aSj-Wq-JtcFN8JQyc)
 - `2022.01.31`: [Episode 46: Caravan Palace "<|º_º|>"](https://music.youtube.com/playlist?list=OLAK5uy_n6vE4QTcYNqXc91m8eMW7p6lpMUakjLH0)
 - `2022.01.24`: [Episode 45: Nirvana "MTV Unplugged In New York"](https://music.youtube.com/playlist?list=OLAK5uy_ky-ihvTuvMxTWOsW_ICT6ZQQgqU62NrTA)

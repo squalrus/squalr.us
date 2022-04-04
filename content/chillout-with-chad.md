@@ -8,9 +8,7 @@ Weekly listening party and social chat.
 
 ## Upcoming
 
-- **NEXT** [Gorillaz "Demon Days"](https://music.youtube.com/playlist?list=OLAK5uy_msC_GYWaz8ESAiX9d41hRIs2uhcL8t_aw)
-- [Black Sabbath "Black Sabbath"](https://music.youtube.com/playlist?list=OLAK5uy_mhoU3URgsWoEi1S-3dG_Dbn3lLUc4vQ0I)
-- [The Strokes "Is This It"](https://music.youtube.com/playlist?list=OLAK5uy_miNTti5IWtAjX_RgVvK7lWMRGwnOB5IaE)
+- **NEXT** [The Strokes "Is This It"](https://music.youtube.com/playlist?list=OLAK5uy_miNTti5IWtAjX_RgVvK7lWMRGwnOB5IaE)
 - [Radiohead "OK Computer"](https://music.youtube.com/playlist?list=OLAK5uy_nc6afxSnmK8OFML8dF9q_0D1MBMXsGnL4)
 - [Queens of the Stone Age "Songs For The Deaf"](https://music.youtube.com/playlist?list=OLAK5uy_miT4yxiBPPyV6xHClICCWbkb68VV9CEKE)
 - [Massive Attack "Mezzanine"](https://music.youtube.com/playlist?list=OLAK5uy_myCWwyHEz9SABGUHaclijR2o9zLXJdE_w)
@@ -27,6 +25,8 @@ Weekly listening party and social chat.
 
 ## Past
 
+- `2022.04.04`: [Episode 50: Black Sabbath "Black Sabbath"](https://listen.tidal.com/album/34450077)
+- `2022.03.28`: [Episode 49: Gorillaz "Demon Days"](https://listen.tidal.com/album/1404355)
 - `2022.03.21`: [Episode 48: Pixies "Doolittle"](https://music.youtube.com/playlist?list=OLAK5uy_lf6jsYkBOcfA6eAzNNIr2PeQv0Cns519A)
 - `2022.02.14`: [Episode 47: The Dave Brubeck Quartet "Time Out"](https://music.youtube.com/playlist?list=OLAK5uy_kT4WsarfRaytnvA8aSj-Wq-JtcFN8JQyc)
 - `2022.01.31`: [Episode 46: Caravan Palace "<|º_º|>"](https://music.youtube.com/playlist?list=OLAK5uy_n6vE4QTcYNqXc91m8eMW7p6lpMUakjLH0)

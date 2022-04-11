@@ -8,8 +8,7 @@ Weekly listening party and social chat.
 
 ## Upcoming
 
-- **NEXT** [The Strokes "Is This It"](https://music.youtube.com/playlist?list=OLAK5uy_miNTti5IWtAjX_RgVvK7lWMRGwnOB5IaE)
-- [Radiohead "OK Computer"](https://music.youtube.com/playlist?list=OLAK5uy_nc6afxSnmK8OFML8dF9q_0D1MBMXsGnL4)
+- **NEXT** [Radiohead "OK Computer"](https://music.youtube.com/playlist?list=OLAK5uy_nc6afxSnmK8OFML8dF9q_0D1MBMXsGnL4)
 - [Queens of the Stone Age "Songs For The Deaf"](https://music.youtube.com/playlist?list=OLAK5uy_miT4yxiBPPyV6xHClICCWbkb68VV9CEKE)
 - [Massive Attack "Mezzanine"](https://music.youtube.com/playlist?list=OLAK5uy_myCWwyHEz9SABGUHaclijR2o9zLXJdE_w)
 - [Depeche Mode "Violator"](https://music.youtube.com/playlist?list=OLAK5uy_mNWbZjgWKWwwFgmWOGtqDdDYmwV2Bs8Ao)
@@ -25,6 +24,7 @@ Weekly listening party and social chat.
 
 ## Past
 
+- `2022.04.11`: [Episode 51: The Strokes "Is This It"](https://listen.tidal.com/album/22372112)
 - `2022.04.04`: [Episode 50: Black Sabbath "Black Sabbath"](https://listen.tidal.com/album/34450077)
 - `2022.03.28`: [Episode 49: Gorillaz "Demon Days"](https://listen.tidal.com/album/1404355)
 - `2022.03.21`: [Episode 48: Pixies "Doolittle"](https://music.youtube.com/playlist?list=OLAK5uy_lf6jsYkBOcfA6eAzNNIr2PeQv0Cns519A)

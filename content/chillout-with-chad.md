@@ -8,21 +8,19 @@ Weekly listening party and social chat.
 
 ## Upcoming
 
-- **NEXT** [Queens of the Stone Age "Songs For The Deaf"](https://music.youtube.com/playlist?list=OLAK5uy_miT4yxiBPPyV6xHClICCWbkb68VV9CEKE)
-- [Massive Attack "Mezzanine"](https://music.youtube.com/playlist?list=OLAK5uy_myCWwyHEz9SABGUHaclijR2o9zLXJdE_w)
+- **NEXT** [Massive Attack "Mezzanine"](https://music.youtube.com/playlist?list=OLAK5uy_myCWwyHEz9SABGUHaclijR2o9zLXJdE_w)
 - [Depeche Mode "Violator"](https://music.youtube.com/playlist?list=OLAK5uy_mNWbZjgWKWwwFgmWOGtqDdDYmwV2Bs8Ao)
 - [System of a Down "Toxicity"](https://music.youtube.com/playlist?list=OLAK5uy_n1sOLxWCfeedpeiN-YS7H5xJq5Qptac-M)
 - [Pearl Jam "Ten"](https://music.youtube.com/playlist?list=OLAK5uy_nCmmq03HsHVw9jrLUPm1SfKXIwuCQ1hXk)
 - [Linkin Park "Hybrid Theory"](https://music.youtube.com/playlist?list=OLAK5uy_k4Xnda2Pxyc90mpntw7hdOPCA3JKeOkRY)
 - [Pink Floyd "The Dark Side of the Moon"](https://music.youtube.com/playlist?list=OLAK5uy_mXoi-FuQb9Gw7Mguhdx5F4jltT0L1qOCw)
 - [Paul Simon "Graceland"](https://music.youtube.com/playlist?list=OLAK5uy_nrTf4uK4d14vKnEk4dm0MBhS_nF2fAY0I)
-- [Various Artists "O Brother, Where Art Thou? (Original Motion Picture Soundtrack)"](https://music.youtube.com/playlist?list=OLAK5uy_k3ohClUglkvoiE9kkrMpPbBNxpNOZPj-4)
-- **NEW** [Zero 7 "Simple Things"](https://tidal.com/album/94765781)
-- **NEW** [Starcadian "Radio Galaxy"](https://music.youtube.com/playlist?list=OLAK5uy_nMulQU6u2DXmC-1fJfGvwZAjpa_nhj6cc)
-- **NEW** [The Album Leaf "Into The Blue Again"](https://music.youtube.com/playlist?list=OLAK5uy_m7JyUXsRVJKt6pfZPx7MFjYk9bYJ2EpNM)
+- [Zero 7 "Simple Things"](https://tidal.com/album/94765781)
+- [The Album Leaf "Into The Blue Again"](https://music.youtube.com/playlist?list=OLAK5uy_m7JyUXsRVJKt6pfZPx7MFjYk9bYJ2EpNM)
 
 ## Past
 
+- `2022.05.23`: [Episode 53: Queens of the Stone Age "Songs For The Deaf"](https://tidal.com/browse/album/37132253)
 - `2022.04.25`: [Episode 52: Radiohead "OK Computer"](https://listen.tidal.com/album/58990510)
 - `2022.04.11`: [Episode 51: The Strokes "Is This It"](https://listen.tidal.com/album/22372112)
 - `2022.04.04`: [Episode 50: Black Sabbath "Black Sabbath"](https://listen.tidal.com/album/34450077)

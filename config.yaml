@@ -6,6 +6,7 @@ paginate: 15
 
 languageCode: en-us
 enableRobotsTXT: true
+enableGitInfo: true
 
 googleAnalytics: UA-10469485-9
 
@@ -43,9 +44,9 @@ menu:
       name: 'Home'
       url: '/'
       weight: 10
-    - identifier: "about"
-      name: "About"
-      url: "https://github.com/squalrus"
+    - identifier: 'about'
+      name: 'About'
+      url: 'https://github.com/squalrus'
       weight: 20
     - identifier: 'tags'
       name: 'Tags'

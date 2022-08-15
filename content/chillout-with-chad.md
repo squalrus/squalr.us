@@ -8,16 +8,14 @@ Weekly listening party and social chat.
 
 ## Upcoming
 
-- **NEXT** [Pearl Jam "Ten"](https://music.youtube.com/playlist?list=OLAK5uy_nCmmq03HsHVw9jrLUPm1SfKXIwuCQ1hXk)
-- [System of a Down "Toxicity"](https://music.youtube.com/playlist?list=OLAK5uy_n1sOLxWCfeedpeiN-YS7H5xJq5Qptac-M)
-- [Linkin Park "Hybrid Theory"](https://music.youtube.com/playlist?list=OLAK5uy_k4Xnda2Pxyc90mpntw7hdOPCA3JKeOkRY)
 - [Pink Floyd "The Dark Side of the Moon"](https://music.youtube.com/playlist?list=OLAK5uy_mXoi-FuQb9Gw7Mguhdx5F4jltT0L1qOCw)
 - [Paul Simon "Graceland"](https://music.youtube.com/playlist?list=OLAK5uy_nrTf4uK4d14vKnEk4dm0MBhS_nF2fAY0I)
-- [Zero 7 "Simple Things"](https://tidal.com/album/94765781)
 - [The Album Leaf "Into The Blue Again"](https://music.youtube.com/playlist?list=OLAK5uy_m7JyUXsRVJKt6pfZPx7MFjYk9bYJ2EpNM)
 
 ## Past
 
+- `2022.08.15`: [Episode 57: Pearl Jam "Ten"](https://listen.tidal.com/album/5120022)
+- `2022.08.08`: [Episode 56: Zero 7 "Simple Things"](https://listen.tidal.com/album/94765781)
 - `2022.07.25`: [Episode 55: Depeche Mode "Violator"](https://listen.tidal.com/album/34448840)
 - `2022.06.13`: [Episode 54: Massive Attack "Mezzanine"](https://tidal.com/browse/album/161314)
 - `2022.05.23`: [Episode 53: Queens of the Stone Age "Songs For The Deaf"](https://tidal.com/browse/album/37132253)

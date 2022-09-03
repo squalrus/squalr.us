@@ -2,15 +2,13 @@
 title: 'Chillout with Chad 🎧'
 ---
 
-Weekly listening party and social chat.
+Chillout with Chad was a weekly listening party and social chat. We listened to an entire album or curated playlist and chatted about music, music-inspired nostalgia, and life. No requirement to chat. Just hang out, listen, and do your own thing.
 
 <!-- https://www.reddit.com/r/AskReddit/comments/pqwt7w/in_your_opinion_what_is_an_album_with_no_bad_songs/?sort=top -->
 
 ## Upcoming
 
-- [Pink Floyd "The Dark Side of the Moon"](https://music.youtube.com/playlist?list=OLAK5uy_mXoi-FuQb9Gw7Mguhdx5F4jltT0L1qOCw)
-- [Paul Simon "Graceland"](https://music.youtube.com/playlist?list=OLAK5uy_nrTf4uK4d14vKnEk4dm0MBhS_nF2fAY0I)
-- [The Album Leaf "Into The Blue Again"](https://music.youtube.com/playlist?list=OLAK5uy_m7JyUXsRVJKt6pfZPx7MFjYk9bYJ2EpNM)
+- TBD
 
 ## Past
 

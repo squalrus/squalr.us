@@ -12,6 +12,7 @@ googleAnalytics: UA-10469485-9
 
 permalinks:
   blog: /:year/:month/:title/
+relativeURLs: true
 
 params:
   author: 'Chad Schulz'

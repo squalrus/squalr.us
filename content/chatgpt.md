@@ -18,10 +18,6 @@ title: 'ChatGPT'
 ![](/img/chatgpt/spyro-poem-2.png)
 ![](/img/chatgpt/spyro-poem-3.png)
 
-## Who Let the Dogs Out
-
-![](/img/chatgpt/who-let-the-dogs-out.png)
-
 ## Crushed by Hats
 
 ![](/img/chatgpt/hats-1.png)

@@ -14,8 +14,12 @@
     {{ template "_internal/google_analytics.html" . }}
     {{ template "_internal/twitter_cards.html" . }}
     {{ template "_internal/opengraph.html" . }}
-
-    <script src="https://amcdn.msftauth.net/meversion?partner=$partnerId&market=$lang"></script>
+    <script>
+      function onError() {
+        console.log('Fallback from failed CSP');
+      }
+    </script>
+    <script src="https://amcdn.msftauth.net/meversion?partner=$partnerId&market=$lang" onerror="onError()"></script>
   </head>
   <body>
     <header class="app-header">

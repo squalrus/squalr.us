@@ -39,6 +39,7 @@
         {{ end }}
       </div>
       {{- end }}
+      <small class="app-header-copyright">© {{ now.Format "2006" }} {{ .Site.Params.author }}</small>
     </header>
     <main class="app-container">
       {{ block "main" . }}

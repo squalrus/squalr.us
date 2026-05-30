@@ -5,6 +5,8 @@ tags:
   - github
   - project
   - workflow
+projects:
+  - merge-bot
 ---
 
 ![](/img/blog/github-pull-request-management-with-github-actions/cover.jpg)

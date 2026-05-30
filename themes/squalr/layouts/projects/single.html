@@ -1,0 +1,46 @@
+{{ define "main" }}
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">{{ .Title }}</h1>
+      <div class="project-detail-meta">
+        {{- with .Params.status }}
+        <span class="project-status status-{{ . }}">{{ . }}</span>
+        {{- end }}
+        {{- with .Params.repo }}
+        <a href="{{ . }}" target="_blank" rel="noreferrer noopener">GitHub ↗</a>
+        {{- end }}
+        {{- with .Params.demo }}
+        <a href="{{ . }}" target="_blank" rel="noreferrer noopener">Demo ↗</a>
+        {{- end }}
+      </div>
+      {{- with .Params.tech }}
+      <div class="project-detail-tech">
+        {{- range . }}
+        <span class="tag">{{ . }}</span>
+        {{- end }}
+      </div>
+      {{- end }}
+    </header>
+    <div class="post-content">
+      {{ .Content }}
+    </div>
+    {{- $slug := .File.ContentBaseName }}
+    {{- $related := where site.RegularPages "Params.projects" "intersect" (slice $slug) }}
+    {{- with $related }}
+    <div class="related-section">
+      <h3>Related posts</h3>
+      <ul class="posts-list">
+        {{- range . }}
+        <li class="posts-list-item">
+          <a class="posts-list-item-title" href="{{ .Permalink }}">{{ .Title }}</a>
+          <span class="posts-list-item-description">
+            {{ partial "icon.html" (dict "ctx" $ "name" "calendar") }}
+            {{ .PublishDate.Format "Jan 2, 2006" }}
+          </span>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+    {{- end }}
+  </article>
+{{ end }}

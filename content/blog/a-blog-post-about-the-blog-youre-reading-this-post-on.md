@@ -6,6 +6,10 @@ tags:
   - workflow
 ---
 
+**Update (2026):** The CSP configuration and GA setup shown in this post reflect what was live at the time. Both have since been updated — GA migrated to GA4, domains updated to `googletagmanager.com`, and `unpkg.com`/`opensea.io` removed after the NFT embeds were dropped.
+
+---
+
 A few months ago I decided I wanted to do some blogging about technical challenges, process observations (and opinions), and some topics I would find valuable to have written down somewhere. I also find blogging cathartic as a means to get an idea, that could otherwise stay wedged, out of my head.
 
 ## The Web Developer's Blog Pitfall

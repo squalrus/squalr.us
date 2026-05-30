@@ -1,7 +1,7 @@
 baseURL: https://squalr.us/
 title: Chad Schulz
 theme: squalr
-copyright: '©2026 Chad Schulz'
+copyright: '© {{ now.Format "2006" }} Chad Schulz'
 paginate: 15
 
 languageCode: en-us
@@ -12,13 +12,17 @@ services:
   googleAnalytics:
     id: G-82PM3D1H9N
 
+taxonomies:
+  tag: tags
+  tech: tech
+
 permalinks:
   blog: /:year/:month/:title/
   projects: /projects/:slug/
 
 params:
   author: 'Chad Schulz'
-  description: 'Principal SDE Manager at Microsoft. Currently working on azure.com.'
+  description: 'Sr Consultant at Dura Digital.'
   avatar: '/img/bio.jpg'
   menu_item_separator: '-'
   favicon: '/img/favicon.ico'

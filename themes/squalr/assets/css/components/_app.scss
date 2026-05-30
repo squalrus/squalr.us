@@ -24,6 +24,13 @@
   }
 }
 
+.app-header-copyright {
+  display: block;
+  margin-top: 1.5rem;
+  font-size: 0.7em;
+  color: rgba($light-color, 0.5);
+}
+
 .app-header-title {
   color: $lightest-color;
   display: block;

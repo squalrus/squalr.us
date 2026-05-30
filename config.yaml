@@ -21,9 +21,9 @@ permalinks:
 
 params:
   author: 'Chad Schulz'
-  description: 'Sr Consultant at Dura Digital.'
+  description: 'Sr Consultant at Dura Digital. Prog metal, pixels, and questionable hotdog opinions.'
   avatar: '/img/bio.jpg'
-  menu_item_separator: '-'
+  menu_item_separator: '//'
   favicon: '/img/favicon.ico'
   images:
     - img/bio.jpg

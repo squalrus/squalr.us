@@ -2,13 +2,55 @@
   padding: 2.5em;
   background: $darkest-color;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  // Subtle scanline texture
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.06) 2px,
+      rgba(0, 0, 0, 0.06) 4px
+    );
+    pointer-events: none;
+  }
+
+  // Accent line along the right edge (desktop) / bottom edge (mobile)
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $primary-color, $accent-color, transparent);
+    opacity: 0.5;
+  }
 }
 
 .app-header-avatar {
+  position: relative;
   width: 15rem;
   height: 15rem;
   border-radius: 100%;
-  border: 0.5rem solid $primary-color;
+  border: 0.35rem solid $primary-color;
+  box-shadow:
+    0 0 0 0.35rem $primary-color,
+    0 0 30px rgba($primary-color, 0.35),
+    0 0 60px rgba($primary-color, 0.12);
+  transition: box-shadow 0.4s;
+
+  &:hover {
+    box-shadow:
+      0 0 0 0.35rem $primary-color,
+      0 0 40px rgba($primary-color, 0.5),
+      0 0 80px rgba($primary-color, 0.2);
+  }
 }
 
 .app-container {
@@ -21,6 +63,13 @@
 
   a {
     margin: 0 0.1em;
+    transition: color 0.35s, filter 0.35s;
+
+    &:hover {
+      color: $primary-color;
+      filter: drop-shadow(0 0 6px rgba($primary-color, 0.7));
+      text-shadow: none;
+    }
   }
 }
 
@@ -28,15 +77,31 @@
   display: block;
   margin-top: 1.5rem;
   font-size: 0.7em;
-  color: rgba($light-color, 0.5);
+  color: rgba($light-color, 0.4);
+  letter-spacing: 0.05em;
 }
 
 .app-header-title {
-  color: $lightest-color;
   display: block;
   font-size: 2em;
   margin: 0.67em 0;
   font-weight: bold;
+  letter-spacing: -0.01em;
+  background: linear-gradient(160deg, $lightest-color 30%, $primary-color 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-header-menu {
+  font-size: 0.9em;
+  letter-spacing: 0.03em;
+
+  .app-header-menu-item {
+    &:hover {
+      text-shadow: 0 0 10px rgba($primary-color, 0.5);
+    }
+  }
 }
 
 @media (min-width: 940px) {
@@ -46,6 +111,17 @@
     left: 0;
     width: 20rem;
     min-height: 100vh;
+
+    // Right edge accent line on desktop
+    &::after {
+      top: 10%;
+      bottom: 10%;
+      left: auto;
+      right: 0;
+      width: 1px;
+      height: auto;
+      background: linear-gradient(180deg, transparent, $primary-color, $accent-color, transparent);
+    }
   }
 
   .app-container {

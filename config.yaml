@@ -28,10 +28,10 @@ params:
   images:
     - img/bio.jpg
   style:
-    darkestColor: '#242930'
-    darkColor: '#353b43'
-    lightColor: '#afbac4'
-    lightestColor: '#ffffff'
+    darkestColor: '#0c0c16'
+    darkColor: '#11111a'
+    lightColor: '#8892a4'
+    lightestColor: '#e2e8f0'
     primaryColor: '#52F0E0'
 
   dateFormat: 'Monday, January 2, 2006'

@@ -1,0 +1,46 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="container">
+    <p class="hero-eyebrow">2026.</p>
+    <h1 class="hero-title">Year of shipping.</h1>
+    <p class="hero-sub">{{ .Site.Params.description }}</p>
+  </div>
+</section>
+
+{{- $projects := where site.RegularPages "Section" "projects" -}}
+{{- if $projects }}
+<section class="home-section">
+  <div class="container">
+    <div class="home-section-header">
+      <h2 class="home-section-label">Projects</h2>
+      <a class="home-section-more" href="/projects/">All projects →</a>
+    </div>
+    <div class="projects-list">
+      {{- range sort $projects "Params.weight" }}
+      {{ partial "project-card.html" . }}
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{- end }}
+
+{{- $posts := where site.RegularPages "Section" "blog" | first 5 -}}
+{{- if $posts }}
+<section class="home-section">
+  <div class="container">
+    <div class="home-section-header">
+      <h2 class="home-section-label">Recent Posts</h2>
+      <a class="home-section-more" href="/blog/">All posts →</a>
+    </div>
+    <ul class="posts-list">
+      {{- range $posts }}
+      <li class="posts-list-item">
+        <a class="posts-list-item-title" href="{{ .Permalink }}">{{ .Title }}</a>
+        <span class="posts-list-item-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</section>
+{{- end }}
+{{ end }}

@@ -14,19 +14,7 @@ Why are people buying NFTs? That seems to be more of a psychology question, but 
 
 ## My Journey: How I Became Rich from Selling NFTs\*
 
-As someone who's never "invested" in cryptocurrency, the NFT journey was quite long. All I was looking to do was make a quick buck by selling my "art" or maybe purchase a few NFTs cheap and let them mature (like the below "Pizzas on Stick" or "Pizza Greek #42").
-
-<nft-card
-contractAddress="0x495f947276749ce646f68ac8c248420045cb7b5e"
-tokenId="71784478912813806361905117342137964638802648269634936565635800773678489141249">
-</nft-card>
-
-<nft-card
-contractAddress="0x495f947276749ce646f68ac8c248420045cb7b5e"
-tokenId="103437603976091268661884785883830492201952290325114708655820254434959514664961">
-</nft-card>
-
-<script src="https://unpkg.com/embeddable-nfts/dist/nft-card.min.js"></script>
+As someone who's never "invested" in cryptocurrency, the NFT journey was quite long. All I was looking to do was make a quick buck by selling my "art" or maybe purchase a few NFTs cheap and let them mature (like "Pizzas on Stick" or "Pizza Greek #42").
 
 Getting set up took a few steps:
 

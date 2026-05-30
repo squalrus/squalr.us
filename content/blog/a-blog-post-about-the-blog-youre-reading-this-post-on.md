@@ -87,4 +87,4 @@ After making these updates, I was able to bump up my scores for both security an
 
 Hugo offered a great platform to spin up a blog in a few hours. Azure offers great, easy infrastructure and automation to host a blog. For anyone wanting to follow in my footsteps, I created the skeleton of my blog as a template repository: https://github.com/squalrus/hugo-on-azure.
 
-If you have any suggestions or feedback on my approach, please reach out on Twitter [@chadschulz](https://twitter.com/chadschulz).
+If you have any suggestions or feedback on my approach, please reach out on X [@chadschulz](https://x.com/chadschulz).

@@ -10,41 +10,50 @@
     <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}" />
     {{ $style := resources.Get "css/main.scss" | resources.ExecuteAsTemplate "css/main.scss" . | resources.ToCSS | resources.Minify | resources.Fingerprint -}}
     <link rel="stylesheet" href="{{ $style.Permalink }}" />
-
     {{ template "_internal/google_analytics.html" . }}
     {{ template "_internal/twitter_cards.html" . }}
     {{ template "_internal/opengraph.html" . }}
   </head>
   <body>
-    <header class="app-header">
-      <a href="{{ .Site.BaseURL }}"><img class="app-header-avatar" src="{{ .Site.Params.avatar | default "avatar.jpg" | relURL }}" alt="{{ .Site.Params.author | default "John Doe" }}" /></a>
-      <span class="app-header-title">{{ .Site.Title }}</span>
-      {{- with .Site.Menus.main }}
-      <nav class="app-header-menu">
-        {{- range $key, $item := . }}
-          {{- if ne $key 0 }}
-            {{ $.Site.Params.menu_item_separator | default " - " | safeHTML }}
-          {{ end }}
-          <a class="app-header-menu-item" href="{{ $item.URL }}">{{ $item.Name }}</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="site-logo" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+        {{- with .Site.Menus.main }}
+        <nav class="site-nav">
+          {{- range . }}
+          <a class="site-nav-item" href="{{ .URL }}">{{ .Name }}</a>
+          {{- end }}
+        </nav>
         {{- end }}
-      </nav>
-      {{- end }}
-      <p>{{ .Site.Params.description | default "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium." }}</p>
-      {{- with .Site.Params.social }}
-      <div class="app-header-social">
-        {{ range . }}
-          <a href="{{ .url }}" target="_blank" rel="noreferrer noopener me">
-            {{ partial "icon.html" (dict "ctx" $ "name" .icon "title" .name) }}
-          </a>
-        {{ end }}
+        {{- with .Site.Params.social }}
+        <div class="site-header-social">
+          {{ range . }}
+            <a href="{{ .url }}" target="_blank" rel="noreferrer noopener me" title="{{ .icon }}">
+              {{ partial "icon.html" (dict "ctx" $ "name" .icon "title" .name) }}
+            </a>
+          {{ end }}
+        </div>
+        {{- end }}
       </div>
-      {{- end }}
-      <small class="app-header-copyright">© {{ now.Format "2006" }} {{ .Site.Params.author }}</small>
     </header>
-    <main class="app-container">
+    <main class="site-content">
       {{ block "main" . }}
         {{ .Content }}
       {{ end }}
     </main>
+    <footer class="site-footer">
+      <div class="container">
+        <span class="site-footer-copy">© {{ now.Format "2006" }} {{ .Site.Params.author }}</span>
+        {{- with .Site.Params.social }}
+        <div class="site-footer-social">
+          {{ range . }}
+            <a href="{{ .url }}" target="_blank" rel="noreferrer noopener me">
+              {{ partial "icon.html" (dict "ctx" $ "name" .icon "title" .name) }}
+            </a>
+          {{ end }}
+        </div>
+        {{- end }}
+      </div>
+    </footer>
   </body>
 </html>

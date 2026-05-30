@@ -9,8 +9,8 @@
   <p class="project-card-description">{{ . }}</p>
   {{- end }}
   {{- with .Params.tech }}
-  <div>
-    {{- range . }}
+  <div class="project-card-tech">
+    {{- range first 4 . }}
     <span class="tag">{{ . }}</span>
     {{- end }}
   </div>

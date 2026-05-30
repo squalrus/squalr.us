@@ -1,101 +1,146 @@
 .projects-list {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
-  padding: 0;
-  list-style: none;
+  gap: 1.25rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 600px) {
   .projects-list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
+@media (min-width: 900px) {
+  .projects-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .project-card {
+  position: relative;
   background: $darkest-color;
-  border-left: 0.4em solid transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.5rem;
   padding: 1.5rem;
-  transition: border-color 0.35s;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, $primary-color, $accent-color);
+    border-radius: 0.5rem 0.5rem 0 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
 
   &:hover {
-    border-left-color: $primary-color;
+    border-color: rgba($primary-color, 0.25);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba($primary-color, 0.08);
+    transform: translateY(-2px);
+
+    &::before {
+      opacity: 1;
+    }
   }
 }
 
 .project-card-header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .project-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
   color: $lightest-color;
-  font-size: 1.1em;
-  font-weight: bold;
-  margin: 0;
+  letter-spacing: -0.01em;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $primary-color;
+    text-shadow: none;
+  }
 }
 
 .project-card-description {
-  font-size: 0.9em;
-  margin: 0.5rem 0 1rem;
+  font-size: 0.875rem;
+  color: rgba($light-color, 0.8);
+  line-height: 1.6;
+  margin: 0 0 1rem;
+}
+
+.project-card-tech {
+  margin-bottom: 1.25rem;
 }
 
 .project-status {
   flex-shrink: 0;
-  font-size: 0.7em;
-  padding: 0.15em 0.5em;
-  border-radius: 0.2em;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15em 0.55em;
+  border-radius: 0.25em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.07em;
 
   &.status-active {
-    background: rgba($primary-color, 0.15);
+    background: rgba($primary-color, 0.12);
     color: $primary-color;
+    border: 1px solid rgba($primary-color, 0.25);
   }
 
   &.status-archived {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.06);
     color: $light-color;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   &.status-wip {
-    background: rgba(255, 165, 0, 0.15);
+    background: rgba(255, 165, 0, 0.12);
     color: #ffa500;
+    border: 1px solid rgba(255, 165, 0, 0.25);
   }
 }
 
 .project-card-links {
-  margin-top: 1rem;
-  font-size: 0.85em;
-
-  a {
-    margin-right: 1rem;
-  }
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
 }
 
+// ─── Project detail page ──────────────────────────
 .project-detail-meta {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-bottom: 1rem;
-  font-size: 0.9em;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
 }
 
 .project-detail-tech {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .related-section {
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px dashed rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 
   h3 {
     margin-top: 0;
     margin-bottom: 1rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba($lightest-color, 0.3);
   }
 }

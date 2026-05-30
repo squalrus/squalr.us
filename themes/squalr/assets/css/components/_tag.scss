@@ -1,15 +1,20 @@
 .tag {
   display: inline-block;
   margin-right: 0.2em;
-  padding: 0 0.6em;
-  font-size: 0.9em;
+  padding: 0.1em 0.6em;
+  font-size: 0.85em;
   border-radius: 0.2em;
   white-space: nowrap;
-  background: rgba(255, 255, 255, 0.1);
-  transition: color 0.35s, background 0.35s;
+  background: rgba($primary-color, 0.1);
+  border: 1px solid rgba($primary-color, 0.2);
+  color: rgba($lightest-color, 0.85);
+  transition: background 0.25s, border-color 0.25s, color 0.25s, box-shadow 0.25s;
 
   &:hover {
-    transition: color 0.25s, background 0.05s;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba($primary-color, 0.2);
+    border-color: rgba($primary-color, 0.6);
+    color: $lightest-color;
+    box-shadow: 0 0 8px rgba($primary-color, 0.25);
+    text-shadow: none;
   }
 }

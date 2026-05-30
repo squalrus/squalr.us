@@ -12,7 +12,7 @@ Our team used to rely on an email or an individual design comp to contain all of
 
 A feature is no longer a hastily hacked together single-page update but a rich, well tested, accessible web experience built with reusable UI components and fueled by data-driven hypothesized business value. This level of complexity can no longer be tracked solely in conversations, chats, or emails and requires a centralized document. This project spec, or canonical document, not only acts as the single source of truth but is infinitely valuable when new team members join the project or leadership wants an overview of the project. [Isaac](https://twitter.com/isaach) summarized this concept well:
 
-{{< tweet 1367003154923937793 >}}
+{{< tweet user="isaach" id="1367003154923937793" >}}
 
 ## The Project Spec™
 

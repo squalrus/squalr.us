@@ -11,7 +11,7 @@ jobs:
     name: Merge
     steps:
     - name: Integration check
-      uses: squalrus/merge-bot@master
+      uses: squalrus/merge-bot@master  # TODO: pin to a specific release tag or SHA once confirmed
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         test: false

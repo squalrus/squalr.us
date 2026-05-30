@@ -1,0 +1,26 @@
+<div class="project-card">
+  <div class="project-card-header">
+    <a class="project-card-title" href="{{ .Permalink }}">{{ .Title }}</a>
+    {{- with .Params.status }}
+    <span class="project-status status-{{ . }}">{{ . }}</span>
+    {{- end }}
+  </div>
+  {{- with .Params.description }}
+  <p class="project-card-description">{{ . }}</p>
+  {{- end }}
+  {{- with .Params.tech }}
+  <div>
+    {{- range . }}
+    <span class="tag">{{ . }}</span>
+    {{- end }}
+  </div>
+  {{- end }}
+  <div class="project-card-links">
+    {{- with .Params.repo }}
+    <a href="{{ . }}" target="_blank" rel="noreferrer noopener">GitHub ↗</a>
+    {{- end }}
+    {{- with .Params.demo }}
+    <a href="{{ . }}" target="_blank" rel="noreferrer noopener">Demo ↗</a>
+    {{- end }}
+  </div>
+</div>

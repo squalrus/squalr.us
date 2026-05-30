@@ -1,0 +1,101 @@
+.projects-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .projects-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.project-card {
+  background: $darkest-color;
+  border-left: 0.4em solid transparent;
+  padding: 1.5rem;
+  transition: border-color 0.35s;
+
+  &:hover {
+    border-left-color: $primary-color;
+  }
+}
+
+.project-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-card-title {
+  color: $lightest-color;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.project-card-description {
+  font-size: 0.9em;
+  margin: 0.5rem 0 1rem;
+}
+
+.project-status {
+  flex-shrink: 0;
+  font-size: 0.7em;
+  padding: 0.15em 0.5em;
+  border-radius: 0.2em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  &.status-active {
+    background: rgba($primary-color, 0.15);
+    color: $primary-color;
+  }
+
+  &.status-archived {
+    background: rgba(255, 255, 255, 0.08);
+    color: $light-color;
+  }
+
+  &.status-wip {
+    background: rgba(255, 165, 0, 0.15);
+    color: #ffa500;
+  }
+}
+
+.project-card-links {
+  margin-top: 1rem;
+  font-size: 0.85em;
+
+  a {
+    margin-right: 1rem;
+  }
+}
+
+.project-detail-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 0.9em;
+}
+
+.project-detail-tech {
+  margin-bottom: 1.5rem;
+}
+
+.related-section {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.3);
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+}

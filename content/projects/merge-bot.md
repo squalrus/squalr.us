@@ -1,0 +1,51 @@
+---
+title: "merge-bot"
+date: 2019-10-01T00:00:00+00:00
+description: "GitHub Action for automated PR merging based on labels, blocking labels, and reviewer sign-off."
+status: active
+repo: https://github.com/squalrus/merge-bot
+demo: ""
+tech:
+  - GitHub Actions
+  - TypeScript
+  - Node.js
+featured: true
+weight: 10
+---
+
+PR management for GitHub repos. merge-bot automates pull request integration by checking a configurable set of conditions before merging: required labels, blocking labels, and optional reviewer approval. Once conditions are met, the PR is merged with the method of your choice and the branch is cleaned up.
+
+It's designed to replace the manual label-watching and back-and-forth of "is this ready?" — wire it up, set your rules, and let the bot handle the rest.
+
+## Setup
+
+Add a workflow file at `.github/workflows/merge-bot.yml`:
+
+```yaml
+name: Merge Bot
+on:
+  pull_request:
+    types: [labeled, unlabeled, review_requested, review_request_removed]
+  pull_request_review:
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: squalrus/merge-bot@v1
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        labels: ready
+        blocking_labels: do not merge
+        method: squash
+```
+
+## Options
+
+| Option | Default | Description |
+|---|---|---|
+| `labels` | `ready` | Label(s) required before merging |
+| `blocking_labels` | `do not merge` | Label(s) that block the merge |
+| `reviewers` | `true` | Require all reviewers to approve |
+| `method` | `merge` | Merge method: `merge`, `squash`, or `rebase` |
+| `test` | `false` | Test mode — comments instead of merging |
+| `delete_source_branch` | `false` | Delete branch after merge |

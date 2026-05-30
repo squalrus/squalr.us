@@ -1,0 +1,10 @@
+{{ define "main" }}
+  <article>
+    <h1>{{ .Title }}</h1>
+    <ul class="projects-list">
+      {{- range sort .Pages "Params.weight" }}
+      <li>{{ partial "project-card.html" . }}</li>
+      {{- end }}
+    </ul>
+  </article>
+{{ end }}

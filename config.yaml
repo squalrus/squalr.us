@@ -1,7 +1,6 @@
 baseURL: https://squalr.us/
 title: Chad Schulz
 theme: squalr
-copyright: '© {{ now.Format "2006" }} Chad Schulz'
 paginate: 15
 
 languageCode: en-us

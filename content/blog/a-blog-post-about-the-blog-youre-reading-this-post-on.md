@@ -20,7 +20,7 @@ I spent some time debating what I am actually trying to get out of the project -
 
 ## Getting My Fix
 
-After looking at a few platforms, I ended up choosing [Hugo](https://gohugo.io/) -- it's blog-ready, has a lot of community built themes, and is simple. [Hugo's documentation](https://gohugo.io/documentation/) is extremely straightforward, there's a lot of [themes](https://themes.gohugo.io/), and with a few clicks [a Hugo site can be published on Azure](https://docs.microsoft.com/en-us/azure/static-web-apps/publish-hugo). Within a few hours I had a website deployed to https://squalr.us/ using the [m10c theme](https://themes.gohugo.io/hugo-theme-m10c/).
+After looking at a few platforms, I ended up choosing [Hugo](https://gohugo.io/) -- it's blog-ready, has a lot of community built themes, and is simple. [Hugo's documentation](https://gohugo.io/documentation/) is extremely straightforward, there's a lot of [themes](https://themes.gohugo.io/), and with a few clicks [a Hugo site can be published on Azure](https://docs.microsoft.com/en-us/azure/static-web-apps/publish-hugo). Within a few hours I had a website deployed to <https://squalr.us/> using the [m10c theme](https://themes.gohugo.io/hugo-theme-m10c/).
 
 Now that the site is established and a few posts are added, I can get my engineering fix.
 
@@ -38,7 +38,21 @@ Second, I ran the site through [WebPageTest](https://www.webpagetest.org/result/
 
 My site was flagged for not having a very robust cache policy. Azure Static Web Apps supports adding cache headers via a `staticwebapp.config.json` file that can be included in the root of the deployed site. Adding this file to Hugo's `/static/` folder allowed me to configure the following for caching.
 
-{{< gist squalrus 0ac98ffce73ca3e30958f3bea8246c4a >}}
+```json
+{
+  "routes": [
+    {
+      "route": "/img/*",
+      "headers": {
+        "cache-control": "must-revalidate, max-age=15770000"
+      }
+    }
+  ],
+  "globalHeaders": {
+    "cache-control": "must-revalidate, max-age=604800",
+  }
+}
+```
 
 ## Security headers
 
@@ -81,7 +95,14 @@ Explained: Allows for an iframe to embed Twitter (embedded Tweet).
 Value: `https://www.google-analytics.com`
 Explained: Restricts the URLs which can be loaded using script interface, limited to Google Analytics in this case.
 
-{{< gist squalrus 5b060eacb55aec76b98fc6ae4fa05b86 >}}
+```json
+{
+  "globalHeaders": {
+    "content-security-policy": "default-src 'self' https://squalr.us; script-src 'self' https://www.google-analytics.com 'sha256-d8WoQSinwBfvQBSI1cIf68DLqh2eUwA1HYB0xu6gBsA=' https://platform.twitter.com https://gist.github.com; style-src 'self' https://squalr.us/ https://github.githubassets.com 'unsafe-inline'; frame-src https://platform.twitter.com; connect-src https://www.google-analytics.com",
+        "x-frame-options": "DENY"
+  }
+}
+```
 
 After making these updates, I was able to bump up my scores for both security and caching. The remaining opportunities in caching are related to Google Analytics and the caching policy that they maintain for the JavaScript library.
 
@@ -89,6 +110,6 @@ After making these updates, I was able to bump up my scores for both security an
 
 ## Conclusion
 
-Hugo offered a great platform to spin up a blog in a few hours. Azure offers great, easy infrastructure and automation to host a blog. For anyone wanting to follow in my footsteps, I created the skeleton of my blog as a template repository: https://github.com/squalrus/hugo-on-azure.
+Hugo offered a great platform to spin up a blog in a few hours. Azure offers great, easy infrastructure and automation to host a blog. For anyone wanting to follow in my footsteps, I created the skeleton of my blog as a template repository: <https://github.com/squalrus/hugo-on-azure>.
 
 If you have any suggestions or feedback on my approach, please reach out on X [@chadschulz](https://x.com/chadschulz).

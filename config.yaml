@@ -1,9 +1,11 @@
 baseURL: https://squalr.us/
 title: Chad Schulz
 theme: squalr
-paginate: 15
+pagination:
+  pagerSize: 15
+ignoreErrors: ['error-remote-getjson','shortcode-twitter-getremote']
 
-languageCode: en-us
+locale: en-us
 enableRobotsTXT: true
 enableGitInfo: true
 

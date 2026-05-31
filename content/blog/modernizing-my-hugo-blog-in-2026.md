@@ -1,6 +1,6 @@
 ---
 title: "Modernizing My Hugo Blog in 2026"
-date: 2026-05-30T00:00:00+00:00
+date: 2026-06-04T00:00:00+00:00
 tags:
   - azure
   - process
@@ -15,7 +15,7 @@ I didn't know that until I actually looked. The site loaded fine, posts rendered
 
 This is the `v1.0.0` post — where the blog stopped being a thing I'd let rot and became something I actually maintain.
 
-## tldr;
+## tldr
 
 - Migrated from defunct Universal Analytics to GA4
 - Updated GitHub Actions from `v0.0.1-preview` to current stable versions
@@ -55,13 +55,13 @@ I started with a simple goal: dust off the blog and start writing again. Before 
 
 ## Then I redesigned the whole thing
 
-The "owned, modernized, identical-looking" theme lasted about a week before I decided identical-looking wasn't the point.
+The "owned, modernized, identical-looking" theme lasted about a day before I decided identical-looking wasn't the point.
 
 The site now leans all the way into cyberpunk: an arcade-pixel hero in [Press Start 2P](https://fonts.google.com/specimen/Press+Start+2P) with a neon flicker on the lit word, a textured background (dot grid, horizon glow, CRT scanlines, vignette), and project cards that either show a real screenshot or an auto-generated faux-terminal banner so no card is ever a blank box. Teal and cyan neon on a near-black blue, with ember orange for the fun punctuation.
 
 A couple of decisions I'm happy with:
 
-- **The hero heading is config, not markup.** I'm still not sold on "YEAR OF SHIPPING.", so the kicker, the heading lines, the lit neon word, and the subtitle all live in `config.yaml`. Wrap a word in `{braces}` and it becomes the glowing one. Changing it is a one-line edit, not a template dig.
+- **The hero heading is config, not markup.** I'm still not sold on "MY YEAR OF SHIPPING.", so the kicker, the heading lines, the lit neon word, and the subtitle all live in `config.yaml`. Wrap a word in `{braces}` and it becomes the glowing one. Changing it is a one-line edit, not a template dig.
 - **Image-less projects get a terminal.** `merge-bot` and `desktop-tracker` don't have screenshots, so they render a little fake CI/dev terminal generated from their metadata instead of an empty rectangle.
 
 It's louder than the old site by a wide margin. That's the idea.

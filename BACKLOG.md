@@ -55,6 +55,7 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 | Drop OpenSea from the CSP + note the defunct embeds in the NFT post | S | M |
 | Update the Twitter social link to X | S | L |
 | Migrate SCSS `@import` → `@use` / `@forward` | M | M |
+| TODO: review all blogs tags | | |
 
 ---
 
@@ -181,10 +182,10 @@ Drafted / scheduled posts, with their intended go-live dates. Future-dated posts
 
 | Post | Go-live | Status |
 | --- | --- | --- |
-| Modernizing My Hugo Blog in 2026 | 2026-05-30 | live with `v1.0.0` |
-| The three markdown files that replaced my project tools | 2026-06-02 | queued — ready |
-| Building a Custom Hugo Theme | 2026-06-16 | queued — ready |
-| Still Here. New Chapter. | 2026-06-23 | draft — **needs Chad's review** (personal details / Dura specifics are placeholders) |
+| Still Here. New Chapter. | 2026-06-02 | draft — **needs Chad's review** (personal details / Dura specifics are placeholders) |
+| Modernizing My Hugo Blog in 2026 | 2026-06-04 | queued — the `v1.0.0` explainer |
+| The three markdown files that replaced my project tools | 2026-06-09 | queued — ready |
+| Building a Custom Hugo Theme | 2026-06-11 | queued — ready |
 
 ## Shipped
 

@@ -1,6 +1,6 @@
 ---
 title: "Building a Custom Hugo Theme"
-date: 2026-06-16T00:00:00+00:00
+date: 2026-06-11T00:00:00+00:00
 tags:
   - process
   - website
@@ -37,7 +37,7 @@ Parity is the right first move. It de-risks everything: if the new theme renders
 
 ## Phase two: lean all the way in
 
-Identical-looking lasted about a week. The whole reason to own the theme was to do something with it.
+Identical-looking lasted about a day. The whole reason to own the theme was to do something with it.
 
 The site is cyberpunk now: an arcade-pixel hero in Press Start 2P with a neon flicker, a textured background built from four stacked fixed layers (dot grid, horizon glow, CRT scanlines, vignette), and project cards that show either a real screenshot or an auto-generated faux-terminal banner. Teal and cyan on near-black blue, ember orange for punctuation.
 

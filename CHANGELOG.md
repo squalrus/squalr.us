@@ -4,7 +4,7 @@ User-visible changes to squalr.us, newest first. Format loosely follows [Keep a 
 
 ## [1.0.0] — 2026-05-30
 
-The first versioned release — a full cyberpunk redesign, plus the backlog / changelog / versioning workflow the site now runs on. The [story is its own blog post](/2026/05/modernizing-my-hugo-blog-in-2026/).
+The first versioned release — a full cyberpunk redesign, plus the backlog / changelog / versioning workflow the site now runs on. The [story is its own blog post](/2026/06/modernizing-my-hugo-blog-in-2026/).
 
 ### Added
 

@@ -1,89 +1,80 @@
 ---
 title: "Building a Custom Hugo Theme"
-date: 2026-06-04T00:00:00+00:00
+date: 2026-06-16T00:00:00+00:00
 tags:
   - process
   - website
   - workflow
+projects:
+  - squalr.us
 ---
 
-The m10c theme served the blog well for five years. But at some point, a git submodule you don't own starts to feel less like a convenience and more like a dependency you can't audit.
+The m10c theme served this blog well for five years. But a git submodule you don't own starts to feel less like a convenience and more like a dependency you can't audit — and I was about to do things to this site that no off-the-shelf theme was going to sit still for.
 
-The final nudge: m10c is minimally maintained, wasn't pinned to a specific commit, and I was about to add a Projects section the theme had no concept of. Building a custom theme made more sense than trying to extend someone else's.
+So I built my own. Then I redesigned it into a neon arcade cabinet. Here's how both halves went.
 
-## What Hugo themes actually are
+## What a Hugo theme actually is
 
-A Hugo theme is a directory inside `themes/` with a specific structure:
+A theme is a directory under `themes/` with a specific structure:
 
 ```
 themes/squalr/
-├── assets/css/      # SCSS, compiled by Hugo's pipeline
+├── assets/css/      # SCSS, compiled by Hugo's own pipeline
 ├── data/            # JSON data files (icons, etc.)
 ├── layouts/         # HTML templates
 └── theme.toml       # Metadata
 ```
 
-Hugo's template lookup tries your project's `layouts/` first, then the theme's. So you can override individual templates without touching the theme — useful when you need a one-off customization without forking everything.
+Two things make this pleasant. First, Hugo's template lookup checks your project's `layouts/` *before* the theme's, so you can override a single template without forking the whole thing. Second, the CSS pipeline runs through Hugo itself — you write SCSS, Hugo compiles and fingerprints it. No npm, no webpack, no `node_modules`.
 
-The CSS pipeline runs through Hugo itself. No npm, no webpack, no node_modules. You write SCSS, Hugo compiles and fingerprints it. That's it.
+## Phase one: parity
 
-## Porting from m10c
+The first goal was boring on purpose — a custom theme that looked *identical* to the old one. I initialized the submodule to read the source, then ported each piece: `_base.scss` for reset and typography, component partials for the layout, post content, tags, pagination, and the 404. The templates were nearly a direct copy.
 
-Phase one was parity: a new theme that looks identical to the old one. I initialized the submodule to read the source, then ported each file:
+One cleanup worth mentioning: m10c ships all 400+ Feather icons as a 53KB JSON blob. The templates use nine. I pulled those nine into `data/squalr/icons.json` — 2KB, no external dependency.
 
-- `_base.scss` — reset, typography, link styles
-- `components/_app.scss` — the fixed sidebar and main container
-- `components/_post.scss` — content area, blockquotes, code blocks
-- Remaining components: tags, pagination, 404, icons
+Parity is the right first move. It de-risks everything: if the new theme renders the existing site pixel-for-pixel, you *know* the port is correct, and every change after that is a deliberate design decision instead of a porting bug you can't tell apart.
 
-The templates were almost a direct copy. The main change: removing the Disqus footer call from `single.html` (it was wired up but never used) and removing a Microsoft auth script from `baseof.html` that had crept in from work tooling.
+## Phase two: lean all the way in
 
-One thing worth doing: the m10c theme ships with all 400+ Feather icons as a 53KB JSON file. The templates use nine of them. I extracted those nine into `data/squalr/icons.json` — now 2KB. Smaller payload, no external dependency.
+Identical-looking lasted about a week. The whole reason to own the theme was to do something with it.
 
-## The icon partial
+The site is cyberpunk now: an arcade-pixel hero in Press Start 2P with a neon flicker, a textured background built from four stacked fixed layers (dot grid, horizon glow, CRT scanlines, vignette), and project cards that show either a real screenshot or an auto-generated faux-terminal banner. Teal and cyan on near-black blue, ember orange for punctuation.
 
-m10c renders icons from a JSON data file using an inline SVG partial. The partial looks up the icon name in `$.Site.Data.m10c.icons`. Porting to the custom theme meant updating that path to `$.Site.Data.squalr.icons` — one-line change, but easy to miss.
+A few things I'd actually recommend stealing:
 
-```html
-{{- if isset .ctx.Site.Data.squalr.icons .name -}}
-<svg ...>
-  {{ safeHTML (index .ctx.Site.Data.squalr.icons .name) }}
-</svg>
-{{- end -}}
-```
-
-## Adding the Projects section
-
-With the theme owned, adding a new content type was straightforward. Projects live in `content/projects/` as Markdown files with structured frontmatter:
+**Make the hero configurable.** I wasn't sure about the headline copy, so I didn't hard-code it. The kicker, the heading lines, the lit word, and the subtitle all come from `config.yaml`:
 
 ```yaml
-status: active
-repo: https://github.com/squalrus/merge-bot
-tech:
-  - GitHub Actions
-  - TypeScript
+hero:
+  lines:
+    - 'YEAR'
+    - 'OF {SHIPPING}.'
 ```
 
-The list page renders a card grid. The detail page shows the project description plus a "Related posts" section — queried by finding all blog posts where `Params.projects` contains the current project's slug:
+A tiny bit of template logic turns `{SHIPPING}` into the glowing `<span>` and the trailing `.` into the ember dot. Changing the headline is a one-line config edit, not a template dig.
+
+**Generate a banner so no card is ever empty.** Projects without a screenshot render a fake terminal built from their own metadata — a `$` command, a comment line, a status line — instead of a blank rectangle. It's driven by an optional `terminal:` frontmatter block with a sensible auto-fallback.
+
+**Cross-link posts and projects off one field.** A post names a project in frontmatter; the project page finds its related posts in reverse. Both directions read the same `projects` array — no relationship table to maintain:
 
 ```html
-{{- $slug := .File.ContentBaseName }}
-{{- $related := where site.RegularPages "Params.projects" "intersect" (slice $slug) }}
+{{ $slug := .File.ContentBaseName }}
+{{ $related := where site.RegularPages "Params.projects" "intersect" (slice $slug) }}
 ```
 
-Blog posts reference projects the same way, in reverse:
+## The gotchas (there are always gotchas)
 
-```yaml
-projects:
-  - merge-bot
-```
+Three of these cost me real time. All three are the kind of bug that compiles fine and *looks* fine until it doesn't.
 
-Hugo looks up the project page and renders a card at the bottom of the post. Both directions work off the same frontmatter — no separate relationship table to maintain.
+**The SCSS-as-template thing.** The theme injects config colors into SCSS variables via `resources.ExecuteAsTemplate` before compiling. It works, but it's genuinely odd — you're running a `.scss` file through Hugo's templating engine first. At one point the pipeline lost that step and the color variables stopped substituting; a stale build cache kept rendering the *old* compiled CSS, so everything looked correct until I cleared the cache. Lesson: when CSS goes weird, nuke `resources/_gen` before you trust what you're seeing.
 
-## What I'd do differently
+**A class-name collision.** My section headings used `<span class="tag">`. So did my blog post tags — a totally separate component with a pill background and a hover glow. The headings silently inherited the pill. The fix was a rename (`sec-tag`), but the lesson is that a flat global CSS namespace will absolutely let two unrelated things fight over a common word.
 
-The SCSS variable approach (injecting config values via `resources.ExecuteAsTemplate`) works, but it's a bit odd — you're treating SCSS as a Hugo template before compiling it. CSS custom properties defined in a `:root` block would be cleaner and easier to override. That's a refactor for another day.
+**A shorthand that ate my spacing.** My centered container set `padding: 0 28px` — and that shorthand quietly zeroes top/bottom padding. Because the container class and the section classes landed on the same elements, and the container was imported *later*, it won the cascade and flattened every vertical gap on the homepage to zero. Everything was crammed together and bumping the section padding did nothing. The fix: use `padding-inline` so the container only ever touches the horizontal axis. Logical properties exist for exactly this reason.
 
-The theme also doesn't have open graph images per-post yet. Hugo has built-in OG support but generating post-specific images requires either a static image per post or a dynamic generation approach. Worth adding when there's content worth promoting.
+## What's next
 
-For now: zero npm, reproducible builds, a theme I can actually modify, and a Projects section that didn't require fighting an upstream dependency. Good enough to ship.
+The `@import` rules in the SCSS are deprecated in Dart Sass and I'll eventually move to `@use`/`@forward`. The fonts load from Google Fonts; self-hosting them would get the zero-dependency story fully back. Both are in [the backlog](/backlog/) — which, fittingly, is rendered by this very theme.
+
+For now: zero npm, reproducible builds, a theme I can actually modify, and a homepage that looks like it belongs to someone who likes pixels. Good enough to ship.

@@ -2,15 +2,29 @@
 title: "merge-bot"
 date: 2019-10-01T00:00:00+00:00
 description: "GitHub Action for automated PR merging based on labels, blocking labels, and reviewer sign-off."
-status: active
+status: archived
 repo: https://github.com/squalrus/merge-bot
+# Featured image — shown on the project card and at the top of this page:
+# image: /img/projects/merge-bot/featured.png
+# Gallery — shown when drilling into this project:
+# gallery:
+#   - src: /img/projects/merge-bot/marketplace.png
+#     caption: "GitHub Marketplace listing"
 demo: ""
 tech:
   - GitHub Actions
   - TypeScript
   - Node.js
 featured: true
-weight: 10
+weight: 30
+terminal:
+  label: 'merge-bot — ci'
+  glyph: '{ }'
+  lines:
+    - '$ merge-bot --auto'
+    - '# labels ok · blocking: none'
+    - '✓ reviewers signed off (2/2)'
+    - '✓ merged PR #482 → main'
 ---
 
 PR management for GitHub repos. merge-bot automates pull request integration by checking a configurable set of conditions before merging: required labels, blocking labels, and optional reviewer approval. Once conditions are met, the PR is merged with the method of your choice and the branch is cleaned up.

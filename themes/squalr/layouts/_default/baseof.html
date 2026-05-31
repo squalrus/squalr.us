@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="{{ .Site.Params.author | default "John Doe" }}" />
     <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
     {{ $opts := dict "transpiler" "dartsass" "targetPath" "css/style.css" }}
     {{ $style := resources.Get "css/main.scss" | resources.ExecuteAsTemplate "css/main.scss" . | css.Sass $opts | minify | fingerprint -}}
     <link rel="stylesheet" href="{{ $style.Permalink }}" />
@@ -16,25 +19,26 @@
     {{ template "_internal/opengraph.html" . }}
   </head>
   <body>
-    <header class="site-header">
-      <div class="site-header-inner">
-        <a class="site-logo" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+    <div class="fx fx-glow"></div>
+    <div class="fx fx-grid"></div>
+    <div class="fx fx-scan"></div>
+    <div class="fx fx-vig"></div>
+    <header class="topbar">
+      <div class="wrap nav">
+        <a class="brand" href="{{ .Site.BaseURL }}">
+          <span class="glyph">CS</span>
+          <span class="name">{{ .Site.Title | upper }}</span>
+        </a>
         {{- with .Site.Menus.main }}
-        <nav class="site-nav">
-          {{- range . }}
-          <a class="site-nav-item" href="{{ .URL }}">{{ .Name }}</a>
-          {{- end }}
+        <nav>
+          <ul class="nav-links">
+            {{- range . }}
+            <li><a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} class="active"{{ end }}>{{ .Name | lower }}</a></li>
+            {{- end }}
+          </ul>
         </nav>
         {{- end }}
-        {{- with .Site.Params.social }}
-        <div class="site-header-social">
-          {{ range . }}
-            <a href="{{ .url }}" target="_blank" rel="noreferrer noopener me" title="{{ .icon }}">
-              {{ partial "icon.html" (dict "ctx" $ "name" .icon "title" .name) }}
-            </a>
-          {{ end }}
-        </div>
-        {{- end }}
+        {{ partial "social.html" . }}
       </div>
     </header>
     <main class="site-content">
@@ -42,18 +46,24 @@
         {{ .Content }}
       {{ end }}
     </main>
-    <footer class="site-footer">
-      <div class="container">
-        <span class="site-footer-copy">© {{ now.Format "2006" }} {{ .Site.Params.author }}</span>
-        {{- with .Site.Params.social }}
-        <div class="site-footer-social">
-          {{ range . }}
-            <a href="{{ .url }}" target="_blank" rel="noreferrer noopener me">
-              {{ partial "icon.html" (dict "ctx" $ "name" .icon "title" .name) }}
-            </a>
-          {{ end }}
+    <footer class="foot">
+      {{- $version := "" -}}
+      {{- with findRE `\[\d+\.\d+\.\d+\]` (readFile "CHANGELOG.md") 1 -}}
+        {{- $version = replaceRE `[\[\]]` "" (index . 0) -}}
+      {{- end -}}
+      <div class="wrap foot-in">
+        <div>
+          <p class="c">© {{ now.Format "2006" }} {{ .Site.Params.author }} · /dev/null</p>
+          <p class="tagline">Built with Hugo, caffeine, and <span class="hi">questionable hotdog opinions</span>. 🌭</p>
         </div>
-        {{- end }}
+        <div class="foot-meta">
+          <nav class="foot-links">
+            <a href="/changelog/">changelog</a>
+            <a href="/backlog/">backlog</a>
+            {{- with $version }}<a class="foot-version" href="/changelog/" title="What shipped, and when">v{{ . }}</a>{{- end }}
+          </nav>
+          {{ partial "social.html" . }}
+        </div>
       </div>
     </footer>
   </body>

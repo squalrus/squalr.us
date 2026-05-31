@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div class="page-container">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{- with .Params.subtitle }}
+  <p class="page-subtitle">{{ . }}</p>
+  {{- end }}
+  <article class="post-content doc-content{{ if eq .Params.sourceFile "CHANGELOG.md" }} doc-changelog{{ end }}">
+    {{- $raw := readFile .Params.sourceFile -}}
+    {{- /* Drop the source file's own H1 — the page title above replaces it */ -}}
+    {{- $body := replaceRE `^# [^\n]*\n` "" $raw -}}
+    {{- /* Rewrite repo-relative doc links to their on-site equivalents */ -}}
+    {{- $body = replaceRE `\]\(\.?/?CHANGELOG\.md` "](/changelog/" $body -}}
+    {{- $body = replaceRE `\]\(\.?/?BACKLOG\.md` "](/backlog/" $body -}}
+    {{- /* De-link references to repo-only docs (CLAUDE.md, TECH-STACK-AUDIT.md, …) so they don't 404 */ -}}
+    {{- $body = replaceRE `\[([^\]]+)\]\(\.?/?[A-Za-z][A-Za-z0-9._-]*\.md[^)]*\)` "$1" $body -}}
+    {{ $body | markdownify }}
+  </article>
+</div>
+{{ end }}

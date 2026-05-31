@@ -1,10 +1,18 @@
 .post-title {
-  color: $lightest-color;
+  color: $ink;
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 700;
+  line-height: 1.1;
   letter-spacing: -0.02em;
+  margin: 0 0 1.1rem;
 }
 
 .post-header {
   margin-bottom: 2.5rem;
+}
+
+.post-meta {
+  font-family: $font-mono;
 }
 
 .post-content {

@@ -1,20 +1,53 @@
-$darkest-color: {{ .Site.Params.style.darkestColor | default "#242930" }};
-$dark-color: {{ .Site.Params.style.darkColor | default "#353b43" }};
-$light-color: {{ .Site.Params.style.lightColor | default "#afbac4" }};
-$lightest-color: {{ .Site.Params.style.lightestColor | default "#ffffff" }};
-$primary-color: {{ .Site.Params.style.primaryColor | default "#52F0E0" }};
-$accent-color: #FF2D78;
+// ─── Palette (config.yaml → params.style) ────────
+$bg:        {{ .Site.Params.style.bg | default "#0a0e12" }};
+$bg-2:      {{ .Site.Params.style.bg2 | default "#0c1219" }};
+$panel:     #0e1620;
+$panel-2:   #0b1118;
+$line:      #16222e;
+$line-2:    #1e2f3e;
+$ink:       {{ .Site.Params.style.ink | default "#e8f1f4" }};
+$ink-dim:   #9fb0bc;
+$ink-faint: #5d6f7c;
+$acc:       {{ .Site.Params.style.accent | default "#2ee6c8" }};
+$acc-2:     {{ .Site.Params.style.accent2 | default "#37c0ff" }};
+$acc-warm:  {{ .Site.Params.style.accentWarm | default "#ff8a3c" }};
+
+// ─── Fonts ───────────────────────────────────────
+$font-pixel: 'Press Start 2P', monospace;
+$font-body:  'Space Grotesk', system-ui, -apple-system, sans-serif;
+$font-mono:  'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+// ─── Legacy aliases ──────────────────────────────
+// Older partials reference these names; map them onto the new palette so
+// every page picks up the cyberpunk colors without a per-file rewrite.
+$darkest-color:  $bg;
+$dark-color:     $bg-2;
+$light-color:    $ink-dim;
+$lightest-color: $ink;
+$primary-color:  $acc;
+$accent-color:   $acc-warm;
 
 @import 'base';
 
+// arcade chrome + homepage components
+@import 'components/fx';
+@import 'components/topbar';
+@import 'components/hero';
+@import 'components/section';
+@import 'components/card';
+@import 'components/posts';
+@import 'components/footer';
+
+// shared layout + inner-page components
 @import 'components/app';
-@import 'components/error_404';
-@import 'components/icon';
-@import 'components/pagination';
 @import 'components/post';
 @import 'components/posts_list';
 @import 'components/tag';
 @import 'components/tags_list';
 @import 'components/projects';
+@import 'components/doc';
+@import 'components/error_404';
+@import 'components/icon';
+@import 'components/pagination';
 
 @import 'extra';

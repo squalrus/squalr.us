@@ -18,10 +18,11 @@
 
 .project-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background: $darkest-color;
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 0.5rem;
-  padding: 1.5rem;
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
   overflow: hidden;
 
@@ -32,8 +33,8 @@
     left: 0;
     right: 0;
     height: 2px;
+    z-index: 3;
     background: linear-gradient(90deg, $primary-color, $accent-color);
-    border-radius: 0.5rem 0.5rem 0 0;
     opacity: 0;
     transition: opacity 0.3s;
   }
@@ -43,10 +44,65 @@
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba($primary-color, 0.08);
     transform: translateY(-2px);
 
-    &::before {
-      opacity: 1;
+    &::before { opacity: 1; }
+  }
+
+  // Featured projects get a permanent pink-leaning edge
+  &.is-featured {
+    border-color: rgba($accent-color, 0.22);
+
+    &:hover {
+      border-color: rgba($accent-color, 0.45);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba($accent-color, 0.12);
     }
   }
+}
+
+.project-card-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: linear-gradient(130deg, rgba($primary-color, 0.12), rgba($accent-color, 0.12));
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease, filter 0.45s ease;
+    filter: saturate(1.05);
+  }
+
+  .project-card:hover & img {
+    transform: scale(1.04);
+    filter: saturate(1.15);
+  }
+
+  &:hover { text-shadow: none; }
+}
+
+.project-card-badge {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25em 0.6em;
+  border-radius: 0.25em;
+  color: $lightest-color;
+  background: rgba($accent-color, 0.85);
+  box-shadow: 0 0 14px rgba($accent-color, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.project-card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.5rem;
 }
 
 .project-card-header {
@@ -81,6 +137,14 @@
   margin-bottom: 1.25rem;
 }
 
+// Push the links to the bottom so cards in a row line up
+.project-card-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+  font-size: 0.8rem;
+}
+
 .project-status {
   flex-shrink: 0;
   font-size: 0.65rem;
@@ -89,6 +153,7 @@
   border-radius: 0.25em;
   text-transform: uppercase;
   letter-spacing: 0.07em;
+  white-space: nowrap;
 
   &.status-active {
     background: rgba($primary-color, 0.12);
@@ -102,17 +167,12 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  &.status-wip {
+  &.status-wip,
+  &.status-paused {
     background: rgba(255, 165, 0, 0.12);
-    color: #ffa500;
+    color: #ffb347;
     border: 1px solid rgba(255, 165, 0, 0.25);
   }
-}
-
-.project-card-links {
-  display: flex;
-  gap: 1rem;
-  font-size: 0.8rem;
 }
 
 // ─── Project detail page ──────────────────────────
@@ -127,6 +187,86 @@
 
 .project-detail-tech {
   margin-bottom: 2rem;
+}
+
+.project-hero-media {
+  position: relative;
+  margin: 0 0 2.5rem;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  border: 1px solid rgba($primary-color, 0.15);
+  box-shadow: 0 10px 44px rgba(0, 0, 0, 0.5);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(160deg, transparent 55%, rgba($accent-color, 0.18));
+    mix-blend-mode: screen;
+  }
+
+  img {
+    width: 100%;
+    display: block;
+  }
+}
+
+// ─── Project gallery ──────────────────────────────
+.project-gallery {
+  margin-top: 3.5rem;
+}
+
+.project-gallery-label {
+  margin: 0 0 1.25rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba($lightest-color, 0.4);
+}
+
+.project-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.project-gallery-item {
+  margin: 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: $darkest-color;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+
+  a {
+    display: block;
+    line-height: 0;
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+  }
+
+  figcaption {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: rgba($light-color, 0.75);
+  }
+
+  &:hover {
+    border-color: rgba($accent-color, 0.4);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba($accent-color, 0.12);
+    transform: translateY(-2px);
+
+    img { transform: scale(1.05); }
+  }
 }
 
 .related-section {

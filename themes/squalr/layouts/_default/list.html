@@ -1,14 +1,11 @@
 {{ define "main" }}
 <div class="page-container">
   <h1 class="page-title">{{ .Title }}</h1>
-  <ul class="posts-list">
-    {{ range where .Paginator.Pages "Type" "!=" "page" }}
-      <li class="posts-list-item">
-        <a class="posts-list-item-title" href="{{ .Permalink }}">{{ .Title }}</a>
-        <span class="posts-list-item-date">{{ .PublishDate.Format "Jan 2, 2006" }}</span>
-      </li>
+  <div class="postrows">
+    {{ range $i, $p := where .Paginator.Pages "Type" "!=" "page" }}
+      {{ partial "post-row.html" (dict "page" $p "num" (add $i 1)) }}
     {{ end }}
-  </ul>
+  </div>
   {{ partial "pagination.html" $ }}
 </div>
 {{ end }}

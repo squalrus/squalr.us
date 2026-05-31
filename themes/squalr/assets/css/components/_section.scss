@@ -1,0 +1,55 @@
+// ─── Section header ──────────────────────────────
+.sec {
+  padding-block: 56px;
+}
+
+.sec-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
+.sec-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+
+  .sec-tag {
+    font-family: $font-pixel;
+    font-size: 14px;
+    color: $ink;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    white-space: nowrap;
+
+    .ic { color: $acc; }
+  }
+
+  .rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, $line-2, transparent);
+    min-width: 30px;
+  }
+}
+
+.sec-more {
+  font-family: $font-mono;
+  font-size: 13px;
+  color: $acc-2;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: gap 0.15s, filter 0.15s;
+
+  &:hover {
+    gap: 11px;
+    filter: drop-shadow(0 0 6px rgba($acc-2, 0.7));
+  }
+}

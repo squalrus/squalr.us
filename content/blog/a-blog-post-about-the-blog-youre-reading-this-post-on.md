@@ -4,6 +4,8 @@ date: 2021-04-21T15:51:27-07:00
 tags:
   - process
   - workflow
+projects:
+  - squalr.us
 ---
 
 **Update (2026):** The CSP configuration and GA setup shown in this post reflect what was live at the time. Both have since been updated — GA migrated to GA4, domains updated to `googletagmanager.com`, and `unpkg.com`/`opensea.io` removed after the NFT embeds were dropped.

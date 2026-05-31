@@ -2,6 +2,13 @@
 title: "Glizzy Relay"
 date: 2026-05-09T00:00:00+00:00
 status: active
+image: /img/projects/glizzyrelay.com/featured.png
+# Gallery — shown when drilling into this project:
+# gallery:
+#   - src: /img/projects/glizzyrelay.com/scoreboard.png
+#     caption: "ESPN-style broadcast scoreboard"
+#   - src: /img/projects/glizzyrelay.com/timer.png
+#     caption: "Tap / spacebar race-day timer"
 tags:
   - react
   - typescript

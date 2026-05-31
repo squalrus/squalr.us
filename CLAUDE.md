@@ -50,11 +50,52 @@ tags:
 ---
 ```
 
+## Adding a Project
+
+Projects live in `content/projects/*.md` and render via `themes/squalr/layouts/projects/`.
+
+Supported frontmatter:
+```yaml
+---
+title: "Project Name"
+status: active          # active | wip | paused | archived (emoji + colored pill)
+featured: true          # pink-accented card + ★ badge on the featured image
+weight: 10              # sort order (lower = first)
+tech: [TypeScript, Go]  # shown as tags
+repo: https://...       # optional; renders "GitHub ↗"
+demo: https://...       # optional; renders "Demo ↗"
+links:                  # optional; arbitrary labelled links
+  - label: "Live ↗"
+    url: "https://..."
+# image: /img/projects/<slug>/featured.png   # featured pic (card + detail header)
+# gallery:                                    # drill-in gallery on the detail page
+#   - src: /img/projects/<slug>/shot.png
+#     caption: "What this shows"
+---
+```
+
+Images go in `static/img/projects/<slug>/` (drop-zone folders already exist). `image` and
+`gallery` are optional — cards and detail pages degrade gracefully to text-only when absent.
+
 ## Deployment
 
 Push to `main` → GitHub Actions builds and deploys to Azure Static Web Apps automatically.
 PRs get a preview deployment at a staging URL (posted as a PR comment).
-PRs merge automatically when labeled "ready" (merge-bot).
+Review the preview, then merge the PR yourself — merging to `main` triggers the production deploy.
+
+## Process, Backlog & Versioning
+
+This project runs on three living docs, all in the repo root:
+
+- **CLAUDE.md** (this file) — architecture, conventions, gotchas. The durable "how we build here" layer.
+- **[BACKLOG.md](./BACKLOG.md)** — candidate work, captured with context (Why / Notes / code pointers) at the moment it's deferred, and **maintained** as other work changes it. Grouped by type with rough effort/value. Not a copy of a tracker — it _is_ the tracker.
+- **[CHANGELOG.md](./CHANGELOG.md)** — the shipped trail, newest first, [Keep a Changelog](https://keepachangelog.com/) format, versioned with [semver](https://semver.org/).
+
+Both `BACKLOG.md` and `CHANGELOG.md` are rendered on the site (`/backlog/`, `/changelog/`) via `themes/squalr/layouts/_default/doc.html`, which `readFile`s the root markdown at build time. The thin content stubs (`content/backlog.md`, `content/changelog.md`) just point at the source file via a `sourceFile` frontmatter param.
+
+**Versioning is changelog-derived.** There is no version constant. The footer in `baseof.html` reads the top `## [X.Y.Z]` heading out of `CHANGELOG.md` at build time and renders the version chip. Adding a new changelog block **is** the version bump — keep the latest version at the very top.
+
+**Shipping a backlog item** follows a fixed checklist (semver rules, changelog migration, doc updates, build gate, branch → PR → manual merge) — see [BACKLOG.md → Shipping a backlog item](./BACKLOG.md#shipping-a-backlog-item). Always run `hugo --minify` (with Dart Sass on `PATH`) as the correctness gate before opening the PR.
 
 ## Known Issues / Tech Debt
 

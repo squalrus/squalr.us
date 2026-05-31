@@ -1,45 +1,62 @@
 {{ define "main" }}
-<section class="hero">
-  <div class="container">
-    <p class="hero-eyebrow">2026.</p>
-    <h1 class="hero-title">Year of shipping.</h1>
-    <p class="hero-sub">{{ .Site.Params.description }}</p>
+{{- $projects := where site.RegularPages "Section" "projects" -}}
+{{- $posts := where site.RegularPages "Section" "blog" -}}
+{{- $hero := .Site.Params.hero -}}
+
+<!-- ============ HERO ============ -->
+<section class="wrap hero">
+  <div class="kicker">{{ $hero.kicker | default "2026" }} <span class="blink"></span></div>
+  <h1>
+    {{- range $i, $line := $hero.lines -}}
+      {{- if $i }}<br>{{ end -}}
+      {{- $l := replaceRE `\{([^}]+)\}` `<span class="lit">$1</span>` $line -}}
+      {{- $l = replaceRE `\.$` `<span class="dot">.</span>` $l -}}
+      {{- $l | safeHTML -}}
+    {{- end -}}
+  </h1>
+  {{- $sub := $hero.subtitle | default .Site.Params.description -}}
+  {{- $sub = replaceRE `\{([^}]+)\}` `<span class="hi">$1</span>` $sub -}}
+  <p class="sub">{{ $sub | safeHTML }}</p>
+  <div class="hero-meta">
+    <span class="chip-stat"><span class="dotpulse"></span> currently: <b>{{ $hero.status | default "shipping" }}</b></span>
+    <span class="chip-stat">projects live <b>{{ len $projects }}</b></span>
+    <span class="chip-stat">field notes <b>{{ len $posts }}</b></span>
+    {{- with $hero.flavorChip }}<span class="chip-stat">{{ . }}</span>{{- end }}
   </div>
 </section>
 
-{{- $projects := where site.RegularPages "Section" "projects" -}}
+<!-- ============ PROJECTS ============ -->
 {{- if $projects }}
-<section class="home-section">
-  <div class="container">
-    <div class="home-section-header">
-      <h2 class="home-section-label">Projects</h2>
-      <a class="home-section-more" href="/projects/">All projects →</a>
+<section class="wrap sec" id="projects">
+  <div class="sec-head">
+    <div class="sec-title">
+      <span class="sec-tag"><span class="ic">▰</span> PROJECTS</span>
+      <span class="rule"></span>
     </div>
-    <div class="projects-list">
-      {{- range sort $projects "Params.weight" }}
-      {{ partial "project-card.html" . }}
-      {{- end }}
-    </div>
+    <a class="sec-more" href="/projects/">all projects →</a>
+  </div>
+  <div class="proj-grid">
+    {{- range sort $projects "Params.weight" }}
+    {{ partial "project-card.html" . }}
+    {{- end }}
   </div>
 </section>
 {{- end }}
 
-{{- $posts := where site.RegularPages "Section" "blog" | first 5 -}}
+<!-- ============ RECENT POSTS ============ -->
 {{- if $posts }}
-<section class="home-section">
-  <div class="container">
-    <div class="home-section-header">
-      <h2 class="home-section-label">Recent Posts</h2>
-      <a class="home-section-more" href="/blog/">All posts →</a>
+<section class="wrap sec" id="posts">
+  <div class="sec-head">
+    <div class="sec-title">
+      <span class="sec-tag"><span class="ic">▤</span> RECENT POSTS</span>
+      <span class="rule"></span>
     </div>
-    <ul class="posts-list">
-      {{- range $posts }}
-      <li class="posts-list-item">
-        <a class="posts-list-item-title" href="{{ .Permalink }}">{{ .Title }}</a>
-        <span class="posts-list-item-date">{{ .Date.Format "Jan 2, 2006" }}</span>
-      </li>
-      {{- end }}
-    </ul>
+    <a class="sec-more" href="/blog/">all posts →</a>
+  </div>
+  <div class="postrows">
+    {{- range $i, $p := (first 5 $posts) }}
+    {{ partial "post-row.html" (dict "page" $p "num" (add $i 1)) }}
+    {{- end }}
   </div>
 </section>
 {{- end }}

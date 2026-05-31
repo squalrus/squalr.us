@@ -1,0 +1,97 @@
+// ─── Recent posts (homepage + list pages) ────────
+// Named .postrow to avoid colliding with the blog article .post
+.postrows {
+  display: flex;
+  flex-direction: column;
+}
+
+.postrow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 6px;
+  border-bottom: 1px solid $line;
+  position: relative;
+  transition: padding 0.18s;
+
+  &:first-child { border-top: 1px solid $line; }
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -6px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: $acc;
+    transform: scaleY(0);
+    transform-origin: center;
+    transition: transform 0.2s;
+    box-shadow: 0 0 10px rgba($acc, 0.8);
+  }
+
+  &:hover {
+    padding-left: 18px;
+    filter: none;
+
+    &::before { transform: scaleY(0.6); }
+  }
+
+  .num {
+    font-family: $font-mono;
+    font-size: 12px;
+    color: $ink-faint;
+    width: 30px;
+    flex-shrink: 0;
+  }
+
+  .ptitle {
+    font-size: 18px;
+    font-weight: 500;
+    color: $ink-dim;
+    transition: color 0.18s;
+    letter-spacing: -0.01em;
+  }
+
+  &:hover .ptitle { color: $ink; }
+
+  .pmid {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+
+  .pdate {
+    font-family: $font-mono;
+    font-size: 13px;
+    color: $ink-faint;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+.proj-chip {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $acc;
+  border: 1px solid rgba($acc, 0.32);
+  border-radius: 20px;
+  padding: 3px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba($acc, 0.06);
+  white-space: nowrap;
+
+  &:hover { filter: none; color: $acc; }
+
+  .di { font-size: 9px; }
+}
+
+@media (max-width: 860px) {
+  .postrow { flex-wrap: wrap; }
+  .postrow .pmid { flex-basis: 100%; order: 3; }
+}

@@ -5,13 +5,17 @@
       <h1 class="post-title">{{ .Title }}</h1>
       <div class="project-detail-meta">
         {{- with .Params.status }}
-        <span class="project-status status-{{ . }}">{{ . }}</span>
+        {{- $statusEmoji := dict "active" "🟢" "wip" "🚧" "archived" "📦" "paused" "⏸️" }}
+        <span class="project-status status-{{ . }}">{{ with index $statusEmoji . }}{{ . }} {{ end }}{{ . }}</span>
         {{- end }}
         {{- with .Params.repo }}
         <a href="{{ . }}" target="_blank" rel="noreferrer noopener">GitHub ↗</a>
         {{- end }}
         {{- with .Params.demo }}
         <a href="{{ . }}" target="_blank" rel="noreferrer noopener">Demo ↗</a>
+        {{- end }}
+        {{- range .Params.links }}
+        <a href="{{ .url }}" target="_blank" rel="noreferrer noopener">{{ .label }}</a>
         {{- end }}
       </div>
       {{- with .Params.tech }}
@@ -22,9 +26,29 @@
       </div>
       {{- end }}
     </header>
+    {{- with .Params.image }}
+    <div class="project-hero-media">
+      <img src="{{ . }}" alt="{{ $.Title }}" />
+    </div>
+    {{- end }}
     <div class="post-content">
       {{ .Content }}
     </div>
+    {{- with .Params.gallery }}
+    <section class="project-gallery">
+      <h3 class="project-gallery-label">📸 Gallery</h3>
+      <div class="project-gallery-grid">
+        {{- range . }}
+        <figure class="project-gallery-item">
+          <a href="{{ .src }}" target="_blank" rel="noreferrer noopener">
+            <img src="{{ .src }}" alt="{{ .caption | default $.Title }}" loading="lazy" />
+          </a>
+          {{- with .caption }}<figcaption>{{ . }}</figcaption>{{- end }}
+        </figure>
+        {{- end }}
+      </div>
+    </section>
+    {{- end }}
     {{- $slug := .File.ContentBaseName }}
     {{- $related := where site.RegularPages "Params.projects" "intersect" (slice $slug) }}
     {{- with $related }}

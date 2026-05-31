@@ -18,23 +18,37 @@ taxonomies:
   tech: tech
 
 permalinks:
-  blog: /:year/:month/:title/
+  blog: /:year/:month/:slug/
   projects: /projects/:slug/
 
 params:
   author: 'Chad Schulz'
-  description: 'Sr Consultant at Dura Digital. Prog metal, pixels, and questionable hotdog opinions.'
+  description: 'Sr Consultant at Dura Digital. Building tools, breaking prod, learning out loud.'
   avatar: '/img/bio.jpg'
   menu_item_separator: '//'
   favicon: '/img/favicon.ico'
   images:
     - img/bio.jpg
+  # Cyberpunk palette — teal / cyan / ember on blue near-black
   style:
-    darkestColor: '#0c0c16'
-    darkColor: '#11111a'
-    lightColor: '#8892a4'
-    lightestColor: '#e2e8f0'
-    primaryColor: '#52F0E0'
+    bg: '#0a0e12'
+    bg2: '#0c1219'
+    ink: '#e8f1f4'
+    accent: '#2ee6c8'      # teal — primary neon
+    accent2: '#37c0ff'     # cyan — links / secondary
+    accentWarm: '#ff8a3c'  # ember — the "fun" punctuation
+
+  # Homepage hero. Heading is `lines` (each item is a line); wrap a word in
+  # {curly braces} to make it the lit neon word, and end a line with `.` for
+  # the ember dot. Same {…} highlight works in `subtitle`.
+  hero:
+    kicker: '2026'
+    lines:
+      - 'MY YEAR'
+      - 'OF {SHIPPING}.'
+    subtitle: 'Sr Consultant at Dura Digital. Building tools, breaking prod, {learning out loud}.'
+    status: 'shipping'
+    flavorChip: 'hotdogs/wk ∞'
 
   dateFormat: 'Monday, January 2, 2006'
 

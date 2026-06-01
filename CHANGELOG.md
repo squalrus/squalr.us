@@ -2,6 +2,17 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.2.1] — 2026-06-01
+
+### Changed
+
+- **Accessibility pass (a11y).** Skip-to-main-content link on every page. Marquee, decorative title-bar chrome, badge wall, webring, flames, and sparkle cursor trail are all `aria-hidden`. `<nav>` with `aria-label` replaces the plain `<div class="navrow">`. `aria-current="page"` on the active nav link. WinAmp transport buttons removed from tab order. Guestbook inputs get real `<label>` elements (`.sr-only`). Visitor counter has an accessible `role="img"` label. Guestbook list and count are `aria-live="polite"`. WinAmp LCD is `aria-live` so now-playing updates announce to screen readers. Section stickers promoted from `<span>` to `<h2>`. Odometer roll animation skipped under `prefers-reduced-motion`. (`index.html`, `baseof.html`, `cybershack.css`, `cybershack.js`)
+- **Text contrast.** `--neon` darkened `#00a619` → `#007a14` and `--neon-2` darkened `#008b8b` → `#006e6e` — both now pass WCAG AA on cream and as white-text backgrounds. WinAmp artist color fixed from near-invisible `#005500` on black to readable `#50c050`. (`cybershack.css`)
+- **Focus styles.** Global `:focus-visible` ring (yellow outline) for keyboard navigation. (`cybershack.css`)
+- **Copy rewrite.** Welcome paragraph now introduces Chad by name and links [Dura Digital](https://duradigital.com). Hero tag links Dura Digital. Status panel adds "at Dura Digital" and drops the redundant post count. Footer drops the placeholder static-site-ring link; closing line simplified. (`index.html`, `baseof.html`)
+
+---
+
 ## [1.2.0] — 2026-06-01
 
 ### Added

@@ -1,0 +1,30 @@
+- top: "best viewed in"
+  bottom: "NETSCAPE"
+  class: "b-netscape"
+  url: "#"
+  enabled: true
+- top: "made 4"
+  bottom: "1024×768"
+  class: "b-1024"
+  url: "#"
+  enabled: true
+- top: "built with"
+  bottom: "HUGO"
+  class: "b-hugo"
+  url: "https://gohugo.io"
+  enabled: true
+- top: "valid"
+  bottom: "HTML 4.01"
+  class: "b-html"
+  url: "#"
+  enabled: true
+- top: "valid"
+  bottom: "CSS 3"
+  class: "b-css"
+  url: "https://jigsaw.w3.org/css-validator/"
+  enabled: true
+- top: "COOL SITE"
+  bottom: "of the DAY"
+  class: "b-award"
+  url: "#"
+  enabled: true

@@ -4,6 +4,37 @@
    wallpaper, cream table cells, dark text, garish accents.
    Standalone homepage styles — not part of the main theme.
    ============================================================ */
+
+/* ---------- self-hosted fonts ---------- */
+@font-face {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/press-start-2p.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'VT323';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/vt323.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Comic Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/comic-neue-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Comic Neue';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/comic-neue-700.woff2') format('woff2');
+}
+
 :root{
   --neon:   #007a14;   /* lime — WCAG AA on cream (#fffdf2) and as bg w/ white text */
   --neon-2: #006e6e;   /* teal — WCAG AA on cream and white */
@@ -275,9 +306,20 @@ a:hover{ color:#fff; background:var(--hot); }
 .b-netscape b{ color:#00ff66 }
 .b-1024{ background:#0000aa;color:#ff0 }
 .b-html{ background:#ff8a00;color:#000 }
-.b-hugo{ background:#ff4088;color:#fff }
-.b-noai{ background:#111;color:#39ff14 }
-.b-award{ background:#1a6e1a;color:#ffd400 }
+.b-hugo{ background:#b5006a;color:#fff }  /* darkened from #ff4088 — contrast 7:1 */
+.b-css{ background:#003399;color:#fff }   /* valid CSS 3 — contrast 10.9:1 */
+.b-award{ background:#145214;color:#ffd400 } /* darkened from #1a6e1a — contrast 6.6:1 */
+
+/* social icon buttons */
+.social-icons{ display:flex;gap:8px;justify-content:center }
+.social-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;
+  background:var(--paper-2);border:2px solid var(--neon-2);
+  color:var(--ink);text-decoration:none;
+}
+.social-icon:hover{ background:var(--neon);color:#fff;border-color:var(--neon) }
+.social-icon svg{ width:18px;height:18px;stroke:currentColor;fill:none }
 
 /* webring */
 .webring{ text-align:center;font-family:var(--term);font-size:17px;color:var(--ink-2) }
@@ -374,8 +416,11 @@ hr.candy{ height:6px;border:0;margin:14px 0;
   font-family:var(--term);font-size:14px;line-height:1;transform:translate(-50%,-50%);will-change:transform,opacity }
 
 @media (prefers-reduced-motion: reduce){
-  .mqbar > span, .rainbow, .wa-spec .eq i, .wa-scroll, .blink{ animation:none }
-  /* odometer roll — JS reads this to skip the counting animation */
+  .mqbar > span, .rainbow, .wa-spec .eq i,
+  .wa-scroll, .wa-scroll.wa-scrolling, .blink{ animation:none }
+  /* odometer roll — JS reads this to skip the counting animation.
+     .wa-scroll.wa-scrolling listed explicitly because its 2-class
+     specificity would otherwise beat the single-class .wa-scroll rule. */
 }
 h2.sticker{ font-size:14px;font-weight:bold }
 

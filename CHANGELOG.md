@@ -2,6 +2,19 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.3.0] — 2026-06-01
+
+### Changed
+
+- **Self-hosted web fonts.** Press Start 2P, VT323, and Comic Neue are now served from `/fonts/` rather than Google Fonts. Removes the cross-origin request from the critical path and drops `fonts.googleapis.com` / `fonts.gstatic.com` from the CSP. (`cybershack.css`, `index.html`, `baseof.html`, `staticwebapp.config.json`)
+- **Social icons.** GitHub, Twitter, and LinkedIn icons now appear in a Connect panel in the sidebar — inline SVG, zero external deps, neon palette on hover. (`index.html`, `cybershack.css`)
+- **Configurable 88×31 badges.** Badge definitions moved to `data/badges.yaml` — add, remove, or reorder badges without touching templates. An `enabled:` flag lets you soft-hide a badge without deleting it. (`data/badges.yaml`, `index.html`)
+- **Badge accessibility.** Hugo badge contrast fixed (was 3.3:1, now 7:1+ on deep magenta `#b5006a`). Award badge contrast fixed (was 4.1:1, now 6.6:1 on darker green `#145214`). "100% HAND-CODED" badge replaced with "valid CSS 3" linking to the W3C CSS Validator. (`cybershack.css`, `data/badges.yaml`)
+- **"Field Notes" renamed to "Posts"** on the homepage section header. (`index.html`)
+- **Reduced-motion coverage tightened.** WinAmp LCD scroll (`wa-scroll.wa-scrolling`) now stops under `prefers-reduced-motion: reduce` — both in CSS (added higher-specificity selector to the `animation:none` block) and in JS (scroll class skipped when motion is reduced). (`cybershack.css`, `cybershack.js`)
+
+---
+
 ## [1.2.2] — 2026-06-01
 
 ### Changed

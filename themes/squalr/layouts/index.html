@@ -17,9 +17,6 @@
   {{ hugo.Generator }}
   <meta name="description" content="{{ .Site.Params.description }}" />
   <link rel="shortcut icon" href="{{ .Site.Params.favicon | default "/favicon.ico" }}" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet" />
   {{- $css := resources.Get "css/cybershack.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
   {{ template "_internal/google_analytics.html" . }}
@@ -105,6 +102,18 @@
         <img id="np-art" src="" alt="" hidden>
       </div>
 
+      <!-- social -->
+      <div class="panel">
+        <h3>:: Connect ::</h3>
+        <div class="social-icons">
+          {{- range .Site.Params.social }}
+          <a href="{{ .url }}" class="social-icon" aria-label="{{ .icon | title }}" rel="noopener noreferrer" target="_blank">
+            {{- partial "icon.html" (dict "name" .icon "title" (.icon | title)) }}
+          </a>
+          {{- end }}
+        </div>
+      </div>
+
       <!-- status -->
       <div class="panel">
         <h3>:: Status ::</h3>
@@ -120,12 +129,9 @@
       <div class="panel">
         <h3>« proudly served »</h3>
         <div class="badges" aria-hidden="true">
-          <a href="#" class="badge88 b-netscape" tabindex="-1">best viewed in<br><b>NETSCAPE</b></a>
-          <a href="#" class="badge88 b-1024" tabindex="-1">made 4<br><b>1024×768</b></a>
-          <a href="#" class="badge88 b-hugo" tabindex="-1">built with<br><b>HUGO</b></a>
-          <a href="#" class="badge88 b-html" tabindex="-1">valid<br><b>HTML 4.01</b></a>
-          <a href="#" class="badge88 b-noai" tabindex="-1">100%<br><b>HAND-CODED</b></a>
-          <a href="#" class="badge88 b-award" tabindex="-1">COOL SITE<br><b>of the DAY</b></a>
+          {{- range hugo.Data.badges }}{{ if .enabled }}
+          <a href="{{ .url | default "#" }}" class="badge88 {{ .class }}" tabindex="-1">{{ .top }}<br><b>{{ .bottom }}</b></a>
+          {{- end }}{{ end }}
         </div>
       </div>
 
@@ -171,7 +177,7 @@
 
       <!-- ===== RECENT POSTS ===== -->
       <div id="posts">
-        <h2 class="sticker">▤ FIELD NOTES</h2>
+        <h2 class="sticker">▤ POSTS</h2>
         <ul class="posts">
           {{- range first 5 $posts }}
           {{ partial "post-li.html" (dict "page" .) }}

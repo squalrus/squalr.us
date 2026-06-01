@@ -45,16 +45,29 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 | --- | --- | --- |
 | Scheduled rebuild so future-dated posts auto-publish | S | M |
 | CSS-only gallery lightbox | S | M |
+| Windows minimize, maximize, and close | M | H |
 
 ### Improvements
 
 | Title | Effort | Value |
 | --- | --- | --- |
+| Add social icons | S | H |
+| Make 88×31 web badges configurable | S | M |
+| Verify reduced-motion coverage | S | M |
+| Self-host the three web fonts (drop the Google Fonts dependency) | S | M |
 | Mobile support pass | M | H |
 | Accessibility (a11y) support pass | M | H |
-| Self-host the three web fonts (drop the Google Fonts dependency) | S | M |
+| Re-write key copy (welcome, hero, status, badges, footer) | M | H |
+| Project showcase readability and CRT effect | M | H |
+| Rename "Field Notes" | S | L |
 | Flesh out the `desktop-tracker` project metadata | S | L |
-| TODO: review all blogs tags | | |
+| TODO: review all blog tags | | |
+
+### Cleanup
+
+| Title | Effort | Value |
+| --- | --- | --- |
+| Drop "web ring" concept | S | M |
 
 ---
 
@@ -103,6 +116,68 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 
 ---
 
+### Windows minimize, maximize, and close
+
+**Type:** feature
+
+**Why:** The Win95-style windows have decorative title bar buttons but they do nothing on click. Making them functional would be on-brand — minimize collapses a window to a taskbar entry, close hides it, maximize fills the viewport — and makes the homepage feel like an actual desktop rather than a static mockup.
+
+**Notes:**
+
+- Keep JS minimal: a small vanilla module that toggles classes. No framework.
+- **Minimize:** collapse the window to show only its title bar; add a taskbar entry at the bottom of the screen that restores it on click.
+- **Maximize:** expand the window to fill the main content area, storing original dimensions for restore. Double-click on the title bar is the classic trigger.
+- **Close:** hide the window entirely; add a way to reopen (a taskbar entry or a clickable "desktop icon").
+- Persist state in `sessionStorage` so windows stay closed/minimized across soft navigations but reset on a fresh visit.
+- JS goes in `themes/squalr/assets/js/` and is bundled through Hugo Pipes (same pattern as existing scripts).
+- Degrade gracefully with no JS — buttons just don't respond, same as today.
+
+---
+
+### Add social icons
+
+**Type:** improvement
+
+**Why:** Social links in the nav/sidebar are text-only. Recognizable platform icons (GitHub, LinkedIn, RSS) reduce cognitive load and look more polished — especially at compact nav widths.
+
+**Notes:**
+
+- Social links are defined in `config.yaml` under `params.social`. Each entry has `name` and `url`.
+- The theme renders them in the sidebar via the relevant partial in `themes/squalr/layouts/partials/`. Add inline SVG icons; keep them zero-dep (no icon font, no external sprite sheet).
+- Inline SVGs can live in a Hugo partial (`icon-github.html`, etc.) and be called with `{{ partial "icon-github" }}` where needed.
+- Size consistently with the existing pill/button chrome; apply the neon palette on hover.
+
+---
+
+### Make 88×31 web badges configurable
+
+**Type:** improvement
+
+**Why:** The 88×31 badge wall is hardcoded HTML — adding, removing, or reordering badges means editing a layout file. Moving them to a data file makes curation a one-line edit without touching templates.
+
+**Notes:**
+
+- Move badge definitions to `data/badges.yaml` — each entry: `label`, `img`, `url` (optional). Render via a Hugo `range` in the relevant partial/template.
+- Image files stay in `static/img/badges/` (or wherever they currently live). No structural change needed there.
+- Optional: add an `enabled: false` flag so a badge can be kept in the file but hidden without deleting it.
+
+---
+
+### Verify reduced-motion coverage
+
+**Type:** improvement
+
+**Why:** The site has several animations (rainbow wordmark, marquee, sparkle cursor, now-playing EQ bars, odometer roll, hover transitions). The a11y pass flags this as a goal but a standalone audit — `prefers-reduced-motion: reduce` on, then walk every page — confirms nothing slipped through.
+
+**Notes:**
+
+- Can be done as a sub-task of the [[accessibility-a11y-support-pass]] or standalone.
+- Method: DevTools → Rendering → "Emulate CSS media feature `prefers-reduced-motion`" → reduce. Walk the homepage, a blog post, and a project page. Anything still moving is a miss.
+- Known risks: the `huey` rainbow wordmark keyframes, the EQ "now spinning" bars, the odometer roll, the sparkle cursor trail, the marquee scroll, any CSS transitions on cards/buttons.
+- Each motion element should either stop entirely (`animation: none`) or swap to an instant/static state. Crossfades and instant reveals are acceptable; spinning, bouncing, and scrolling are not.
+
+---
+
 ### Self-host the three web fonts (drop the Google Fonts dependency)
 
 **Type:** improvement
@@ -115,21 +190,6 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 - Remove the Google Fonts `<link>` + preconnects from **both** `themes/squalr/layouts/index.html` and `themes/squalr/layouts/_default/baseof.html`, and drop `https://fonts.googleapis.com` / `font-src https://fonts.gstatic.com` from the CSP in `static/staticwebapp.config.json`.
 - Press Start 2P and VT323 are pixel/bitmap-ish and used at a few sizes — tight latin subsets keep them small.
 - Verify the A+ security headers score and that the wordmark / windows / terminals still render identically.
-
----
-
-### Flesh out the `desktop-tracker` project metadata
-
-**Type:** improvement
-
-**Why:** `content/projects/desktop-tracker.md` is the thinnest project — a one-line description, `Rust` / `Tauri` tech, and a faux-terminal banner, but no real body, no screenshots, and no detail worth landing on. It reads as a placeholder. Once the project has something to show, give it the metadata the card + detail page are built to display.
-
-**Notes:**
-
-- Add a real body (what it does, why local-first, the "watch what I'm actually doing" angle) so the detail page isn't empty.
-- Add a featured `image:` + a `gallery:` once there are screenshots — drop files in `static/img/projects/desktop-tracker/` (the folder exists).
-- Tighten `tech:` if the stack firms up, and flip `status:` off `wip` when it's real.
-- Cross-link any future "building desktop-tracker" post via `projects: [desktop-tracker]` so the card's field-note count lights up.
 
 ---
 
@@ -163,6 +223,82 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 - **Motion:** confirm `prefers-reduced-motion` covers _everything_ (the rainbow wordmark `huey` animation, now-spinning, the odometer roll), not just the obvious ones.
 - **Focus:** add visible `:focus-visible` styles for the nav buttons, links, and guestbook form (currently UA defaults), plus a skip-to-content link.
 - **Semantics:** mark the marquee `aria-hidden` (or give it a static fallback); give the visitor-counter odometer an accessible label; `aria-hidden` the decorative badges and custom cursor; add real `<label>`s to the guestbook inputs (placeholder-only today); verify heading order on each page type.
+
+---
+
+### Re-write key copy (welcome, hero, status, badges, footer)
+
+**Type:** improvement
+
+**Why:** The welcome message, hero subheading, now/status content, badge text, and footer copy were written quickly during the v1 build. They're the first things a visitor reads — they should sound like Chad, not like placeholder text.
+
+**Notes:**
+
+- See the Writing Style Guide in CLAUDE.md for voice reference: conversational, direct, self-aware, practical over theoretical.
+- Locations to hit:
+  - Homepage layout — the welcome blurb and hero subheading.
+  - The status/now section — what it says about current state and what Chad is working on.
+  - Footer — the sign-off copy and any flavor text.
+  - Badge alt text — small but worth making intentional.
+- This is a copywriting pass, not a structural change. One sitting with Chad's voice locked in. Don't touch layouts unless copy literally won't fit.
+
+---
+
+### Project showcase readability and CRT effect
+
+**Type:** improvement
+
+**Why:** The project cards and detail pages are functional but not memorable. Screenshots and faux-terminal snippets are the most visually interesting elements — a subtle CRT treatment (scanlines, phosphor glow, slight vignette) would make the showcase stand out and reinforce the retro aesthetic without touching the readability of prose.
+
+**Notes:**
+
+- CRT effect is pure CSS: a `::after` overlay with a `repeating-linear-gradient` for scanlines, an inset `box-shadow` for the vignette, and an optional subtle flicker via `@keyframes`. The flicker **must** respect `prefers-reduced-motion`.
+- Apply selectively to project screenshots and `.terminal` blocks — not to body text or UI chrome.
+- Readability pass is separate: check that the project list and detail pages have enough whitespace, contrast, and typographic hierarchy to scan quickly. The two goals (readable + standout) can conflict if the CRT is too heavy — keep the effect light.
+- Fun stretch: a "CRT on/off" toggle in the title bar would be on-brand for the 90s desktop theme and completely optional.
+
+---
+
+### Rename "Field Notes"
+
+**Type:** improvement
+
+**Why:** "Field Notes" doesn't quite land as a label for a personal dev/tech blog. A rename would better signal what the section is and match the voice of the rest of the site.
+
+**Notes:**
+
+- Open question: what should it be called? Candidates: **Blog**, **Posts**, **Devlog**, **Dispatch**, **Writing**, **Log**. Chad's call — this is a voice decision.
+- Touch points once decided: the nav label, any section heading on the homepage, and `config.yaml`. The URL slug is already `/blog/` — if the nav label is the only place "Field Notes" appears, the URL stays untouched and no redirect is needed.
+- Confirm with a grep for "Field Notes" across `themes/squalr/layouts/` and `config.yaml` before starting.
+
+---
+
+### Flesh out the `desktop-tracker` project metadata
+
+**Type:** improvement
+
+**Why:** `content/projects/desktop-tracker.md` is the thinnest project — a one-line description, `Rust` / `Tauri` tech, and a faux-terminal banner, but no real body, no screenshots, and no detail worth landing on. It reads as a placeholder. Once the project has something to show, give it the metadata the card + detail page are built to display.
+
+**Notes:**
+
+- Add a real body (what it does, why local-first, the "watch what I'm actually doing" angle) so the detail page isn't empty.
+- Add a featured `image:` + a `gallery:` once there are screenshots — drop files in `static/img/projects/desktop-tracker/` (the folder exists).
+- Tighten `tech:` if the stack firms up, and flip `status:` off `wip` when it's real.
+- Cross-link any future "building desktop-tracker" post via `projects: [desktop-tracker]` so the card's field-note count lights up.
+
+---
+
+### Drop "web ring" concept
+
+**Type:** cleanup
+
+**Why:** The web ring section is a fun nod to the 90s but it's not connected to an actual web ring and has no real outbound links. It reads as an empty placeholder that dilutes the page rather than adding personality.
+
+**Notes:**
+
+- Remove the web ring section from the homepage layout (`themes/squalr/layouts/index.html` or the relevant partial).
+- Remove any CSS scoped to `.webring` or similar from `cybershack.css`.
+- Don't leave a commented-out skeleton — if the concept ever comes back with real members and links, it's easy to add fresh.
 
 ---
 

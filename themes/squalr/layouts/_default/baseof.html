@@ -1,70 +1,74 @@
+{{- /* ============================================================
+     90s baseof — shared chrome for every inner page. The homepage
+     (layouts/index.html) is standalone and does NOT use this.
+     Garish GeoCities chrome around a readable cream content window.
+     ============================================================ */ -}}
+{{- $lit := "SQUALRUS" -}}
+{{- range .Site.Params.hero.lines }}{{ with findRE `\{[^}]+\}` . 1 }}{{ $lit = replaceRE `[{}]` "" (index . 0) }}{{ end }}{{ end -}}
+{{- $sec := "SQUALRUS" -}}{{- with .Section }}{{ $sec = upper . }}{{ end -}}
 <!doctype html>
 <html lang="{{ .Site.Language.Locale | default "en-us" }}">
-  <head>
-    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} // {{ .Site.Title }}{{ end }}</title>
-    <link rel="shortcut icon" href="{{ .Site.Params.favicon | default "/favicon.ico" }}" />
-    <meta charset="utf-8" />
-    {{ hugo.Generator }}
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="{{ .Site.Params.author | default "John Doe" }}" />
-    <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-    {{ $opts := dict "transpiler" "dartsass" "targetPath" "css/style.css" }}
-    {{ $style := resources.Get "css/main.scss" | resources.ExecuteAsTemplate "css/main.scss" . | css.Sass $opts | minify | fingerprint -}}
-    <link rel="stylesheet" href="{{ $style.Permalink }}" />
-    {{ template "_internal/google_analytics.html" . }}
-    {{ template "_internal/twitter_cards.html" . }}
-    {{ template "_internal/opengraph.html" . }}
-  </head>
-  <body>
-    <div class="fx fx-glow"></div>
-    <div class="fx fx-grid"></div>
-    <div class="fx fx-scan"></div>
-    <div class="fx fx-vig"></div>
-    <header class="topbar">
-      <div class="wrap nav">
-        <a class="brand" href="{{ .Site.BaseURL }}">
-          <span class="glyph">CS</span>
-          <span class="name">{{ .Site.Title | upper }}</span>
-        </a>
-        {{- with .Site.Menus.main }}
-        <nav>
-          <ul class="nav-links">
-            {{- range . }}
-            <li><a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} class="active"{{ end }}>{{ .Name | lower }}</a></li>
-            {{- end }}
-          </ul>
-        </nav>
-        {{- end }}
-        {{ partial "social.html" . }}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} :: squalr.us{{ end }}</title>
+  {{ hugo.Generator }}
+  <meta name="author" content="{{ .Site.Params.author | default "Chad Schulz" }}" />
+  <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description | default .Summary }}{{ end }}" />
+  <link rel="shortcut icon" href="{{ .Site.Params.favicon | default "/favicon.ico" }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet" />
+  {{- $css := resources.Get "css/cybershack.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
+  {{ template "_internal/google_analytics.html" . }}
+  {{ template "_internal/twitter_cards.html" . }}
+  {{ template "_internal/opengraph.html" . }}
+</head>
+<body>
+
+<div class="mqbar"><span>★ {{ .Site.Title | upper }}'S CYBER-SHACK ★&nbsp;&nbsp; <b>YOU ARE HERE:</b> /{{ lower $sec }}/ &nbsp;&nbsp; <i>★ shipping since '21 ★</i> &nbsp;&nbsp; <u><a href="/#guestbook" style="color:inherit">SIGN MY GUESTBOOK ↓</a></u> &nbsp;&nbsp; ☣ best viewed in Netscape ☣ &nbsp;&nbsp; 🔊 volume UP! &nbsp;&nbsp;</span></div>
+
+<div class="page">
+
+  <div class="banner-top banner-inner">
+    <a href="{{ .Site.BaseURL }}" class="home-link"><h1 class="wordmark"><span class="rainbow">{{ $lit }}</span><span style="color:var(--hot)">!!!</span></h1></a>
+    <div class="tag">« <a href="{{ .Site.BaseURL }}">back to the cyber-shack</a> »</div>
+    <div class="flames"></div>
+  </div>
+
+  <div class="navrow">
+    {{- range .Site.Menus.main }}
+    <a href="{{ .URL }}"{{ if and (ne .URL "/") (hasPrefix $.RelPermalink .URL) }} class="cur"{{ end }}>{{ .Name | upper }}</a>
+    {{- end }}
+    <a href="/#guestbook">GUESTBOOK</a>
+  </div>
+
+  <main class="main">
+    <div class="win">
+      <div class="tbar">
+        <span>C:\{{ $sec }}\{{ .Title }}</span>
+        <span class="tb-btns"><i>_</i><i>▢</i><i>✕</i></span>
       </div>
-    </header>
-    <main class="site-content">
-      {{ block "main" . }}
-        {{ .Content }}
-      {{ end }}
-    </main>
-    <footer class="foot">
-      {{- $version := "" -}}
-      {{- with findRE `\[\d+\.\d+\.\d+\]` (readFile "CHANGELOG.md") 1 -}}
-        {{- $version = replaceRE `[\[\]]` "" (index . 0) -}}
-      {{- end -}}
-      <div class="wrap foot-in">
-        <div>
-          <p class="c">© {{ now.Format "2006" }} {{ .Site.Params.author }} · /dev/null</p>
-          <p class="tagline">Built with Hugo, caffeine, and <span class="hi">questionable hotdog opinions</span>. 🌭</p>
-        </div>
-        <div class="foot-meta">
-          <nav class="foot-links">
-            <a href="/changelog/">changelog</a>
-            <a href="/backlog/">backlog</a>
-            {{- with $version }}<a class="foot-version" href="/changelog/" title="What shipped, and when">v{{ . }}</a>{{- end }}
-          </nav>
-          {{ partial "social.html" . }}
-        </div>
+      <div class="body">
+        {{ block "main" . }}{{ .Content }}{{ end }}
       </div>
-    </footer>
-  </body>
+    </div>
+  </main>
+
+  <!-- footer -->
+  <div class="foot">
+    <hr class="candy">
+    {{- $version := "" }}{{ with findRE `\[\d+\.\d+\.\d+\]` (readFile "CHANGELOG.md") 1 }}{{ $version = replaceRE `[\[\]]` "" (index . 0) }}{{ end }}
+    <div>✉ <a href="mailto:chad.awesome@gmail.com">email me</a> &nbsp;·&nbsp; <span class="em">[ © {{ now.Format "2006" }} {{ .Site.Params.author }} · /dev/null ]</span></div>
+    <div style="margin-top:6px">⟢ <a href="/changelog/">CHANGELOG</a> · <a href="/backlog/">BACKLOG</a> · <a href="/#guestbook">GUESTBOOK</a> ⟢</div>
+    <div class="updated">⟳ this page last updated {{ now.Format "01/02/2006" }} · Y2K compliant (probably)</div>
+    {{- with $version }}<div class="ver"><a href="/changelog/">▓ running v{{ . }} ▓</a></div>{{ end }}
+    <div class="smol">Built with Hugo, caffeine, and <span class="made">too many neon glows</span>. ✨ &nbsp;|&nbsp; © Geocities is dead, long live Geocities.</div>
+  </div>
+
+</div>
+
+<script src="/cybershack.js"></script>
+</body>
 </html>

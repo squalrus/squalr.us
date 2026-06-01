@@ -1,9 +1,7 @@
 {{ define "main" }}
-<div class="page-container">
   <div class="error-404">
-    <h1 class="error-404-title">O{{ partial "icon.html" (dict "ctx" $ "name" "frown") }}ps... </h1>
-    <p>The link you followed may be broken, or the page may have been removed.</p>
-    <a href="{{ "/" | relURL }}">Go home {{ partial "icon.html" (dict "ctx" $ "name" "arrow-right") }}</a>
+    <h1 class="error-404-title">404<br>LOST IN CYBERSPACE</h1>
+    <p style="font-family:var(--comic);font-size:17px">Whoa there, websurfer — that page <b>404'd</b>. It may be broken, moved, or lost to a dead GeoCities neighborhood. 🌐💀</p>
+    <p><a href="{{ "/" | relURL }}">« BEAM ME HOME »</a></p>
   </div>
-</div>
 {{ end }}

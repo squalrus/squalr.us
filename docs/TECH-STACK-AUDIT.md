@@ -2,6 +2,8 @@
 
 _Audit date: 2026-05-30_
 
+> **Status: largely superseded (2026-06).** This is the audit of the *starting* state. Most findings are now resolved — GA4 is live, Hugo is pinned (`0.162.1`), the GitHub Actions are current, and the m10c submodule was replaced by an owned custom theme (now a 90s GeoCities design — plain CSS, no Sass). Kept as a historical record of where the cleanup began. Active tech debt now lives in [BACKLOG.md](../BACKLOG.md); shipped changes in [CHANGELOG.md](../CHANGELOG.md).
+
 ## Overview
 
 squalr.us is a Hugo-based personal blog hosted on Azure Static Web Apps and deployed via GitHub Actions. The core architecture is sound — static generation, CDN delivery, and minimal dependencies are all good choices for a personal blog. Most issues are maintenance debt from ~2–3 years of dormancy rather than structural problems.

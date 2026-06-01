@@ -12,7 +12,7 @@ When a backlog item lands, run the same checklist every time so the version trai
 2. **Move the entry to [CHANGELOG.md](./CHANGELOG.md).** Add a new version block at the top — date it (`YYYY-MM-DD`), classify the change (`Added` / `Changed` / `Fixed` / `Removed`), and write the user-facing summary there. Don't leave a duplicate in this file. **Adding this block _is_ the version bump** — the footer chip and `/changelog` page read the latest version straight from the top of `CHANGELOG.md` at build time, so there is no separate version constant to edit.
 3. **Update the docs as needed.** Touch only the files where reality actually changed — don't churn them otherwise. Typical triggers:
    - **CLAUDE.md** — a new layout/template pattern, a new convention (image folders, frontmatter fields), a new gotcha, or invalidation of an existing one.
-   - **TECH-STACK-AUDIT.md** — a dependency/version/CI change, or an audit item resolved (tick it off rather than leave it stale).
+   - **docs/TECH-STACK-AUDIT.md** — a dependency/version/CI change, or an audit item resolved (tick it off rather than leave it stale).
    - **A blog post** — only if the change is itself worth writing about (this is a blog; shipping notes ≠ posts).
 4. **Pick the new version by [semver](https://semver.org/):**
    - `feature` → minor bump (e.g. `1.0.1` → `1.1.0`)
@@ -50,11 +50,10 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 
 | Title | Effort | Value |
 | --- | --- | --- |
+| Mobile support pass | M | H |
+| Accessibility (a11y) support pass | M | H |
 | Self-host the three web fonts (drop the Google Fonts dependency) | S | M |
 | Flesh out the `desktop-tracker` project metadata | S | L |
-| Drop OpenSea from the CSP + note the defunct embeds in the NFT post | S | M |
-| Update the Twitter social link to X | S | L |
-| Migrate SCSS `@import` → `@use` / `@forward` | M | M |
 | TODO: review all blogs tags | | |
 
 ---
@@ -108,56 +107,14 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 
 **Type:** improvement
 
-**Why:** The cyberpunk redesign loads Press Start 2P, Space Grotesk, and JetBrains Mono from Google Fonts, which added `fonts.googleapis.com` / `fonts.gstatic.com` to the CSP and a third-party request to the critical path. The site otherwise prides itself on zero external deps and an A+ security posture — self-hosting the fonts gets both back and removes a render-blocking cross-origin hop.
+**Why:** The 90s theme loads **Press Start 2P, VT323, and Comic Neue** from Google Fonts, which adds `fonts.googleapis.com` / `fonts.gstatic.com` to the CSP and a third-party request to the critical path. The site otherwise prides itself on zero external deps and an A+ security posture — self-hosting the fonts gets both back and removes a render-blocking cross-origin hop.
 
 **Notes:**
 
-- Download the woff2 files (subset to latin), drop them in `themes/squalr/static/fonts/` (or `assets/`), and add `@font-face` rules with `font-display: swap` to `_base.scss`.
-- Remove the Google Fonts `<link>` + preconnects from `baseof.html`, and drop `https://fonts.googleapis.com` / `font-src https://fonts.gstatic.com` from the CSP in `static/staticwebapp.config.json`.
-- Press Start 2P is pixel/bitmap-ish and only used at a couple of sizes — a tight latin subset keeps it small.
-- Verify the A+ security headers score and that the arcade hero/headers still render identically.
-
----
-
-### Drop OpenSea from the CSP + note the defunct embeds in the NFT post
-
-**Type:** improvement
-
-**Why:** The "WTF is NFT" post used to embed `<nft-card>` web components that are long dead (OpenSea changed their API; the `embeddable-nfts` package is unmaintained). The broken embeds have been stripped from the post, but `staticwebapp.config.json` still allows `https://api.opensea.io` in the CSP for them — dead allowance widening the policy surface for no reason. The post would also read better with an honest one-liner that the live cards are gone.
-
-**Notes:**
-
-- Remove the OpenSea entries from the CSP `connect-src` / `script-src` in `static/staticwebapp.config.json`. Confirm nothing else on the site still calls OpenSea first (it doesn't).
-- Add a short blockquote/aside to `content/blog/wtf-is-nft.md` acknowledging the embeds were retired — matches the writing-style guide's "acknowledge tradeoffs honestly".
-- Verify the A+ security headers score is unchanged (ideally improved) after the CSP trim.
-
----
-
-### Update the Twitter social link to X
-
-**Type:** improvement
-
-**Why:** `config.yaml` links the social icon to `https://x.com/chadschulz` already, but the icon key is still `twitter` and any lingering `twitter.com` references should resolve to the current brand. Low urgency, pure consistency.
-
-**Notes:**
-
-- Audit `config.yaml` `params.social` and the icon data (`themes/squalr/data/squalr/icons`) for `twitter` vs `x` naming.
-- If the icon glyph is the old Twitter bird, swap it for the X mark while here.
-- Cosmetic only — no behavior change, hence Value: L.
-
----
-
-### Migrate SCSS `@import` → `@use` / `@forward`
-
-**Type:** improvement
-
-**Why:** Dart Sass deprecated `@import` rules; they'll be removed in Dart Sass 3.0.0. The build currently runs Dart Sass 1.100.0, where `@import` still works but emits a deprecation warning on every build.
-
-**Notes:**
-
-- **Where:** `themes/squalr/assets/css/main.scss` imports `base`, `extra`, and the `components/*` partials via `@import`.
-- **Catch:** The partials rely on globally-scoped variables (`$darkest-color`, `$primary-color`, etc.) defined at the top of `main.scss`. `@use` namespaces members per-module, so a naive swap breaks those references. The migration needs restructuring — move the variables into a module the partials `@use` (or `@forward`), or pull them in with `@use '...' as *`. Diff the compiled CSS before/after to confirm no visual regressions.
-- **When:** before upgrading to Dart Sass 3.0.0 (not yet released). Not urgent, but it's the last deprecation warning in the build.
+- Download the woff2 files (subset to latin), drop them in `themes/squalr/static/fonts/`, and add `@font-face` rules with `font-display: swap` near the top of `themes/squalr/assets/css/cybershack.css`.
+- Remove the Google Fonts `<link>` + preconnects from **both** `themes/squalr/layouts/index.html` and `themes/squalr/layouts/_default/baseof.html`, and drop `https://fonts.googleapis.com` / `font-src https://fonts.gstatic.com` from the CSP in `static/staticwebapp.config.json`.
+- Press Start 2P and VT323 are pixel/bitmap-ish and used at a few sizes — tight latin subsets keep them small.
+- Verify the A+ security headers score and that the wordmark / windows / terminals still render identically.
 
 ---
 
@@ -173,6 +130,39 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 - Add a featured `image:` + a `gallery:` once there are screenshots — drop files in `static/img/projects/desktop-tracker/` (the folder exists).
 - Tighten `tech:` if the stack firms up, and flip `status:` off `wip` when it's real.
 - Cross-link any future "building desktop-tracker" post via `projects: [desktop-tracker]` so the card's field-note count lights up.
+
+---
+
+### Mobile support pass
+
+**Type:** improvement
+
+**Why:** The 90s design was drawn for desktop — a 980px page with a 212px sidebar. `cybershack.css` has a first-cut `@media (max-width:760px)` that stacks the homepage columns, collapses the project grid, and reorders the sidebar, but it's a single breakpoint and hasn't been audited on real phone widths. The whole site (homepage + every inner window) needs a deliberate small-screen pass.
+
+**Notes:**
+
+- Audit at ~360–414px. Homepage: sidebar stacking order, the marquee, the rainbow wordmark scale, the nav-button row wrapping, the guestbook form, the 88×31 badge wall, the footer.
+- Inner pages (via `baseof`): window padding, the Win95 title-bar path overflow (already ellipsised), tag-pill wrapping, pagination buttons.
+- Content overflow: make sure `.post-content pre` (code) and `table` scroll horizontally instead of blowing out the viewport. The prose measure is capped at `70ch` (fine).
+- Tap targets ≥44px on the nav buttons, webring links, and guestbook controls.
+- The sparkle cursor trail is `mousemove`-only — confirm it doesn't fire awkwardly on touch scroll.
+- Verify the visitor-counter odometer and the guestbook render cleanly in a narrow single column.
+
+---
+
+### Accessibility (a11y) support pass
+
+**Type:** improvement
+
+**Why:** A clashing GeoCities palette plus decorative chrome (marquee, blink, rainbow text, custom cursor) is an accessibility minefield — contrast, motion, focus, and semantics all need a real audit. Some scaffolding exists (`prefers-reduced-motion` disables the marquee / blink / sparkle / eq animations; body prose is a high-contrast serif on cream), but nothing has been measured.
+
+**Notes:**
+
+- Baseline with Lighthouse / axe on the homepage, a blog post, a project page, and `/changelog`.
+- **Contrast:** check the worst offenders — lime `--neon` (`#00a619`) and teal on cream, the white-on-magenta link hover (`a:hover{color:#fff;background:var(--hot)}`), the green-on-black marquee, and the status pills. Darken whatever fails WCAG AA.
+- **Motion:** confirm `prefers-reduced-motion` covers _everything_ (the rainbow wordmark `huey` animation, now-spinning, the odometer roll), not just the obvious ones.
+- **Focus:** add visible `:focus-visible` styles for the nav buttons, links, and guestbook form (currently UA defaults), plus a skip-to-content link.
+- **Semantics:** mark the marquee `aria-hidden` (or give it a static fallback); give the visitor-counter odometer an accessible label; `aria-hidden` the decorative badges and custom cursor; add real `<label>`s to the guestbook inputs (placeholder-only today); verify heading order on each page type.
 
 ---
 

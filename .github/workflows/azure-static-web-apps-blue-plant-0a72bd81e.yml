@@ -21,11 +21,6 @@ jobs:
         with:
           hugo-version: '0.162.1'
           extended: true
-      - name: Install Dart Sass
-        run: |
-          curl -fsSL https://github.com/sass/dart-sass/releases/download/1.100.0/dart-sass-1.100.0-linux-x64.tar.gz \
-            | sudo tar -xz -C /usr/local/lib
-          echo "/usr/local/lib/dart-sass" >> "$GITHUB_PATH"
       - name: Build
         run: hugo --minify
       - name: Build And Deploy

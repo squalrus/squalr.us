@@ -4,25 +4,25 @@ User-visible changes to squalr.us, newest first. Format loosely follows [Keep a 
 
 ## [1.0.0] — 2026-05-30
 
-The first versioned release — a full cyberpunk redesign, plus the backlog / changelog / versioning workflow the site now runs on. The [story is its own blog post](/2026/06/modernizing-my-hugo-blog-in-2026/).
+The first versioned release — a years-overdue modernization, a full **90s GeoCities** redesign, and the backlog / changelog / versioning workflow the site now runs on. The [story is its own blog post](/2026/06/modernizing-my-hugo-blog-in-2026/).
 
 ### Added
 
-- **Cyberpunk homepage redesign.** An arcade-pixel hero (Press Start 2P) with a neon flicker on the lit word and a blinking cursor, a textured background (dot grid, horizon glow, CRT scanlines, vignette), project cards with screenshot-or-generated-terminal banners and corner-bracket hovers, color-coded status badges, and projects ↔ posts cross-linking ("◇ N field notes" on cards, project chips on posts). Teal / cyan / ember neon on blue near-black. (`themes/squalr/layouts/index.html`, `themes/squalr/assets/css/`)
-- **Configurable hero.** The kicker, heading lines, lit neon word, subtitle, status, and flavor chip all come from `config.yaml` (`params.hero`) — wrap a word in `{braces}` to make it the lit word, end a line with `.` for the ember dot. (`config.yaml`)
-- **Project galleries + featured images.** A project can carry a featured image (card banner + detail hero) and a captioned gallery on its detail page; image-less projects get an auto-generated faux-terminal banner (driven by an optional `terminal:` frontmatter block) instead of a blank box. (`themes/squalr/layouts/partials/`)
+- **90s GeoCities redesign, site-wide.** A light, period-accurate Web 1.0 tribute: tiled confetti wallpaper, Win95 window chrome with title bars, a scrolling marquee, a WordArt rainbow wordmark, 88×31 web badges, a webring, candy-stripe rules, and a custom pixel cursor. The homepage is the full "Cyber-Shack"; every inner page (posts, projects, changelog, backlog, tags) wraps its content in a Win95 window. Blog posts and project pages keep **readable Times-serif body text on cream** so the reading never suffers for the bit. (`themes/squalr/`)
+- **Working visitor counter, guestbook, and cursor trail.** Client-side, static-host-friendly (`/cybershack.js`): an animated visitor odometer, a sign-able guestbook, a sparkle cursor trail, and a rotating "Now Spinning" prog-metal widget. The counter and guestbook persist per-browser via `localStorage` — a tribute, not a server.
+- **Project showcase.** Projects render as cards with a real screenshot banner or an auto-generated DOS-terminal banner (from a `terminal:` frontmatter block), color-coded status, tags, links, and `◇ N field notes` cross-links to related posts. Detail pages support a featured image + a captioned gallery.
+- **Configurable hero.** The wordmark's lit word, kicker, and the sidebar stats come from `config.yaml` (`params.hero`) — wrap a word in `{braces}` to make it the rainbow word.
 - **Public changelog + backlog + a version.** [/changelog](/changelog/) and [/backlog](/backlog/) render straight from the root `CHANGELOG.md` / `BACKLOG.md` at build time, and the footer shows a version chip read from the top of this changelog — no separate version constant.
 
 ### Changed
 
-- **New type + color system.** Space Grotesk (body), JetBrains Mono (code / labels), and Press Start 2P (arcade headers), with the whole site moving to the teal (`#2ee6c8`) / cyan (`#37c0ff`) / ember (`#ff8a3c`) palette on `#0a0e12`. (`themes/squalr/assets/css/`)
-- **Projects support arbitrary `links`** beyond `repo` / `demo`, and the `squalr.us` project now lives at a clean `/projects/squalr-us/` instead of `/projects/https/`.
+- **Modernized the whole stack.** Migrated off defunct Universal Analytics to GA4; pinned Hugo `0.162.1` (local + CI); bumped the GitHub Actions deploy workflow off its 2019 `v0.0.1-preview` pin to current stable versions; and replaced the unowned m10c theme git submodule with a custom theme in `themes/squalr/`. The CSS pipeline is plain CSS through Hugo (`resources.Get | minify | fingerprint`) — no npm, no Sass, no `node_modules`.
+- **Projects support arbitrary `links`** beyond `repo` / `demo`, and the `squalr.us` project lives at a clean `/projects/squalr-us/` instead of `/projects/https/`.
 
 ### Fixed
 
 - **Pagination paginates at 15** — it was silently defaulting to 10 from a flat `pagination.pagerSize` config key Hugo never read. (`config.yaml`)
-- **SCSS theme colors compile again** — restored the `resources.ExecuteAsTemplate` step a stale build cache had been masking, along with CSS fingerprinting. (`themes/squalr/layouts/_default/baseof.html`)
 
 ---
 
-Build and CI changes a site reader wouldn't notice — the Hugo `0.162.1` pin (local + CI), the SCSS migration to Dart Sass `1.100.0`, the GA4 migration, and the GitHub Actions bumps — live in [TECH-STACK-AUDIT.md](./TECH-STACK-AUDIT.md) and git history, not here.
+Build and CI changes a site reader wouldn't notice — the Hugo `0.162.1` pin (local + CI), the GA4 migration, and the GitHub Actions bumps — are tracked in `docs/TECH-STACK-AUDIT.md` and git history, not here.

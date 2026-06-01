@@ -1,0 +1,28 @@
+{{- /* 90s project card. Context (.) is the project page. */ -}}
+{{- $statusClass := "on" -}}
+{{- if or (eq .Params.status "wip") (eq .Params.status "paused") }}{{ $statusClass = "wip" }}{{ else if eq .Params.status "archived" }}{{ $statusClass = "archived" }}{{ end -}}
+{{- $slug := .File.ContentBaseName -}}
+{{- $notes := where site.RegularPages "Params.projects" "intersect" (slice $slug) -}}
+<article class="pcard">
+  <div class="pchrome"><span class="pname"><a href="{{ .Permalink }}">{{ .Title }}</a></span><span class="pstat {{ $statusClass }}">{{ .Params.status | upper }}</span></div>
+  <div class="shot">
+    {{- with .Params.image }}
+    <span class="shothint">⌖ screenshot.gif</span>
+    <img src="{{ . }}" alt="{{ $.Title }} screenshot" loading="lazy" />
+    {{- else }}
+    {{ partial "cybershack-terminal.html" . }}
+    {{- end }}
+  </div>
+  <div class="pbody">
+    {{- with .Params.description }}<p class="pdesc">{{ . }}</p>{{ end }}
+    {{- with .Params.tech }}<div class="ptags">{{ range . }}<span>{{ . }}</span>{{ end }}</div>{{ end }}
+    <div class="pfoot">
+      <span class="plinks">
+        {{- with .Params.demo }}<a href="{{ . }}">live↗</a>{{ end }}
+        {{- with .Params.repo }}<a href="{{ . }}">github↗</a>{{ end }}
+        {{- range .Params.links }}<a href="{{ .url }}">{{ replaceRE `[↗→\s]+$` "" .label | lower }}↗</a>{{ end }}
+      </span>
+      {{- if $notes }}<a class="pnotes" href="{{ .Permalink }}">◇ {{ len $notes }} note{{ if gt (len $notes) 1 }}s{{ end }}</a>{{ else }}<span class="pnotes none">◇ no notes yet</span>{{ end }}
+    </div>
+  </div>
+</article>

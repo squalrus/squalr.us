@@ -1,11 +1,10 @@
 {{- with .Params.projects }}
-<div class="related-section">
-  <h3>Related projects</h3>
-  {{- range . }}
-    {{- $project := site.GetPage (printf "/projects/%s" .) }}
-    {{- with $project }}
-      {{ partial "project-card.html" . }}
+<div class="related-projects">
+  <h3>◇ Related projects</h3>
+  <div class="projgrid">
+    {{- range . }}
+    {{- with site.GetPage (printf "/projects/%s" .) }}{{ partial "pcard.html" . }}{{ end }}
     {{- end }}
-  {{- end }}
+  </div>
 </div>
 {{- end }}

@@ -1,5 +1,4 @@
 {{ define "main" }}
-<div class="page-container">
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">{{ .Title }}</h1>
@@ -8,41 +7,29 @@
         {{- $statusEmoji := dict "active" "🟢" "wip" "🚧" "archived" "📦" "paused" "⏸️" }}
         <span class="project-status status-{{ . }}">{{ with index $statusEmoji . }}{{ . }} {{ end }}{{ . }}</span>
         {{- end }}
-        {{- with .Params.repo }}
-        <a href="{{ . }}" target="_blank" rel="noreferrer noopener">GitHub ↗</a>
-        {{- end }}
-        {{- with .Params.demo }}
-        <a href="{{ . }}" target="_blank" rel="noreferrer noopener">Demo ↗</a>
-        {{- end }}
-        {{- range .Params.links }}
-        <a href="{{ .url }}" target="_blank" rel="noreferrer noopener">{{ .label }}</a>
-        {{- end }}
+        {{- with .Params.repo }}<a href="{{ . }}" target="_blank" rel="noreferrer noopener">github↗</a>{{ end }}
+        {{- with .Params.demo }}<a href="{{ . }}" target="_blank" rel="noreferrer noopener">demo↗</a>{{ end }}
+        {{- range .Params.links }}<a href="{{ .url }}" target="_blank" rel="noreferrer noopener">{{ replaceRE `[↗→\s]+$` "" .label | lower }}↗</a>{{ end }}
       </div>
       {{- with .Params.tech }}
       <div class="project-detail-tech">
-        {{- range . }}
-        <span class="tag">{{ . }}</span>
-        {{- end }}
+        {{- range . }}<span class="tag">{{ . }}</span>{{ end }}
       </div>
       {{- end }}
     </header>
     {{- with .Params.image }}
-    <div class="project-hero-media">
-      <img src="{{ . }}" alt="{{ $.Title }}" />
-    </div>
+    <div class="project-hero-media"><img src="{{ . }}" alt="{{ $.Title }}" /></div>
     {{- end }}
     <div class="post-content">
       {{ .Content }}
     </div>
     {{- with .Params.gallery }}
     <section class="project-gallery">
-      <h3 class="project-gallery-label">📸 Gallery</h3>
+      <h3 class="project-gallery-label">📸 screenshots.zip</h3>
       <div class="project-gallery-grid">
         {{- range . }}
         <figure class="project-gallery-item">
-          <a href="{{ .src }}" target="_blank" rel="noreferrer noopener">
-            <img src="{{ .src }}" alt="{{ .caption | default $.Title }}" loading="lazy" />
-          </a>
+          <a href="{{ .src }}" target="_blank" rel="noreferrer noopener"><img src="{{ .src }}" alt="{{ .caption | default $.Title }}" loading="lazy" /></a>
           {{- with .caption }}<figcaption>{{ . }}</figcaption>{{- end }}
         </figure>
         {{- end }}
@@ -53,17 +40,13 @@
     {{- $related := where site.RegularPages "Params.projects" "intersect" (slice $slug) }}
     {{- with $related }}
     <div class="related-section">
-      <h3>Related posts</h3>
-      <ul class="posts-list">
+      <h3>◇ Field notes about this project</h3>
+      <ul class="posts">
         {{- range . }}
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="{{ .Permalink }}">{{ .Title }}</a>
-          <span class="posts-list-item-date">{{ .PublishDate.Format "Jan 2, 2006" }}</span>
-        </li>
+        {{ partial "post-li.html" (dict "page" .) }}
         {{- end }}
       </ul>
     </div>
     {{- end }}
   </article>
-</div>
 {{ end }}

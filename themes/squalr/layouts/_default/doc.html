@@ -1,5 +1,4 @@
 {{ define "main" }}
-<div class="page-container">
   <h1 class="page-title">{{ .Title }}</h1>
   {{- with .Params.subtitle }}
   <p class="page-subtitle">{{ . }}</p>
@@ -15,5 +14,4 @@
     {{- $body = replaceRE `\[([^\]]+)\]\(\.?/?[A-Za-z][A-Za-z0-9._-]*\.md[^)]*\)` "$1" $body -}}
     {{ $body | markdownify }}
   </article>
-</div>
 {{ end }}

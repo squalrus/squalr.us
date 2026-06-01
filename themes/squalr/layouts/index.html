@@ -1,63 +1,195 @@
-{{ define "main" }}
+{{- /* ============================================================
+     CYBER-SHACK — squalr.us 90s homepage (standalone, no baseof).
+     Light GeoCities × Win95 × cyberpunk-silly. Real content from
+     Hugo; dynamic bits (counter, guestbook, sparkle, now-spinning)
+     in /cybershack.js.
+     ============================================================ */ -}}
 {{- $projects := where site.RegularPages "Section" "projects" -}}
 {{- $posts := where site.RegularPages "Section" "blog" -}}
-{{- $hero := .Site.Params.hero -}}
+{{- $lit := "SQUALRUS" -}}
+{{- range .Site.Params.hero.lines }}{{ with findRE `\{[^}]+\}` . 1 }}{{ $lit = replaceRE `[{}]` "" (index . 0) }}{{ end }}{{ end -}}
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Locale | default "en-us" }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>~ {{ .Site.Title | upper }}'S CYBER-SHACK ~ :: squalr.us ::</title>
+  {{ hugo.Generator }}
+  <meta name="description" content="{{ .Site.Params.description }}" />
+  <link rel="shortcut icon" href="{{ .Site.Params.favicon | default "/favicon.ico" }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet" />
+  {{- $css := resources.Get "css/cybershack.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
+  {{ template "_internal/google_analytics.html" . }}
+  {{ template "_internal/opengraph.html" . }}
+  {{ template "_internal/twitter_cards.html" . }}
+</head>
+<body>
 
-<!-- ============ HERO ============ -->
-<section class="wrap hero">
-  <div class="kicker">{{ $hero.kicker | default "2026" }} <span class="blink"></span></div>
-  <h1>
-    {{- range $i, $line := $hero.lines -}}
-      {{- if $i }}<br>{{ end -}}
-      {{- $l := replaceRE `\{([^}]+)\}` `<span class="lit">$1</span>` $line -}}
-      {{- $l = replaceRE `\.$` `<span class="dot">.</span>` $l -}}
-      {{- $l | safeHTML -}}
-    {{- end -}}
-  </h1>
-  {{- $sub := $hero.subtitle | default .Site.Params.description -}}
-  {{- $sub = replaceRE `\{([^}]+)\}` `<span class="hi">$1</span>` $sub -}}
-  <p class="sub">{{ $sub | safeHTML }}</p>
-  <div class="hero-meta">
-    <span class="chip-stat"><span class="dotpulse"></span> currently: <b>{{ $hero.status | default "shipping" }}</b></span>
-    <span class="chip-stat">projects live <b>{{ len $projects }}</b></span>
-    <span class="chip-stat">field notes <b>{{ len $posts }}</b></span>
-    {{- with $hero.flavorChip }}<span class="chip-stat">{{ . }}</span>{{- end }}
-  </div>
-</section>
+<!-- ===== marquee ===== -->
+<div class="mqbar"><span>★ WELCOME 2 {{ .Site.Title | upper }}'S CYBER-SHACK ★&nbsp;&nbsp; <b>NOW PLAYING:</b> &nbsp;&nbsp; <i>YOU ARE VISITOR #00133742</i> &nbsp;&nbsp; <u>SIGN MY GUESTBOOK ↓</u> &nbsp;&nbsp; ☣ best viewed in Netscape Navigator ☣ &nbsp;&nbsp; 🔊 turn ur speakers on! &nbsp;&nbsp; ★ shipping since '21 ★ &nbsp;&nbsp;</span></div>
 
-<!-- ============ PROJECTS ============ -->
-{{- if $projects }}
-<section class="wrap sec" id="projects">
-  <div class="sec-head">
-    <div class="sec-title">
-      <span class="sec-tag"><span class="ic">▰</span> PROJECTS</span>
-      <span class="rule"></span>
+<div class="page">
+
+  <!-- ===== top banner ===== -->
+  <div class="banner-top">
+    <div class="eyebrow">·:¦:· HOME OF ·:¦:·</div>
+    <h1 class="wordmark"><span class="rainbow">SQUALRUS</span><span style="color:var(--hot)">!!!</span></h1>
+    <div class="tag">a Sr Consultant @ Dura Digital · prog metal · pixels · <span class="hi">strong opinions about whitespace</span></div>
+    <div class="speakers">♫ ♪ this page sounds best with the volume UP ♪ ♫</div>
+    <div class="constr">
+      <span class="digger">⛏</span> <span class="txt">UNDER CONSTRUCTION SINCE 2001</span> <span class="digger">🚧</span>
     </div>
-    <a class="sec-more" href="/projects/">all projects →</a>
+    <div class="flames"></div>
   </div>
-  <div class="proj-grid">
-    {{- range sort $projects "Params.weight" }}
-    {{ partial "project-card.html" . }}
-    {{- end }}
-  </div>
-</section>
-{{- end }}
 
-<!-- ============ RECENT POSTS ============ -->
-{{- if $posts }}
-<section class="wrap sec" id="posts">
-  <div class="sec-head">
-    <div class="sec-title">
-      <span class="sec-tag"><span class="ic">▤</span> RECENT POSTS</span>
-      <span class="rule"></span>
-    </div>
-    <a class="sec-more" href="/blog/">all posts →</a>
-  </div>
-  <div class="postrows">
-    {{- range $i, $p := (first 5 $posts) }}
-    {{ partial "post-row.html" (dict "page" $p "num" (add $i 1)) }}
+  <!-- ===== nav ===== -->
+  <div class="navrow">
+    {{- range .Site.Menus.main }}
+    <a href="{{ .URL }}"{{ if eq .URL "/" }} class="cur"{{ end }}>{{ .Name | upper }}</a>
     {{- end }}
+    <a href="#guestbook">GUESTBOOK</a>
   </div>
-</section>
-{{- end }}
-{{ end }}
+
+  <div class="cols">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="side">
+
+      <!-- visitor counter -->
+      <div class="panel counter-wrap">
+        <h3>★ Visitors ★</h3>
+        <div class="odo" id="odo"></div>
+        <div class="lbl">U R VISITOR!</div>
+        <div class="since">online since Apr 20, 2021</div>
+      </div>
+
+      <!-- now playing -->
+      <div class="panel">
+        <h3>♪ Now Spinning ♪</h3>
+        <div class="npx">
+          <span class="eq"><i></i><i></i><i></i><i></i></span>
+          <span class="song" id="np-song">The Dance of Eternity</span><br>
+          <span class="artist" id="np-artist">Dream Theater</span>
+        </div>
+      </div>
+
+      <!-- status -->
+      <div class="panel">
+        <h3>:: Status ::</h3>
+        <ul class="statlist">
+          <li><span>currently</span> <b class="on">shipping ▸</b></li>
+          <li><span>projects live</span> <b>{{ len $projects }}</b></li>
+          <li><span>field notes</span> <b>{{ len $posts }}</b></li>
+          <li><span>coffee level</span> <b class="wip">critical</b></li>
+          <li><span>fav time sig</span> <b>7/8</b></li>
+        </ul>
+      </div>
+
+      <!-- web badges -->
+      <div class="panel">
+        <h3>« proudly served »</h3>
+        <div class="badges">
+          <a href="#" class="badge88 b-netscape">best viewed in<br><b>NETSCAPE</b></a>
+          <a href="#" class="badge88 b-1024">made 4<br><b>1024×768</b></a>
+          <a href="#" class="badge88 b-hugo">built with<br><b>HUGO</b></a>
+          <a href="#" class="badge88 b-html">valid<br><b>HTML 4.01</b></a>
+          <a href="#" class="badge88 b-noai">100%<br><b>HAND-CODED</b></a>
+          <a href="#" class="badge88 b-award">COOL SITE<br><b>of the DAY</b></a>
+        </div>
+      </div>
+
+      <!-- webring -->
+      <div class="panel webring">
+        <h3>The Static-Site Ring</h3>
+        this site is node #14 in a<br>ring of Hugo webmasters
+        <div class="nav">
+          <a href="#">◀ PREV</a>
+          <a href="#">RANDOM</a>
+          <a href="#">NEXT ▶</a>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ============ MAIN ============ -->
+    <main class="main">
+
+      <!-- welcome window -->
+      <div class="win">
+        <div class="tbar">
+          <span>C:\SQUALRUS\welcome.exe</span>
+          <span class="tb-btns"><i>_</i><i>▢</i><i>✕</i></span>
+        </div>
+        <div class="body welcome">
+          <p><b class="pop">Hiya, websurfer!</b> 🏄 You've reached the personal homepage of <b class="pop">{{ .Site.Params.author }}</b> — Sr Consultant by day, pixel-pusher &amp; <span class="hi">prog-metal evangelist</span> by night.</p>
+          <p>This is <b>squalr.us</b>: a hand-built Hugo site with too many neon glows, zero whitespace, and a deep, abiding disrespect for the year being 2026. Grab a Surge, dim the lights, and <a href="#guestbook">sign the guestbook</a> before you bounce.</p>
+        </div>
+      </div>
+
+      <!-- ===== PROJECTS ===== -->
+      <div id="projects">
+        <span class="sticker">▰ MY RAD PROJECTS</span>
+        <div class="projgrid">
+          {{- range sort $projects "Params.weight" }}
+          {{ partial "pcard.html" . }}
+          {{- end }}
+        </div>
+      </div>
+
+      <hr class="candy">
+
+      <!-- ===== RECENT POSTS ===== -->
+      <div id="posts">
+        <span class="sticker">▤ FIELD NOTES</span>
+        <ul class="posts">
+          {{- range first 5 $posts }}
+          {{ partial "post-li.html" (dict "page" .) }}
+          {{- end }}
+        </ul>
+      </div>
+
+      <hr class="candy">
+
+      <!-- ===== GUESTBOOK ===== -->
+      <div id="guestbook" class="win">
+        <div class="tbar">
+          <span>★ SIGN MY GUESTBOOK ★</span>
+          <span class="tb-btns"><i>_</i><i>▢</i><i>✕</i></span>
+        </div>
+        <div class="body">
+          <div style="font-family:var(--term);font-size:18px;color:var(--neon-2);text-align:center;margin-bottom:10px">don't be a lurker — leave a mark! ✍</div>
+          <form class="gb-form" id="gb-form" autocomplete="off">
+            <div class="gb-row">
+              <input class="name-in" id="gb-name" maxlength="32" placeholder="yer name / handle" />
+              <input class="mood-in" id="gb-mood" maxlength="14" placeholder="mood (☺)" />
+            </div>
+            <textarea id="gb-msg" maxlength="240" placeholder="say something rad..."></textarea>
+            <div><button class="gb-send" type="submit">»» STAMP IT ««</button></div>
+          </form>
+          <div class="gb-list" id="gb-list"></div>
+          <div class="gb-count" id="gb-count"></div>
+          <div style="font-family:var(--comic);font-size:11px;color:var(--ink-2);text-align:center;margin-top:8px">(entries save to your own browser — it's a 90s tribute, not a server 😉)</div>
+        </div>
+      </div>
+
+      <!-- footer -->
+      <div class="foot">
+        <hr class="candy">
+        <div>✉ <a href="mailto:chad.awesome@gmail.com">email me</a> &nbsp;·&nbsp; <span class="em">[ © {{ now.Format "2006" }} {{ .Site.Params.author }} · /dev/null ]</span></div>
+        <div style="margin-top:6px">⟢ <a href="/changelog/">CHANGELOG</a> · <a href="/backlog/">BACKLOG</a> · <a href="#">STATIC-SITE RING</a> ⟢</div>
+        <div class="updated">⟳ this page last updated {{ now.Format "01/02/2006" }} · Y2K compliant (probably)</div>
+        {{- $version := "" }}{{ with findRE `\[\d+\.\d+\.\d+\]` (readFile "CHANGELOG.md") 1 }}{{ $version = replaceRE `[\[\]]` "" (index . 0) }}{{ end }}
+        {{- with $version }}<div class="ver"><a href="/changelog/">▓ running v{{ . }} ▓</a></div>{{ end }}
+        <div class="smol">Built with Hugo, caffeine, and <span class="made">too many neon glows</span>. ✨ &nbsp;|&nbsp; © Geocities is dead, long live Geocities.</div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="/cybershack.js"></script>
+</body>
+</html>

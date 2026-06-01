@@ -1,0 +1,25 @@
+{{- /* 90s DOS-style terminal banner for image-less project cards.
+       Reads the same `terminal:` frontmatter the cyberpunk card uses. */ -}}
+{{- $p := . -}}
+{{- $wip := or (eq $p.Params.status "wip") (eq $p.Params.status "paused") -}}
+{{- $lines := slice -}}
+{{- with $p.Params.terminal -}}
+  {{- $lines = .lines -}}
+{{- else -}}
+  {{- $cm := "# building in public" -}}{{- with $p.Params.tech }}{{ $cm = printf "# %s" (delimit (first 3 .) " · ") }}{{ end -}}
+  {{- $st := "✓ shipping" -}}{{- if $wip }}{{ $st = "⚠ work in progress" }}{{ end -}}
+  {{- $lines = slice (printf "$ %s" $p.File.ContentBaseName) $cm $st -}}
+{{- end -}}
+<div class="termshot">
+  {{- $last := sub (len $lines) 1 -}}
+  {{- range $i, $ln := $lines }}
+  <div>
+    {{- if hasPrefix $ln "$ " -}}<span class="pr">C:\&gt;</span> {{ strings.TrimPrefix "$ " $ln }}
+    {{- else if hasPrefix $ln "#" -}}<span class="cm">{{ $ln }}</span>
+    {{- else if hasPrefix $ln "✓" -}}<span class="ok">[OK]</span> {{ strings.TrimPrefix "✓ " $ln }}
+    {{- else if hasPrefix $ln "⚠" -}}<span class="wn">[!!]</span> {{ strings.TrimPrefix "⚠ " $ln }}
+    {{- else -}}{{ $ln }}{{- end -}}
+    {{- if eq $i $last }}<span class="cur blink"></span>{{ end -}}
+  </div>
+  {{- end }}
+</div>

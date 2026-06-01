@@ -1,11 +1,9 @@
 {{ define "main" }}
-<div class="page-container">
-  <h1 class="page-title">🛠 Projects</h1>
+  <h1 class="page-title">▰ My Rad Projects</h1>
   <p class="page-subtitle">Things I'm building — some serious, some just for the bit.</p>
-  <div class="proj-grid">
+  <div class="projgrid">
     {{- range sort .Pages "Params.weight" }}
-    {{ partial "project-card.html" . }}
+    {{ partial "pcard.html" . }}
     {{- end }}
   </div>
-</div>
 {{ end }}

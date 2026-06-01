@@ -1,6 +1,6 @@
 # CLAUDE.md — squalr.us
 
-Personal blog for Chad Schulz. Hugo static site, hosted on Azure Static Web Apps.
+Personal blog + project showcase for Chad Schulz. Hugo static site with a custom **90s GeoCities** theme ("Cyber-Shack"), hosted on Azure Static Web Apps.
 
 ## Common Commands
 
@@ -12,24 +12,30 @@ hugo new ./blog/{post-name}.md      # create a new post from archetype
 hugo --minify                       # production build → public/
 ```
 
-No npm, no node_modules. Hugo handles everything including SCSS compilation.
+No npm, no node_modules, no Sass. The theme is **plain CSS** compiled through Hugo's asset pipeline (`resources.Get "css/cybershack.css" | minify | fingerprint`). Dart Sass is **not** required.
 
 ## Project Structure
 
 ```
 content/
-  blog/           # published posts (.md)
-  blog/draft/     # draft posts (not committed to published history)
-layouts/
-  _default/
-    baseof.html   # base template override (adds fingerprinted CSS, GA)
+  blog/            # posts (.md); a future date = scheduled (hidden until a build runs after it)
+  projects/        # project pages (.md)
+  changelog.md     # thin stub → renders root CHANGELOG.md via the doc layout
+  backlog.md       # thin stub → renders root BACKLOG.md via the doc layout
+themes/squalr/
+  layouts/
+    index.html               # standalone 90s "Cyber-Shack" homepage (does NOT use baseof)
+    _default/baseof.html      # 90s chrome for every inner page (marquee, Win95 window, footer)
+    partials/                 # pcard, post-li, cybershack-terminal, related-projects, icon
+  assets/css/cybershack.css   # the entire 90s stylesheet (plain CSS)
+  static/cybershack.js        # visitor counter, guestbook, sparkle cursor, now-playing (localStorage)
 static/
-  img/            # images organized by post slug under static/img/blog/
-  staticwebapp.config.json  # cache + security headers for Azure
-themes/
-  m10c/           # git submodule — current theme (being replaced)
-config.yaml       # site config, social links, menu, color palette
+  img/             # images: blog/<slug>/ and projects/<slug>/
+  staticwebapp.config.json    # cache + CSP / security headers for Azure
+config.yaml        # site config, menu, palette (params.style), hero (params.hero)
 ```
+
+The homepage is standalone; every other page renders through `baseof.html`, which wraps the page's content in a Win95 "window" with a cream, **readable** body (Times-serif prose for posts/projects).
 
 ## Adding a New Post
 
@@ -58,8 +64,7 @@ Supported frontmatter:
 ```yaml
 ---
 title: "Project Name"
-status: active          # active | wip | paused | archived (emoji + colored pill)
-featured: true          # pink-accented card + ★ badge on the featured image
+status: active          # active | wip | paused | archived (colored status pill)
 weight: 10              # sort order (lower = first)
 tech: [TypeScript, Go]  # shown as tags
 repo: https://...       # optional; renders "GitHub ↗"
@@ -71,11 +76,16 @@ links:                  # optional; arbitrary labelled links
 # gallery:                                    # drill-in gallery on the detail page
 #   - src: /img/projects/<slug>/shot.png
 #     caption: "What this shows"
+# terminal:                                   # image-less cards render a DOS banner from this
+#   label: 'merge-bot — ci'
+#   lines: ['$ merge-bot --auto', '# labels ok', '✓ merged PR #482']
 ---
 ```
 
-Images go in `static/img/projects/<slug>/` (drop-zone folders already exist). `image` and
-`gallery` are optional — cards and detail pages degrade gracefully to text-only when absent.
+Images go in `static/img/projects/<slug>/` (drop-zone folders already exist). All of `image`,
+`gallery`, and `terminal` are optional. Card banner logic: `image` → screenshot; else the
+`terminal:` block (or an auto-generated one) renders a DOS-style banner so no card is ever blank.
+A post with `projects: [<this project's filename base>]` shows a `◇ field notes` cross-link on the card.
 
 ## Deployment
 
@@ -95,15 +105,11 @@ Both `BACKLOG.md` and `CHANGELOG.md` are rendered on the site (`/backlog/`, `/ch
 
 **Versioning is changelog-derived.** There is no version constant. The footer in `baseof.html` reads the top `## [X.Y.Z]` heading out of `CHANGELOG.md` at build time and renders the version chip. Adding a new changelog block **is** the version bump — keep the latest version at the very top.
 
-**Shipping a backlog item** follows a fixed checklist (semver rules, changelog migration, doc updates, build gate, branch → PR → manual merge) — see [BACKLOG.md → Shipping a backlog item](./BACKLOG.md#shipping-a-backlog-item). Always run `hugo --minify` (with Dart Sass on `PATH`) as the correctness gate before opening the PR.
+**Shipping a backlog item** follows a fixed checklist (semver rules, changelog migration, doc updates, build gate, branch → PR → manual merge) — see [BACKLOG.md → Shipping a backlog item](./BACKLOG.md#shipping-a-backlog-item). Always run `hugo --minify` as the correctness gate before opening the PR (no Dart Sass needed — the theme is plain CSS).
 
 ## Known Issues / Tech Debt
 
-See `TECH-STACK-AUDIT.md` for full details. Short version:
-- Google Analytics UA is defunct since July 2023, needs GA4 migration
-- GitHub Actions workflows use outdated action versions
-- Hugo version is unpinned
-- NFT post embeds (`<nft-card>`) are broken
+The 2021-era debt is resolved (GA4 live, Hugo pinned, GitHub Actions current, owned theme, NFT embeds stripped). Remaining candidates live in **[BACKLOG.md](./BACKLOG.md)** — notably: no mobile pass yet, no accessibility pass yet, fonts still load from Google Fonts, and OpenSea is still in the CSP allowlist. `docs/TECH-STACK-AUDIT.md` is a historical snapshot of the *starting* state, now largely superseded.
 
 ---
 

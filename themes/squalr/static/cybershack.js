@@ -187,6 +187,7 @@
   var lastSpawn = 0;
   function initSparkles() {
     if (reducedMotion) return;
+    if (window.matchMedia && window.matchMedia('(pointer:coarse)').matches) return;
     window.addEventListener('mousemove', function (e) {
       if (!trailOn) return;
       var now = Date.now();

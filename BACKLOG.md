@@ -55,7 +55,6 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 | Make 88×31 web badges configurable | S | M |
 | Verify reduced-motion coverage | S | M |
 | Self-host the three web fonts (drop the Google Fonts dependency) | S | M |
-| Mobile support pass | M | H |
 | Project showcase readability and CRT effect | M | H |
 | Rename "Field Notes" | S | L |
 | Flesh out the `desktop-tracker` project metadata | S | L |
@@ -188,23 +187,6 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 - Remove the Google Fonts `<link>` + preconnects from **both** `themes/squalr/layouts/index.html` and `themes/squalr/layouts/_default/baseof.html`, and drop `https://fonts.googleapis.com` / `font-src https://fonts.gstatic.com` from the CSP in `static/staticwebapp.config.json`.
 - Press Start 2P and VT323 are pixel/bitmap-ish and used at a few sizes — tight latin subsets keep them small.
 - Verify the A+ security headers score and that the wordmark / windows / terminals still render identically.
-
----
-
-### Mobile support pass
-
-**Type:** improvement
-
-**Why:** The 90s design was drawn for desktop — a 980px page with a 212px sidebar. `cybershack.css` has a first-cut `@media (max-width:760px)` that stacks the homepage columns, collapses the project grid, and reorders the sidebar, but it's a single breakpoint and hasn't been audited on real phone widths. The whole site (homepage + every inner window) needs a deliberate small-screen pass.
-
-**Notes:**
-
-- Audit at ~360–414px. Homepage: sidebar stacking order, the marquee, the rainbow wordmark scale, the nav-button row wrapping, the guestbook form, the 88×31 badge wall, the footer.
-- Inner pages (via `baseof`): window padding, the Win95 title-bar path overflow (already ellipsised), tag-pill wrapping, pagination buttons.
-- Content overflow: make sure `.post-content pre` (code) and `table` scroll horizontally instead of blowing out the viewport. The prose measure is capped at `70ch` (fine).
-- Tap targets ≥44px on the nav buttons, webring links, and guestbook controls.
-- The sparkle cursor trail is `mousemove`-only — confirm it doesn't fire awkwardly on touch scroll.
-- Verify the visitor-counter odometer and the guestbook render cleanly in a narrow single column.
 
 ---
 

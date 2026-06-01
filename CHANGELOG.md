@@ -2,6 +2,15 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.1.0] — 2026-06-01
+
+### Added
+
+- **Live "Now Spinning" powered by Last.fm.** The sidebar widget now fetches real listening data every 30 seconds — track name, artist, and album art. Shows `▶ playing` when something is actively playing, `■ last played` when idle. Spectrum bars drop flat when nothing is playing; falls back silently if the fetch fails. (`cybershack.js`, `index.html`)
+- **WinAmp 2.x skin for the now-playing widget.** The old static widget is reskinned as a WinAmp-style player: Win95 blue gradient title bar, black LCD with green phosphor text and an adaptive marquee (only scrolls when the title overflows), an 18-bar spectrum analyzer with staggered per-bar delays, beveled transport controls, and a decorative volume slider. (`cybershack.css`, `index.html`)
+
+---
+
 ## [1.0.0] — 2026-05-30
 
 The first versioned release — a years-overdue modernization, a full **90s GeoCities** redesign, and the backlog / changelog / versioning workflow the site now runs on. The [story is its own blog post](/2026/06/modernizing-my-hugo-blog-in-2026/).

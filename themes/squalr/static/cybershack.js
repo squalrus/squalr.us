@@ -34,31 +34,77 @@
     });
   }
 
-  /* ---------- NOW SPINNING (rotates the prog-metal flex) ---------- */
-  var TRACKS = [
-    ['The Dance of Eternity', 'Dream Theater'],
-    ['Stream of Consciousness', 'Dream Theater'],
-    ['Bleed', 'Meshuggah'],
-    ['Cygnus....Vismund Cygnus', 'The Mars Volta'],
-    ['Cassandra Gemini', 'The Mars Volta'],
-    ['Schism', 'TOOL'],
-    ['Ghost of Perdition', 'Opeth'],
-    ['First Day of My Life... in 17/16', 'Glizzcore™']
-  ];
+  /* ---------- NOW SPINNING (Last.fm) ---------- */
+  var LFM_USER = 'squalrus';
+  var LFM_KEY  = 'eeb057078d22855ccfe801b9a69fba67';
   function initNowPlaying() {
-    var s = document.getElementById('np-song'),
-        a = document.getElementById('np-artist');
+    var s   = document.getElementById('np-song'),
+        a   = document.getElementById('np-artist'),
+        art = document.getElementById('np-art'),
+        eq  = document.getElementById('np-eq'),
+        lbl = document.getElementById('np-label');
     if (!s || !a) return;
-    var i = 0;
-    setInterval(function () {
-      i = (i + 1) % TRACKS.length;
+
+    function applyTrack(track) {
+      var isNow = !!(track['@attr'] && track['@attr'].nowplaying === 'true');
       s.style.opacity = 0; a.style.opacity = 0;
       setTimeout(function () {
-        s.textContent = TRACKS[i][0]; a.textContent = TRACKS[i][1];
+        s.textContent = track.name;
+        a.textContent = track.artist['#text'];
+        var imgs = track.image || [];
+        var src = '';
+        for (var j = imgs.length - 1; j >= 0; j--) {
+          if (imgs[j]['#text']) { src = imgs[j]['#text']; break; }
+        }
+        if (art) {
+          if (src) { art.src = src; art.alt = track.album['#text'] || track.name; art.hidden = false; }
+          else { art.hidden = true; }
+        }
+        if (eq)  { if (isNow) eq.classList.remove('paused'); else eq.classList.add('paused'); }
+        if (lbl) {
+          lbl.textContent = isNow ? '▶ playing' : '■ last played';
+          lbl.className = 'wa-state' + (isNow ? '' : ' last-played');
+        }
+        // Adaptive marquee: only scroll when text actually overflows the clip container
+        var wrap = s.parentElement;
+        if (wrap) {
+          s.classList.remove('wa-scrolling');
+          void s.offsetWidth; // flush so scrollWidth reflects new text without animation
+          var textW = s.scrollWidth;
+          var wrapW = wrap.clientWidth;
+          if (textW > wrapW) {
+            var gap = Math.max(60, wrapW >> 1); // half-container gap between loops
+            var shift = textW + gap;
+            s.style.setProperty('--wa-pad', gap + 'px');
+            s.style.setProperty('--wa-shift', '-' + shift + 'px');
+            // ~50px/s scroll speed; hold+gap take 40% of total
+            s.style.setProperty('--wa-dur', Math.max(7, shift / 50 / 0.6).toFixed(1) + 's');
+            s.classList.add('wa-scrolling');
+          } else {
+            s.style.removeProperty('--wa-pad');
+            s.style.removeProperty('--wa-shift');
+            s.style.removeProperty('--wa-dur');
+          }
+        }
         s.style.transition = a.style.transition = 'opacity .3s';
         s.style.opacity = 1; a.style.opacity = 1;
-      }, 300);
-    }, 4200);
+      }, 200);
+    }
+
+    function fetchLfm() {
+      fetch('https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=' + LFM_USER + '&api_key=' + LFM_KEY + '&limit=1&format=json')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          var tracks = data.recenttracks && data.recenttracks.track;
+          if (!tracks) return;
+          var track = Array.isArray(tracks) ? tracks[0] : tracks;
+          if (track) applyTrack(track);
+        })
+        .catch(function () {});
+    }
+
+    fetchLfm();
+    setInterval(fetchLfm, 30000);
   }
 
   /* ---------- GUESTBOOK (localStorage) ---------- */

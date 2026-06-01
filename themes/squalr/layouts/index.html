@@ -66,14 +66,42 @@
         <div class="since">online since Apr 20, 2021</div>
       </div>
 
-      <!-- now playing -->
-      <div class="panel">
-        <h3>♪ Now Spinning ♪</h3>
-        <div class="npx">
-          <span class="eq"><i></i><i></i><i></i><i></i></span>
-          <span class="song" id="np-song">The Dance of Eternity</span><br>
-          <span class="artist" id="np-artist">Dream Theater</span>
+      <!-- now playing (WinAmp) -->
+      <div class="wa">
+        <div class="wa-title">
+          <span class="wa-name">♫ WINAMP</span>
+          <div class="wa-wbtns">
+            <button class="wa-wb" title="minimize">_</button>
+            <button class="wa-wb" title="shade">□</button>
+            <button class="wa-wb" title="close">×</button>
+          </div>
         </div>
+        <div class="wa-body">
+          <div class="wa-lcd">
+            <div class="wa-clip">
+              <span class="wa-scroll" id="np-song">The Dance of Eternity</span>
+            </div>
+            <div class="wa-meta">
+              <span class="wa-state" id="np-label">▶ playing</span>
+              <span class="wa-who" id="np-artist">Dream Theater</span>
+            </div>
+          </div>
+          <div class="wa-spec">
+            <span class="eq" id="np-eq">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </span>
+          </div>
+          <div class="wa-ctrl">
+            <button class="wa-cb">⏮</button>
+            <button class="wa-cb wa-play-btn">▶</button>
+            <button class="wa-cb">⏸</button>
+            <button class="wa-cb">⏹</button>
+            <button class="wa-cb">⏭</button>
+            <div class="wa-vol"><div class="wa-vol-knob"></div></div>
+          </div>
+        </div>
+        <img id="np-art" src="" alt="" hidden>
       </div>
 
       <!-- status -->

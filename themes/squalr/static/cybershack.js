@@ -42,11 +42,15 @@
         a   = document.getElementById('np-artist'),
         art = document.getElementById('np-art'),
         eq  = document.getElementById('np-eq'),
-        lbl = document.getElementById('np-label');
-    if (!s || !a) return;
+        lbl = document.getElementById('np-label'),
+        mq  = document.getElementById('mq-track');
+    var hasWidget = !!(s && a);
+    if (!hasWidget && !mq) return;
 
     function applyTrack(track) {
       var isNow = !!(track['@attr'] && track['@attr'].nowplaying === 'true');
+      if (mq) mq.textContent = (isNow ? '▶ ' : '■ ') + track.name + ' — ' + track.artist['#text'];
+      if (!hasWidget) return;
       s.style.opacity = 0; a.style.opacity = 0;
       setTimeout(function () {
         s.textContent = track.name;

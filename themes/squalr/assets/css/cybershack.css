@@ -48,7 +48,7 @@ body{
   image-rendering:pixelated;
   overflow-x:hidden;
 }
-img{image-rendering:pixelated;max-width:100%}
+img{image-rendering:pixelated;max-width:100%;display:block}
 
 /* custom pixel cursor (lime arrow w/ black outline — pops on light) */
 body, a, button{

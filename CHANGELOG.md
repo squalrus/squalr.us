@@ -2,6 +2,18 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.2.0] — 2026-06-01
+
+### Added
+
+- **Now-playing in the marquee bar.** Both the homepage and inner-page marquees now show the live track from Last.fm — `▶ Song — Artist` while playing, `■ Song — Artist` when idle. Updates every 30 seconds alongside the WinAmp widget. (`cybershack.js`, `index.html`, `baseof.html`)
+
+### Fixed
+
+- **Last.fm fetch unblocked by CSP.** `https://ws.audioscrobbler.com` was missing from the `connect-src` directive, silently killing every now-playing fetch in the browser. Also added `https://lastfm.freetls.fastly.net` to `img-src` so album art loads without a CSP violation. (`staticwebapp.config.json`)
+
+---
+
 ## [1.1.0] — 2026-06-01
 
 ### Added

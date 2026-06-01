@@ -27,28 +27,30 @@
 </head>
 <body>
 
-<div class="mqbar"><span>★ {{ .Site.Title | upper }}'S CYBER-SHACK ★&nbsp;&nbsp; <b>YOU ARE HERE:</b> /{{ lower $sec }}/ &nbsp;&nbsp; <b>NOW PLAYING:</b> <span id="mq-track">loading...</span>&nbsp;&nbsp; <i>★ shipping since '21 ★</i> &nbsp;&nbsp; <u><a href="/#guestbook" style="color:inherit">SIGN MY GUESTBOOK ↓</a></u> &nbsp;&nbsp; ☣ best viewed in Netscape ☣ &nbsp;&nbsp; 🔊 volume UP! &nbsp;&nbsp;</span></div>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<div class="mqbar" aria-hidden="true"><span>★ {{ .Site.Title | upper }}'S CYBER-SHACK ★&nbsp;&nbsp; <b>YOU ARE HERE:</b> /{{ lower $sec }}/ &nbsp;&nbsp; <b>NOW PLAYING:</b> <span id="mq-track">loading...</span>&nbsp;&nbsp; <i>★ shipping since '21 ★</i> &nbsp;&nbsp; <u><a href="/#guestbook" style="color:inherit" tabindex="-1">SIGN MY GUESTBOOK ↓</a></u> &nbsp;&nbsp; ☣ best viewed in Netscape ☣ &nbsp;&nbsp; 🔊 volume UP! &nbsp;&nbsp;</span></div>
 
 <div class="page">
 
-  <div class="banner-top banner-inner">
-    <a href="{{ .Site.BaseURL }}" class="home-link"><h1 class="wordmark"><span class="rainbow">{{ $lit }}</span><span style="color:var(--hot)">!!!</span></h1></a>
+  <div class="banner-inner banner-top">
+    <a href="{{ .Site.BaseURL }}" class="home-link"><h1 class="wordmark"><span class="rainbow">{{ $lit }}</span><span style="color:var(--hot)" aria-hidden="true">!!!</span></h1></a>
     <div class="tag">« <a href="{{ .Site.BaseURL }}">back to the cyber-shack</a> »</div>
-    <div class="flames"></div>
+    <div class="flames" aria-hidden="true"></div>
   </div>
 
-  <div class="navrow">
+  <nav class="navrow" aria-label="Main navigation">
     {{- range .Site.Menus.main }}
-    <a href="{{ .URL }}"{{ if and (ne .URL "/") (hasPrefix $.RelPermalink .URL) }} class="cur"{{ end }}>{{ .Name | upper }}</a>
+    <a href="{{ .URL }}"{{ if and (ne .URL "/") (hasPrefix $.RelPermalink .URL) }} class="cur" aria-current="page"{{ end }}>{{ .Name | upper }}</a>
     {{- end }}
     <a href="/#guestbook">GUESTBOOK</a>
-  </div>
+  </nav>
 
-  <main class="main">
+  <main class="main" id="main-content">
     <div class="win">
       <div class="tbar">
         <span>C:\{{ $sec }}\{{ .Title }}</span>
-        <span class="tb-btns"><i>_</i><i>▢</i><i>✕</i></span>
+        <span class="tb-btns" aria-hidden="true"><i>_</i><i>▢</i><i>✕</i></span>
       </div>
       <div class="body">
         {{ block "main" . }}{{ .Content }}{{ end }}
@@ -58,13 +60,13 @@
 
   <!-- footer -->
   <div class="foot">
-    <hr class="candy">
+    <hr class="candy" aria-hidden="true">
     {{- $version := "" }}{{ with findRE `\[\d+\.\d+\.\d+\]` (readFile "CHANGELOG.md") 1 }}{{ $version = replaceRE `[\[\]]` "" (index . 0) }}{{ end }}
     <div>✉ <a href="mailto:chad.awesome@gmail.com">email me</a> &nbsp;·&nbsp; <span class="em">[ © {{ now.Format "2006" }} {{ .Site.Params.author }} · /dev/null ]</span></div>
     <div style="margin-top:6px">⟢ <a href="/changelog/">CHANGELOG</a> · <a href="/backlog/">BACKLOG</a> · <a href="/#guestbook">GUESTBOOK</a> ⟢</div>
     <div class="updated">⟳ this page last updated {{ now.Format "01/02/2006" }} · Y2K compliant (probably)</div>
     {{- with $version }}<div class="ver"><a href="/changelog/">▓ running v{{ . }} ▓</a></div>{{ end }}
-    <div class="smol">Built with Hugo, caffeine, and <span class="made">too many neon glows</span>. ✨ &nbsp;|&nbsp; © Geocities is dead, long live Geocities.</div>
+    <div class="smol">Built with Hugo. ✨</div>
   </div>
 
 </div>

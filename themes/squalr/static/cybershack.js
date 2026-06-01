@@ -8,6 +8,7 @@
   /* ---------- VISITOR COUNTER (odometer) ---------- */
   // Persists per-browser via localStorage; seeded with a fake "you're the
   // 133,742nd visitor" base so it always looks impressively well-trafficked.
+  var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function initCounter() {
     var odo = document.getElementById('odo');
     if (!odo) return;
@@ -21,9 +22,13 @@
     str.split('').forEach(function (ch, i) {
       var d = document.createElement('span');
       d.className = 'd';
-      d.textContent = '0';
       odo.appendChild(d);
+      if (reducedMotion) {
+        d.textContent = ch;
+        return;
+      }
       // little roll-up animation
+      d.textContent = '0';
       var target = parseInt(ch, 10);
       var step = 0;
       var iv = setInterval(function () {
@@ -181,7 +186,7 @@
   var trailOn = true;
   var lastSpawn = 0;
   function initSparkles() {
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (reducedMotion) return;
     window.addEventListener('mousemove', function (e) {
       if (!trailOn) return;
       var now = Date.now();
@@ -189,6 +194,7 @@
       lastSpawn = now;
       var s = document.createElement('div');
       s.className = 'spark';
+      s.setAttribute('aria-hidden', 'true');
       s.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
       var hue = (Math.random() * 360) | 0;
       s.style.color = 'hsl(' + hue + ',100%,65%)';

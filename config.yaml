@@ -44,8 +44,7 @@ params:
   hero:
     kicker: '2026'
     lines:
-      - 'MY YEAR'
-      - 'OF {SHIPPING}.'
+      - '{SQUALRUS}'
     subtitle: 'Sr Consultant at Dura Digital. Building tools, breaking prod, {learning out loud}.'
     status: 'shipping'
     flavorChip: 'hotdogs/wk ∞'

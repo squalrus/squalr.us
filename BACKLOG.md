@@ -56,8 +56,6 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 | Verify reduced-motion coverage | S | M |
 | Self-host the three web fonts (drop the Google Fonts dependency) | S | M |
 | Mobile support pass | M | H |
-| Accessibility (a11y) support pass | M | H |
-| Re-write key copy (welcome, hero, status, badges, footer) | M | H |
 | Project showcase readability and CRT effect | M | H |
 | Rename "Field Notes" | S | L |
 | Flesh out the `desktop-tracker` project metadata | S | L |
@@ -207,40 +205,6 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 - Tap targets ≥44px on the nav buttons, webring links, and guestbook controls.
 - The sparkle cursor trail is `mousemove`-only — confirm it doesn't fire awkwardly on touch scroll.
 - Verify the visitor-counter odometer and the guestbook render cleanly in a narrow single column.
-
----
-
-### Accessibility (a11y) support pass
-
-**Type:** improvement
-
-**Why:** A clashing GeoCities palette plus decorative chrome (marquee, blink, rainbow text, custom cursor) is an accessibility minefield — contrast, motion, focus, and semantics all need a real audit. Some scaffolding exists (`prefers-reduced-motion` disables the marquee / blink / sparkle / eq animations; body prose is a high-contrast serif on cream), but nothing has been measured.
-
-**Notes:**
-
-- Baseline with Lighthouse / axe on the homepage, a blog post, a project page, and `/changelog`.
-- **Contrast:** check the worst offenders — lime `--neon` (`#00a619`) and teal on cream, the white-on-magenta link hover (`a:hover{color:#fff;background:var(--hot)}`), the green-on-black marquee, and the status pills. Darken whatever fails WCAG AA.
-- **Motion:** confirm `prefers-reduced-motion` covers _everything_ (the rainbow wordmark `huey` animation, now-spinning, the odometer roll), not just the obvious ones.
-- **Focus:** add visible `:focus-visible` styles for the nav buttons, links, and guestbook form (currently UA defaults), plus a skip-to-content link.
-- **Semantics:** mark the marquee `aria-hidden` (or give it a static fallback); give the visitor-counter odometer an accessible label; `aria-hidden` the decorative badges and custom cursor; add real `<label>`s to the guestbook inputs (placeholder-only today); verify heading order on each page type.
-
----
-
-### Re-write key copy (welcome, hero, status, badges, footer)
-
-**Type:** improvement
-
-**Why:** The welcome message, hero subheading, now/status content, badge text, and footer copy were written quickly during the v1 build. They're the first things a visitor reads — they should sound like Chad, not like placeholder text.
-
-**Notes:**
-
-- See the Writing Style Guide in CLAUDE.md for voice reference: conversational, direct, self-aware, practical over theoretical.
-- Locations to hit:
-  - Homepage layout — the welcome blurb and hero subheading.
-  - The status/now section — what it says about current state and what Chad is working on.
-  - Footer — the sign-off copy and any flavor text.
-  - Badge alt text — small but worth making intentional.
-- This is a copywriting pass, not a structural change. One sitting with Chad's voice locked in. Don't touch layouts unless copy literally won't fit.
 
 ---
 

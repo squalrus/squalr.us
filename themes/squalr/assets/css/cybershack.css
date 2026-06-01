@@ -5,8 +5,8 @@
    Standalone homepage styles — not part of the main theme.
    ============================================================ */
 :root{
-  --neon:   #00a619;   /* lime, darkened for light bg */
-  --neon-2: #008b8b;   /* teal/cyan */
+  --neon:   #007a14;   /* lime — WCAG AA on cream (#fffdf2) and as bg w/ white text */
+  --neon-2: #006e6e;   /* teal — WCAG AA on cream and white */
   --hot:    #d4009c;   /* magenta */
   --zap:    #ffcc00;   /* yellow */
   --fire:   #ff6a00;   /* orange */
@@ -77,6 +77,29 @@ a:hover{ color:#fff; background:var(--hot); }
 .mqbar > span{ display:inline-block;padding-left:100%;animation:mq var(--mq) linear infinite; }
 @keyframes mq{ to{ transform:translateX(-100%) } }
 .mqbar b{ color:#ffe000 } .mqbar i{ color:#ff5fd2;font-style:normal } .mqbar u{ color:#33e0ff;text-decoration:none }
+
+/* ---------- accessibility helpers ---------- */
+/* skip-to-content link — hidden off-screen until focused */
+.skip-link{
+  position:absolute;top:-100%;left:0;z-index:9999;
+  background:var(--navy);color:#fff;
+  font-family:var(--pix);font-size:11px;
+  padding:10px 16px;text-decoration:none;
+}
+.skip-link:focus-visible{ top:0 }
+
+/* visually hidden but accessible */
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;
+  margin:-1px;overflow:hidden;clip:rect(0,0,0,0);
+  white-space:nowrap;border:0;
+}
+
+/* keyboard focus ring (yellow = visible on all site backgrounds) */
+:focus-visible{
+  outline:3px solid var(--zap);
+  outline-offset:2px;
+}
 
 /* ---------- win95 bevels ---------- */
 .win{ margin:0 0 14px; }
@@ -190,7 +213,7 @@ a:hover{ color:#fff; background:var(--hot); }
 .wa-meta{ display:flex;justify-content:space-between;align-items:baseline;margin-top:3px;gap:4px; }
 .wa-state{ font-family:var(--term);font-size:14px;color:#00ff66;white-space:nowrap;flex-shrink:0; }
 .wa-state.last-played{ color:var(--fire); }
-.wa-who{ font-family:var(--term);font-size:14px;color:#005500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right; }
+.wa-who{ font-family:var(--term);font-size:14px;color:#50c050;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right; }
 
 /* spectrum */
 .wa-spec{
@@ -352,7 +375,9 @@ hr.candy{ height:6px;border:0;margin:14px 0;
 
 @media (prefers-reduced-motion: reduce){
   .mqbar > span, .rainbow, .wa-spec .eq i, .wa-scroll, .blink{ animation:none }
+  /* odometer roll — JS reads this to skip the counting animation */
 }
+h2.sticker{ font-size:14px;font-weight:bold }
 
 /* ============================================================
    INNER PAGES (baseof) — garish chrome, READABLE content.

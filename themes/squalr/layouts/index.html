@@ -28,56 +28,57 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
 <!-- ===== marquee ===== -->
-<div class="mqbar"><span>★ WELCOME 2 {{ .Site.Title | upper }}'S CYBER-SHACK ★&nbsp;&nbsp; <b>NOW PLAYING:</b> <span id="mq-track">loading...</span>&nbsp;&nbsp; <i>YOU ARE VISITOR #00133742</i> &nbsp;&nbsp; <u>SIGN MY GUESTBOOK ↓</u> &nbsp;&nbsp; ☣ best viewed in Netscape Navigator ☣ &nbsp;&nbsp; 🔊 turn ur speakers on! &nbsp;&nbsp; ★ shipping since '21 ★ &nbsp;&nbsp;</span></div>
+<div class="mqbar" aria-hidden="true"><span>★ WELCOME 2 {{ .Site.Title | upper }}'S CYBER-SHACK ★&nbsp;&nbsp; <b>NOW PLAYING:</b> <span id="mq-track">loading...</span>&nbsp;&nbsp; <i>YOU ARE VISITOR #00133742</i> &nbsp;&nbsp; <u>SIGN MY GUESTBOOK ↓</u> &nbsp;&nbsp; ☣ best viewed in Netscape Navigator ☣ &nbsp;&nbsp; 🔊 turn ur speakers on! &nbsp;&nbsp; ★ shipping since '21 ★ &nbsp;&nbsp;</span></div>
 
 <div class="page">
 
   <!-- ===== top banner ===== -->
   <div class="banner-top">
-    <div class="eyebrow">·:¦:· HOME OF ·:¦:·</div>
-    <h1 class="wordmark"><span class="rainbow">SQUALRUS</span><span style="color:var(--hot)">!!!</span></h1>
-    <div class="tag">a Sr Consultant @ Dura Digital · prog metal · pixels · <span class="hi">strong opinions about whitespace</span></div>
-    <div class="speakers">♫ ♪ this page sounds best with the volume UP ♪ ♫</div>
-    <div class="constr">
+    <div class="eyebrow" aria-hidden="true">·:¦:· HOME OF ·:¦:·</div>
+    <h1 class="wordmark"><span class="rainbow">{{$lit}}</span><span style="color:var(--hot)" aria-hidden="true">!!!</span></h1>
+    <div class="tag">Sr Consultant @ <a href="https://duradigital.com">Dura Digital</a> · music · pixels · <span class="hi">strong opinions about whitespace</span></div>
+    <div class="constr" aria-hidden="true">
       <span class="digger">⛏</span> <span class="txt">UNDER CONSTRUCTION SINCE 2001</span> <span class="digger">🚧</span>
     </div>
-    <div class="flames"></div>
+    <div class="flames" aria-hidden="true"></div>
   </div>
 
   <!-- ===== nav ===== -->
-  <div class="navrow">
+  <nav class="navrow" aria-label="Main navigation">
     {{- range .Site.Menus.main }}
-    <a href="{{ .URL }}"{{ if eq .URL "/" }} class="cur"{{ end }}>{{ .Name | upper }}</a>
+    <a href="{{ .URL }}"{{ if eq .URL "/" }} class="cur" aria-current="page"{{ end }}>{{ .Name | upper }}</a>
     {{- end }}
     <a href="#guestbook">GUESTBOOK</a>
-  </div>
+  </nav>
 
   <div class="cols">
 
     <!-- ============ SIDEBAR ============ -->
-    <aside class="side">
+    <aside class="side" aria-label="Sidebar">
 
       <!-- visitor counter -->
       <div class="panel counter-wrap">
         <h3>★ Visitors ★</h3>
-        <div class="odo" id="odo"></div>
-        <div class="lbl">U R VISITOR!</div>
+        <div class="odo" id="odo" role="img" aria-label="Visitor count"></div>
+        <div class="lbl" aria-hidden="true">U R VISITOR!</div>
         <div class="since">online since Apr 20, 2021</div>
       </div>
 
       <!-- now playing (WinAmp) -->
-      <div class="wa">
+      <div class="wa" aria-label="Now playing">
         <div class="wa-title">
-          <span class="wa-name">♫ WINAMP</span>
-          <div class="wa-wbtns">
-            <button class="wa-wb" title="minimize">_</button>
-            <button class="wa-wb" title="shade">□</button>
-            <button class="wa-wb" title="close">×</button>
+          <span class="wa-name" aria-hidden="true">♫ WINAMP</span>
+          <div class="wa-wbtns" aria-hidden="true">
+            <button class="wa-wb" tabindex="-1">_</button>
+            <button class="wa-wb" tabindex="-1">□</button>
+            <button class="wa-wb" tabindex="-1">×</button>
           </div>
         </div>
         <div class="wa-body">
-          <div class="wa-lcd">
+          <div class="wa-lcd" aria-live="polite" aria-atomic="true">
             <div class="wa-clip">
               <span class="wa-scroll" id="np-song">The Dance of Eternity</span>
             </div>
@@ -86,18 +87,18 @@
               <span class="wa-who" id="np-artist">Dream Theater</span>
             </div>
           </div>
-          <div class="wa-spec">
+          <div class="wa-spec" aria-hidden="true">
             <span class="eq" id="np-eq">
               <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
               <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
             </span>
           </div>
-          <div class="wa-ctrl">
-            <button class="wa-cb">⏮</button>
-            <button class="wa-cb wa-play-btn">▶</button>
-            <button class="wa-cb">⏸</button>
-            <button class="wa-cb">⏹</button>
-            <button class="wa-cb">⏭</button>
+          <div class="wa-ctrl" aria-hidden="true">
+            <button class="wa-cb" tabindex="-1">⏮</button>
+            <button class="wa-cb wa-play-btn" tabindex="-1">▶</button>
+            <button class="wa-cb" tabindex="-1">⏸</button>
+            <button class="wa-cb" tabindex="-1">⏹</button>
+            <button class="wa-cb" tabindex="-1">⏭</button>
             <div class="wa-vol"><div class="wa-vol-knob"></div></div>
           </div>
         </div>
@@ -109,57 +110,56 @@
         <h3>:: Status ::</h3>
         <ul class="statlist">
           <li><span>currently</span> <b class="on">shipping ▸</b></li>
-          <li><span>projects live</span> <b>{{ len $projects }}</b></li>
-          <li><span>field notes</span> <b>{{ len $posts }}</b></li>
+          <li><span>at</span> <b><a href="https://duradigital.com">Dura Digital</a></b></li>
+          <li><span>projects</span> <b>{{ len $projects }}</b></li>
           <li><span>coffee level</span> <b class="wip">critical</b></li>
-          <li><span>fav time sig</span> <b>7/8</b></li>
         </ul>
       </div>
 
       <!-- web badges -->
       <div class="panel">
         <h3>« proudly served »</h3>
-        <div class="badges">
-          <a href="#" class="badge88 b-netscape">best viewed in<br><b>NETSCAPE</b></a>
-          <a href="#" class="badge88 b-1024">made 4<br><b>1024×768</b></a>
-          <a href="#" class="badge88 b-hugo">built with<br><b>HUGO</b></a>
-          <a href="#" class="badge88 b-html">valid<br><b>HTML 4.01</b></a>
-          <a href="#" class="badge88 b-noai">100%<br><b>HAND-CODED</b></a>
-          <a href="#" class="badge88 b-award">COOL SITE<br><b>of the DAY</b></a>
+        <div class="badges" aria-hidden="true">
+          <a href="#" class="badge88 b-netscape" tabindex="-1">best viewed in<br><b>NETSCAPE</b></a>
+          <a href="#" class="badge88 b-1024" tabindex="-1">made 4<br><b>1024×768</b></a>
+          <a href="#" class="badge88 b-hugo" tabindex="-1">built with<br><b>HUGO</b></a>
+          <a href="#" class="badge88 b-html" tabindex="-1">valid<br><b>HTML 4.01</b></a>
+          <a href="#" class="badge88 b-noai" tabindex="-1">100%<br><b>HAND-CODED</b></a>
+          <a href="#" class="badge88 b-award" tabindex="-1">COOL SITE<br><b>of the DAY</b></a>
         </div>
       </div>
 
       <!-- webring -->
-      <div class="panel webring">
+      <div class="panel webring" aria-hidden="true">
         <h3>The Static-Site Ring</h3>
         this site is node #14 in a<br>ring of Hugo webmasters
         <div class="nav">
-          <a href="#">◀ PREV</a>
-          <a href="#">RANDOM</a>
-          <a href="#">NEXT ▶</a>
+          <a href="#" tabindex="-1">◀ PREV</a>
+          <a href="#" tabindex="-1">RANDOM</a>
+          <a href="#" tabindex="-1">NEXT ▶</a>
         </div>
       </div>
 
     </aside>
 
     <!-- ============ MAIN ============ -->
-    <main class="main">
+    <main class="main" id="main-content">
 
       <!-- welcome window -->
       <div class="win">
         <div class="tbar">
           <span>C:\SQUALRUS\welcome.exe</span>
-          <span class="tb-btns"><i>_</i><i>▢</i><i>✕</i></span>
+          <span class="tb-btns" aria-hidden="true"><i>_</i><i>▢</i><i>✕</i></span>
         </div>
         <div class="body welcome">
-          <p><b class="pop">Hiya, websurfer!</b> 🏄 You've reached the personal homepage of <b class="pop">{{ .Site.Params.author }}</b> — Sr Consultant by day, pixel-pusher &amp; <span class="hi">prog-metal evangelist</span> by night.</p>
-          <p>This is <b>squalr.us</b>: a hand-built Hugo site with too many neon glows, zero whitespace, and a deep, abiding disrespect for the year being 2026. Grab a Surge, dim the lights, and <a href="#guestbook">sign the guestbook</a> before you bounce.</p>
+          <p><b class="pop">Hey! I'm Chad.</b> 🏄 Sr Consultant at <a href="https://duradigital.com">Dura Digital</a> — helping teams ship real products for real people. Off the clock I build things that make me happy and teach me something along the way. Usually both.</p>
+          <p><b>squalr.us</b> is my corner of the internet: built with Hugo, stuck in 1997, and fueled by caffeine and music. <a href="#guestbook">Sign the guestbook</a> before you leave — don't be a lurker.</p>
         </div>
       </div>
 
       <!-- ===== PROJECTS ===== -->
       <div id="projects">
-        <span class="sticker">▰ MY RAD PROJECTS</span>
+        <h2 class="sticker">▰ MY RAD PROJECTS</h2>
         <div class="projgrid">
           {{- range sort $projects "Params.weight" }}
           {{ partial "pcard.html" . }}
@@ -167,11 +167,11 @@
         </div>
       </div>
 
-      <hr class="candy">
+      <hr class="candy" aria-hidden="true">
 
       <!-- ===== RECENT POSTS ===== -->
       <div id="posts">
-        <span class="sticker">▤ FIELD NOTES</span>
+        <h2 class="sticker">▤ FIELD NOTES</h2>
         <ul class="posts">
           {{- range first 5 $posts }}
           {{ partial "post-li.html" (dict "page" .) }}
@@ -179,39 +179,42 @@
         </ul>
       </div>
 
-      <hr class="candy">
+      <hr class="candy" aria-hidden="true">
 
       <!-- ===== GUESTBOOK ===== -->
       <div id="guestbook" class="win">
         <div class="tbar">
           <span>★ SIGN MY GUESTBOOK ★</span>
-          <span class="tb-btns"><i>_</i><i>▢</i><i>✕</i></span>
+          <span class="tb-btns" aria-hidden="true"><i>_</i><i>▢</i><i>✕</i></span>
         </div>
         <div class="body">
-          <div style="font-family:var(--term);font-size:18px;color:var(--neon-2);text-align:center;margin-bottom:10px">don't be a lurker — leave a mark! ✍</div>
+          <div style="font-family:var(--term);font-size:18px;color:var(--neon-2);text-align:center;margin-bottom:10px" aria-hidden="true">don't be a lurker — leave a mark! ✍</div>
           <form class="gb-form" id="gb-form" autocomplete="off">
             <div class="gb-row">
+              <label for="gb-name" class="sr-only">Name or handle</label>
               <input class="name-in" id="gb-name" maxlength="32" placeholder="yer name / handle" />
+              <label for="gb-mood" class="sr-only">Mood (optional)</label>
               <input class="mood-in" id="gb-mood" maxlength="14" placeholder="mood (☺)" />
             </div>
+            <label for="gb-msg" class="sr-only">Message</label>
             <textarea id="gb-msg" maxlength="240" placeholder="say something rad..."></textarea>
             <div><button class="gb-send" type="submit">»» STAMP IT ««</button></div>
           </form>
-          <div class="gb-list" id="gb-list"></div>
-          <div class="gb-count" id="gb-count"></div>
+          <div class="gb-list" id="gb-list" aria-live="polite" aria-label="Guestbook entries"></div>
+          <div class="gb-count" id="gb-count" aria-live="polite"></div>
           <div style="font-family:var(--comic);font-size:11px;color:var(--ink-2);text-align:center;margin-top:8px">(entries save to your own browser — it's a 90s tribute, not a server 😉)</div>
         </div>
       </div>
 
       <!-- footer -->
       <div class="foot">
-        <hr class="candy">
+        <hr class="candy" aria-hidden="true">
         <div>✉ <a href="mailto:chad.awesome@gmail.com">email me</a> &nbsp;·&nbsp; <span class="em">[ © {{ now.Format "2006" }} {{ .Site.Params.author }} · /dev/null ]</span></div>
-        <div style="margin-top:6px">⟢ <a href="/changelog/">CHANGELOG</a> · <a href="/backlog/">BACKLOG</a> · <a href="#">STATIC-SITE RING</a> ⟢</div>
+        <div style="margin-top:6px">⟢ <a href="/changelog/">CHANGELOG</a> · <a href="/backlog/">BACKLOG</a> ⟢</div>
         <div class="updated">⟳ this page last updated {{ now.Format "01/02/2006" }} · Y2K compliant (probably)</div>
         {{- $version := "" }}{{ with findRE `\[\d+\.\d+\.\d+\]` (readFile "CHANGELOG.md") 1 }}{{ $version = replaceRE `[\[\]]` "" (index . 0) }}{{ end }}
         {{- with $version }}<div class="ver"><a href="/changelog/">▓ running v{{ . }} ▓</a></div>{{ end }}
-        <div class="smol">Built with Hugo, caffeine, and <span class="made">too many neon glows</span>. ✨ &nbsp;|&nbsp; © Geocities is dead, long live Geocities.</div>
+        <div class="smol">Built with Hugo. ✨</div>
       </div>
 
     </main>

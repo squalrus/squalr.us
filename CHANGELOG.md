@@ -2,6 +2,14 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.2.2] — 2026-06-01
+
+### Changed
+
+- **Mobile support pass.** The site now renders cleanly on 360–414px phone widths. Page edge padding tightened. Win95 window body padding reduced on narrow viewports. Nav buttons, pagination links, and guestbook submit get `min-height:44px` so they meet the 44px touch-target floor; guestbook text inputs grow to match. Post-list rows get `flex-wrap:wrap` so dates don't crush long titles. Status-list items are allowed to wrap. `pre` blocks pick up `-webkit-overflow-scrolling:touch` for iOS momentum scroll; tables use `display:block;overflow-x:auto` so wide tables scroll in-place rather than blowing out the viewport. Sparkle cursor is skipped entirely on coarse-pointer (touch) devices — no mouse, no trail. (`cybershack.css`, `cybershack.js`)
+
+---
+
 ## [1.2.1] — 2026-06-01
 
 ### Changed

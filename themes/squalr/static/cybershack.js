@@ -81,7 +81,7 @@
           void s.offsetWidth; // flush so scrollWidth reflects new text without animation
           var textW = s.scrollWidth;
           var wrapW = wrap.clientWidth;
-          if (textW > wrapW) {
+          if (textW > wrapW && !reducedMotion) {
             var gap = Math.max(60, wrapW >> 1); // half-container gap between loops
             var shift = textW + gap;
             s.style.setProperty('--wa-pad', gap + 'px');

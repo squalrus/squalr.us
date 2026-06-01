@@ -51,20 +51,15 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 
 | Title | Effort | Value |
 | --- | --- | --- |
-| Add social icons | S | H |
-| Make 88×31 web badges configurable | S | M |
-| Verify reduced-motion coverage | S | M |
-| Self-host the three web fonts (drop the Google Fonts dependency) | S | M |
 | Project showcase readability and CRT effect | M | H |
-| Rename "Field Notes" | S | L |
 | Flesh out the `desktop-tracker` project metadata | S | L |
-| TODO: review all blog tags | | |
 
 ### Cleanup
 
 | Title | Effort | Value |
 | --- | --- | --- |
 | Drop "web ring" concept | S | M |
+| Audit and normalize blog post tags | S | M |
 
 ---
 
@@ -131,65 +126,6 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 
 ---
 
-### Add social icons
-
-**Type:** improvement
-
-**Why:** Social links in the nav/sidebar are text-only. Recognizable platform icons (GitHub, LinkedIn, RSS) reduce cognitive load and look more polished — especially at compact nav widths.
-
-**Notes:**
-
-- Social links are defined in `config.yaml` under `params.social`. Each entry has `name` and `url`.
-- The theme renders them in the sidebar via the relevant partial in `themes/squalr/layouts/partials/`. Add inline SVG icons; keep them zero-dep (no icon font, no external sprite sheet).
-- Inline SVGs can live in a Hugo partial (`icon-github.html`, etc.) and be called with `{{ partial "icon-github" }}` where needed.
-- Size consistently with the existing pill/button chrome; apply the neon palette on hover.
-
----
-
-### Make 88×31 web badges configurable
-
-**Type:** improvement
-
-**Why:** The 88×31 badge wall is hardcoded HTML — adding, removing, or reordering badges means editing a layout file. Moving them to a data file makes curation a one-line edit without touching templates.
-
-**Notes:**
-
-- Move badge definitions to `data/badges.yaml` — each entry: `label`, `img`, `url` (optional). Render via a Hugo `range` in the relevant partial/template.
-- Image files stay in `static/img/badges/` (or wherever they currently live). No structural change needed there.
-- Optional: add an `enabled: false` flag so a badge can be kept in the file but hidden without deleting it.
-
----
-
-### Verify reduced-motion coverage
-
-**Type:** improvement
-
-**Why:** The site has several animations (rainbow wordmark, marquee, sparkle cursor, now-playing EQ bars, odometer roll, hover transitions). The a11y pass flags this as a goal but a standalone audit — `prefers-reduced-motion: reduce` on, then walk every page — confirms nothing slipped through.
-
-**Notes:**
-
-- Can be done as a sub-task of the [[accessibility-a11y-support-pass]] or standalone.
-- Method: DevTools → Rendering → "Emulate CSS media feature `prefers-reduced-motion`" → reduce. Walk the homepage, a blog post, and a project page. Anything still moving is a miss.
-- Known risks: the `huey` rainbow wordmark keyframes, the EQ "now spinning" bars, the odometer roll, the sparkle cursor trail, the marquee scroll, any CSS transitions on cards/buttons.
-- Each motion element should either stop entirely (`animation: none`) or swap to an instant/static state. Crossfades and instant reveals are acceptable; spinning, bouncing, and scrolling are not.
-
----
-
-### Self-host the three web fonts (drop the Google Fonts dependency)
-
-**Type:** improvement
-
-**Why:** The 90s theme loads **Press Start 2P, VT323, and Comic Neue** from Google Fonts, which adds `fonts.googleapis.com` / `fonts.gstatic.com` to the CSP and a third-party request to the critical path. The site otherwise prides itself on zero external deps and an A+ security posture — self-hosting the fonts gets both back and removes a render-blocking cross-origin hop.
-
-**Notes:**
-
-- Download the woff2 files (subset to latin), drop them in `themes/squalr/static/fonts/`, and add `@font-face` rules with `font-display: swap` near the top of `themes/squalr/assets/css/cybershack.css`.
-- Remove the Google Fonts `<link>` + preconnects from **both** `themes/squalr/layouts/index.html` and `themes/squalr/layouts/_default/baseof.html`, and drop `https://fonts.googleapis.com` / `font-src https://fonts.gstatic.com` from the CSP in `static/staticwebapp.config.json`.
-- Press Start 2P and VT323 are pixel/bitmap-ish and used at a few sizes — tight latin subsets keep them small.
-- Verify the A+ security headers score and that the wordmark / windows / terminals still render identically.
-
----
-
 ### Project showcase readability and CRT effect
 
 **Type:** improvement
@@ -205,20 +141,6 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 
 ---
 
-### Rename "Field Notes"
-
-**Type:** improvement
-
-**Why:** "Field Notes" doesn't quite land as a label for a personal dev/tech blog. A rename would better signal what the section is and match the voice of the rest of the site.
-
-**Notes:**
-
-- Open question: what should it be called? Candidates: **Blog**, **Posts**, **Devlog**, **Dispatch**, **Writing**, **Log**. Chad's call — this is a voice decision.
-- Touch points once decided: the nav label, any section heading on the homepage, and `config.yaml`. The URL slug is already `/blog/` — if the nav label is the only place "Field Notes" appears, the URL stays untouched and no redirect is needed.
-- Confirm with a grep for "Field Notes" across `themes/squalr/layouts/` and `config.yaml` before starting.
-
----
-
 ### Flesh out the `desktop-tracker` project metadata
 
 **Type:** improvement
@@ -231,6 +153,21 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 - Add a featured `image:` + a `gallery:` once there are screenshots — drop files in `static/img/projects/desktop-tracker/` (the folder exists).
 - Tighten `tech:` if the stack firms up, and flip `status:` off `wip` when it's real.
 - Cross-link any future "building desktop-tracker" post via `projects: [desktop-tracker]` so the card's field-note count lights up.
+
+---
+
+### Audit and normalize blog post tags
+
+**Type:** cleanup
+
+**Why:** Blog tags were added ad-hoc across posts without a controlled vocabulary. The `/tags/` page has one-offs that won't get a second post, near-duplicates (e.g. `azure` vs `Azure`), and overlapping concepts that fragment discovery. A one-time audit deduplicates and merges them so the taxonomy is actually useful for browsing.
+
+**Notes:**
+
+- Browse `/tags/` (or `hugo list all` output) to enumerate every current tag and its count.
+- Flag: tags with a count of 1 that are too specific to recur, semantic near-duplicates, tags that are too broad to be useful as a filter.
+- Fix by editing the `tags:` frontmatter on affected posts in `content/blog/` — no template changes.
+- Once settled, record the canonical tag vocabulary in CLAUDE.md so new posts stay within it.
 
 ---
 

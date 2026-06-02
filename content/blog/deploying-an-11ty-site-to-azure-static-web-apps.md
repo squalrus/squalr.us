@@ -1,6 +1,9 @@
 ---
 title: "Deploying an 11ty Site to Azure Static Web Apps"
 date: 2021-05-13T20:27:15-07:00
+tags:
+  - azure
+  - website
 ---
 
 I am a huge fan of two things: [Azure](https://azure.microsoft.com/en-us/) and [static site generators](https://jamstack.org/generators/). I am super excited Azure now has an easy-to-use, free offering for deploying small hobby websites. Historically hosing a small site on Azure cost about $50/mo (to get SSL support), then through Azure Storage Static Web hosting the cost went down to pennies but was [complex to configure](/2018/07/cutting-hosting-costs-by-99-with-static-websites-on-azure/). Now Azure offers [Azure Static Web Apps](https://azure.microsoft.com/en-us/services/app-service/static/) (generally available as of 05/12/2021) which makes hosting a breeze for a static site.

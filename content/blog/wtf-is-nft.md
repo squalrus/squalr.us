@@ -2,8 +2,7 @@
 title: WTF is NFT
 date: 2022-01-29T00:00:00+00:00
 tags:
-  - cryptocurrency
-  - nft
+  - web3
 ---
 
 ## tldr;

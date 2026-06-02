@@ -327,12 +327,6 @@ a:hover{ color:#fff; background:var(--hot); }
 .social-icon:hover{ background:var(--neon);color:#fff;border-color:var(--neon) }
 .social-icon svg{ width:18px;height:18px;stroke:currentColor;fill:none }
 
-/* webring */
-.webring{ text-align:center;font-family:var(--term);font-size:17px;color:var(--ink-2) }
-.webring .nav{ display:flex;justify-content:center;gap:6px;margin-top:6px }
-.webring .nav a{ font-family:var(--pix);font-size:9px;padding:5px 7px;background:var(--paper-2);color:var(--visited);
-  border:2px outset var(--neon-2);text-decoration:none }
-
 /* ---------- main content ---------- */
 .welcome{ font-family:var(--comic);font-size:16px;color:var(--ink) }
 .welcome p{ margin:0 0 10px }

@@ -5,7 +5,7 @@ description: "GitHub Action for automated PR merging based on labels, blocking l
 status: archived
 repo: https://github.com/squalrus/merge-bot
 # Featured image — shown on the project card and at the top of this page:
-# image: /img/projects/merge-bot/featured.png
+image: /img/projects/merge-bot/featured.png
 # Gallery — shown when drilling into this project:
 # gallery:
 #   - src: /img/projects/merge-bot/marketplace.png

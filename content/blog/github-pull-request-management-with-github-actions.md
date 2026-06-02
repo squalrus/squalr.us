@@ -2,8 +2,7 @@
 title: GitHub Pull Request Automation with GitHub Actions
 date: 2019-10-17T00:00:00+00:00
 tags:
-  - github
-  - project
+  - automation
   - workflow
 projects:
   - merge-bot

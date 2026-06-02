@@ -1,0 +1,161 @@
+// ============================================================
+// Readable article prose — post and doc pages
+// ============================================================
+
+.post-content,
+.doc-content {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink);
+  max-width: 70ch;
+
+  p { margin: 0 0 1em; }
+
+  h2 {
+    font-family: var(--comic);
+    font-weight: 700;
+    font-size: 23px;
+    color: var(--hot);
+    border-bottom: 2px solid var(--zap);
+    padding-bottom: 3px;
+    margin: 1.5em 0 .5em;
+  }
+
+  h3 {
+    font-family: var(--comic);
+    font-weight: 700;
+    font-size: 19px;
+    color: var(--neon-2);
+    margin: 1.3em 0 .4em;
+  }
+
+  h4 {
+    font-family: var(--comic);
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink);
+    margin: 1.2em 0 .3em;
+  }
+
+  a {
+    color: var(--link);
+    text-decoration: underline;
+
+    &:visited { color: var(--visited); }
+    &:hover   { color: #fff; background: var(--hot); }
+  }
+
+  ul, ol { padding-left: 1.5em; margin: 0 0 1em; }
+  li     { margin: .3em 0; }
+
+  code {
+    font-family: var(--term);
+    font-size: 1em;
+    color: #102a6b;
+    background: #e9e3ff;
+    padding: 0 4px;
+    border: 1px solid #b9a9d6;
+  }
+
+  pre {
+    background: linear-gradient(180deg, #020a06, #001403);
+    color: #9effc4;
+    border: 2px inset var(--chrome);
+    padding: 11px 13px;
+    overflow: auto;
+    margin: 0 0 1em;
+    font-family: var(--term);
+    font-size: 16px;
+    line-height: 1.35;
+
+    code { background: none; border: 0; color: #9effc4; font-size: 1em; }
+  }
+
+  blockquote {
+    border-left: 6px solid var(--hot);
+    background: var(--paper-2);
+    margin: 0 0 1em;
+    padding: .5em 1em;
+    color: var(--ink);
+
+    p { margin: .4em 0; }
+  }
+
+  hr {
+    height: 5px;
+    border: 0;
+    margin: 1.4em 0;
+    background: repeating-linear-gradient(
+      90deg,
+      #ff0040  0  12px,
+      #ffcc00 12px 24px,
+      #00a619 24px 36px,
+      #008b8b 36px 48px,
+      #d4009c 48px 60px
+    );
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 0 1em;
+    font-family: var(--comic);
+    font-size: 15px;
+  }
+
+  th {
+    background: var(--neon-2);
+    color: #fff;
+    border: 1px solid #000;
+    padding: 5px 8px;
+    text-align: left;
+  }
+
+  td { border: 1px solid #c3a9d6; padding: 5px 8px; vertical-align: top; }
+
+  // Content photos stay crisp (not pixelated like the wallpaper/sprites)
+  img { image-rendering: auto; max-width: 100%; height: auto; border: 2px solid var(--ink); background: #fff; }
+}
+
+// Hero and gallery images also render crisp
+.project-hero-media img,
+.project-gallery-item img { image-rendering: auto; }
+
+// ---- Related posts / projects ----
+
+.related-section,
+.related-projects {
+  margin-top: 20px;
+  border-top: 2px dashed var(--hot);
+  padding-top: 12px;
+
+  h2 {
+    font-family: var(--comic);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--hot);
+    margin: 0 0 10px;
+  }
+}
+
+.related-projects .projgrid { margin-top: 6px; }
+
+// ---- Changelog page: version headings styled as sticker labels ----
+
+.doc-changelog {
+  h2 {
+    display: inline-block;
+    background: var(--zap);
+    border: 2px solid #000;
+    box-shadow: 3px 3px 0 var(--hot);
+    font-family: var(--term);
+    font-size: 20px;
+    color: #000;
+    padding: 1px 10px;
+    border-bottom: 2px solid #000;
+    margin-top: 1.6em;
+  }
+
+  h3 { color: var(--hot); border: 0; }
+}

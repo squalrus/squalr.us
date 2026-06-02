@@ -12,7 +12,7 @@ hugo new ./blog/{post-name}.md      # create a new post from archetype
 hugo --minify                       # production build → public/
 ```
 
-No npm, no node_modules, no Sass. The theme is **plain CSS** compiled through Hugo's asset pipeline (`resources.Get "css/cybershack.css" | minify | fingerprint`). Dart Sass is **not** required.
+No npm, no node_modules. The theme stylesheet is **SCSS** compiled through Hugo's asset pipeline (`resources.Get "css/cybershack.scss" | toCSS | minify | fingerprint`). **Dart Sass must be on `PATH`** — `hugo --minify` fails if it isn't. Install once with `npm install -g sass`.
 
 ## Project Structure
 
@@ -27,7 +27,29 @@ themes/squalr/
     index.html               # standalone 90s "Cyber-Shack" homepage (does NOT use baseof)
     _default/baseof.html      # 90s chrome for every inner page (marquee, Win95 window, footer)
     partials/                 # pcard, post-li, cybershack-terminal, related-projects, icon
-  assets/css/cybershack.css   # the entire 90s stylesheet (plain CSS)
+  assets/css/cybershack.scss  # SCSS entry point — @use imports all partials
+  assets/css/_vars.scss       # CSS custom properties (:root)
+  assets/css/_fonts.scss      # @font-face declarations
+  assets/css/_base.scss       # reset, body, cursor, links
+  assets/css/_animations.scss # blink, rainbow, marquee + @keyframes
+  assets/css/_a11y.scss       # skip-link, sr-only, focus ring
+  assets/css/_win95.scss      # .win window chrome
+  assets/css/_layout.scss     # .page, .cols
+  assets/css/_banner.scss     # .banner-top, .banner-inner, construction badge
+  assets/css/_nav.scss        # .navrow
+  assets/css/_sidebar.scss    # panel, counter, statlist, badges, social icons
+  assets/css/_winamp.scss     # WinAmp now-playing widget
+  assets/css/_homepage.scss   # .welcome, hr.candy, .sticker, .projgrid
+  assets/css/_projects.scss   # .pcard, .shot, .termshot, CRT effect
+  assets/css/_posts.scss      # .posts list, .newgif
+  assets/css/_guestbook.scss  # .gb-form, .gb-entry
+  assets/css/_footer.scss     # .foot, .spark cursor
+  assets/css/_inner.scss      # inner-page chrome (.page-title, .post-header, .error-404)
+  assets/css/_prose.scss      # .post-content, .doc-content, related sections, changelog
+  assets/css/_tags.scss       # a.tag, .tags-list
+  assets/css/_project-detail.scss # project detail meta, hero image, gallery
+  assets/css/_pagination.scss # .pagination
+  assets/css/_responsive.scss # prefers-reduced-motion + max-width:760px
   static/cybershack.js        # visitor counter, guestbook, sparkle cursor, now-playing (localStorage)
 static/
   img/             # images: blog/<slug>/ and projects/<slug>/

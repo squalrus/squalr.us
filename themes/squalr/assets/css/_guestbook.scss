@@ -1,0 +1,74 @@
+// ---- Input form ----
+
+.gb-form {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+
+  input, textarea {
+    font-family: var(--comic);
+    font-size: 15px;
+    color: #001;
+    background: #ffffff;
+    border: 2px inset var(--chrome);
+    padding: 7px 9px;
+    width: 100%;
+  }
+
+  textarea { resize: vertical; min-height: 60px; }
+}
+
+.gb-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.gb-form .name-in { flex: 1; min-width: 140px; }
+.gb-form .mood-in { width: 120px; flex: 0 0 auto; }
+
+.gb-send {
+  font-family: var(--pix);
+  font-size: 11px;
+  color: #000;
+  background: #39ff14;
+  padding: 10px 16px;
+  border: 2px solid;
+  border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
+  cursor: pointer;
+
+  &:active { border-color: var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd); }
+}
+
+// ---- Entry list ----
+
+.gb-list { display: flex; flex-direction: column; gap: 10px; }
+
+.gb-entry {
+  background: var(--paper-2);
+  border: 1px solid #d8c3ea;
+  border-left: 6px solid var(--hot);
+  padding: 9px 12px;
+  font-family: var(--comic);
+  font-size: 14.5px;
+
+  .meta {
+    font-family: var(--term);
+    font-size: 15px;
+    margin-bottom: 3px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: baseline;
+
+    .who  { color: var(--hot); font-weight: 700; }
+    .mood { color: var(--neon-2); }
+    .when { color: var(--ink-2); margin-left: auto; font-size: 13px; }
+  }
+
+  .msg { color: var(--ink); }
+}
+
+.gb-count {
+  font-family: var(--term);
+  font-size: 16px;
+  color: var(--ink-2);
+  text-align: center;
+  margin-top: 10px;
+}

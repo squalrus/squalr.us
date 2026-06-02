@@ -1,0 +1,22 @@
+.navrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin: 0 0 16px;
+
+  a {
+    font-family: var(--pix);
+    font-size: 11px;
+    text-decoration: none;
+    color: #000;
+    padding: 9px 13px;
+    background: var(--chrome);
+    border: 2px solid;
+    border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
+
+    &:hover  { color: #000; background: var(--zap); }
+    &:active { border-color: var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd); }
+    &.cur    { background: var(--neon); color: #fff; }
+  }
+}

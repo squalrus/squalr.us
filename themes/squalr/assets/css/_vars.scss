@@ -1,0 +1,37 @@
+:root {
+  // Accent palette
+  --neon:      #007a14;   // lime — WCAG AA on cream (#fffdf2) and as bg w/ white text
+  --neon-2:    #006e6e;   // teal — WCAG AA on cream and white
+  --hot:       #d4009c;   // magenta
+  --zap:       #ffcc00;   // yellow
+  --fire:      #ff6a00;   // orange
+
+  // Content surfaces
+  --paper:     #fffdf2;   // cream content cell
+  --paper-2:   #fff8e0;   // warmer cream
+
+  // Text
+  --ink:       #1a1530;   // near-black ink
+  --ink-2:     #3a2f5c;   // secondary text
+
+  // Win95 chrome
+  --chrome:    #c0c0c0;
+  --chrome-d:  #808080;
+  --chrome-dd: #404040;
+  --chrome-l:  #ffffff;
+
+  // Links
+  --navy:      #000080;
+  --link:      #0000ee;
+  --visited:   #551a8b;
+
+  // Animation rates
+  --blinkrate: 1;
+  --mq:        18s;
+
+  // Font stacks
+  --pix:   'Press Start 2P', monospace;
+  --term:  'VT323', monospace;
+  --comic: 'Comic Neue', 'Comic Sans MS', cursive;
+  --serif: 'Times New Roman', Times, serif;
+}

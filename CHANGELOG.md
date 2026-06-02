@@ -2,6 +2,12 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.4.1] — 2026-06-02
+
+### Changed
+
+- **Stylesheet converted to SCSS.** `cybershack.css` split into 22 partials under `assets/css/` (one file per component: `_vars`, `_fonts`, `_base`, `_animations`, `_a11y`, `_win95`, `_layout`, `_banner`, `_nav`, `_sidebar`, `_winamp`, `_homepage`, `_projects`, `_posts`, `_guestbook`, `_footer`, `_inner`, `_prose`, `_tags`, `_project-detail`, `_pagination`, `_responsive`). SCSS nesting applied throughout to match DOM structure. Hugo Pipes pipeline updated to `toCSS | minify | fingerprint`. Requires Dart Sass on `PATH` (`npm install -g sass`). No visual output change.
+
 ## [1.4.0] — 2026-06-02
 
 ### Added

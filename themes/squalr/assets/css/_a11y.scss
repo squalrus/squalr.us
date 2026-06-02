@@ -1,0 +1,34 @@
+// Skip-to-content: hidden off-screen until focused
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 9999;
+  background: var(--navy);
+  color: #fff;
+  font-family: var(--pix);
+  font-size: 11px;
+  padding: 10px 16px;
+  text-decoration: none;
+
+  &:focus-visible { top: 0; }
+}
+
+// Visually hidden but still announced by screen readers
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Yellow focus ring — visible on all site backgrounds
+:focus-visible {
+  outline: 3px solid var(--zap);
+  outline-offset: 2px;
+}

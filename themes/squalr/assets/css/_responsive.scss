@@ -1,0 +1,69 @@
+// ============================================================
+// Reduced-motion: kill all decorative animations
+// ============================================================
+
+@media (prefers-reduced-motion: reduce) {
+  // Marquee, rainbow, spectrum bars, scroll ticker, blink, CRT flicker
+  // (.wa-scroll.wa-scrolling listed explicitly — its 2-class specificity would
+  //  otherwise beat the single-class .wa-scroll rule above)
+  .mqbar > span,
+  .rainbow,
+  .wa-spec .eq i,
+  .wa-scroll,
+  .wa-scroll.wa-scrolling,
+  .blink,
+  .shot::after,
+  .project-hero-media::after {
+    animation: none;
+  }
+}
+
+// ============================================================
+// Mobile (≤760px)
+// ============================================================
+
+@media (max-width: 760px) {
+  // Stack sidebar below main column
+  .cols    { grid-template-columns: 1fr; }
+  .projgrid { grid-template-columns: 1fr; }
+
+  // Tighter page edges
+  .page     { padding: 0 8px 24px; }
+  .win .body { padding: 10px; }
+
+  // Nav buttons: ≥44px tap targets
+  .navrow a {
+    padding: 11px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // Pagination: ≥44px tap targets
+  .page-item .page-link { padding: 11px 13px; min-height: 44px; }
+
+  // Guestbook: ≥44px tap targets
+  .gb-send       { min-height: 44px; padding: 12px 16px; }
+  .gb-form input { min-height: 44px; }
+
+  // Posts list: let the date wrap under long titles
+  .posts li  { flex-wrap: wrap; }
+  .posts .dt { font-size: 12px; }
+
+  // Status list: allow lines to wrap
+  .statlist li { white-space: normal; }
+
+  // Code blocks: momentum scroll on iOS
+  .post-content pre,
+  .doc-content  pre { -webkit-overflow-scrolling: touch; }
+
+  // Tables: horizontal scroll instead of viewport blowout
+  .post-content table,
+  .doc-content  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+}

@@ -17,9 +17,10 @@
   {{ hugo.Generator }}
   <meta name="description" content="{{ .Site.Params.description }}" />
   <link rel="shortcut icon" href="{{ .Site.Params.favicon | default "/favicon.ico" }}" />
+  <link rel="preconnect" href="https://lastfm.freetls.fastly.net" crossorigin>
+  <link rel="preconnect" href="https://ws.audioscrobbler.com">
   {{- $css := resources.Get "css/cybershack.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
-  {{ template "_internal/google_analytics.html" . }}
   {{ template "_internal/opengraph.html" . }}
   {{ template "_internal/twitter_cards.html" . }}
 </head>
@@ -99,7 +100,7 @@
             <div class="wa-vol"><div class="wa-vol-knob"></div></div>
           </div>
         </div>
-        <img id="np-art" alt="" hidden>
+        <img id="np-art" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="300" height="300" alt="" hidden>
       </div>
 
       <!-- social -->
@@ -112,6 +113,10 @@
           </a>
           {{- end }}
         </div>
+        <ul class="statlist" style="margin-top:8px">
+          <li><span>✉ email</span> <b><a href="mailto:chad.awesome@gmail.com">email me</a></b></li>
+          <li><span>💬 AIM</span> <b>Squalrus19</b></li>
+        </ul>
       </div>
 
       <!-- status -->
@@ -227,6 +232,7 @@
   </div>
 </div>
 
-<script src="/cybershack.js"></script>
+{{ template "_internal/google_analytics.html" . }}
+<script defer src="/cybershack.js"></script>
 </body>
 </html>

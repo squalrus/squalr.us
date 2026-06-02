@@ -2,6 +2,25 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.3.4] — 2026-06-01
+
+### Fixed
+
+- **Now Playing `<img>` validates cleanly.** Added a 1×1 transparent GIF data URI as the placeholder `src` and explicit `width="300" height="300"` attributes. The element is now spec-valid, the browser can reserve layout space to prevent CLS, and no network request is made until JS populates the real album-art URL. (`index.html`)
+
+### Added
+
+- **Connect section: AIM handle and email.** `Squalrus19` (AIM) and an email link now appear in the Connect panel beneath the social icons. (`index.html`)
+
+### Changed
+
+- **Sidebar stacks first on mobile.** Removed the `order: 2` override that was pushing the sidebar (visitor counter, Now Playing, Connect) below the main content and footer on narrow screens. Sidebar now flows at the top on mobile, above the projects and posts grid. (`cybershack.css`)
+- **Preconnect hints for Last.fm.** Added `<link rel="preconnect">` hints for `lastfm.freetls.fastly.net` (with `crossorigin`) and `ws.audioscrobbler.com` — Lighthouse-estimated 330ms + 200ms LCP savings for the Now Playing widget. (`index.html`)
+- **`cybershack.js` deferred.** Added `defer` to the `<script>` tag in both `index.html` and `baseof.html`, moving the 4.6 KiB script off the critical render path (~540ms FCP/LCP improvement). `defer` guarantees DOM-ready execution so no listener-pattern changes were needed.
+- **Google Analytics moved out of `<head>`.** The GA/gtag snippet is now emitted at the bottom of `<body>` in both templates, pushing its inline initialization script out of the critical path. The main `gtag.js` file was already `async`; this removes it from the head entirely. CSP hash unchanged. (`index.html`, `baseof.html`)
+
+---
+
 ## [1.3.3] — 2026-06-01
 
 ### Changed

@@ -43,7 +43,6 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 
 | Title | Effort | Value |
 | --- | --- | --- |
-| Now Playing `<img>` missing `src`/`srcset` (HTML validator) | S | M |
 | Color contrast failures across cards and badges (a11y) | M | H |
 
 ### Features
@@ -53,18 +52,17 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 | Scheduled rebuild so future-dated posts auto-publish | S | M |
 | CSS-only gallery lightbox | S | M |
 | Windows minimize, maximize, and close | M | H |
+| AIM-style buddy list widget backed by Steam friends API | M | H |
+| Replace fake guestbook with GitHub Discussions (Giscus) | M | M |
 
 ### Improvements
 
 | Title | Effort | Value |
 | --- | --- | --- |
 | Flesh out the `desktop-tracker` project body and screenshots | S | M |
-| Add preconnect hints for Last.fm and audioscrobbler | S | M |
-| Explicit width and height on Now Playing album art | S | M |
-| Defer cybershack.js from critical render path | S | M |
-| Defer Google Tag Manager loading | S | M |
 | Serve responsive / optimized images (Glizzy Relay) | M | M |
 | Fix forced reflow in cybershack.js | M | M |
+| Convert cybershack.css to SCSS (reintroduce Dart Sass) | M | M |
 
 ### Cleanup
 
@@ -181,26 +179,6 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 
 ---
 
-### Now Playing `<img>` missing `src`/`srcset` (HTML validator)
-
-**Type:** bug
-
-**Why:** Removing the empty `src=""` attribute (v1.3.1) fixed the spurious network request, but left `<img id="np-art" alt hidden>` with neither `src` nor `srcset`. The HTML spec requires at least one of these on every `<img>` — the W3C validator flags it as an error, and some browsers may render a broken-image icon before JS hides the element.
-
-**Notes:**
-
-- Validator error: `Element img is missing one or more of the following attributes: src, srcset.` at `<img id=np-art alt hidden>` in `themes/squalr/layouts/index.html`.
-- Fix: set `src` to a 1×1 transparent data URI so the element is valid HTML and makes no network request:
-
-  ```html
-  <img id="np-art" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" hidden>
-  ```
-
-- The JS in `cybershack.js` already overwrites `img.src` with the real album-art URL when a track is found, so the placeholder is only ever visible to the validator (the element stays `hidden` until JS reveals it).
-- Pair with the "Explicit width and height on Now Playing album art" improvement when touching this element — both are one-line changes on the same `<img>`.
-
----
-
 ### Color contrast failures across cards and badges (a11y)
 
 **Type:** bug
@@ -219,72 +197,6 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 - The 90s GeoCities aesthetic uses pastels and neons that often fail WCAG — adjust luminance rather than hue to preserve the vibe while hitting contrast ratios.
 - `.pnotes.none` is the "no notes yet" placeholder — easiest fix is darkening the text color since the background is already known.
 - Badge fixes (`.wip`, `.pstat.archived`): try darkening the text or lightening the background by 10–15% and re-check; small adjustments usually clear the threshold without visible aesthetic change.
-
----
-
-### Add preconnect hints for Last.fm and audioscrobbler
-
-**Type:** improvement
-
-**Why:** Lighthouse estimates 330ms LCP savings from preconnecting to `https://lastfm.freetls.fastly.net` and 200ms from `https://ws.audioscrobbler.com`. These origins serve the Now Playing widget's album art and API data. Adding `<link rel="preconnect">` lets the browser start DNS/TLS handshakes before the JS fires the requests.
-
-**Notes:**
-
-- Add to the `<head>` in `themes/squalr/layouts/index.html` (homepage only — that's where Now Playing lives):
-
-  ```html
-  <link rel="preconnect" href="https://lastfm.freetls.fastly.net" crossorigin>
-  <link rel="preconnect" href="https://ws.audioscrobbler.com">
-  ```
-
-- Keep total preconnect hints to ≤4 per Lighthouse guidance. These two are the highest-value targets.
-- Pair with deferring `cybershack.js` (see separate item) for cumulative LCP improvement — preconnect only helps if the fetch itself isn't also blocked by a render-blocking script.
-- The `crossorigin` attribute is needed for `lastfm.freetls.fastly.net` because the `<img>` fetch is CORS; omit it for the audioscrobbler XHR (same-origin CORS semantics differ).
-
----
-
-### Explicit width and height on Now Playing album art
-
-**Type:** improvement
-
-**Why:** The Last.fm album art `<img id="np-art">` has no explicit `width` or `height` attributes, so the browser can't reserve space for it before the image loads. This causes layout shift (CLS) — surrounding content jumps when the image arrives.
-
-**Notes:**
-
-- The image is fetched dynamically from Last.fm's CDN at 300×300 resolution.
-- Add `width="300" height="300"` to the `<img id="np-art">` element — either in the template where it's declared or in the JS where the element is created/populated in `themes/squalr/static/cybershack.js`.
-- CSS can still override the displayed size; the attributes just give the browser an aspect ratio to hold space with.
-- If the Now Playing widget is hidden when no track is playing, the reserved space disappears anyway — confirm the hiding/showing logic doesn't itself cause layout shift.
-
----
-
-### Defer cybershack.js from critical render path
-
-**Type:** improvement
-
-**Why:** `cybershack.js` (4.6 KiB) blocks the page's initial render for ~540ms. None of the features it provides (visitor counter, sparkle cursor, Now Playing) are needed for above-the-fold paint — deferring it moves it off the critical path and improves LCP and FCP.
-
-**Notes:**
-
-- Add `defer` to the `<script>` tag that loads `cybershack.js` in `themes/squalr/layouts/index.html` and `_default/baseof.html`.
-- `defer` is safe as long as no other inline script in the document depends on `cybershack.js` executing synchronously. Check for any inline `<script>` that calls functions from `cybershack.js` — if found, either also defer those or fold them into the file.
-- The script should already be wrapping DOM-dependent code in a `DOMContentLoaded` listener (or equivalent). If it isn't, the defer attribute will shift when the code runs — audit and fix the listener pattern at the same time.
-- Preconnect hints for Last.fm (see separate item) compound this improvement: with the script deferred, the browser can start the Last.fm connection earlier relative to page load.
-
----
-
-### Defer Google Tag Manager loading
-
-**Type:** improvement
-
-**Why:** GTM loads 143 KiB on every page, with 83 KiB unused on initial load. Analytics don't need to fire during the critical render path — deferring or async-loading GTM has no user-visible impact and reduces bytes consumed on first paint.
-
-**Notes:**
-
-- GTM's standard snippet already uses an async pattern for the main `gtm.js` library, but the inline snippet itself can still block if it's synchronous.
-- Check the GTM snippet in the templates — if it's a raw `<script>` block without `async` or `defer`, that's the blocker. Adding `defer` to the script tag (or restructuring to use GTM's recommended async snippet) is the fix.
-- If the inline GTM snippet is also the source of the CSP hash violation (see bug item), moving it to an external file solves both issues at once.
-- Confirm GA4 events still fire correctly after the change — test with GTM's preview mode and the GA4 DebugView.
 
 ---
 
@@ -317,6 +229,62 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 - Likely suspects: the visitor counter (updates text then reads width?), the Now Playing widget (sets album art then reads container size?), or the sparkle cursor (measures cursor position relative to DOM on mousemove).
 - Fix: batch all reads before writes, or defer the write to the next `requestAnimationFrame`. A pattern like `requestAnimationFrame(() => { el.style.width = ...; })` breaks the read-write cycle.
 - "Unattributed" in Lighthouse means it may originate in a third-party script (GTM) — profile with GTM blocked to isolate whether the reflow is first- or third-party.
+
+---
+
+### AIM-style buddy list widget backed by Steam friends API
+
+**Type:** feature
+
+**Why:** The 90s GeoCities theme is strongest when it feels lived-in. A real AIM-style buddy list showing actual Steam friends online/offline/in-game would make the homepage feel like a genuine throwback desktop rather than a CSS exercise. Steam's public Web API makes this possible without any auth flow from visitors.
+
+**Notes:**
+
+- **Widget concept:** A draggable (or fixed) "Buddy List" window — title bar reads "Buddy List", rows grouped by "Online" / "Away" / "Offline", each entry shows a friend's Steam display name and a coloured AIM-style status dot.
+- **Steam Web API is the right backend:**
+  - `GET https://api.steampowered.com/ISteamUser/GetFriendList/v1/?key=KEY&steamid=STEAMID&relationship=friend` returns friend SteamIDs.
+  - A second call to `GetPlayerSummaries` fetches display names, avatars, and `personastate` (0 = offline, 1 = online, 2 = busy, 3 = away, 4 = snooze, 5 = looking to trade, 6 = looking to play).
+  - Your Steam profile must be set to **Public** for the friend list to be readable.
+  - API key is free at `https://steamcommunity.com/dev/apikey` — store it in Azure Static Web Apps application settings and proxy the call through a small Azure Function or API route so the key is never in the client bundle.
+  - Rate limit: 100,000 calls/day — well within range for a personal site.
+- **Why not Xbox or Discord:** Xbox's friends API requires per-visitor OAuth. Discord's API also requires OAuth. Last.fm has a friends endpoint but the social graph there is low-activity. Steam is the clear choice.
+- **AIM visual fidelity:** Classic AIM color scheme (white bg, yellow/blue accents, running-man favicon). The window can share drag logic with the Win95 windows item.
+- The static AIM username display (shipped in v1.3.4) is the MVP; this widget is the deluxe version.
+
+---
+
+### Replace fake guestbook with GitHub Discussions (Giscus)
+
+**Type:** feature
+
+**Why:** The current guestbook is `localStorage`-backed — each visitor sees only their own entries, nobody else's. It reads as a placeholder. Replacing it with a real commenting system backed by a public platform gives visitors an actual social touchpoint and makes the page feel alive.
+
+**Notes:**
+
+- **Recommended: Giscus** (`giscus.app`) — open source, zero ads, no tracking beyond GitHub, uses GitHub Discussions as the storage backend. Visitors need a GitHub account to post; that's a reasonable bar for a developer-audience site.
+  - Enable GitHub Discussions on this repo, create a "Guestbook" category.
+  - Generate the embed snippet at `giscus.app` (choose repo, category, theme). It produces a `<script>` tag to drop into the guestbook partial or directly in `index.html`.
+  - Theme it to match the 90s aesthetic: Giscus accepts a `data-theme` URL pointing at a custom CSS file — wire up a Win95-style sheet to make comments feel native to the site.
+- **Alternative: GitHub Issues as guestbook.** One pinned Issue = the guestbook thread. `GET /repos/{owner}/{repo}/issues/{n}/comments` returns replies; render them client-side for full control, more code.
+- **Not recommended:** LinkedIn has no public embeddable API. Twitter/X API is now paywalled. Disqus is free but ad-supported and adds tracking. Utterances is similar to Giscus but uses Issues (less semantic for a guestbook).
+- When Giscus is wired up, strip the fake guestbook logic from `cybershack.js` to avoid confusion and reduce the bundle.
+
+---
+
+### Convert cybershack.css to SCSS (reintroduce Dart Sass)
+
+**Type:** improvement
+
+**Why:** `cybershack.css` is now 1,700+ lines of flat CSS with repeated magic-number colors, duplicated values, and long selector chains that are hard to read. SCSS variables for the color palette, nesting to match DOM structure, and optional `@use`-based file splitting would make the stylesheet maintainable without touching any output CSS.
+
+**Notes:**
+
+- Dart Sass must be on `PATH` for Hugo Pipes to compile SCSS. Install it system-wide (or add a GitHub Actions step). Hugo does **not** bundle a Sass compiler — `hugo --minify` fails the build gate if Dart Sass is missing.
+- Migration path — ship as three separate patches to keep diffs small:
+  1. **Rename + pipeline switch only:** `assets/css/cybershack.css` → `assets/css/cybershack.scss`. In the template, change `resources.Get "css/cybershack.css" | minify | fingerprint` to `resources.Get "css/cybershack.scss" | toCSS | minify | fingerprint`. Confirm `hugo --minify` produces identical output. No other changes.
+  2. **Extract variables:** pull every hardcoded color/size into `assets/css/_vars.scss`; `@use` it from `cybershack.scss`. Confirm output identical.
+  3. **Optional split:** `_base.scss`, `_layout.scss`, `_components.scss`, `_homepage.scss` — only if the file is genuinely painful to navigate after step 2.
+- When this ships: update the "No npm, no Sass" note in CLAUDE.md to "Dart Sass required on `PATH`" and update the build gate note in the [Shipping a backlog item](#shipping-a-backlog-item) checklist (step 6).
 
 ---
 

@@ -227,7 +227,7 @@ a:hover{ color:#fff; background:var(--hot); }
 }
 .wa-wb:active{ border-color:var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd); }
 .wa-body{ background:#232323;padding:4px; }
-#np-art{ width:100%;display:block }
+#np-art{ width:100%;height:auto;display:block }
 
 /* LCD */
 .wa-lcd{
@@ -240,7 +240,9 @@ a:hover{ color:#fff; background:var(--hot); }
 }
 .wa-clip::before{ left:0 }
 .wa-clip::after { right:0 }
-.wa-clip:has(.wa-scrolling)::before{ background:linear-gradient(to right,#000,transparent) }
+/* Left fade only visible once text has scrolled past its start (after the 20% hold) */
+@keyframes wa-fade-l{ 0%,20%{ opacity:0 } 23%,100%{ opacity:1 } }
+.wa-clip:has(.wa-scrolling)::before{ background:linear-gradient(to right,#000,transparent);animation:wa-fade-l var(--wa-dur,12s) linear infinite }
 .wa-clip:has(.wa-scrolling)::after { background:linear-gradient(to left, #000,transparent) }
 .wa-scroll{ display:inline-block;white-space:nowrap;color:#00ff66;font-family:var(--term);font-size:18px;line-height:1.1; }
 .wa-scroll.wa-scrolling{ animation:wa-scroll var(--wa-dur,12s) linear infinite;padding-right:var(--wa-pad,60px); }
@@ -562,7 +564,6 @@ a.tag:hover, .tags-list-item-title:hover{ background:var(--zap);color:#000 }
 @media(max-width:760px){
   .cols{ grid-template-columns:1fr }
   .projgrid{ grid-template-columns:1fr }
-  .side{ order:2 }
 
   /* tighter page edges on phones */
   .page{ padding:0 8px 24px }

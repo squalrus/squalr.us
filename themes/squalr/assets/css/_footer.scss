@@ -1,0 +1,29 @@
+// Site footer
+.foot {
+  margin-top: 20px;
+  text-align: center;
+  font-family: var(--term);
+  font-size: 18px;
+  color: var(--ink-2);
+
+  .em      { color: var(--hot); font-size: 19px; }
+  a        { color: var(--link); }
+  .updated { font-family: var(--term); font-size: 16px; color: var(--neon-2); margin-top: 6px; }
+  .smol    { font-family: var(--comic); font-size: 12px; color: var(--ink-2); margin-top: 8px; }
+  .made    { color: var(--hot); }
+  .ver     { font-family: var(--term); font-size: 15px; }
+}
+
+// Sparkle cursor trail particles (spawned by cybershack.js)
+.spark {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  z-index: 99999;
+  font-family: var(--term);
+  font-size: 14px;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+}

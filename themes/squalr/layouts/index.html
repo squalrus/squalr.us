@@ -19,7 +19,7 @@
   <link rel="shortcut icon" href="{{ .Site.Params.favicon | default "/favicon.ico" }}" />
   <link rel="preconnect" href="https://lastfm.freetls.fastly.net" crossorigin>
   <link rel="preconnect" href="https://ws.audioscrobbler.com">
-  {{- $css := resources.Get "css/cybershack.css" | minify | fingerprint }}
+  {{- $css := resources.Get "css/cybershack.scss" | toCSS (dict "transpiler" "dartsass") | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
   {{ template "_internal/opengraph.html" . }}
   {{ template "_internal/twitter_cards.html" . }}

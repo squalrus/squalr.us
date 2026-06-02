@@ -1,0 +1,44 @@
+* { box-sizing: border-box; }
+
+html { overflow-x: hidden; }
+
+body {
+  margin: 0;
+  font-family: var(--comic);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+  overflow-x: hidden;
+
+  // Dot-matrix wallpaper: four offset dot layers over a lavender gradient
+  background-color: #cfc8f2;
+  background-image:
+    radial-gradient(circle, rgba(212, 0, 156, .55) 1.6px, transparent 2.2px),
+    radial-gradient(circle, rgba(0, 139, 139, .55) 1.6px, transparent 2.2px),
+    radial-gradient(circle, rgba(255, 106, 0, .55) 1.6px, transparent 2.2px),
+    radial-gradient(circle, rgba(0, 166, 25, .5)  1.6px, transparent 2.2px),
+    linear-gradient(180deg, #dcd6f7, #cfc8f2);
+  background-size:     28px 28px, 28px 28px, 28px 28px, 28px 28px, 100% 100%;
+  background-position: 0 0, 14px 14px, 7px 21px, 21px 7px, 0 0;
+  image-rendering: pixelated;
+}
+
+img {
+  image-rendering: pixelated;
+  max-width: 100%;
+  display: block;
+}
+
+// Custom pixel cursor: lime arrow with black outline
+body, a, button {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M2 2 L2 18 L6 14 L9 21 L12 20 L9 13 L15 13 Z' fill='%2300d11e' stroke='black' stroke-width='1.5' stroke-linejoin='round'/></svg>") 2 2, auto;
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  font-weight: 700;
+
+  &:visited { color: var(--visited); }
+  &:hover   { color: #fff; background: var(--hot); }
+}

@@ -1,0 +1,142 @@
+// Sidebar column spacing
+.side > div { margin-bottom: 14px; }
+
+// ---- Panel (shared container for all sidebar widgets) ----
+
+.panel {
+  padding: 10px;
+  background: var(--paper);
+  border: 3px ridge var(--neon-2);
+
+  h2 {
+    margin: 0 0 8px;
+    font-family: var(--pix);
+    font-size: 10px;
+    color: var(--hot);
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 1px dashed var(--neon-2);
+    padding-bottom: 7px;
+  }
+}
+
+// ---- Visitor counter (dark LCD odometer look) ----
+
+.counter-wrap {
+  text-align: center;
+
+  .lbl   { font-family: var(--term); font-size: 18px; color: var(--hot); }
+  .since { font-family: var(--comic); font-size: 11px; color: var(--ink-2); margin-top: 3px; }
+}
+
+.odo {
+  display: inline-flex;
+  gap: 2px;
+  justify-content: center;
+  margin: 2px auto 6px;
+  padding: 4px;
+  background: #000;
+  border: 2px inset var(--chrome);
+
+  .d {
+    font-family: var(--term);
+    font-size: 30px;
+    line-height: 1;
+    color: #00ff66;
+    background: #021;
+    width: 20px;
+    text-align: center;
+    border: 1px solid #053;
+    text-shadow: 0 0 6px #0f6;
+  }
+}
+
+// ---- Project status list ----
+
+.statlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--term);
+  font-size: 18px;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+    border-bottom: 1px dotted #b9a9d6;
+    padding: 5px 0;
+    line-height: 1.1;
+    color: var(--ink-2);
+    white-space: nowrap;
+
+    span { overflow: hidden; text-overflow: ellipsis; }
+    b    { color: var(--neon); }
+  }
+
+  .on  { color: var(--neon); }
+  .wip { color: var(--fire); }
+}
+
+// ---- 88×31 web badges ----
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+
+.badge88 {
+  width: 88px;
+  height: 31px;
+  border: 1px solid #000;
+  font-family: var(--term);
+  font-size: 11px;
+  line-height: 1.05;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+  text-decoration: none;
+
+  b      { font-size: 12px; }
+  &:hover { background: #000; }
+}
+
+// Individual badge colour schemes (darkened as needed for WCAG AA contrast)
+.b-netscape { background: #000; color: #fff; border: 1px solid #888; b { color: #00ff66; } }
+.b-1024     { background: #0000aa; color: #ff0; }
+.b-html     { background: #ff8a00; color: #000; }
+.b-hugo     { background: #b5006a; color: #fff; }   // darkened from #ff4088 — 7:1 contrast
+.b-css      { background: #003399; color: #fff; }   // 10.9:1 contrast
+.b-award    { background: #145214; color: #ffd400; } // darkened from #1a6e1a — 6.6:1 contrast
+
+// ---- Social icon buttons ----
+
+.social-icons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: var(--paper-2);
+  border: 2px solid var(--neon-2);
+  color: var(--ink);
+  text-decoration: none;
+
+  &:hover { background: var(--neon); color: #fff; border-color: var(--neon); }
+
+  svg { width: 18px; height: 18px; stroke: currentColor; fill: none; }
+}

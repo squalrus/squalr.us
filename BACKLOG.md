@@ -62,7 +62,6 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 | Flesh out the `desktop-tracker` project body and screenshots | S | M |
 | Serve responsive / optimized images (Glizzy Relay) | M | M |
 | Fix forced reflow in cybershack.js | M | M |
-| Convert cybershack.css to SCSS (reintroduce Dart Sass) | M | M |
 
 ### Cleanup
 
@@ -236,23 +235,6 @@ _No open cleanup items._
 - **Alternative: GitHub Issues as guestbook.** One pinned Issue = the guestbook thread. `GET /repos/{owner}/{repo}/issues/{n}/comments` returns replies; render them client-side for full control, more code.
 - **Not recommended:** LinkedIn has no public embeddable API. Twitter/X API is now paywalled. Disqus is free but ad-supported and adds tracking. Utterances is similar to Giscus but uses Issues (less semantic for a guestbook).
 - When Giscus is wired up, strip the fake guestbook logic from `cybershack.js` to avoid confusion and reduce the bundle.
-
----
-
-### Convert cybershack.css to SCSS (reintroduce Dart Sass)
-
-**Type:** improvement
-
-**Why:** `cybershack.css` is now 1,700+ lines of flat CSS with repeated magic-number colors, duplicated values, and long selector chains that are hard to read. SCSS variables for the color palette, nesting to match DOM structure, and optional `@use`-based file splitting would make the stylesheet maintainable without touching any output CSS.
-
-**Notes:**
-
-- Dart Sass must be on `PATH` for Hugo Pipes to compile SCSS. Install it system-wide (or add a GitHub Actions step). Hugo does **not** bundle a Sass compiler — `hugo --minify` fails the build gate if Dart Sass is missing.
-- Migration path — ship as three separate patches to keep diffs small:
-  1. **Rename + pipeline switch only:** `assets/css/cybershack.css` → `assets/css/cybershack.scss`. In the template, change `resources.Get "css/cybershack.css" | minify | fingerprint` to `resources.Get "css/cybershack.scss" | toCSS | minify | fingerprint`. Confirm `hugo --minify` produces identical output. No other changes.
-  2. **Extract variables:** pull every hardcoded color/size into `assets/css/_vars.scss`; `@use` it from `cybershack.scss`. Confirm output identical.
-  3. **Optional split:** `_base.scss`, `_layout.scss`, `_components.scss`, `_homepage.scss` — only if the file is genuinely painful to navigate after step 2.
-- When this ships: update the "No npm, no Sass" note in CLAUDE.md to "Dart Sass required on `PATH`" and update the build gate note in the [Shipping a backlog item](#shipping-a-backlog-item) checklist (step 6).
 
 ---
 

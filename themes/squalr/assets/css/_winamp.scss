@@ -1,0 +1,315 @@
+// ============================================================
+// WinAmp now-playing widget
+// ============================================================
+
+// Outer container
+.wa {
+  border: 2px solid;
+  border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
+  overflow: hidden;
+}
+
+// Title bar
+.wa-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  background: linear-gradient(90deg, var(--navy), #1084d0);
+  padding: 3px 5px;
+}
+
+.wa-name {
+  font-family: var(--pix);
+  font-size: 10px;
+  color: #fff;
+  letter-spacing: .5px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+a.wa-name {
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; opacity: .85; }
+}
+
+// Title bar window buttons
+.wa-wbtns { display: flex; gap: 2px; flex-shrink: 0; }
+
+.wa-wb {
+  width: 14px;
+  height: 12px;
+  padding: 0;
+  border: 1px solid;
+  border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
+  background: var(--chrome);
+  color: #000;
+  font-family: var(--comic);
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:active { border-color: var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd); }
+}
+
+// Dark body area
+.wa-body { background: #232323; padding: 4px; }
+
+#np-art { width: 100%; height: auto; display: block; }
+
+// ---- LCD display ----
+
+.wa-lcd {
+  background: #000;
+  padding: 5px 6px 4px;
+  margin-bottom: 4px;
+  border: 2px solid;
+  border-color: var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd);
+}
+
+.wa-clip {
+  overflow: hidden;
+  white-space: nowrap;
+  height: 20px;
+  position: relative;
+
+  // Fade edges hide the scroll seam
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &::before { left: 0; }
+  &::after  { right: 0; }
+
+  // Left fade only appears after text has scrolled past its starting point (after the 20% hold)
+  &:has(.wa-scrolling)::before {
+    background: linear-gradient(to right, #000, transparent);
+    animation: wa-fade-l var(--wa-dur, 12s) linear infinite;
+  }
+  &:has(.wa-scrolling)::after {
+    background: linear-gradient(to left, #000, transparent);
+  }
+}
+
+@keyframes wa-fade-l {
+  0%, 20%    { opacity: 0; }
+  23%, 100%  { opacity: 1; }
+}
+
+.wa-scroll {
+  display: inline-block;
+  white-space: nowrap;
+  color: #00ff66;
+  font-family: var(--term);
+  font-size: 18px;
+  line-height: 1.1;
+
+  &.wa-scrolling {
+    // .wa-scrolling listed explicitly because its 2-class specificity would
+    // otherwise beat the single-class .wa-scroll rule in the reduced-motion block
+    animation: wa-scroll var(--wa-dur, 12s) linear infinite;
+    padding-right: var(--wa-pad, 60px);
+  }
+}
+
+@keyframes wa-scroll {
+  0%, 20% { transform: translateX(0); }
+  100%    { transform: translateX(var(--wa-shift, -200px)); }
+}
+
+// Playback state + Last.fm metadata
+.wa-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 3px;
+  gap: 4px;
+}
+
+.wa-state {
+  font-family: var(--term);
+  font-size: 14px;
+  color: #00ff66;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &.last-played { color: var(--fire); }
+}
+
+.wa-loved {
+  color: #ff4466;
+  font-size: 11px;
+  flex-shrink: 0;
+  animation: lfm-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes lfm-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .3; }
+}
+
+.wa-who {
+  font-family: var(--term);
+  font-size: 14px;
+  color: #50c050;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+}
+
+// ---- Spectrum visualizer ----
+
+.wa-spec {
+  background: #000;
+  padding: 2px 3px;
+  margin-bottom: 4px;
+  border: 2px solid;
+  border-color: var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd);
+
+  .eq {
+    display: flex;
+    gap: 1px;
+    align-items: flex-end;
+    height: 28px;
+    width: 100%;
+
+    i {
+      flex: 1;
+      min-width: 0;
+      background: linear-gradient(to top, #00a619, #00ff44 70%, #ffcc00);
+      animation: eq .8s ease-in-out infinite;
+    }
+
+    // Each bar gets a distinct phase/speed so the EQ looks organic
+    i:nth-child(1)  { animation-delay: 0s;    animation-duration: .65s; }
+    i:nth-child(2)  { animation-delay: .04s;  animation-duration: .73s; }
+    i:nth-child(3)  { animation-delay: .09s;  animation-duration: .81s; }
+    i:nth-child(4)  { animation-delay: .15s;  animation-duration: .91s; }
+    i:nth-child(5)  { animation-delay: .22s;  animation-duration: .76s; }
+    i:nth-child(6)  { animation-delay: .29s;  animation-duration: .61s; }
+    i:nth-child(7)  { animation-delay: .36s;  animation-duration: .87s; }
+    i:nth-child(8)  { animation-delay: .43s;  animation-duration: .97s; }
+    i:nth-child(9)  { animation-delay: .49s;  animation-duration: .71s; }
+    i:nth-child(10) { animation-delay: .52s;  animation-duration: .89s; }
+    i:nth-child(11) { animation-delay: .46s;  animation-duration: .79s; }
+    i:nth-child(12) { animation-delay: .39s;  animation-duration: .93s; }
+    i:nth-child(13) { animation-delay: .31s;  animation-duration: .67s; }
+    i:nth-child(14) { animation-delay: .24s;  animation-duration: .83s; }
+    i:nth-child(15) { animation-delay: .17s;  animation-duration: .75s; }
+    i:nth-child(16) { animation-delay: .11s;  animation-duration: .87s; }
+    i:nth-child(17) { animation-delay: .05s;  animation-duration: .79s; }
+    i:nth-child(18) { animation-delay: .01s;  animation-duration: .69s; }
+
+    &.paused i { animation: none; height: 2px; }
+  }
+}
+
+@keyframes eq {
+  0%, 100% { height: 2px; }
+  50%      { height: 28px; }
+}
+
+// ---- Transport controls ----
+
+.wa-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.wa-cb {
+  padding: 3px 5px;
+  border: 1px solid;
+  border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
+  background: var(--chrome);
+  color: #000;
+  font-family: sans-serif;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover  { filter: brightness(1.08); }
+  &:active { border-color: var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd); }
+}
+
+.wa-play-btn { color: #004d00; }
+
+.wa-vol {
+  flex: 1;
+  height: 6px;
+  background: #111;
+  border: 1px solid;
+  border-color: var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd);
+  margin-left: 4px;
+  position: relative;
+}
+
+.wa-vol-knob {
+  position: absolute;
+  top: -4px;
+  left: 65%;
+  width: 6px;
+  height: 14px;
+  background: var(--chrome);
+  border: 1px solid;
+  border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
+}
+
+// ---- Playlist ----
+
+.wa-playlist {
+  list-style: none;
+  margin: 0;
+  padding: 2px 0;
+  background: #0d0d0d;
+  border-top: 1px solid #333;
+
+  li {
+    display: flex;
+    gap: 5px;
+    padding: 1px 6px;
+    font-family: var(--term);
+    font-size: 12px;
+    color: #3a7a3a;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &.wa-pl-now { color: #00ff66; }
+  }
+}
+
+.wa-pl-idx   { flex-shrink: 0; width: 14px; text-align: right; }
+.wa-pl-track { overflow: hidden; text-overflow: ellipsis; }
+
+// ---- Footer (scrobble count) ----
+
+.wa-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 6px;
+  background: #0d0d0d;
+  border-top: 1px solid #222;
+  font-family: var(--term);
+  font-size: 11px;
+  color: #2a5a2a;
+
+  #lfm-scrobbles { color: #3a7a3a; }
+
+  // Hide the footer entirely when the scrobble count hasn't loaded yet
+  &:has(#lfm-scrobbles:empty) { display: none; }
+}

@@ -1,0 +1,44 @@
+// ============================================================
+// CHAD SCHULZ — CYBER-SHACK  ::  squalr.us 90s edition
+// GeoCities × Win95 × cyberpunk-silly
+//
+// Entry point — @use imports all partials in cascade order.
+// Edit individual partials; don't add rules here.
+// ============================================================
+
+// Tokens
+@use 'fonts';     // @font-face declarations
+@use 'vars';      // CSS custom properties (:root)
+
+// Global base
+@use 'base';      // reset, body, cursor, links
+@use 'animations'; // blink, rainbow, marquee bar + @keyframes
+@use 'a11y';      // skip-link, sr-only, focus ring
+
+// Structural chrome (shared across homepage + inner pages)
+@use 'win95';     // .win window shell
+@use 'layout';    // .page, .cols
+
+// Homepage sections
+@use 'banner';    // .banner-top, .wordmark, flames, construction badge;
+                  // also .banner-inner for inner pages
+@use 'nav';       // .navrow
+@use 'sidebar';   // .panel, counter, statlist, badges, social icons
+@use 'winamp';    // WinAmp now-playing widget
+@use 'homepage';  // .welcome, hr.candy, .sticker, .projgrid
+@use 'projects';  // .pcard, .shot, .termshot, CRT effect
+@use 'posts';     // .posts list, .newgif
+@use 'guestbook'; // .gb-form, .gb-entry
+
+// Footer + cursor effects
+@use 'footer';    // .foot, .spark
+
+// Inner-page content
+@use 'inner';           // .page-title, .post-header, .post-meta, .error-404
+@use 'prose';           // .post-content, .doc-content, related sections, changelog
+@use 'tags';            // a.tag, .tags-list
+@use 'project-detail';  // project detail meta, hero image, gallery
+@use 'pagination';      // .pagination, .page-item
+
+// Media queries (last so they always win over component defaults)
+@use 'responsive'; // prefers-reduced-motion + max-width:760px

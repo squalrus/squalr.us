@@ -1,0 +1,53 @@
+// ---- Blink ----
+
+.blink {
+  animation: blink calc(1s / var(--blinkrate)) steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+// ---- Rainbow text ----
+
+.rainbow {
+  background: linear-gradient(90deg, #ff0040, #ff6a00, #e3b500, #00a619, #008b8b, #d4009c, #ff0040);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: huey 6s linear infinite;
+}
+
+@keyframes huey {
+  to { background-position: 400% 0; }
+}
+
+// ---- Marquee bar ----
+
+.mqbar {
+  background: #000;
+  border-top:    2px solid var(--zap);
+  border-bottom: 2px solid var(--zap);
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: var(--term);
+  font-size: 22px;
+  color: #39ff14;
+  letter-spacing: 1px;
+  padding: 4px 0;
+
+  > span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: mq var(--mq) linear infinite;
+  }
+
+  b { color: #ffe000; }
+  i { color: #ff5fd2; font-style: normal; }
+  u { color: #33e0ff; text-decoration: none; }
+}
+
+@keyframes mq {
+  to { transform: translateX(-100%); }
+}

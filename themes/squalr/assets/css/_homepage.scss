@@ -1,0 +1,53 @@
+// ============================================================
+// Homepage main column
+// ============================================================
+
+// Intro text block
+.welcome {
+  font-family: var(--comic);
+  font-size: 16px;
+  color: var(--ink);
+
+  p    { margin: 0 0 10px; }
+  .pop { color: var(--hot); font-weight: 700; }
+  .hi  { background: var(--zap); color: #000; padding: 0 4px; }
+}
+
+// Rainbow divider stripe
+hr.candy {
+  height: 6px;
+  border: 0;
+  margin: 14px 0;
+  background: repeating-linear-gradient(
+    90deg,
+    #ff0040  0  12px,
+    #ffcc00 12px 24px,
+    #00a619 24px 36px,
+    #008b8b 36px 48px,
+    #d4009c 48px 60px
+  );
+}
+
+// Section header sticker label
+.sticker {
+  display: inline-block;
+  font-family: var(--pix);
+  font-size: 14px;
+  color: #000;
+  background: var(--zap);
+  padding: 7px 12px;
+  border: 2px solid #000;
+  box-shadow: 4px 4px 0 var(--hot);
+  transform: rotate(-1.4deg);
+  margin: 6px 0 14px;
+}
+
+// h2 stickers (changelog, inner pages) drop the rotation
+h2.sticker { font-size: 14px; font-weight: bold; }
+
+// Project card grid (2-up on desktop, 1-up on mobile via _responsive.scss)
+.projgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}

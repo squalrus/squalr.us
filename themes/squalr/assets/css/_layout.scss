@@ -1,0 +1,12 @@
+.page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 10px 40px;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: 212px 1fr;
+  gap: 16px;
+  align-items: start;
+}

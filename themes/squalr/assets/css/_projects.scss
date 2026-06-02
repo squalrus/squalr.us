@@ -1,0 +1,168 @@
+// ============================================================
+// Project cards (.pcard) — used on the homepage grid
+// ============================================================
+
+.pcard {
+  background: var(--paper-2);
+  border: 3px ridge var(--neon);
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  // Purple gradient title bar
+  .pchrome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    background: linear-gradient(90deg, #5b1aa6, #9b2fb0);
+    padding: 5px 8px;
+    border-bottom: 2px solid var(--zap);
+  }
+
+  .pname {
+    font-family: var(--pix);
+    font-size: 11px;
+    color: #fff;
+    margin: 0;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+
+      &:hover { color: #fff; background: rgba(255, 255, 255, .25); text-decoration: underline; }
+    }
+  }
+
+  // Status pill
+  .pstat {
+    font-family: var(--term);
+    font-size: 14px;
+    padding: 1px 7px;
+    border: 1px solid #000;
+
+    &.on       { color: #000; background: #39ff14; }
+    &.wip      { color: #000; background: var(--fire); }
+    &.archived { color: #fff; background: var(--chrome-d); }
+  }
+
+  // Card body
+  .pbody {
+    padding: 10px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    flex: 1;
+  }
+
+  .pdesc { font-family: var(--comic); font-size: 14.5px; color: var(--ink); margin: 0; }
+  .ptags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+  // Footer row: links + field-notes count
+  .pfoot {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    border-top: 1px dashed #c3a9d6;
+    padding-top: 9px;
+    font-family: var(--term);
+    font-size: 15px;
+  }
+
+  .plinks          { display: flex; gap: 10px; }
+  .pnotes          { color: var(--ink-2); }
+  .pnotes.none     { color: #6b5d8f; }
+
+  &:hover { border-color: var(--hot); box-shadow: 0 4px 14px rgba(91, 26, 166, .22); }
+}
+
+// Tech tag pills (shared between cards and the project detail page)
+.ptags span {
+  font-family: var(--term);
+  font-size: 14px;
+  color: #000;
+  background: #7fe3e3;
+  padding: 0 7px;
+  border: 1px solid #000;
+}
+
+// ============================================================
+// Screenshot + terminal banner containers
+// ============================================================
+
+.shot {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  background: #000;
+  border-bottom: 2px solid #5b1aa6;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    image-rendering: pixelated;
+  }
+
+  .shothint {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    z-index: 2;
+    font-family: var(--term);
+    font-size: 13px;
+    color: var(--zap);
+    background: rgba(0, 0, 0, .6);
+    padding: 1px 6px;
+    pointer-events: none;
+  }
+
+  // CRT scanline + vignette overlay
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, .11) 0,
+      rgba(0, 0, 0, .11) 1px,
+      transparent       1px,
+      transparent       3px
+    );
+    box-shadow: inset 0 0 36px rgba(0, 0, 0, .52);
+    animation: crt-flicker 11s linear infinite;
+  }
+}
+
+@keyframes crt-flicker {
+  0%, 88%, 90%, 95%, 97%, 100% { opacity: 1; }
+  89% { opacity: .95; }
+  96% { opacity: .97; }
+}
+
+// Fake DOS terminal banner for code-project cards (no screenshot available)
+.termshot {
+  position: absolute;
+  inset: 0;
+  font-family: var(--term);
+  font-size: 15px;
+  color: #9effc4;
+  padding: 8px 10px;
+  background: linear-gradient(180deg, #020a06, #001403);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  // Phosphor glow on terminal text colours
+  .pr  { color: #39ff14; text-shadow: 0 0 6px #39ff14; }
+  .cm  { color: #3a8a5a; }
+  .ok  { color: #33e0ff; text-shadow: 0 0 8px #33e0ff; }
+  .wn  { color: var(--fire); }
+  .cur { display: inline-block; width: 8px; height: 14px; background: #39ff14; vertical-align: -2px; box-shadow: 0 0 5px #39ff14; }
+}

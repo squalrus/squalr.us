@@ -4,6 +4,7 @@ date: 2021-03-28T20:55:27-07:00
 tags:
   - process
   - workflow
+  - documentation
 ---
 
 The first time I heard the term "durable artifact" was from [Isaac Hepworth](https://twitter.com/isaach) about a year and a half ago. At the time we were part of an evolving web team with a lot of opportunity for process and workflow improvements. Fast-forward to today and this same team is broken into specialized groups, planning out sprints and quarters, and working on complex site-wide features (during a global pandemic) and documentation has become more relevant than ever.

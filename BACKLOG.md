@@ -66,10 +66,7 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 
 ### Cleanup
 
-| Title | Effort | Value |
-| --- | --- | --- |
-| Drop "web ring" concept | S | M |
-| Audit and normalize blog post tags | S | M |
+_No open cleanup items._
 
 ---
 
@@ -147,35 +144,6 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 - Add a real body (what the app does, why Virtual Desktop tracking, how the BambooHR sync works) so the detail page isn't empty.
 - Add a featured `image:` + a `gallery:` once there are screenshots — drop files in `static/img/projects/desktop-tracker/` (the folder exists).
 - Cross-link any future "building desktop-tracker" post via `projects: [desktop-tracker]` so the card's field-note count lights up.
-
----
-
-### Audit and normalize blog post tags
-
-**Type:** cleanup
-
-**Why:** Blog tags were added ad-hoc across posts without a controlled vocabulary. The `/tags/` page has one-offs that won't get a second post, near-duplicates (e.g. `azure` vs `Azure`), and overlapping concepts that fragment discovery. A one-time audit deduplicates and merges them so the taxonomy is actually useful for browsing.
-
-**Notes:**
-
-- Browse `/tags/` (or `hugo list all` output) to enumerate every current tag and its count.
-- Flag: tags with a count of 1 that are too specific to recur, semantic near-duplicates, tags that are too broad to be useful as a filter.
-- Fix by editing the `tags:` frontmatter on affected posts in `content/blog/` — no template changes.
-- Once settled, record the canonical tag vocabulary in CLAUDE.md so new posts stay within it.
-
----
-
-### Drop "web ring" concept
-
-**Type:** cleanup
-
-**Why:** The web ring section is a fun nod to the 90s but it's not connected to an actual web ring and has no real outbound links. It reads as an empty placeholder that dilutes the page rather than adding personality.
-
-**Notes:**
-
-- Remove the web ring section from the homepage layout (`themes/squalr/layouts/index.html` or the relevant partial).
-- Remove any CSS scoped to `.webring` or similar from `cybershack.css`.
-- Don't leave a commented-out skeleton — if the concept ever comes back with real members and links, it's easy to add fresh.
 
 ---
 

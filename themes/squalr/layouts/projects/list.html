@@ -2,7 +2,7 @@
   <h1 class="page-title">▰ My Rad Projects</h1>
   <p class="page-subtitle">Things I'm building — some serious, some just for the bit.</p>
   <div class="projgrid">
-    {{- range sort .Pages "Params.weight" }}
+    {{- range sort .Pages "Date" "desc" }}
     {{ partial "pcard.html" . }}
     {{- end }}
   </div>

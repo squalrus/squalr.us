@@ -86,8 +86,8 @@
             var shift = textW + gap;
             s.style.setProperty('--wa-pad', gap + 'px');
             s.style.setProperty('--wa-shift', '-' + shift + 'px');
-            // ~50px/s scroll speed; hold+gap take 40% of total
-            s.style.setProperty('--wa-dur', Math.max(7, shift / 50 / 0.6).toFixed(1) + 's');
+            // ~50px/s scroll speed; hold at start takes 20% of total, scroll takes 80%
+            s.style.setProperty('--wa-dur', Math.max(7, shift / 50 / 0.8).toFixed(1) + 's');
             s.classList.add('wa-scrolling');
           } else {
             s.style.removeProperty('--wa-pad');

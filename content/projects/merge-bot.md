@@ -1,6 +1,6 @@
 ---
 title: "merge-bot"
-date: 2019-10-01T00:00:00+00:00
+date: 2019-09-20T00:00:00+00:00
 description: "GitHub Action for automated PR merging based on labels, blocking labels, and reviewer sign-off."
 status: archived
 repo: https://github.com/squalrus/merge-bot
@@ -10,13 +10,12 @@ repo: https://github.com/squalrus/merge-bot
 # gallery:
 #   - src: /img/projects/merge-bot/marketplace.png
 #     caption: "GitHub Marketplace listing"
-demo: ""
+demo: "https://github.com/marketplace/actions/pr-merge-bot"
 tech:
   - GitHub Actions
   - TypeScript
   - Node.js
 featured: true
-weight: 30
 terminal:
   label: 'merge-bot — ci'
   glyph: '{ }'

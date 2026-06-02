@@ -43,6 +43,7 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 
 | Title | Effort | Value |
 | --- | --- | --- |
+| Now Playing `<img>` missing `src`/`srcset` (HTML validator) | S | M |
 | Color contrast failures across cards and badges (a11y) | M | H |
 
 ### Features
@@ -57,7 +58,6 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 
 | Title | Effort | Value |
 | --- | --- | --- |
-| Project showcase readability and CRT effect | M | H |
 | Flesh out the `desktop-tracker` project body and screenshots | S | M |
 | Add preconnect hints for Last.fm and audioscrobbler | S | M |
 | Explicit width and height on Now Playing album art | S | M |
@@ -138,21 +138,6 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 
 ---
 
-### Project showcase readability and CRT effect
-
-**Type:** improvement
-
-**Why:** The project cards and detail pages are functional but not memorable. Screenshots and faux-terminal snippets are the most visually interesting elements — a subtle CRT treatment (scanlines, phosphor glow, slight vignette) would make the showcase stand out and reinforce the retro aesthetic without touching the readability of prose.
-
-**Notes:**
-
-- CRT effect is pure CSS: a `::after` overlay with a `repeating-linear-gradient` for scanlines, an inset `box-shadow` for the vignette, and an optional subtle flicker via `@keyframes`. The flicker **must** respect `prefers-reduced-motion`.
-- Apply selectively to project screenshots and `.terminal` blocks — not to body text or UI chrome.
-- Readability pass is separate: check that the project list and detail pages have enough whitespace, contrast, and typographic hierarchy to scan quickly. The two goals (readable + standout) can conflict if the CRT is too heavy — keep the effect light.
-- Fun stretch: a "CRT on/off" toggle in the title bar would be on-brand for the 90s desktop theme and completely optional.
-
----
-
 ### Flesh out the `desktop-tracker` project body and screenshots
 
 **Type:** improvement
@@ -193,6 +178,26 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 - Remove the web ring section from the homepage layout (`themes/squalr/layouts/index.html` or the relevant partial).
 - Remove any CSS scoped to `.webring` or similar from `cybershack.css`.
 - Don't leave a commented-out skeleton — if the concept ever comes back with real members and links, it's easy to add fresh.
+
+---
+
+### Now Playing `<img>` missing `src`/`srcset` (HTML validator)
+
+**Type:** bug
+
+**Why:** Removing the empty `src=""` attribute (v1.3.1) fixed the spurious network request, but left `<img id="np-art" alt hidden>` with neither `src` nor `srcset`. The HTML spec requires at least one of these on every `<img>` — the W3C validator flags it as an error, and some browsers may render a broken-image icon before JS hides the element.
+
+**Notes:**
+
+- Validator error: `Element img is missing one or more of the following attributes: src, srcset.` at `<img id=np-art alt hidden>` in `themes/squalr/layouts/index.html`.
+- Fix: set `src` to a 1×1 transparent data URI so the element is valid HTML and makes no network request:
+
+  ```html
+  <img id="np-art" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" hidden>
+  ```
+
+- The JS in `cybershack.js` already overwrites `img.src` with the real album-art URL when a track is found, so the placeholder is only ever visible to the validator (the element stays `hidden` until JS reveals it).
+- Pair with the "Explicit width and height on Now Playing album art" improvement when touching this element — both are one-line changes on the same `<img>`.
 
 ---
 

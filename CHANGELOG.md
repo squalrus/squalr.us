@@ -2,6 +2,15 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.4.0] — 2026-06-02
+
+### Added
+
+- **Last.fm profile link on the WinAmp widget.** The `♫ LAST.FM` title bar is now a link to the Last.fm profile. (`index.html`)
+- **Loved track heart.** A pulsing ❤ indicator appears in the LCD meta row when the current/last scrobbled track has been loved on Last.fm. Shown/hidden on each 30s refresh. (`index.html`, `cybershack.js`, `cybershack.css`)
+- **Recent tracks playlist.** The widget now fetches the last 5 tracks and renders them as a compact playlist panel below the album art — currently playing entry highlighted in green with ▶, previous entries numbered. (`index.html`, `cybershack.js`, `cybershack.css`)
+- **Scrobble count footer.** A slim bar below the playlist shows the lifetime play count from `user.getinfo`, formatted with locale commas. Hidden until the async fetch resolves. (`index.html`, `cybershack.js`, `cybershack.css`)
+
 ## [1.3.5] — 2026-06-01
 
 ### Removed

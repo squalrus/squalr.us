@@ -68,7 +68,7 @@
       <!-- now playing (WinAmp) -->
       <div class="wa" role="region" aria-label="Now playing">
         <div class="wa-title">
-          <span class="wa-name" aria-hidden="true">♫ WINAMP</span>
+          <a href="https://www.last.fm/user/squalrus" class="wa-name" target="_blank" rel="noopener noreferrer" aria-label="last.fm profile">♫ LAST.FM</a>
           <div class="wa-wbtns" aria-hidden="true">
             <button class="wa-wb" tabindex="-1">_</button>
             <button class="wa-wb" tabindex="-1">□</button>
@@ -78,11 +78,12 @@
         <div class="wa-body">
           <div class="wa-lcd" aria-live="polite" aria-atomic="true">
             <div class="wa-clip">
-              <span class="wa-scroll" id="np-song">The Dance of Eternity</span>
+              <span class="wa-scroll" id="np-song">Loading...</span>
             </div>
             <div class="wa-meta">
               <span class="wa-state" id="np-label">▶ playing</span>
-              <span class="wa-who" id="np-artist">Dream Theater</span>
+              <span class="wa-loved" id="np-loved" aria-label="loved track" hidden>❤</span>
+              <span class="wa-who" id="np-artist">Loading...</span>
             </div>
           </div>
           <div class="wa-spec" aria-hidden="true">
@@ -101,6 +102,11 @@
           </div>
         </div>
         <img id="np-art" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="300" height="300" alt="" hidden>
+        <ul class="wa-playlist" id="np-playlist" aria-label="Recent tracks"></ul>
+        <div class="wa-footer">
+          <span class="wa-footer-label">scrobbles</span>
+          <span id="lfm-scrobbles"></span>
+        </div>
       </div>
 
       <!-- social -->
@@ -123,7 +129,6 @@
       <div class="panel">
         <h2>:: Status ::</h2>
         <ul class="statlist">
-          <li><span>currently</span> <b class="on">shipping ▸</b></li>
           <li><span>at</span> <b><a href="https://duradigital.com">Dura Digital</a></b></li>
           <li><span>projects</span> <b>{{ len $projects }}</b></li>
           <li><span>coffee level</span> <b class="wip">critical</b></li>
@@ -132,7 +137,7 @@
 
       <!-- web badges -->
       <div class="panel">
-        <h2>« proudly served »</h2>
+        <h2>:: Site Stats ::</h2>
         <div class="badges" aria-hidden="true">
           {{- range hugo.Data.badges }}{{ if .enabled }}
           <a href="{{ .url | default "#" }}" class="badge88 {{ .class }}" tabindex="-1">{{ .top }}<br><b>{{ .bottom }}</b></a>

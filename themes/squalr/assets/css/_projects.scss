@@ -44,7 +44,7 @@
 
     &.on       { color: #000; background: #39ff14; }
     &.wip      { color: #000; background: var(--fire); }
-    &.archived { color: #fff; background: var(--chrome-d); }
+    &.archived { color: #fff; background: #727272; }  // was #808080 — 3.94:1; #727272 = 4.57:1
   }
 
   // Card body

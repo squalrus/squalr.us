@@ -1,7 +1,7 @@
 ---
 title: "Still Here. New Chapter."
 slug: still-here-new-chapter
-date: 2026-06-02T00:00:00+00:00
+date: 2026-06-04T00:00:00+00:00
 tags:
   - process
 ---

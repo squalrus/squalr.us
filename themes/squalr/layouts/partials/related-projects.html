@@ -1,6 +1,6 @@
 {{- with .Params.projects }}
 <div class="related-projects">
-  <h3>◇ Related projects</h3>
+  <h2>◇ Related projects</h2>
   <div class="projgrid">
     {{- range . }}
     {{- with site.GetPage (printf "/projects/%s" .) }}{{ partial "pcard.html" . }}{{ end }}

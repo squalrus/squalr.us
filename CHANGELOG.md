@@ -2,6 +2,24 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.3.1] — 2026-06-01
+
+### Fixed
+
+- **CSP inline-script hash updated.** Hugo 0.162's `_internal/google_analytics.html` emits a DNT-aware variant of the gtag initializer — the old hash no longer matched, silently blocking analytics. Hash replaced with the correct SHA-256 for the current output. (`staticwebapp.config.json`)
+- **Mobile viewport overflow.** Added `html { overflow-x: hidden }` alongside the existing `body` rule. Without it, some Android Chrome builds promote `html` to the scroll container and evaluate media-query widths against the document layout width rather than the device viewport — causing the 760 px breakpoint to never fire on phones. (`cybershack.css`)
+- **`aria-label` on unlabelled `<div>` elements.** The Now Playing widget wrapper (`<div class="wa">`) and the guestbook list (`<div id="gb-list">`) both carried `aria-label` with no `role`, making the label invisible to assistive technology. Added `role="region"` to both. (`index.html`)
+- **Now Playing album art — empty `src` attribute.** `<img id="np-art" src="">` issued a spurious network request to the page URL on load. Removed the empty `src`; the JS sets `img.src` when real album art is available. (`index.html`)
+- **Project cards missing heading element.** Each `<article class="pcard">` had no `<h*>` inside it, making card boundaries unlabelled for screen readers. The project title `<span>` is now an `<h3>`, which sits correctly under the section's `<h2>`. CSS reset added to suppress default heading margin. (`pcard.html`, `cybershack.css`)
+- **Heading order — h1 → h3 skip.** Five sidebar panel headings were `<h3>` with no `<h2>` between them and the page `<h1>`, creating a gap that breaks screen-reader navigation. Promoted all five to `<h2>`. The same skip existed in related-projects, project gallery, and field-notes sections across detail-page layouts — fixed those too. (`index.html`, `pcard.html`, `related-projects.html`, `projects/single.html`, `cybershack.css`)
+
+### Changed
+
+- **Desktop Tracker project metadata.** Title cased, description updated to reflect the real product (Windows tray app, Virtual Desktop time tracking, BambooHR sync), tech stack corrected to Python / JavaScript / SVG / PyInstaller / BambooHR API, status promoted to `active`. (`content/projects/desktop-tracker.md`)
+- **CLAUDE.md frontmatter docs.** `date` and `description` fields in the "Adding a Project" example now include inline comments and real-format examples matching existing projects. (`CLAUDE.md`)
+
+---
+
 ## [1.3.0] — 2026-06-01
 
 ### Changed

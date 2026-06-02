@@ -46,6 +46,7 @@ The homepage is standalone; every other page renders through `baseof.html`, whic
 5. Reference images as `/img/blog/my-post-title/image.png`
 
 Frontmatter format:
+
 ```yaml
 ---
 title: "Post Title Here"
@@ -61,9 +62,12 @@ tags:
 Projects live in `content/projects/*.md` and render via `themes/squalr/layouts/projects/`.
 
 Supported frontmatter:
+
 ```yaml
 ---
 title: "Project Name"
+date: 2026-06-01T00:00:00+00:00   # ISO 8601; used for sorting, not displayed
+description: "One-sentence plain-English summary shown on the project card."
 status: active          # active | wip | paused | archived (colored status pill)
 weight: 10              # sort order (lower = first)
 tech: [TypeScript, Go]  # shown as tags
@@ -109,7 +113,7 @@ Both `BACKLOG.md` and `CHANGELOG.md` are rendered on the site (`/backlog/`, `/ch
 
 ## Known Issues / Tech Debt
 
-The 2021-era debt is resolved (GA4 live, Hugo pinned, GitHub Actions current, owned theme, NFT embeds stripped). Remaining candidates live in **[BACKLOG.md](./BACKLOG.md)** — notably: no mobile pass yet, no accessibility pass yet, fonts still load from Google Fonts, and OpenSea is still in the CSP allowlist. `docs/TECH-STACK-AUDIT.md` is a historical snapshot of the *starting* state, now largely superseded.
+The 2021-era debt is resolved (GA4 live, Hugo pinned, GitHub Actions current, owned theme, NFT embeds stripped). Remaining candidates live in **[BACKLOG.md](./BACKLOG.md)** — notably: no mobile pass yet, no accessibility pass yet, fonts still load from Google Fonts, and OpenSea is still in the CSP allowlist. `docs/TECH-STACK-AUDIT.md` is a historical snapshot of the _starting_ state, now largely superseded.
 
 ---
 

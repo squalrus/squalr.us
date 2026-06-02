@@ -39,6 +39,12 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 - **Effort** — rough Claude session cost. **S** = a single focused turn (one or two files, no clarification needed). **M** = a conversation session (several files, maybe a question or two upfront, fits one context window). **L** = multi-session work that warrants a written plan first.
 - **Value** — impact on a reader/visitor. **H** = clearly noticeable or removes real friction. **M** = a solid improvement, narrower audience. **L** = polish or quiet upkeep.
 
+### Bugs
+
+| Title | Effort | Value |
+| --- | --- | --- |
+| Color contrast failures across cards and badges (a11y) | M | H |
+
 ### Features
 
 | Title | Effort | Value |
@@ -52,7 +58,13 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 | Title | Effort | Value |
 | --- | --- | --- |
 | Project showcase readability and CRT effect | M | H |
-| Flesh out the `desktop-tracker` project metadata | S | L |
+| Flesh out the `desktop-tracker` project body and screenshots | S | M |
+| Add preconnect hints for Last.fm and audioscrobbler | S | M |
+| Explicit width and height on Now Playing album art | S | M |
+| Defer cybershack.js from critical render path | S | M |
+| Defer Google Tag Manager loading | S | M |
+| Serve responsive / optimized images (Glizzy Relay) | M | M |
+| Fix forced reflow in cybershack.js | M | M |
 
 ### Cleanup
 
@@ -141,17 +153,16 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 
 ---
 
-### Flesh out the `desktop-tracker` project metadata
+### Flesh out the `desktop-tracker` project body and screenshots
 
 **Type:** improvement
 
-**Why:** `content/projects/desktop-tracker.md` is the thinnest project — a one-line description, `Rust` / `Tauri` tech, and a faux-terminal banner, but no real body, no screenshots, and no detail worth landing on. It reads as a placeholder. Once the project has something to show, give it the metadata the card + detail page are built to display.
+**Why:** Metadata was updated in v1.3.1 (correct stack, real description, status promoted to `active`) but the detail page still has no body copy and no screenshots. Without them, clicking into the project lands on an empty shell.
 
 **Notes:**
 
-- Add a real body (what it does, why local-first, the "watch what I'm actually doing" angle) so the detail page isn't empty.
+- Add a real body (what the app does, why Virtual Desktop tracking, how the BambooHR sync works) so the detail page isn't empty.
 - Add a featured `image:` + a `gallery:` once there are screenshots — drop files in `static/img/projects/desktop-tracker/` (the folder exists).
-- Tighten `tech:` if the stack firms up, and flip `status:` off `wip` when it's real.
 - Cross-link any future "building desktop-tracker" post via `projects: [desktop-tracker]` so the card's field-note count lights up.
 
 ---
@@ -182,6 +193,125 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 - Remove the web ring section from the homepage layout (`themes/squalr/layouts/index.html` or the relevant partial).
 - Remove any CSS scoped to `.webring` or similar from `cybershack.css`.
 - Don't leave a commented-out skeleton — if the concept ever comes back with real members and links, it's easy to add fresh.
+
+---
+
+### Color contrast failures across cards and badges (a11y)
+
+**Type:** bug
+
+**Why:** Multiple elements fail WCAG AA contrast requirements (4.5:1 for normal text, 3:1 for large/bold text). Low-contrast text is difficult or impossible to read for users with low vision or color-vision deficiency.
+
+**Notes:**
+
+- Failing elements identified by Lighthouse:
+  - `.wip` badge text (status pill)
+  - `.panel` div text
+  - `.pnotes.none` span ("◇ no notes yet")
+  - `.pcard` article background/foreground
+  - `.pstat.archived` badge text
+- All styles live in `themes/squalr/assets/css/cybershack.css`. Check each selector's `color` and `background-color` with a contrast checker (browser DevTools has one built in under the color picker).
+- The 90s GeoCities aesthetic uses pastels and neons that often fail WCAG — adjust luminance rather than hue to preserve the vibe while hitting contrast ratios.
+- `.pnotes.none` is the "no notes yet" placeholder — easiest fix is darkening the text color since the background is already known.
+- Badge fixes (`.wip`, `.pstat.archived`): try darkening the text or lightening the background by 10–15% and re-check; small adjustments usually clear the threshold without visible aesthetic change.
+
+---
+
+### Add preconnect hints for Last.fm and audioscrobbler
+
+**Type:** improvement
+
+**Why:** Lighthouse estimates 330ms LCP savings from preconnecting to `https://lastfm.freetls.fastly.net` and 200ms from `https://ws.audioscrobbler.com`. These origins serve the Now Playing widget's album art and API data. Adding `<link rel="preconnect">` lets the browser start DNS/TLS handshakes before the JS fires the requests.
+
+**Notes:**
+
+- Add to the `<head>` in `themes/squalr/layouts/index.html` (homepage only — that's where Now Playing lives):
+
+  ```html
+  <link rel="preconnect" href="https://lastfm.freetls.fastly.net" crossorigin>
+  <link rel="preconnect" href="https://ws.audioscrobbler.com">
+  ```
+
+- Keep total preconnect hints to ≤4 per Lighthouse guidance. These two are the highest-value targets.
+- Pair with deferring `cybershack.js` (see separate item) for cumulative LCP improvement — preconnect only helps if the fetch itself isn't also blocked by a render-blocking script.
+- The `crossorigin` attribute is needed for `lastfm.freetls.fastly.net` because the `<img>` fetch is CORS; omit it for the audioscrobbler XHR (same-origin CORS semantics differ).
+
+---
+
+### Explicit width and height on Now Playing album art
+
+**Type:** improvement
+
+**Why:** The Last.fm album art `<img id="np-art">` has no explicit `width` or `height` attributes, so the browser can't reserve space for it before the image loads. This causes layout shift (CLS) — surrounding content jumps when the image arrives.
+
+**Notes:**
+
+- The image is fetched dynamically from Last.fm's CDN at 300×300 resolution.
+- Add `width="300" height="300"` to the `<img id="np-art">` element — either in the template where it's declared or in the JS where the element is created/populated in `themes/squalr/static/cybershack.js`.
+- CSS can still override the displayed size; the attributes just give the browser an aspect ratio to hold space with.
+- If the Now Playing widget is hidden when no track is playing, the reserved space disappears anyway — confirm the hiding/showing logic doesn't itself cause layout shift.
+
+---
+
+### Defer cybershack.js from critical render path
+
+**Type:** improvement
+
+**Why:** `cybershack.js` (4.6 KiB) blocks the page's initial render for ~540ms. None of the features it provides (visitor counter, sparkle cursor, Now Playing) are needed for above-the-fold paint — deferring it moves it off the critical path and improves LCP and FCP.
+
+**Notes:**
+
+- Add `defer` to the `<script>` tag that loads `cybershack.js` in `themes/squalr/layouts/index.html` and `_default/baseof.html`.
+- `defer` is safe as long as no other inline script in the document depends on `cybershack.js` executing synchronously. Check for any inline `<script>` that calls functions from `cybershack.js` — if found, either also defer those or fold them into the file.
+- The script should already be wrapping DOM-dependent code in a `DOMContentLoaded` listener (or equivalent). If it isn't, the defer attribute will shift when the code runs — audit and fix the listener pattern at the same time.
+- Preconnect hints for Last.fm (see separate item) compound this improvement: with the script deferred, the browser can start the Last.fm connection earlier relative to page load.
+
+---
+
+### Defer Google Tag Manager loading
+
+**Type:** improvement
+
+**Why:** GTM loads 143 KiB on every page, with 83 KiB unused on initial load. Analytics don't need to fire during the critical render path — deferring or async-loading GTM has no user-visible impact and reduces bytes consumed on first paint.
+
+**Notes:**
+
+- GTM's standard snippet already uses an async pattern for the main `gtm.js` library, but the inline snippet itself can still block if it's synchronous.
+- Check the GTM snippet in the templates — if it's a raw `<script>` block without `async` or `defer`, that's the blocker. Adding `defer` to the script tag (or restructuring to use GTM's recommended async snippet) is the fix.
+- If the inline GTM snippet is also the source of the CSP hash violation (see bug item), moving it to an external file solves both issues at once.
+- Confirm GA4 events still fire correctly after the change — test with GTM's preview mode and the GA4 DebugView.
+
+---
+
+### Serve responsive / optimized images (Glizzy Relay)
+
+**Type:** improvement
+
+**Why:** The Glizzy Relay featured image is 1920×1070 px (212 KiB) but displayed at 683×384 px, wasting ~185 KiB per page load. Lighthouse flags this as a direct LCP contributor. The same issue likely affects other project featured images.
+
+**Notes:**
+
+- **Quick fix (do first):** resize `static/img/projects/glizzyrelay.com/featured.png` to ≤1366px wide using any image tool, and convert to WebP. Halves the bytes with no template change.
+- **Better fix:** use Hugo's built-in image processing in the project card/detail templates — `resources.Get` + `.Resize "683x" webp` generates a correctly-sized WebP at build time. Hugo caches resized images in `resources/_gen/`, which is gitignored.
+- **Best fix (stretch):** generate a `srcset` with 2–3 sizes (683w, 1024w, 1366w) so mobile gets the smallest version. Hugo's `.Resize` and `.Fill` support this with a `range` loop.
+- Audit all other files under `static/img/projects/` for the same oversize pattern while you're here — fix them all in one pass.
+- Update CLAUDE.md's image section to document the max source image width convention once a standard is set.
+
+---
+
+### Fix forced reflow in cybershack.js
+
+**Type:** improvement
+
+**Why:** Lighthouse flags 182ms of unattributed forced reflow — JavaScript is querying layout properties (e.g. `offsetWidth`) after invalidating the DOM, forcing the browser to synchronously recalculate styles. This blocks the main thread and delays interactivity.
+
+**Notes:**
+
+- Open Chrome DevTools → Performance tab → record a page load → look for tall "Recalculate Style" / "Layout" blocks triggered immediately after JS execution. The call stack will point at the offending line in `cybershack.js`.
+- Classic pattern to look for: a DOM write (setting `innerHTML`, toggling a class, changing a style) followed immediately by a geometry read (`offsetWidth`, `getBoundingClientRect`, `scrollHeight`). The read forces a flush.
+- Likely suspects: the visitor counter (updates text then reads width?), the Now Playing widget (sets album art then reads container size?), or the sparkle cursor (measures cursor position relative to DOM on mousemove).
+- Fix: batch all reads before writes, or defer the write to the next `requestAnimationFrame`. A pattern like `requestAnimationFrame(() => { el.style.width = ...; })` breaks the read-write cycle.
+- "Unattributed" in Lighthouse means it may originate in a third-party script (GTM) — profile with GTM blocked to isolate whether the reflow is first- or third-party.
 
 ---
 

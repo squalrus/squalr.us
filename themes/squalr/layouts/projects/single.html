@@ -25,7 +25,7 @@
     </div>
     {{- with .Params.gallery }}
     <section class="project-gallery">
-      <h3 class="project-gallery-label">📸 screenshots.zip</h3>
+      <h2 class="project-gallery-label">📸 screenshots.zip</h2>
       <div class="project-gallery-grid">
         {{- range . }}
         <figure class="project-gallery-item">
@@ -40,7 +40,7 @@
     {{- $related := where site.RegularPages "Params.projects" "intersect" (slice $slug) }}
     {{- with $related }}
     <div class="related-section">
-      <h3>◇ Field notes about this project</h3>
+      <h2>◇ Field notes about this project</h2>
       <ul class="posts">
         {{- range . }}
         {{ partial "post-li.html" (dict "page" .) }}

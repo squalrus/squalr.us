@@ -61,6 +61,7 @@
 }
 
 *{box-sizing:border-box}
+html{overflow-x:hidden}
 body{
   margin:0;
   font-family:var(--comic);
@@ -196,7 +197,7 @@ a:hover{ color:#fff; background:var(--hot); }
 /* ---------- sidebar ---------- */
 .side > div{ margin-bottom:14px }
 .panel{ padding:10px;background:var(--paper);border:3px ridge var(--neon-2); }
-.panel h3{ margin:0 0 8px;font-family:var(--pix);font-size:10px;color:var(--hot);
+.panel h2{ margin:0 0 8px;font-family:var(--pix);font-size:10px;color:var(--hot);
   letter-spacing:.5px;text-transform:uppercase;text-align:center;
   border-bottom:1px dashed var(--neon-2);padding-bottom:7px }
 
@@ -346,7 +347,7 @@ hr.candy{ height:6px;border:0;margin:14px 0;
 .pcard{ background:var(--paper-2);border:3px ridge var(--neon);padding:0;overflow:hidden;display:flex;flex-direction:column }
 .pcard .pchrome{ display:flex;align-items:center;justify-content:space-between;gap:6px;
   background:linear-gradient(90deg,#5b1aa6,#9b2fb0);padding:5px 8px;border-bottom:2px solid var(--zap) }
-.pcard .pname{ font-family:var(--pix);font-size:11px;color:#fff }
+.pcard .pname{ font-family:var(--pix);font-size:11px;color:#fff;margin:0 }
 .pcard .pstat{ font-family:var(--term);font-size:14px;padding:1px 7px;border:1px solid #000 }
 .pcard .pstat.on{ color:#000;background:#39ff14 }
 .pcard .pstat.wip{ color:#000;background:var(--fire) }
@@ -504,7 +505,7 @@ a.tag:hover, .tags-list-item-title:hover{ background:var(--zap);color:#000 }
 
 /* related sections (posts on a project, projects on a post) */
 .related-section, .related-projects{ margin-top:20px;border-top:2px dashed var(--hot);padding-top:12px }
-.related-section h3, .related-projects h3{ font-family:var(--comic);font-weight:700;font-size:18px;color:var(--hot);margin:0 0 10px }
+.related-section h2, .related-projects h2{ font-family:var(--comic);font-weight:700;font-size:18px;color:var(--hot);margin:0 0 10px }
 .related-projects .projgrid{ margin-top:6px }
 
 /* changelog version headings -> sticker */

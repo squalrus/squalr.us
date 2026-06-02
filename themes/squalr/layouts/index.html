@@ -167,7 +167,7 @@
       <div id="projects">
         <h2 class="sticker">▰ MY RAD PROJECTS</h2>
         <div class="projgrid">
-          {{- range sort $projects "Params.weight" }}
+          {{- range sort $projects "Date" "desc" }}
           {{ partial "pcard.html" . }}
           {{- end }}
         </div>

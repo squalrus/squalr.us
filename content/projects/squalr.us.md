@@ -1,7 +1,7 @@
 ---
 title: "squalr.us"
 slug: squalr-us
-date: 2019-10-01T00:00:00+00:00
+date: 2017-08-12T00:00:00+00:00
 description: "This very site. A custom Hugo theme with too many neon glows and a healthy disrespect for whitespace."
 status: wip
 # Featured image — shown on the project card and at the top of this page:
@@ -16,5 +16,4 @@ tech:
   - TypeScript
   - Node.js
 featured: true
-weight: 20
 ---

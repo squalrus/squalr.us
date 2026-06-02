@@ -19,9 +19,7 @@ tech:
   - TypeScript
   - Supabase
   - Vite
-links:
-  - label: "Live ↗"
-    url: "https://glizzyrelay.com"
+demo: "https://glizzyrelay.com"
 ---
 
 Live scoreboard and scoring for a hot dog eating relay. Glizzy Relay runs the whole event: teams of three eat a hot dog and drink a beer in sequence, a tap/spacebar timer captures every runner's split, and an ESPN-style broadcast scoreboard updates live on the big screen as the race happens.

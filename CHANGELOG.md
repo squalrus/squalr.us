@@ -2,6 +2,30 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.3.3] — 2026-06-01
+
+### Changed
+
+- **Blog added to main nav.** "Blog" now appears between Home and Projects in the nav row on every page. (`config.yaml`)
+- **Projects sorted by date, weight removed.** Cards on the homepage and `/projects/` list are now sorted newest-first by frontmatter `date`. The manual `weight:` field is removed from all project files. (`index.html`, `projects/list.html`, project frontmatter)
+- **WinAmp scroll animation.** The previous keyframe held the text fully off-screen for 20% of the loop (blank LCD visible). The scroll now runs from 20% to 100%, snapping back at the loop point while the text is already off-screen — invisible jump, clean loop. Duration divisor updated to match (80% scroll / 20% hold). (`cybershack.css`, `cybershack.js`)
+- **WinAmp edge fades gated on scrolling.** The `::before`/`::after` fade-to-black gradients on `.wa-clip` are now scoped to `:has(.wa-scrolling)` — they only appear when text is actively scrolling. Short titles like "Ciel" were being clipped by the always-on left gradient; now they display cleanly. (`cybershack.css`)
+- **WinAmp album art fills widget on mobile.** Added `width:100%` to `#np-art` so the album art stretches to match the full-width widget on mobile instead of rendering at its natural 300px with background showing beside it. (`cybershack.css`)
+
+---
+
+## [1.3.2] — 2026-06-01
+
+### Changed
+
+- **CRT effect on project screenshots and terminal blocks.** A CSS `::after` overlay adds authentic scanlines (`repeating-linear-gradient`) and a vignette (`box-shadow: inset`) to `.shot` card thumbnails and `.project-hero-media` detail images. A subtle flicker animation is applied to the overlay and respects `prefers-reduced-motion`. Terminal block text gets a phosphor glow (`text-shadow`) on the green and cyan colors. (`cybershack.css`)
+- **Project card title links readable.** Card title `<a>` inside `.pchrome` now overrides the global blue link color with white to match the purple gradient title bar. No underline at rest; underline appears on hover along with a translucent white wash. (`cybershack.css`)
+- **Project card hover state.** Cards now shift border to magenta and gain a subtle purple drop shadow on hover — making the card-as-link intent obvious without requiring a cursor-pointer override. (`cybershack.css`)
+- **`.pnotes.none` contrast fix.** "◇ no notes yet" was rendered with `opacity: .55` (~2.8:1 contrast against cream background, failing WCAG AA). Replaced with an explicit `color: #6b5d8f` (~5.4:1). (`cybershack.css`)
+- **Glizzy Relay frontmatter.** Switched from a custom `links:` entry to the semantic `demo:` field; harmonized `demo` label to `live↗` on the detail page to match the card. (`content/projects/glizzyrelay.com.md`, `themes/squalr/layouts/projects/single.html`)
+
+---
+
 ## [1.3.1] — 2026-06-01
 
 ### Fixed

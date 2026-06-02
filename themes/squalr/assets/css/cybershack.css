@@ -217,6 +217,8 @@ a:hover{ color:#fff; background:var(--hot); }
   padding:3px 5px;
 }
 .wa-name{ font-family:var(--pix);font-size:10px;color:#fff;letter-spacing:.5px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+a.wa-name{ text-decoration:none; }
+a.wa-name:hover{ text-decoration:underline;opacity:.85; }
 .wa-wbtns{ display:flex;gap:2px;flex-shrink:0; }
 .wa-wb{
   width:14px;height:12px;padding:0;
@@ -250,6 +252,8 @@ a:hover{ color:#fff; background:var(--hot); }
 .wa-meta{ display:flex;justify-content:space-between;align-items:baseline;margin-top:3px;gap:4px; }
 .wa-state{ font-family:var(--term);font-size:14px;color:#00ff66;white-space:nowrap;flex-shrink:0; }
 .wa-state.last-played{ color:var(--fire); }
+.wa-loved{ color:#ff4466;font-size:11px;flex-shrink:0;animation:lfm-pulse 1.4s ease-in-out infinite; }
+@keyframes lfm-pulse{ 0%,100%{opacity:1} 50%{opacity:.3} }
 .wa-who{ font-family:var(--term);font-size:14px;color:#50c050;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right; }
 
 /* spectrum */
@@ -294,6 +298,16 @@ a:hover{ color:#fff; background:var(--hot); }
 .wa-play-btn{ color:#004d00; }
 .wa-vol{ flex:1;height:6px;background:#111;border:1px solid;border-color:var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd);margin-left:4px;position:relative; }
 .wa-vol-knob{ position:absolute;top:-4px;left:65%;width:6px;height:14px;background:var(--chrome);border:1px solid;border-color:var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l); }
+
+/* playlist */
+.wa-playlist{ list-style:none;margin:0;padding:2px 0;background:#0d0d0d;border-top:1px solid #333; }
+.wa-playlist li{ display:flex;gap:5px;padding:1px 6px;font-family:var(--term);font-size:12px;color:#3a7a3a;overflow:hidden;white-space:nowrap; }
+.wa-playlist li.wa-pl-now{ color:#00ff66; }
+.wa-pl-idx{ flex-shrink:0;width:14px;text-align:right; }
+.wa-pl-track{ overflow:hidden;text-overflow:ellipsis; }
+.wa-footer{ display:flex;justify-content:space-between;align-items:center;padding:3px 6px;background:#0d0d0d;border-top:1px solid #222;font-family:var(--term);font-size:11px;color:#2a5a2a; }
+.wa-footer #lfm-scrobbles{ color:#3a7a3a; }
+.wa-footer:has(#lfm-scrobbles:empty){ display:none; }
 
 .statlist{ list-style:none;margin:0;padding:0;font-family:var(--term);font-size:18px }
 .statlist li{ display:flex;justify-content:space-between;gap:8px;align-items:center;

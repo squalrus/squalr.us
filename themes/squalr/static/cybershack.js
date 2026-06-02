@@ -43,12 +43,13 @@
   var LFM_USER = 'squalrus';
   var LFM_KEY  = 'eeb057078d22855ccfe801b9a69fba67';
   function initNowPlaying() {
-    var s   = document.getElementById('np-song'),
-        a   = document.getElementById('np-artist'),
-        art = document.getElementById('np-art'),
-        eq  = document.getElementById('np-eq'),
-        lbl = document.getElementById('np-label'),
-        mq  = document.getElementById('mq-track');
+    var s     = document.getElementById('np-song'),
+        a     = document.getElementById('np-artist'),
+        art   = document.getElementById('np-art'),
+        eq    = document.getElementById('np-eq'),
+        lbl   = document.getElementById('np-label'),
+        loved = document.getElementById('np-loved'),
+        mq    = document.getElementById('mq-track');
     var hasWidget = !!(s && a);
     if (!hasWidget && !mq) return;
 
@@ -74,6 +75,7 @@
           lbl.textContent = isNow ? '▶ playing' : '■ last played';
           lbl.className = 'wa-state' + (isNow ? '' : ' last-played');
         }
+        if (loved) loved.hidden = track.loved !== '1';
         // Adaptive marquee: only scroll when text actually overflows the clip container
         var wrap = s.parentElement;
         if (wrap) {
@@ -101,20 +103,53 @@
       }, 200);
     }
 
+    function applyPlaylist(tracks) {
+      var pl = document.getElementById('np-playlist');
+      if (!pl) return;
+      pl.innerHTML = '';
+      var num = 1;
+      tracks.forEach(function (track) {
+        var isNow = !!(track['@attr'] && track['@attr'].nowplaying === 'true');
+        var li = document.createElement('li');
+        if (isNow) li.className = 'wa-pl-now';
+        var idx = document.createElement('span');
+        idx.className = 'wa-pl-idx';
+        idx.textContent = isNow ? '▶' : (num++) + '.';
+        var label = document.createElement('span');
+        label.className = 'wa-pl-track';
+        label.textContent = track.name + ' — ' + track.artist['#text'];
+        li.appendChild(idx);
+        li.appendChild(label);
+        pl.appendChild(li);
+      });
+    }
+
     function fetchLfm() {
-      fetch('https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=' + LFM_USER + '&api_key=' + LFM_KEY + '&limit=1&format=json')
+      fetch('https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=' + LFM_USER + '&api_key=' + LFM_KEY + '&limit=5&format=json')
         .then(function (r) { return r.json(); })
         .then(function (data) {
           var tracks = data.recenttracks && data.recenttracks.track;
           if (!tracks) return;
-          var track = Array.isArray(tracks) ? tracks[0] : tracks;
-          if (track) applyTrack(track);
+          var list = Array.isArray(tracks) ? tracks : [tracks];
+          if (list[0]) applyTrack(list[0]);
+          applyPlaylist(list);
         })
         .catch(function () {});
     }
 
     fetchLfm();
     setInterval(fetchLfm, 30000);
+
+    var scrobbleEl = document.getElementById('lfm-scrobbles');
+    if (scrobbleEl) {
+      fetch('https://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=' + LFM_USER + '&api_key=' + LFM_KEY + '&format=json')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          var count = data.user && data.user.playcount;
+          if (count) scrobbleEl.textContent = Number(count).toLocaleString();
+        })
+        .catch(function () {});
+    }
   }
 
   /* ---------- GUESTBOOK (localStorage) ---------- */

@@ -12,7 +12,7 @@ hugo new ./blog/{post-name}.md      # create a new post from archetype
 hugo --minify                       # production build → public/
 ```
 
-No npm, no node_modules. The theme stylesheet is **SCSS** compiled through Hugo's asset pipeline (`resources.Get "css/cybershack.scss" | toCSS | minify | fingerprint`). **Dart Sass must be on `PATH`** — `hugo --minify` fails if it isn't. Install once with `npm install -g sass`.
+No npm, no node_modules. The theme stylesheet is **SCSS** compiled through Hugo's asset pipeline (`resources.Get "css/cybershack.scss" | toCSS | minify | fingerprint`). **Dart Sass must be on `PATH`** — `hugo --minify` fails if it isn't. Install the embedded binary (not the pure-JS `sass` package): `npm install -g sass-embedded`.
 
 ## Project Structure
 

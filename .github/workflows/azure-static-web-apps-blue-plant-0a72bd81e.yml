@@ -21,6 +21,8 @@ jobs:
         with:
           hugo-version: '0.162.1'
           extended: true
+      - name: Setup Dart Sass
+        run: npm install -g sass-embedded
       - name: Build
         run: hugo --minify
       - name: Build And Deploy

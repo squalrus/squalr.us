@@ -16,7 +16,7 @@
   <meta name="author" content="{{ .Site.Params.author | default "Chad Schulz" }}" />
   <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description | default .Summary }}{{ end }}" />
   <link rel="shortcut icon" href="{{ .Site.Params.favicon | default "/favicon.ico" }}" />
-  {{- $css := resources.Get "css/cybershack.scss" | toCSS | minify | fingerprint }}
+  {{- $css := resources.Get "css/cybershack.scss" | toCSS (dict "transpiler" "dartsass") | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
   {{ template "_internal/twitter_cards.html" . }}
   {{ template "_internal/opengraph.html" . }}

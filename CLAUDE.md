@@ -57,6 +57,21 @@ tags:
 ---
 ```
 
+### Canonical tag vocabulary
+
+Use only these tags on new posts. Do not invent new ones without updating this list.
+
+| Tag | Use for |
+| --- | --- |
+| `azure` | Azure services, cloud hosting, Azure Static Web Apps, Azure Storage |
+| `website` | Web development, static sites, HTML/CSS/JS, site architecture |
+| `process` | Engineering process, estimation, prioritization, team dynamics |
+| `workflow` | Developer workflow, CI/CD pipelines, tooling, automation |
+| `automation` | GitHub Actions, CI/CD automation, scripted pipelines |
+| `documentation` | Documentation practices, specs, READMEs, changelogs |
+| `ai` | AI, LLMs, Claude, prompt engineering |
+| `web3` | NFT, cryptocurrency, blockchain |
+
 ## Adding a Project
 
 Projects live in `content/projects/*.md` and render via `themes/squalr/layouts/projects/`.

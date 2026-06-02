@@ -2,6 +2,16 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.3.5] — 2026-06-01
+
+### Removed
+
+- **Web ring widget dropped.** The "Static-Site Ring" sidebar panel was a placeholder with no real outbound links; removed from `index.html` and its scoped `.webring` CSS removed from `cybershack.css`.
+
+### Changed
+
+- **Blog tag vocabulary normalized.** Audited all post frontmatter — deduped near-duplicates, removed the vague `project` tag, merged `cryptocurrency` + `nft` → `web3`, renamed `github` → `automation`, added `documentation` to the documentation post, and tagged the previously tag-less 11ty deploy post (`azure`, `website`). Canonical vocabulary recorded in `CLAUDE.md`.
+
 ## [1.3.4] — 2026-06-01
 
 ### Fixed

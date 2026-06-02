@@ -2,7 +2,6 @@
 title: 301 Redirects and Reversing a 301 Redirect
 date: 2021-04-20T00:00:00+00:00
 tags:
-  - project
   - website
 ---
 

@@ -19,8 +19,12 @@
   <link rel="shortcut icon" href="{{ .Site.Params.favicon | default "/favicon.ico" }}" />
   <link rel="preconnect" href="https://lastfm.freetls.fastly.net" crossorigin>
   <link rel="preconnect" href="https://ws.audioscrobbler.com">
-  {{- $css := resources.Get "css/cybershack.scss" | toCSS (dict "transpiler" "dartsass") | minify | fingerprint }}
-  <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
+  <link rel="preload" href="/fonts/press-start-2p.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/vt323.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/comic-neue-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/comic-neue-700.woff2" as="font" type="font/woff2" crossorigin>
+  {{- $css := resources.Get "css/cybershack.scss" | toCSS (dict "transpiler" "dartsass") | minify }}
+  <style>{{ $css.Content | safeCSS }}</style>
   {{ template "_internal/opengraph.html" . }}
   {{ template "_internal/twitter_cards.html" . }}
 </head>
@@ -101,7 +105,7 @@
             <div class="wa-vol"><div class="wa-vol-knob"></div></div>
           </div>
         </div>
-        <img id="np-art" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="300" height="300" alt="" hidden>
+        <img id="np-art" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="300" height="300" alt="" hidden fetchpriority="high">
         <ul class="wa-playlist" id="np-playlist" aria-label="Recent tracks"></ul>
         <div class="wa-footer">
           <span class="wa-footer-label">scrobbles</span>

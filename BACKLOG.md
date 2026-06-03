@@ -49,7 +49,6 @@ _No open bug items._
 | --- | --- | --- |
 | Scheduled rebuild so future-dated posts auto-publish | S | M |
 | CSS-only gallery lightbox | S | M |
-| Windows minimize, maximize, and close | M | H |
 | AIM-style buddy list widget backed by Steam friends API | M | H |
 | Replace fake guestbook with GitHub Discussions (Giscus) | M | M |
 
@@ -105,24 +104,6 @@ _No open cleanup items._
 - Respect `prefers-reduced-motion` for the fade.
 - Trap: `:target` lightboxes can fight the browser back button and scroll position. Test that closing returns the visitor to where they were on the page.
 - If `:target` gets fiddly, a tiny vanilla-JS lightbox (no dependency) is the fallback — but try CSS first to keep the no-build ethos.
-
----
-
-### Windows minimize, maximize, and close
-
-**Type:** feature
-
-**Why:** The Win95-style windows have decorative title bar buttons but they do nothing on click. Making them functional would be on-brand — minimize collapses a window to a taskbar entry, close hides it, maximize fills the viewport — and makes the homepage feel like an actual desktop rather than a static mockup.
-
-**Notes:**
-
-- Keep JS minimal: a small vanilla module that toggles classes. No framework.
-- **Minimize:** collapse the window to show only its title bar; add a taskbar entry at the bottom of the screen that restores it on click.
-- **Maximize:** expand the window to fill the main content area, storing original dimensions for restore. Double-click on the title bar is the classic trigger.
-- **Close:** hide the window entirely; add a way to reopen (a taskbar entry or a clickable "desktop icon").
-- Persist state in `sessionStorage` so windows stay closed/minimized across soft navigations but reset on a fresh visit.
-- JS goes in `themes/squalr/assets/js/` and is bundled through Hugo Pipes (same pattern as existing scripts).
-- Degrade gracefully with no JS — buttons just don't respond, same as today.
 
 ---
 

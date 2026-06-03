@@ -2,6 +2,14 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.6.5] — 2026-06-03
+
+### Added
+
+- **Functional Win95 window controls (minimize, maximize, close).** All `.win` title-bar buttons and the WinAmp title-bar buttons now work. Minimize collapses the window to its title bar; maximize expands it to fill the viewport (double-clicking the title bar also toggles maximize); close hides it entirely. WinAmp `_`/`□` toggle shade mode (compact title-bar-only view); `×` closes the player. State persists in `sessionStorage` and resets on a fresh visit. Degrades gracefully with no JS. All four window instances (homepage welcome, homepage guestbook, WinAmp player, inner-page content) share a single `partials/win-btns.html` partial so button markup is identical everywhere. (`win-btns.html`, `_win95.scss`, `_winamp.scss`, `cybershack.js`)
+- **Win2000-style taskbar.** When any window is minimized or closed, a fixed taskbar appears at the bottom of the screen with three zones: a **Start button** (site favicon + "Start" label, far left), a **task strip** (restore buttons for each minimized/closed window or player, center), and a **live clock** in a sunken system-tray inset (far right, updates every second). Clicking **Start** clears `sessionStorage` and restores every window and the WinAmp player to their default visible state, then dismisses the taskbar. (`_win95.scss`, `cybershack.js`)
+- **"NEW!" badge on project cards.** Projects with a `date:` within the last 45 days now display the same blinking red `NEW!` badge used on post list rows. (`pcard.html`)
+
 ## [1.6.4] — 2026-06-03
 
 ### Changed

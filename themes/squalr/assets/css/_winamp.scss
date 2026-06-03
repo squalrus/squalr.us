@@ -36,28 +36,6 @@ a.wa-name {
   &:hover { text-decoration: underline; opacity: .85; }
 }
 
-// Title bar window buttons
-.wa-wbtns { display: flex; gap: 2px; flex-shrink: 0; }
-
-.wa-wb {
-  width: 14px;
-  height: 12px;
-  padding: 0;
-  border: 1px solid;
-  border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
-  background: var(--chrome);
-  color: #000;
-  font-family: var(--comic);
-  font-size: 9px;
-  line-height: 1;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:active { border-color: var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd); }
-}
 
 // Dark body area
 .wa-body { background: #232323; padding: 4px; }
@@ -294,6 +272,14 @@ a.wa-name {
 
 .wa-pl-idx   { flex-shrink: 0; width: 14px; text-align: right; }
 .wa-pl-track { overflow: hidden; text-overflow: ellipsis; }
+
+// JS-toggled states
+.wa.wa-shaded .wa-body,
+.wa.wa-shaded #np-art,
+.wa.wa-shaded .wa-playlist,
+.wa.wa-shaded .wa-footer { display: none; }
+
+.wa.wa-closed { display: none; }
 
 // ---- Footer (scrobble count) ----
 

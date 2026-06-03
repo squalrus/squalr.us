@@ -50,7 +50,7 @@
     <div class="win">
       <div class="tbar">
         <span>C:\{{ $sec }}\{{ .Title }}</span>
-        <span class="tb-btns" aria-hidden="true"><i>_</i><i>▢</i><i>✕</i></span>
+        {{ partial "win-btns.html" . }}
       </div>
       <div class="body">
         {{ block "main" . }}{{ .Content }}{{ end }}

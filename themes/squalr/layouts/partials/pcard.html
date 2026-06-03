@@ -4,7 +4,7 @@
 {{- $slug := .File.ContentBaseName -}}
 {{- $notes := where site.RegularPages "Params.projects" "intersect" (slice $slug) -}}
 <article class="pcard">
-  <div class="pchrome"><h3 class="pname"><a href="{{ .Permalink }}">{{ .Title }}</a></h3><span class="pstat {{ $statusClass }}">{{ .Params.status | upper }}</span></div>
+  <div class="pchrome"><h3 class="pname"><a href="{{ .Permalink }}">{{ .Title }}</a>{{- if ge .Date (now.AddDate 0 0 -45) }} <span class="newgif blink">NEW!</span>{{ end }}</h3><span class="pstat {{ $statusClass }}">{{ .Params.status | upper }}</span></div>
   <div class="shot">
     {{- with .Params.image }}
     {{- $assetPath := strings.TrimLeft "/" . }}

@@ -1,6 +1,7 @@
 ---
 title: "The three markdown files that replaced my project tools"
 date: 2026-06-09T00:00:00+00:00
+draft: true
 slug: the-three-markdown-files-that-replaced-my-project-tools
 tags:
   - process

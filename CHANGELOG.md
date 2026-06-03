@@ -2,6 +2,16 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.6.0] — 2026-06-02
+
+### Added
+
+- **"Relaunching squalr.us in 2026" post.** Covers the 2026 audit and modernization work: GA4 migration, GitHub Actions updates, Hugo version pinning, Dart Sass pipeline, custom theme build (parity → GeoCities redesign, gotchas), and the version/changelog/backlog workflow. (`content/blog/relaunching-squalr-us-in-2026.md`)
+
+### Changed
+
+- **Hero eyebrow is now config-driven.** The `·:¦:· HOME OF ·:¦:·` banner text reads from `params.hero.kicker` in `config.yaml` instead of being hardcoded in the template. (`index.html`, `config.yaml`)
+
 ## [1.5.0] — 2026-06-02
 
 ### Added

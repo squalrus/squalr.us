@@ -16,7 +16,7 @@ terminal:
   label: 'desktop-tracker — dev'
   glyph: '▮▮'
   lines:
-    - '$ cargo run'
+    - '$ init desktop-tracker'
     - '# tracking active window + idle time'
-    - '⚠ still figuring out the good idea'
+    - '$ pyinstaller --name "DesktopTracker" pyvda tracker.py'
 ---

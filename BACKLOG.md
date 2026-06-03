@@ -55,10 +55,7 @@ _No open bug items._
 
 ### Improvements
 
-| Title | Effort | Value |
-| --- | --- | --- |
-| Flesh out the `desktop-tracker` project body and screenshots | S | M |
-| Fix forced reflow in cybershack.js | M | M |
+_No open improvement items._
 
 ### Cleanup
 
@@ -126,36 +123,6 @@ _No open cleanup items._
 - Persist state in `sessionStorage` so windows stay closed/minimized across soft navigations but reset on a fresh visit.
 - JS goes in `themes/squalr/assets/js/` and is bundled through Hugo Pipes (same pattern as existing scripts).
 - Degrade gracefully with no JS — buttons just don't respond, same as today.
-
----
-
-### Flesh out the `desktop-tracker` project body and screenshots
-
-**Type:** improvement
-
-**Why:** Metadata was updated in v1.3.1 (correct stack, real description, status promoted to `active`) but the detail page still has no body copy and no screenshots. Without them, clicking into the project lands on an empty shell.
-
-**Notes:**
-
-- Add a real body (what the app does, why Virtual Desktop tracking, how the BambooHR sync works) so the detail page isn't empty.
-- Add a featured `image:` + a `gallery:` once there are screenshots — drop files in `static/img/projects/desktop-tracker/` (the folder exists).
-- Cross-link any future "building desktop-tracker" post via `projects: [desktop-tracker]` so the card's field-note count lights up.
-
----
-
-### Fix forced reflow in cybershack.js
-
-**Type:** improvement
-
-**Why:** Lighthouse flags 182ms of unattributed forced reflow — JavaScript is querying layout properties (e.g. `offsetWidth`) after invalidating the DOM, forcing the browser to synchronously recalculate styles. This blocks the main thread and delays interactivity.
-
-**Notes:**
-
-- Open Chrome DevTools → Performance tab → record a page load → look for tall "Recalculate Style" / "Layout" blocks triggered immediately after JS execution. The call stack will point at the offending line in `cybershack.js`.
-- Classic pattern to look for: a DOM write (setting `innerHTML`, toggling a class, changing a style) followed immediately by a geometry read (`offsetWidth`, `getBoundingClientRect`, `scrollHeight`). The read forces a flush.
-- Likely suspects: the visitor counter (updates text then reads width?), the Now Playing widget (sets album art then reads container size?), or the sparkle cursor (measures cursor position relative to DOM on mousemove).
-- Fix: batch all reads before writes, or defer the write to the next `requestAnimationFrame`. A pattern like `requestAnimationFrame(() => { el.style.width = ...; })` breaks the read-write cycle.
-- "Unattributed" in Lighthouse means it may originate in a third-party script (GTM) — profile with GTM blocked to isolate whether the reflow is first- or third-party.
 
 ---
 

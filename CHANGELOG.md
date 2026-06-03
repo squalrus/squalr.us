@@ -2,6 +2,16 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.6.4] — 2026-06-03
+
+### Changed
+
+- **Stylesheet inlined to eliminate render-blocking request.** The `cybershack.min.*.css` file was loaded via a synchronous `<link rel="stylesheet">`, blocking first paint for ~210 ms (est. 600 ms LCP/FCP savings). The CSS is now rendered inline in a `<style>` block by Hugo's asset pipeline — no external stylesheet request on any page. The `fingerprint` step is removed since there is no URL to version. (`index.html`, `baseof.html`)
+- **Self-hosted fonts preloaded from HTML.** Added `<link rel="preload" as="font" type="font/woff2" crossorigin>` for all four `.woff2` files (`press-start-2p`, `vt323`, `comic-neue-400`, `comic-neue-700`) in both `index.html` and `baseof.html`. Fonts previously couldn't start downloading until the browser parsed CSS; preload tags let them fetch in parallel with the HTML itself, cutting the critical chain by ~400 ms. (`index.html`, `baseof.html`)
+- **LCP album art marked high-priority.** Added `fetchpriority="high"` to `#np-art` in `index.html` so the browser prioritises the album art fetch once the JS-driven src is set. (`index.html`)
+- **Forced reflow eliminated from WinAmp marquee.** The adaptive marquee used `void s.offsetWidth` to synchronously flush layout before measuring text overflow — a forced reflow that blocked the main thread. Replaced with a `requestAnimationFrame` callback: the class removal and property clears happen first, then the measurement and conditional class re-add happen in the next frame after the browser has committed the style changes. (`cybershack.js`)
+- **Desktop Tracker project body written.** The project detail page had no body copy — clicking through landed on an empty shell. Added a description of what the app does (Virtual Desktop time tracking → BambooHR sync), how it works (pyvda, pystray, PyInstaller), and why it's useful. (`content/projects/desktop-tracker.md`)
+
 ## [1.6.3] — 2026-06-03
 
 ### Changed

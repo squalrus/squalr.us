@@ -74,30 +74,30 @@
           lbl.textContent = isNow ? '▶ playing' : '■ last played';
           lbl.className = 'wa-state' + (isNow ? '' : ' last-played');
         }
-        // Adaptive marquee: only scroll when text actually overflows the clip container
+        s.style.transition = a.style.transition = 'opacity .3s';
+        s.style.opacity = 1; a.style.opacity = 1;
+        // Adaptive marquee: defer measurement to next frame — avoids forced reflow
         var wrap = s.parentElement;
         if (wrap) {
           s.classList.remove('wa-scrolling');
-          void s.offsetWidth; // flush so scrollWidth reflects new text without animation
-          var textW = s.scrollWidth;
-          var wrapW = wrap.clientWidth;
-          if (textW > wrapW && !reducedMotion) {
-            var gap = Math.max(60, wrapW >> 1); // half-container gap between loops
-            var shift = textW + gap;
-            s.style.setProperty('--wa-pad', gap + 'px');
-            s.style.setProperty('--wa-shift', '-' + shift + 'px');
-            // ~50px/s scroll speed; hold at start takes 20% of total, scroll takes 80%
-            // Set --wa-dur on wrap (not span) so ::before can access it for fade-in sync
-            wrap.style.setProperty('--wa-dur', Math.max(7, shift / 50 / 0.8).toFixed(1) + 's');
-            s.classList.add('wa-scrolling');
-          } else {
-            s.style.removeProperty('--wa-pad');
-            s.style.removeProperty('--wa-shift');
-            wrap.style.removeProperty('--wa-dur');
-          }
+          s.style.removeProperty('--wa-pad');
+          s.style.removeProperty('--wa-shift');
+          wrap.style.removeProperty('--wa-dur');
+          requestAnimationFrame(function() {
+            var textW = s.scrollWidth;
+            var wrapW = wrap.clientWidth;
+            if (textW > wrapW && !reducedMotion) {
+              var gap = Math.max(60, wrapW >> 1); // half-container gap between loops
+              var shift = textW + gap;
+              s.style.setProperty('--wa-pad', gap + 'px');
+              s.style.setProperty('--wa-shift', '-' + shift + 'px');
+              // ~50px/s scroll speed; hold at start takes 20% of total, scroll takes 80%
+              // Set --wa-dur on wrap (not span) so ::before can access it for fade-in sync
+              wrap.style.setProperty('--wa-dur', Math.max(7, shift / 50 / 0.8).toFixed(1) + 's');
+              s.classList.add('wa-scrolling');
+            }
+          });
         }
-        s.style.transition = a.style.transition = 'opacity .3s';
-        s.style.opacity = 1; a.style.opacity = 1;
       }, 200);
     }
 

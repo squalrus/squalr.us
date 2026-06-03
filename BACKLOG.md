@@ -58,7 +58,6 @@ _No open bug items._
 | Title | Effort | Value |
 | --- | --- | --- |
 | Flesh out the `desktop-tracker` project body and screenshots | S | M |
-| Serve responsive / optimized images (Glizzy Relay) | M | M |
 | Fix forced reflow in cybershack.js | M | M |
 
 ### Cleanup
@@ -141,22 +140,6 @@ _No open cleanup items._
 - Add a real body (what the app does, why Virtual Desktop tracking, how the BambooHR sync works) so the detail page isn't empty.
 - Add a featured `image:` + a `gallery:` once there are screenshots — drop files in `static/img/projects/desktop-tracker/` (the folder exists).
 - Cross-link any future "building desktop-tracker" post via `projects: [desktop-tracker]` so the card's field-note count lights up.
-
----
-
-### Serve responsive / optimized images (Glizzy Relay)
-
-**Type:** improvement
-
-**Why:** The Glizzy Relay featured image is 1920×1070 px (212 KiB) but displayed at 683×384 px, wasting ~185 KiB per page load. Lighthouse flags this as a direct LCP contributor. The same issue likely affects other project featured images.
-
-**Notes:**
-
-- **Quick fix (do first):** resize `static/img/projects/glizzyrelay.com/featured.png` to ≤1366px wide using any image tool, and convert to WebP. Halves the bytes with no template change.
-- **Better fix:** use Hugo's built-in image processing in the project card/detail templates — `resources.Get` + `.Resize "683x" webp` generates a correctly-sized WebP at build time. Hugo caches resized images in `resources/_gen/`, which is gitignored.
-- **Best fix (stretch):** generate a `srcset` with 2–3 sizes (683w, 1024w, 1366w) so mobile gets the smallest version. Hugo's `.Resize` and `.Fill` support this with a `range` loop.
-- Audit all other files under `static/img/projects/` for the same oversize pattern while you're here — fix them all in one pass.
-- Update CLAUDE.md's image section to document the max source image width convention once a standard is set.
 
 ---
 

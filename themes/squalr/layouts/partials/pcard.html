@@ -7,8 +7,23 @@
   <div class="pchrome"><h3 class="pname"><a href="{{ .Permalink }}">{{ .Title }}</a></h3><span class="pstat {{ $statusClass }}">{{ .Params.status | upper }}</span></div>
   <div class="shot">
     {{- with .Params.image }}
+    {{- $assetPath := strings.TrimLeft "/" . }}
+    {{- $imgRes := resources.Get $assetPath }}
+    {{- if $imgRes }}
+      {{- $sm := $imgRes.Resize "683x webp" }}
+      {{- $md := $imgRes.Resize "1024x webp" }}
+      {{- $lg := $imgRes.Resize "1366x webp" }}
+    <span class="shothint">⌖ screenshot.gif</span>
+    <img src="{{ $sm.RelPermalink }}"
+         srcset="{{ $sm.RelPermalink }} 683w, {{ $md.RelPermalink }} 1024w, {{ $lg.RelPermalink }} 1366w"
+         sizes="(max-width: 760px) 100vw, 460px"
+         alt="{{ $.Title }} screenshot"
+         width="{{ $sm.Width }}" height="{{ $sm.Height }}"
+         loading="lazy" />
+    {{- else }}
     <span class="shothint">⌖ screenshot.gif</span>
     <img src="{{ . }}" alt="{{ $.Title }} screenshot" loading="lazy" />
+    {{- end }}
     {{- else }}
     {{ partial "cybershack-terminal.html" . }}
     {{- end }}

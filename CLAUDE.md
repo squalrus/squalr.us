@@ -51,8 +51,10 @@ themes/squalr/
   assets/css/_pagination.scss # .pagination
   assets/css/_responsive.scss # prefers-reduced-motion + max-width:760px
   static/cybershack.js        # visitor counter, guestbook, sparkle cursor, now-playing (localStorage)
+assets/
+  img/projects/    # project featured images (processed by Hugo → WebP srcset at build time)
 static/
-  img/             # images: blog/<slug>/ and projects/<slug>/
+  img/             # blog post images and any other static assets
   staticwebapp.config.json    # cache + CSP / security headers for Azure
 config.yaml        # site config, menu, palette (params.style), hero (params.hero)
 ```
@@ -114,8 +116,10 @@ links:                  # optional; arbitrary labelled links
   - label: "Live ↗"
     url: "https://..."
 # image: /img/projects/<slug>/featured.png   # featured pic (card + detail header)
+                                              # source file lives in assets/img/projects/<slug>/featured.png
+                                              # (Hugo resizes to WebP srcset at build time; ≤1366px wide source recommended)
 # gallery:                                    # drill-in gallery on the detail page
-#   - src: /img/projects/<slug>/shot.png
+#   - src: /img/projects/<slug>/shot.png      # gallery images still served from static/img/projects/<slug>/
 #     caption: "What this shows"
 # terminal:                                   # image-less cards render a DOS banner from this
 #   label: 'merge-bot — ci'
@@ -123,10 +127,11 @@ links:                  # optional; arbitrary labelled links
 ---
 ```
 
-Images go in `static/img/projects/<slug>/` (drop-zone folders already exist). All of `image`,
-`gallery`, and `terminal` are optional. Card banner logic: `image` → screenshot; else the
-`terminal:` block (or an auto-generated one) renders a DOS-style banner so no card is ever blank.
-A post with `projects: [<this project's filename base>]` shows a `◇ field notes` cross-link on the card.
+**Featured image** (`image:`) — put the source file in `assets/img/projects/<slug>/featured.png` (≤1366px wide). Hugo resizes it to WebP at build time and generates a srcset; no manual resizing needed. The `image:` frontmatter value stays as the URL path `/img/projects/<slug>/featured.png` — the template strips the leading `/` to find the asset.
+
+**Gallery images** (`gallery[].src`) — still go in `static/img/projects/<slug>/` (served as-is; Hugo doesn't process them).
+
+All of `image`, `gallery`, and `terminal` are optional. Card banner logic: `image` → screenshot; else the `terminal:` block (or an auto-generated one) renders a DOS-style banner so no card is ever blank. A post with `projects: [<this project's filename base>]` shows a `◇ field notes` cross-link on the card.
 
 ## Deployment
 

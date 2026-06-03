@@ -33,9 +33,9 @@
     {{- with .Params.tech }}<div class="ptags">{{ range . }}<span>{{ . }}</span>{{ end }}</div>{{ end }}
     <div class="pfoot">
       <span class="plinks">
-        {{- with .Params.demo }}<a href="{{ . }}">live↗</a>{{ end }}
-        {{- with .Params.repo }}<a href="{{ . }}">github↗</a>{{ end }}
-        {{- range .Params.links }}<a href="{{ .url }}">{{ replaceRE `[↗→\s]+$` "" .label | lower }}↗</a>{{ end }}
+        {{- with .Params.demo }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">live↗</a>{{ end }}
+        {{- with .Params.repo }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">github↗</a>{{ end }}
+        {{- range .Params.links }}<a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ replaceRE `[↗→\s]+$` "" .label | lower }}↗</a>{{ end }}
       </span>
       {{- if $notes }}<a class="pnotes" href="{{ .Permalink }}">◇ {{ len $notes }} note{{ if gt (len $notes) 1 }}s{{ end }}</a>{{ else }}<span class="pnotes none">◇ no notes yet</span>{{ end }}
     </div>

@@ -2,6 +2,12 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.6.3] — 2026-06-03
+
+### Changed
+
+- **External links and in-post body links open in a new tab.** A Hugo Markdown render hook (`layouts/_default/_markup/render-link.html`) now intercepts every link in post and project body copy — all open in a new tab, with `rel="noopener noreferrer"` added for external URLs. Template links that were missing `target="_blank"` are also fixed: project card `demo`, `repo`, and custom `links` in `pcard.html`; the Hugo credit in `baseof.html`; and the three Dura Digital links and the Hugo credit in `index.html`. Suggested by [Fiorella Franzini](https://linkedin.com/in/fiorella-franzini).
+
 ## [1.6.2] — 2026-06-02
 
 ### Fixed

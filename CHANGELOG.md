@@ -2,6 +2,12 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.6.1] — 2026-06-02
+
+### Changed
+
+- **Responsive, WebP-optimized project images.** Featured images on project cards and detail pages are now processed through Hugo's asset pipeline — resized to display dimensions and served as WebP with a three-step `srcset` (683w, 1024w, 1366w for cards; 960w and 1366w for hero). Source images moved from `static/img/projects/` to `assets/img/projects/` so Hugo can process them at build time. Saves ~185 KiB on the Glizzy Relay card alone; all three project images benefit. (`pcard.html`, `projects/single.html`)
+
 ## [1.6.0] — 2026-06-02
 
 ### Added

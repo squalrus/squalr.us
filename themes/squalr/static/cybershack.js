@@ -48,7 +48,6 @@
         art   = document.getElementById('np-art'),
         eq    = document.getElementById('np-eq'),
         lbl   = document.getElementById('np-label'),
-        loved = document.getElementById('np-loved'),
         mq    = document.getElementById('mq-track');
     var hasWidget = !!(s && a);
     if (!hasWidget && !mq) return;
@@ -75,7 +74,6 @@
           lbl.textContent = isNow ? '▶ playing' : '■ last played';
           lbl.className = 'wa-state' + (isNow ? '' : ' last-played');
         }
-        if (loved) loved.hidden = track.loved !== '1';
         // Adaptive marquee: only scroll when text actually overflows the clip container
         var wrap = s.parentElement;
         if (wrap) {

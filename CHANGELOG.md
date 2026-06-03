@@ -2,6 +2,12 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.6.2] — 2026-06-02
+
+### Fixed
+
+- **WinAmp loved-heart always visible.** The ❤ indicator was previously toggled via `hidden` attribute in JS (`loved.hidden = track.loved !== '1'`), so it only appeared when the currently-loaded track had been loved — invisible on cold page load until the Next.js polling resolved. Removed the `hidden` attribute from the HTML element and the `loved.hidden` assignment from JS; the heart now shows persistently. (`index.html`, `cybershack.js`)
+
 ## [1.6.1] — 2026-06-02
 
 ### Changed

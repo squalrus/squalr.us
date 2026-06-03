@@ -23,26 +23,6 @@
       white-space: nowrap;
     }
 
-    .tb-btns {
-      display: flex;
-      gap: 3px;
-
-      i {
-        width: 15px;
-        height: 13px;
-        display: grid;
-        place-items: center;
-        background: var(--chrome);
-        border: 1px solid;
-        border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
-        color: #000;
-        font-family: var(--comic);
-        font-weight: 700;
-        font-size: 10px;
-        font-style: normal;
-        line-height: 1;
-      }
-    }
   }
 
   .body {
@@ -52,5 +32,142 @@
     border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
     border-top: none;
     overflow-wrap: break-word;
+  }
+
+  // JS-toggled window states
+  &.win-minimized .body { display: none; }
+
+  &.win-maximized {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+    .body {
+      flex: 1;
+      overflow-y: auto;
+    }
+  }
+
+  &.win-closed { display: none; }
+}
+
+// Shared title-bar button chrome — used in .win .tbar and .wa .wa-title
+.tb-btns {
+  display: flex;
+  gap: 3px;
+  flex-shrink: 0;
+
+  .tb-btn {
+    width: 15px;
+    height: 13px;
+    display: grid;
+    place-items: center;
+    background: var(--chrome);
+    border: 1px solid;
+    border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
+    color: #000;
+    font-family: var(--comic);
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+
+    &:active {
+      border-color: var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd);
+    }
+  }
+}
+
+// Fixed taskbar — Win2000 style: [Start] [tasks] [tray/clock]
+#win-taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: var(--chrome);
+  border-top: 2px solid;
+  border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 1000;
+
+  // Start button — favicon + bold label, slightly raised
+  .tb-start {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1px 8px 1px 4px;
+    height: 22px;
+    background: var(--chrome);
+    border: 2px solid;
+    border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
+    cursor: pointer;
+    font-family: var(--pix);
+    font-size: 9px;
+    font-weight: 700;
+    color: #000;
+    white-space: nowrap;
+    flex-shrink: 0;
+
+    img { width: 16px; height: 16px; image-rendering: pixelated; }
+
+    &:active {
+      border-color: var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd);
+    }
+  }
+
+  // Task button strip — takes remaining space
+  .tb-tasks {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .tb-task {
+    display: flex;
+    align-items: center;
+    padding: 2px 8px;
+    background: var(--chrome);
+    border: 1px solid;
+    border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
+    cursor: pointer;
+    font-family: var(--pix);
+    font-size: 9px;
+    color: #000;
+    white-space: nowrap;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:active {
+      border-color: var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd);
+    }
+  }
+
+  // System tray — sunken inset, right-aligned
+  .tb-tray {
+    display: flex;
+    align-items: center;
+    padding: 1px 6px;
+    height: 20px;
+    border: 1px solid;
+    border-color: var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd);
+    flex-shrink: 0;
+  }
+
+  .tb-clock {
+    font-family: var(--pix);
+    font-size: 9px;
+    color: #000;
+    white-space: nowrap;
   }
 }

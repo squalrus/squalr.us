@@ -215,6 +215,208 @@
     });
   }
 
+  /* ---------- WINDOW CONTROLS (Win95 + WinAmp) ---------- */
+
+  // Shared fixed taskbar — used by both window controls and WinAmp controls
+  var _tbEl    = null;
+  var _tbItems = {}; // key → { title, restoreFn }
+  var _winReset = null; // set by initWindowControls — resets all .win states
+  var _waReset  = null; // set by initWinampControls — resets WinAmp state
+
+  function _tbAdd(key, title, restoreFn) {
+    _tbItems[key] = { title: title, restoreFn: restoreFn };
+    _tbRender();
+  }
+
+  function _tbRemove(key) {
+    delete _tbItems[key];
+    _tbRender();
+  }
+
+  function _tbRender() {
+    var keys = Object.keys(_tbItems);
+    if (!keys.length) {
+      if (_tbEl) { _tbEl.remove(); _tbEl = null; }
+      return;
+    }
+    if (!_tbEl) {
+      _tbEl = document.createElement('div');
+      _tbEl.id = 'win-taskbar';
+      _tbEl.setAttribute('role', 'toolbar');
+      _tbEl.setAttribute('aria-label', 'Taskbar');
+      document.body.appendChild(_tbEl);
+
+      // Start button (Win2000 style — favicon + bold label)
+      var startBtn = document.createElement('button');
+      startBtn.className = 'tb-start';
+      startBtn.setAttribute('aria-label', 'Start');
+      var startImg = document.createElement('img');
+      startImg.src = '/img/favicon.ico';
+      startImg.alt = '';
+      startImg.setAttribute('aria-hidden', 'true');
+      startImg.width = 16;
+      startImg.height = 16;
+      startBtn.appendChild(startImg);
+      var startText = document.createElement('span');
+      startText.textContent = 'Start';
+      startBtn.appendChild(startText);
+      startBtn.addEventListener('click', function () {
+        sessionStorage.clear();
+        if (_winReset) _winReset();
+        if (_waReset)  _waReset();
+      });
+      _tbEl.appendChild(startBtn);
+
+      // Task area (window restore buttons go here)
+      var taskArea = document.createElement('div');
+      taskArea.className = 'tb-tasks';
+      _tbEl.appendChild(taskArea);
+
+      // System tray + clock
+      var tray = document.createElement('div');
+      tray.className = 'tb-tray';
+      var clock = document.createElement('time');
+      clock.className = 'tb-clock';
+      tray.appendChild(clock);
+      _tbEl.appendChild(tray);
+
+      function tickClock() {
+        var now = new Date();
+        var h = now.getHours() % 12 || 12;
+        var m = now.getMinutes();
+        clock.textContent = h + ':' + (m < 10 ? '0' + m : m) + (now.getHours() >= 12 ? ' PM' : ' AM');
+        clock.setAttribute('datetime', now.toTimeString().slice(0, 5));
+      }
+      tickClock();
+      setInterval(tickClock, 1000);
+    }
+
+    // Rebuild only the task buttons — Start and clock stay intact
+    var taskArea = _tbEl.querySelector('.tb-tasks');
+    taskArea.innerHTML = '';
+    keys.forEach(function (key) {
+      var item = _tbItems[key];
+      var btn = document.createElement('button');
+      btn.className = 'tb-task';
+      btn.textContent = '▣ ' + item.title;
+      btn.addEventListener('click', function () { item.restoreFn(); });
+      taskArea.appendChild(btn);
+    });
+  }
+
+  function initWindowControls() {
+    var wins = document.querySelectorAll('.win');
+    if (!wins.length) return;
+    var winData = [];
+
+    function applyState(w, newState) {
+      w.state = newState;
+      if (newState) sessionStorage.setItem(w.key, newState);
+      else sessionStorage.removeItem(w.key);
+
+      w.el.classList.remove('win-minimized', 'win-maximized', 'win-closed');
+      if (newState) w.el.classList.add('win-' + newState);
+
+      var maxBtn = w.el.querySelector('.tb-btn[data-action="maximize"]');
+      if (maxBtn) {
+        maxBtn.textContent = newState === 'maximized' ? '❐' : '▢';
+        maxBtn.setAttribute('aria-label', newState === 'maximized' ? 'Restore' : 'Maximize');
+        maxBtn.setAttribute('title',      newState === 'maximized' ? 'Restore' : 'Maximize');
+      }
+
+      if (newState === 'minimized' || newState === 'closed') {
+        _tbAdd(w.key, w.title, function () { applyState(w, ''); });
+      } else {
+        _tbRemove(w.key);
+      }
+    }
+
+    // Phase 1: collect windows + saved state
+    wins.forEach(function (winEl, idx) {
+      var titleEl = winEl.querySelector('.tbar > span:first-child');
+      var title = (titleEl ? titleEl.textContent.trim() : '') || ('Window ' + (idx + 1));
+      var key = 'win:' + location.pathname + ':' + idx;
+      winData.push({ el: winEl, title: title, key: key, state: sessionStorage.getItem(key) || '' });
+    });
+
+    // Phase 2: apply saved classes + seed taskbar entries
+    winData.forEach(function (w) {
+      w.el.classList.remove('win-minimized', 'win-maximized', 'win-closed');
+      if (w.state) w.el.classList.add('win-' + w.state);
+      var maxBtn = w.el.querySelector('.tb-btn[data-action="maximize"]');
+      if (maxBtn && w.state === 'maximized') {
+        maxBtn.textContent = '❐';
+        maxBtn.setAttribute('aria-label', 'Restore');
+        maxBtn.setAttribute('title', 'Restore');
+      }
+      if (w.state === 'minimized' || w.state === 'closed') {
+        _tbAdd(w.key, w.title, function () { applyState(w, ''); });
+      }
+    });
+
+    // Register global reset so the Start button can restore all windows
+    _winReset = function () { winData.forEach(function (w) { applyState(w, ''); }); };
+
+    // Phase 3: wire up button + dblclick handlers
+    winData.forEach(function (w) {
+      w.el.querySelectorAll('.tb-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var a = btn.dataset.action;
+          if (a === 'minimize')      applyState(w, w.state === 'minimized' ? '' : 'minimized');
+          else if (a === 'maximize') applyState(w, w.state === 'maximized' ? '' : 'maximized');
+          else if (a === 'close')    applyState(w, 'closed');
+        });
+      });
+      var tbar = w.el.querySelector('.tbar');
+      if (tbar) {
+        tbar.addEventListener('dblclick', function (e) {
+          if (e.target.closest('.tb-btns')) return;
+          applyState(w, w.state === 'maximized' ? '' : 'maximized');
+        });
+      }
+    });
+  }
+
+  function initWinampControls() {
+    var wa = document.querySelector('.wa');
+    if (!wa) return;
+    var wbtns = wa.querySelectorAll('.tb-btn');
+    if (!wbtns.length) return;
+
+    var TITLE = '♫ LAST.FM';
+    var SK    = 'wa:s:' + location.pathname; // shaded key
+    var CK    = 'wa:c:' + location.pathname; // closed key
+
+    var shaded = sessionStorage.getItem(SK) === '1';
+    var closed = sessionStorage.getItem(CK) === '1';
+
+    function setState(newShaded, newClosed) {
+      shaded = newShaded;
+      closed = newClosed;
+      sessionStorage.setItem(SK, shaded ? '1' : '');
+      sessionStorage.setItem(CK, closed ? '1' : '');
+      wa.classList.toggle('wa-shaded', shaded);
+      wa.classList.toggle('wa-closed', closed);
+      if (closed) _tbAdd(CK, TITLE, function () { setState(false, false); });
+      else        _tbRemove(CK);
+    }
+
+    // minimize/maximize → toggle shade; close → close player
+    wbtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (btn.dataset.action === 'close') setState(false, true);
+        else                                setState(!shaded, false);
+      });
+    });
+
+    // Register global reset so the Start button can restore the player
+    _waReset = function () { setState(false, false); };
+
+    // Restore saved state on load
+    if (closed)      setState(false, true);
+    else if (shaded) setState(true,  false);
+  }
+
   /* ---------- SPARKLE CURSOR TRAIL ---------- */
   var GLYPHS = ['✦', '✧', '★', '+', '·'];
   var trailOn = true;
@@ -258,6 +460,8 @@
     initNowPlaying();
     initGuestbook();
     initSparkles();
+    initWindowControls();
+    initWinampControls();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);

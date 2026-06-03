@@ -73,11 +73,7 @@
       <div class="wa" role="region" aria-label="Now playing">
         <div class="wa-title">
           <a href="https://www.last.fm/user/squalrus" class="wa-name" target="_blank" rel="noopener noreferrer" aria-label="last.fm profile">♫ LAST.FM</a>
-          <div class="wa-wbtns" aria-hidden="true">
-            <button class="wa-wb" tabindex="-1">_</button>
-            <button class="wa-wb" tabindex="-1">□</button>
-            <button class="wa-wb" tabindex="-1">×</button>
-          </div>
+            {{ partial "win-btns.html" . }}
         </div>
         <div class="wa-body">
           <div class="wa-lcd" aria-live="polite" aria-atomic="true">
@@ -158,7 +154,7 @@
       <div class="win">
         <div class="tbar">
           <span>C:\SQUALRUS\welcome.exe</span>
-          <span class="tb-btns" aria-hidden="true"><i>_</i><i>▢</i><i>✕</i></span>
+          {{ partial "win-btns.html" . }}
         </div>
         <div class="body welcome">
           <p><b class="pop">Hey! I'm Chad.</b> 🏄 Sr Consultant at <a href="https://duradigital.com" target="_blank" rel="noopener noreferrer">Dura Digital</a> — helping teams ship real products for real people. Off the clock I build things that make me happy and teach me something along the way. Usually both.</p>
@@ -194,7 +190,7 @@
       <div id="guestbook" class="win">
         <div class="tbar">
           <span>★ SIGN MY GUESTBOOK ★</span>
-          <span class="tb-btns" aria-hidden="true"><i>_</i><i>▢</i><i>✕</i></span>
+          {{ partial "win-btns.html" . }}
         </div>
         <div class="body">
           <div style="font-family:var(--term);font-size:18px;color:var(--neon-2);text-align:center;margin-bottom:10px" aria-hidden="true">don't be a lurker — leave a mark! ✍</div>

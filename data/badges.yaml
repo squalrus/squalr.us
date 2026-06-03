@@ -3,9 +3,14 @@
   class: "b-netscape"
   url: "#"
   enabled: true
-- top: "made 4"
-  bottom: "1024×768"
-  class: "b-1024"
+- top: "works in"
+  bottom: "IE 4.0"
+  class: "b-ie"
+  url: "#"
+  enabled: true
+- top: "best viewed"
+  bottom: "ANY RES"
+  class: "b-anyres"
   url: "#"
   enabled: true
 - top: "built with"
@@ -14,7 +19,12 @@
   url: "https://gohugo.io"
   enabled: true
 - top: "valid"
-  bottom: "HTML 4.01"
+  bottom: "HTML 2.0"
+  class: "b-html2"
+  url: "#"
+  enabled: true
+- top: "valid"
+  bottom: "HTML 4.0"
   class: "b-html"
   url: "#"
   enabled: true

@@ -41,9 +41,7 @@ Grouped by type; within each type sorted by ROI — small/high first, large/low 
 
 ### Bugs
 
-| Title | Effort | Value |
-| --- | --- | --- |
-| Color contrast failures across cards and badges (a11y) | M | H |
+_No open bug items._
 
 ### Features
 
@@ -143,27 +141,6 @@ _No open cleanup items._
 - Add a real body (what the app does, why Virtual Desktop tracking, how the BambooHR sync works) so the detail page isn't empty.
 - Add a featured `image:` + a `gallery:` once there are screenshots — drop files in `static/img/projects/desktop-tracker/` (the folder exists).
 - Cross-link any future "building desktop-tracker" post via `projects: [desktop-tracker]` so the card's field-note count lights up.
-
----
-
-### Color contrast failures across cards and badges (a11y)
-
-**Type:** bug
-
-**Why:** Multiple elements fail WCAG AA contrast requirements (4.5:1 for normal text, 3:1 for large/bold text). Low-contrast text is difficult or impossible to read for users with low vision or color-vision deficiency.
-
-**Notes:**
-
-- Failing elements identified by Lighthouse:
-  - `.wip` badge text (status pill)
-  - `.panel` div text
-  - `.pnotes.none` span ("◇ no notes yet")
-  - `.pcard` article background/foreground
-  - `.pstat.archived` badge text
-- All styles live in `themes/squalr/assets/css/cybershack.css`. Check each selector's `color` and `background-color` with a contrast checker (browser DevTools has one built in under the color picker).
-- The 90s GeoCities aesthetic uses pastels and neons that often fail WCAG — adjust luminance rather than hue to preserve the vibe while hitting contrast ratios.
-- `.pnotes.none` is the "no notes yet" placeholder — easiest fix is darkening the text color since the background is already known.
-- Badge fixes (`.wip`, `.pstat.archived`): try darkening the text or lightening the background by 10–15% and re-check; small adjustments usually clear the threshold without visible aesthetic change.
 
 ---
 

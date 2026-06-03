@@ -10,7 +10,7 @@ image: /img/projects/squalr.us/featured.png
 # gallery:
 #   - src: /img/projects/squalr.us/homepage.png
 #     caption: "Homepage"
-demo: ""
+demo: "https://squalr.us/"
 tech:
   - GitHub Actions
   - TypeScript

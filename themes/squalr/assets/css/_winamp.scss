@@ -284,7 +284,7 @@ a.wa-name {
     padding: 1px 6px;
     font-family: var(--term);
     font-size: 12px;
-    color: #3a7a3a;
+    color: #428c42;  // was #3a7a3a — 3.72:1, now 4.68:1 on #0d0d0d
     overflow: hidden;
     white-space: nowrap;
 
@@ -306,9 +306,9 @@ a.wa-name {
   border-top: 1px solid #222;
   font-family: var(--term);
   font-size: 11px;
-  color: #2a5a2a;
+  color: #3f8c3f;  // was #2a5a2a — 2.4:1, now 4.66:1 on #0d0d0d
 
-  #lfm-scrobbles { color: #3a7a3a; }
+  #lfm-scrobbles { color: #428c42; }  // was #3a7a3a — 3.72:1, now 4.68:1
 
   // Hide the footer entirely when the scrobble count hasn't loaded yet
   &:has(#lfm-scrobbles:empty) { display: none; }

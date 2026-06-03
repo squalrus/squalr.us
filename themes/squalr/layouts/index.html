@@ -137,7 +137,7 @@
 
       <!-- web badges -->
       <div class="panel">
-        <h2>:: Site Stats ::</h2>
+        <h2>:: Built With ::</h2>
         <div class="badges" aria-hidden="true">
           {{- range hugo.Data.badges }}{{ if .enabled }}
           <a href="{{ .url | default "#" }}" class="badge88 {{ .class }}" tabindex="-1">{{ .top }}<br><b>{{ .bottom }}</b></a>
@@ -214,12 +214,21 @@
       <!-- footer -->
       <div class="foot">
         <hr class="candy" aria-hidden="true">
+        <div class="foot-constr" aria-hidden="true">
+          <span class="hat">⛏</span> ⚠ UNDER CONSTRUCTION ⚠ <span class="hat">⛏</span>
+        </div>
         <div>✉ <a href="mailto:chad.awesome@gmail.com">email me</a> &nbsp;·&nbsp; <span class="em">[ © {{ now.Format "2006" }} {{ .Site.Params.author }} · /dev/null ]</span></div>
         <div style="margin-top:6px">⟢ <a href="/changelog/">CHANGELOG</a> · <a href="/backlog/">BACKLOG</a> ⟢</div>
         <div class="updated">⟳ this page last updated {{ now.Format "01/02/2006" }} · Y2K compliant (probably)</div>
         {{- $version := "" }}{{ with findRE `\[\d+\.\d+\.\d+\]` (readFile "CHANGELOG.md") 1 }}{{ $version = replaceRE `[\[\]]` "" (index . 0) }}{{ end }}
         {{- with $version }}<div class="ver"><a href="/changelog/">▓ running v{{ . }} ▓</a></div>{{ end }}
-        <div class="smol">Built with Hugo. ✨</div>
+        <div class="foot-badges" aria-hidden="true">
+          {{- range hugo.Data.badges }}{{ if .enabled }}
+          <a href="{{ .url | default "#" }}" class="badge88 {{ .class }}" tabindex="-1">{{ .top }}<br><b>{{ .bottom }}</b></a>
+          {{- end }}{{ end }}
+        </div>
+        <div class="smol">Built with <a href="https://gohugo.io">Hugo</a> and GeoCities</div>
+        <div class="viewed">☆ NO FRAMES · NO COOKIES · GEOCITIES APPROVED ☆</div>
       </div>
 
     </main>

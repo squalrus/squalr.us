@@ -2,6 +2,26 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.5.0] — 2026-06-02
+
+### Added
+
+- **Period-accurate footer.** Footer now has a dark navy (`#000080`) background with high-contrast yellow/cyan text, replacing the low-contrast text on lavender that failed WCAG AA. Includes animated ⛏ under-construction pickaxes (respects `prefers-reduced-motion`), the full 88×31 badge strip, "Built with Hugo and GeoCities" credit, and "NO FRAMES · NO COOKIES · GEOCITIES APPROVED" tagline. (`_footer.scss`, `baseof.html`, `index.html`)
+- **New 88×31 badges:** IE 4.0 (dark blue), HTML 2.0 (dark red), and Best Viewed Any Resolution (dark green / matrix green). Displayed in both the sidebar badge panel and the new footer badge strip. (`data/badges.yaml`, `_sidebar.scss`)
+
+### Fixed
+
+- **WCAG AA contrast failures (16 instances).** All failures flagged by Accessibility Insights FastPass resolved:
+  - WinAmp playlist rows and footer scrobble count: `#3a7a3a` / `#2a5a2a` → `#428c42` / `#3f8c3f` on `#0d0d0d` (was 2.4–3.72:1, now 4.66–4.68:1). (`_winamp.scss`)
+  - Sidebar `.wip` status: `#ff6a00` → `#c35000` on cream (was 2.81:1, now 4.72:1). (`_sidebar.scss`)
+  - `.pstat.archived` badge: background `#808080` → `#727272` — white text now 4.57:1. (`_projects.scss`)
+  - Footer badge text: `.foot a { color: #00ffff }` at specificity `[0,1,1]` was overriding badge colour classes at `[0,1,0]`; fixed by adding `.foot .b-*` rules at `[0,2,0]`. (`_footer.scss`)
+- **`squalr.us` project demo link.** Was blank; set to `https://squalr.us/`. (`content/projects/squalr.us.md`)
+
+### Changed
+
+- **HTML 4.01 badge updated to HTML 4.0** (more colloquial for the era). (`data/badges.yaml`)
+
 ## [1.4.1] — 2026-06-02
 
 ### Changed

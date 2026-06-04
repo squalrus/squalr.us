@@ -417,6 +417,13 @@
     else if (shaded) setState(true,  false);
   }
 
+  /* ---------- RETRO AD SLOT (random pick) ---------- */
+  function initAdSlot() {
+    var ads = document.querySelectorAll('.ad-banner');
+    if (!ads.length) return;
+    ads[(Math.random() * ads.length) | 0].style.display = 'block';
+  }
+
   /* ---------- SPARKLE CURSOR TRAIL ---------- */
   var GLYPHS = ['✦', '✧', '★', '+', '·'];
   var trailOn = true;
@@ -459,6 +466,7 @@
     initCounter();
     initNowPlaying();
     initGuestbook();
+    initAdSlot();
     initSparkles();
     initWindowControls();
     initWinampControls();

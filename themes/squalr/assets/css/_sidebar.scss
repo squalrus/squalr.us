@@ -261,6 +261,201 @@
   .ad-body:hover .ad-btn { background: #fff; color: #c0007a; }
 }
 
+.ad-aol {
+  background: #003399;
+  border-color: #001f5e;
+
+  .ad-body { color: #fff; }
+
+  .ad-logo-aol {
+    font-size: 44px;
+    font-family: var(--term);
+    color: #ffcc00;
+    line-height: 1;
+    margin-bottom: 3px;
+    text-shadow: 2px 2px 0 #001f5e;
+  }
+
+  .ad-mascot { font-size: 15px; color: #a0c0ff; margin-bottom: 4px; }
+  .ad-sub    { color: #a0c0ff; }
+  .ad-promo  { color: #ffcc00; font-size: 14px; }
+  .ad-btn    { background: #ffcc00; color: #003399; border-color: #fff; }
+  .ad-body:hover .ad-btn { background: #fff; }
+}
+
+.ad-jeeves {
+  background: #f5f0e0;
+  border-color: #c8a030;
+
+  .ad-body { color: #1a1a4e; }
+
+  .ad-logo-jeeves {
+    font-size: 22px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: bold;
+    color: #1a1a4e;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .ad-mascot { font-size: 22px; color: #c8a030; margin-bottom: 4px; }
+  .ad-sub    { color: #333; }
+  .ad-promo  { color: #1a1a4e; font-size: 14px; }
+  .ad-btn    { background: #1a1a4e; color: #f5f0e0; border-color: #c8a030; }
+  .ad-body:hover .ad-btn { background: #c8a030; color: #fff; }
+}
+
+.ad-napster {
+  background: #000;
+  border-color: #ff6600;
+
+  .ad-body { color: #fff; }
+
+  .ad-logo-napster {
+    font-size: 28px;
+    font-family: var(--term);
+    color: #ff6600;
+    line-height: 1;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+
+  .ad-mascot { font-size: 24px; margin-bottom: 4px; }
+  .ad-sub    { color: #ccc; }
+  .ad-promo  { color: #ff6600; font-size: 19px; }
+  .ad-btn    { background: #ff6600; color: #000; border-color: #fff; }
+  .ad-body:hover .ad-btn { background: #fff; color: #000; }
+}
+
+.ad-geocities {
+  background: #000;
+  border-color: #ffcc00;
+
+  .ad-body { color: #fff; }
+
+  .ad-logo-geocities {
+    font-size: 16px;
+    font-family: var(--pix);
+    line-height: 1.3;
+    margin-bottom: 5px;
+  }
+
+  .ad-sub    { color: #ffcc00; }
+  .ad-promo  { color: #39ff14; font-size: 15px; }
+  .ad-btn    { background: #ffcc00; color: #000; border-color: #fff; }
+  .ad-body:hover .ad-btn { background: #fff; }
+}
+
+.ad-blockbuster {
+  background: #003087;
+  border-color: #001f5e;
+
+  .ad-body { color: #fff; }
+
+  .ad-logo-blockbuster {
+    font-size: 21px;
+    font-family: var(--term);
+    color: #ffcc00;
+    line-height: 1;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+
+  .ad-mascot { font-size: 18px; color: #a0c0ff; margin-bottom: 4px; }
+  .ad-sub    { color: #a0c0ff; }
+  .ad-promo  { color: #ffcc00; font-size: 17px; }
+  .ad-btn    { background: #ffcc00; color: #003087; border-color: #fff; }
+  .ad-body:hover .ad-btn { background: #fff; color: #003087; }
+}
+
+.ad-altavista {
+  background: #fff;
+  border-color: #cc0000;
+
+  .ad-body { color: #1a1a1a; }
+
+  .ad-logo-altavista {
+    font-size: 24px;
+    font-family: var(--term);
+    color: #cc0000;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .ad-sub    { color: #333; }
+  .ad-promo  { color: #0000cc; font-size: 15px; }
+  .ad-btn    { background: #cc0000; color: #fff; border-color: #0000cc; }
+  .ad-body:hover .ad-btn { background: #0000cc; }
+}
+
+.ad-kozmo {
+  background: #00874a;
+  border-color: #005c33;
+
+  .ad-body { color: #fff; }
+
+  .ad-logo-kozmo {
+    font-size: 26px;
+    font-family: var(--comic);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 4px;
+    span { color: #ffcc00; }
+  }
+
+  .ad-mascot { font-size: 20px; margin-bottom: 4px; }
+  .ad-sub    { color: #c0ffd8; }
+  .ad-promo  { color: #ffcc00; font-size: 19px; }
+  .ad-btn    { background: #ffcc00; color: #005c33; border-color: #fff; }
+  .ad-body:hover .ad-btn { background: #fff; color: #00874a; }
+}
+
+.ad-priceline {
+  background: #002366;
+  border-color: #001540;
+
+  .ad-body { color: #fff; }
+
+  .ad-logo-priceline {
+    font-size: 22px;
+    font-family: var(--term);
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 4px;
+    span { color: #ffcc00; }
+  }
+
+  .ad-mascot { font-size: 15px; color: #ffcc00; margin-bottom: 4px; font-family: var(--term); }
+  .ad-sub    { color: #a0c0ff; }
+  .ad-promo  { color: #ffcc00; font-size: 16px; }
+  .ad-btn    { background: #ffcc00; color: #002366; border-color: #fff; }
+  .ad-body:hover .ad-btn { background: #fff; color: #002366; }
+}
+
+.ad-netscape {
+  background: #4d1ba8;
+  border-color: #2d0f66;
+
+  .ad-body { color: #fff; }
+
+  .ad-logo-netscape {
+    font-size: 26px;
+    font-family: var(--term);
+    color: #ffcc00;
+    line-height: 1;
+    margin-bottom: 4px;
+    letter-spacing: 2px;
+  }
+
+  .ad-mascot { font-size: 16px; color: #c0a0ff; margin-bottom: 4px; }
+  .ad-sub    { color: #c0a0ff; font-size: 13px; }
+  .ad-promo  { color: #ffcc00; font-size: 14px; font-family: var(--pix); }
+  .ad-btn    { background: #ffcc00; color: #4d1ba8; border-color: #fff; }
+  .ad-body:hover .ad-btn { background: #fff; color: #4d1ba8; }
+}
+
 // ---- Social icon buttons ----
 
 .social-icons {

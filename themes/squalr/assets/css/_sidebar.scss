@@ -119,6 +119,99 @@
 .b-css      { background: #003399; color: #fff;    }   // 10.9:1 contrast
 .b-award    { background: #145214; color: #ffd400; }   // darkened from #1a6e1a — 6.6:1 contrast
 
+// ---- Retro 90s sponsor banner ads ----
+
+.ad-banner {
+  border: 3px solid #000;
+  overflow: hidden;
+  text-align: center;
+  font-family: var(--term);
+
+  .ad-eyebrow {
+    background: #000;
+    color: #888;
+    font-family: var(--pix);
+    font-size: 7px;
+    padding: 2px 0;
+    letter-spacing: 1px;
+  }
+
+  .ad-body {
+    display: block;
+    padding: 8px 6px 10px;
+    text-decoration: none;
+  }
+
+  .ad-sub {
+    font-size: 14px;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .ad-promo {
+    font-size: 17px;
+    margin-bottom: 7px;
+  }
+
+  .ad-btn {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px 10px;
+    border: 2px solid;
+  }
+}
+
+.ad-tru {
+  background: #ffe500;
+  border-color: #c8001c;
+
+  .ad-body   { color: #1a0000; }
+
+  .ad-logo-tru {
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+
+    .tl-t  { color: #c8001c; }
+    .tl-o  { color: #0046ad; }
+    .tl-y  { color: #e38000; }
+    .tl-s1 { color: #007a00; }
+    .tl-r  { display: inline-block; transform: scaleX(-1); color: #c8001c; }
+    .tl-u  { color: #0046ad; }
+    .tl-s2 { color: #c8001c; }
+  }
+
+  .ad-sub   { color: #1a0000; b { color: #c8001c; } }
+  .ad-promo { color: #c8001c; }
+  .ad-btn   { background: #c8001c; color: #ffe500; border-color: #1a0000; }
+  .ad-body:hover .ad-btn { background: #1a0000; }
+}
+
+.ad-rs {
+  background: #c8001c;
+  border-color: #8b0000;
+
+  .ad-body { color: #fff; }
+
+  .ad-logo-rs {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 5px;
+    color: #fff;
+
+    b { color: #ffdd00; }
+  }
+
+  .ad-sub   { color: #ffe0e0; b { color: #ffdd00; } }
+  .ad-promo { color: #ffdd00; font-size: 19px; }
+  .ad-btn   { background: #000; color: #fff; border-color: #fff; }
+  .ad-body:hover .ad-btn { background: #fff; color: #c8001c; }
+}
+
 // ---- Social icon buttons ----
 
 .social-icons {

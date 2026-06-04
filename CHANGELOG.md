@@ -2,6 +2,16 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.7.0] — 2026-06-04
+
+### Added
+
+- **15 rotating 90s retro sidebar ads.** One random "sponsor" ad appears in the sidebar on each page load, chosen from 15 period-accurate brands: Toys R Us (multicolored letters, CSS-flipped backwards R, N64 sale), RadioShack ("You've got questions, we've got answers!"), Pets.com (sock-puppet mascot, "Because pets can't drive!"), Tamagotchi ("Feed me! Keep me alive!"), AOL (free 1000 hours, CD in your mailbox), Ask Jeeves (italic serif butler, no keywords needed), Napster (orange cat, ★ 100% free), GeoCities (rainbow pixel-font logo on black, "Build yours!"), Blockbuster ("NO LATE FEES\*"), AltaVista ("Faster than Yahoo!"), Kozmo.com (1-hour free delivery), Priceline ("SHATNER SAYS: flights from $29"), Netscape Navigator ("Best viewed in NS!"), MySpace (Tom says, "Top 8 awaits!"), and LimeWire ("Definitely not a virus"). Each has era-accurate colors, a blinking promo line, and an ASCII mascot. (`index.html`, `_sidebar.scss`, `cybershack.js`)
+
+### Fixed
+
+- **JS cache-busting via Hugo fingerprint.** `cybershack.js` moved from `static/` to `assets/js/` so Hugo's asset pipeline assigns it a content-hashed URL (e.g. `cybershack.abc123.js`). Resolves a 7-day CDN cache issue where the old JS was served alongside new CSS — hiding all ads with no script to reveal any. (`index.html`, `baseof.html`)
+
 ## [1.6.5] — 2026-06-03
 
 ### Added

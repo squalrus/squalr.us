@@ -456,6 +456,52 @@
   .ad-body:hover .ad-btn { background: #fff; color: #4d1ba8; }
 }
 
+.ad-myspace {
+  background: #0059b3;
+  border-color: #003d7a;
+
+  .ad-body { color: #fff; }
+
+  .ad-logo-myspace {
+    font-size: 28px;
+    font-family: var(--comic);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 4px;
+    span { color: #ff9900; }
+  }
+
+  .ad-mascot { font-size: 15px; color: #ff9900; margin-bottom: 4px; font-family: var(--term); }
+  .ad-sub    { color: #a0c8ff; }
+  .ad-promo  { color: #ff9900; font-size: 17px; }
+  .ad-btn    { background: #ff9900; color: #003d7a; border-color: #fff; }
+  .ad-body:hover .ad-btn { background: #fff; color: #0059b3; }
+}
+
+.ad-limewire {
+  background: #0a0a0a;
+  border-color: #7fd91f;
+
+  .ad-body { color: #fff; }
+
+  .ad-logo-limewire {
+    font-size: 24px;
+    font-family: var(--term);
+    color: #7fd91f;
+    line-height: 1;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px #7fd91f;
+  }
+
+  .ad-mascot { font-size: 18px; color: #7fd91f; margin-bottom: 4px; }
+  .ad-sub    { color: #a8e860; font-size: 13px; }
+  .ad-promo  { color: #7fd91f; font-size: 14px; }
+  .ad-btn    { background: #7fd91f; color: #000; border-color: #fff; }
+  .ad-body:hover .ad-btn { background: #fff; color: #0a0a0a; }
+}
+
 // ---- Social icon buttons ----
 
 .social-icons {

@@ -120,8 +120,10 @@
 .b-award    { background: #145214; color: #ffd400; }   // darkened from #1a6e1a — 6.6:1 contrast
 
 // ---- Retro 90s sponsor banner ads ----
+// JS (initAdSlot) picks one at random and sets display:block
 
 .ad-banner {
+  display: none;
   border: 3px solid #000;
   overflow: hidden;
   text-align: center;
@@ -210,6 +212,53 @@
   .ad-promo { color: #ffdd00; font-size: 19px; }
   .ad-btn   { background: #000; color: #fff; border-color: #fff; }
   .ad-body:hover .ad-btn { background: #fff; color: #c8001c; }
+}
+
+.ad-pets {
+  background: #fff;
+  border-color: #e8300f;
+
+  .ad-body { color: #1a1a1a; }
+
+  .ad-logo-pets {
+    font-size: 26px;
+    font-weight: 900;
+    font-family: var(--comic);
+    line-height: 1;
+    margin-bottom: 4px;
+    color: #00008b;
+    span { color: #e8300f; }
+  }
+
+  .ad-mascot { font-size: 22px; margin-bottom: 4px; color: #00008b; }
+  .ad-sub    { color: #333; }
+  .ad-promo  { color: #e8300f; }
+  .ad-btn    { background: #e8300f; color: #fff; border-color: #a82000; }
+  .ad-body:hover .ad-btn { background: #a82000; }
+}
+
+.ad-tama {
+  background: #c0007a;
+  border-color: #88005a;
+
+  .ad-body { color: #fff; }
+
+  .ad-logo-tama {
+    font-size: 22px;
+    font-weight: 700;
+    font-family: var(--term);
+    line-height: 1;
+    margin-bottom: 5px;
+    color: #ffdd00;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 0 #88005a;
+  }
+
+  .ad-mascot { font-size: 24px; margin-bottom: 4px; }
+  .ad-sub    { color: #ffc0e0; }
+  .ad-promo  { color: #ffdd00; font-size: 19px; }
+  .ad-btn    { background: #ffdd00; color: #88005a; border-color: #fff; }
+  .ad-body:hover .ad-btn { background: #fff; color: #c0007a; }
 }
 
 // ---- Social icon buttons ----

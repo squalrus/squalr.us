@@ -5,6 +5,11 @@
 (function () {
   'use strict';
 
+  /* ---------- GA4 EVENT HELPER ---------- */
+  function track(event, params) {
+    if (typeof window.gtag === 'function') window.gtag('event', event, params || {});
+  }
+
   /* ---------- VISITOR COUNTER (odometer) ---------- */
   // Persists per-browser via localStorage; seeded with a fake "you're the
   // 133,742nd visitor" base so it always looks impressively well-trafficked.
@@ -207,6 +212,7 @@
       list.unshift({ who: name || 'anonymous surfer', mood: mood, msg: msg, when: when });
       saveGB(list);
       renderGB();
+      track('guestbook_sign');
       form.reset();
       // confetti-ish toast
       var btn = form.querySelector('.gb-send');
@@ -251,6 +257,8 @@
       var startBtn = document.createElement('button');
       startBtn.className = 'tb-start';
       startBtn.setAttribute('aria-label', 'Start');
+      startBtn.setAttribute('aria-haspopup', 'true');
+      startBtn.setAttribute('aria-expanded', 'false');
       var startImg = document.createElement('img');
       startImg.src = '/img/favicon.ico';
       startImg.alt = '';
@@ -261,11 +269,136 @@
       var startText = document.createElement('span');
       startText.textContent = 'Start';
       startBtn.appendChild(startText);
-      startBtn.addEventListener('click', function () {
-        sessionStorage.clear();
-        if (_winReset) _winReset();
-        if (_waReset)  _waReset();
+
+      // Start menu popup
+      var startMenu = document.createElement('div');
+      startMenu.id = 'start-menu';
+      startMenu.setAttribute('role', 'menu');
+      startMenu.setAttribute('aria-label', 'Start menu');
+      startMenu.hidden = true;
+      document.body.appendChild(startMenu);
+
+      function buildStartMenu() {
+        startMenu.innerHTML = '';
+
+        // Header strip
+        var hdr = document.createElement('div');
+        hdr.className = 'sm-header';
+        hdr.textContent = '✦ SQUALRUS ✦';
+        startMenu.appendChild(hdr);
+
+        var body = document.createElement('div');
+        body.className = 'sm-body';
+        startMenu.appendChild(body);
+
+        // Navigation items
+        var navItems = [
+          { icon: '📁', label: 'Blog',      url: '/blog/' },
+          { icon: '📁', label: 'Projects',  url: '/projects/' },
+          { icon: '📁', label: 'Tags',      url: '/tags/' },
+          { icon: '📄', label: 'Changelog', url: '/changelog/' },
+          { icon: '📄', label: 'Backlog',   url: '/backlog/' },
+        ];
+        navItems.forEach(function (item) {
+          var a = document.createElement('a');
+          a.className = 'sm-item';
+          a.href = item.url;
+          a.setAttribute('role', 'menuitem');
+          a.innerHTML = '<span class="sm-icon" aria-hidden="true">' + item.icon + '</span><span>' + item.label + '</span>';
+          a.addEventListener('click', function () { track('start_menu_nav', { label: item.label }); });
+          body.appendChild(a);
+        });
+
+        // Separator
+        var sep1 = document.createElement('div');
+        sep1.className = 'sm-sep';
+        body.appendChild(sep1);
+
+        // Hidden/fun destinations
+        var funItems = [
+          { icon: '😎', label: 'Chillout',  url: '/chillout-with-chad/' },
+        ];
+        funItems.forEach(function (item) {
+          var a = document.createElement('a');
+          a.className = 'sm-item';
+          a.href = item.url;
+          a.setAttribute('role', 'menuitem');
+          a.innerHTML = '<span class="sm-icon" aria-hidden="true">' + item.icon + '</span><span>' + item.label + '</span>';
+          a.addEventListener('click', function () { track('start_menu_nav', { label: item.label }); });
+          body.appendChild(a);
+        });
+
+        // Restore section — minimized/closed windows
+        var restoreKeys = Object.keys(_tbItems);
+        if (restoreKeys.length) {
+          var sep2 = document.createElement('div');
+          sep2.className = 'sm-sep';
+          body.appendChild(sep2);
+
+          restoreKeys.forEach(function (key) {
+            var item = _tbItems[key];
+            var btn = document.createElement('button');
+            btn.className = 'sm-item';
+            btn.setAttribute('role', 'menuitem');
+            btn.innerHTML = '<span class="sm-icon" aria-hidden="true">▣</span><span>' + item.title + '</span>';
+            btn.addEventListener('click', (function (title) {
+              return function () {
+                track('start_menu_restore', { window_title: title });
+                item.restoreFn();
+                closeStartMenu();
+              };
+            })(item.title));
+            body.appendChild(btn);
+          });
+        }
+
+        // Separator + Shut Down
+        var sep3 = document.createElement('div');
+        sep3.className = 'sm-sep';
+        body.appendChild(sep3);
+
+        var shutBtn = document.createElement('button');
+        shutBtn.className = 'sm-item sm-shutdown';
+        shutBtn.setAttribute('role', 'menuitem');
+        shutBtn.innerHTML = '<span class="sm-icon" aria-hidden="true">⏻</span><span>Restore All</span>';
+        shutBtn.addEventListener('click', function () {
+          track('start_menu_restore_all');
+          sessionStorage.clear();
+          if (_winReset) _winReset();
+          if (_waReset)  _waReset();
+          closeStartMenu();
+        });
+        body.appendChild(shutBtn);
+      }
+
+      function openStartMenu() {
+        buildStartMenu();
+        startMenu.hidden = false;
+        startBtn.classList.add('tb-start--active');
+        startBtn.setAttribute('aria-expanded', 'true');
+        track('start_menu_open');
+      }
+
+      function closeStartMenu() {
+        startMenu.hidden = true;
+        startBtn.classList.remove('tb-start--active');
+        startBtn.setAttribute('aria-expanded', 'false');
+      }
+
+      startBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (!startMenu.hidden) { closeStartMenu(); return; }
+        openStartMenu();
       });
+
+      document.addEventListener('click', function (e) {
+        if (!startMenu.hidden && !startMenu.contains(e.target)) closeStartMenu();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !startMenu.hidden) closeStartMenu();
+      });
+
       _tbEl.appendChild(startBtn);
 
       // Task area (window restore buttons go here)
@@ -311,9 +444,16 @@
     var winData = [];
 
     function applyState(w, newState) {
+      var prevState = w.state;
       w.state = newState;
       if (newState) sessionStorage.setItem(w.key, newState);
       else sessionStorage.removeItem(w.key);
+
+      // track meaningful transitions only (ignore no-op restores on init)
+      if (newState !== prevState) {
+        var action = newState || 'restore';
+        track('window_' + action, { window_title: w.title });
+      }
 
       w.el.classList.remove('win-minimized', 'win-maximized', 'win-closed');
       if (newState) w.el.classList.add('win-' + newState);
@@ -392,14 +532,21 @@
     var closed = sessionStorage.getItem(CK) === '1';
 
     function setState(newShaded, newClosed) {
+      var prevShaded = shaded, prevClosed = closed;
       shaded = newShaded;
       closed = newClosed;
       sessionStorage.setItem(SK, shaded ? '1' : '');
       sessionStorage.setItem(CK, closed ? '1' : '');
       wa.classList.toggle('wa-shaded', shaded);
       wa.classList.toggle('wa-closed', closed);
-      if (closed) _tbAdd(CK, TITLE, function () { setState(false, false); });
-      else        _tbRemove(CK);
+      if (closed) {
+        _tbAdd(CK, TITLE, function () { setState(false, false); });
+        if (!prevClosed) track('winamp_close');
+      } else {
+        _tbRemove(CK);
+        if (prevClosed) track('winamp_restore');
+        else if (newShaded !== prevShaded) track(newShaded ? 'winamp_shade' : 'winamp_unshade');
+      }
     }
 
     // minimize/maximize → toggle shade; close → close player
@@ -434,14 +581,22 @@
       if (idx === -1) return;
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
         e.preventDefault();
+        track('gallery_nav', { direction: 'next' });
         location.hash = '#img-' + ((idx + 1) % count);
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
         e.preventDefault();
+        track('gallery_nav', { direction: 'prev' });
         location.hash = '#img-' + ((idx - 1 + count) % count);
       } else if (e.key === 'Escape') {
         e.preventDefault();
+        track('gallery_close');
         location.hash = '#gallery';
       }
+    });
+
+    // Track lightbox open (hash changes to #img-N)
+    window.addEventListener('hashchange', function () {
+      if (currentIndex() !== -1) track('gallery_open', { index: currentIndex() });
     });
   }
 
@@ -510,7 +665,11 @@
   function initAdSlot() {
     var ads = document.querySelectorAll('.ad-banner');
     if (!ads.length) return;
-    ads[(Math.random() * ads.length) | 0].style.display = 'block';
+    var picked = ads[(Math.random() * ads.length) | 0];
+    picked.style.display = 'block';
+    var adName = (picked.className.match(/ad-(\S+)/) || [])[1] || 'unknown';
+    var link = picked.querySelector('.ad-body');
+    if (link) link.addEventListener('click', function () { track('ad_click', { ad_name: adName }); });
   }
 
   /* ---------- SPARKLE CURSOR TRAIL ---------- */

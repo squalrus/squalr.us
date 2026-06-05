@@ -51,3 +51,10 @@
 @keyframes mq {
   to { transform: translateX(-100%); }
 }
+
+// ---- Lightbox fade ----
+
+@keyframes lb-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

@@ -48,7 +48,6 @@ _No open bug items._
 | Title | Effort | Value |
 | --- | --- | --- |
 | Scheduled rebuild so future-dated posts auto-publish | S | M |
-| CSS-only gallery lightbox | S | M |
 | AIM-style buddy list widget backed by Steam friends API | M | H |
 | [Win95 Start menu](#win95-start-menu) | L | H |
 | Replace fake guestbook with GitHub Discussions (Giscus) | M | M |
@@ -108,21 +107,6 @@ _No open cleanup items._
 - Keep `buildFuture` **false** — that's the point (future posts stay hidden until their date passes, then a scheduled build picks them up). Don't set `buildFuture: true`, which would publish them immediately.
 - Tradeoff: a daily cron means up to ~24h latency between the post's date and it going live; tighten the cron if you want finer granularity. Note GitHub's scheduled workflows can be delayed under load and are disabled after 60 days of repo inactivity.
 - Document the "set a future `date`, it publishes on the next scheduled build" behavior in CLAUDE.md's posting section when this ships.
-
----
-
-### CSS-only gallery lightbox
-
-**Type:** feature
-
-**Why:** Project galleries currently open each screenshot full-size in a new browser tab (a plain `<a target="_blank">`). That works and stays zero-JS, but it kicks the visitor out of the page. A lightbox — click a thumbnail, it opens in an overlay, click away to close — keeps them in flow and reads more like a real project showcase.
-
-**Notes:**
-
-- Keep it zero-JS. The `:target` pseudo-class lightbox pattern works: each gallery image links to `#img-<n>`, a sibling overlay element matches `:target` and shows via CSS, and a full-cover close link resets the hash. Hugo can generate the IDs in the `range` loop in `themes/squalr/layouts/projects/single.html`.
-- Respect `prefers-reduced-motion` for the fade.
-- Trap: `:target` lightboxes can fight the browser back button and scroll position. Test that closing returns the visitor to where they were on the page.
-- If `:target` gets fiddly, a tiny vanilla-JS lightbox (no dependency) is the fallback — but try CSS first to keep the no-build ethos.
 
 ---
 

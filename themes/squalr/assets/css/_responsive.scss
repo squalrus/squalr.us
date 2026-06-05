@@ -14,7 +14,8 @@
   .blink,
   .shot::after,
   .project-hero-media::after,
-  .foot-constr .hat {
+  .foot-constr .hat,
+  .gallery-lightbox:target {
     animation: none;
   }
 }

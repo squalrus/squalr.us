@@ -52,32 +52,53 @@
       {{ .Content }}
     </div>
     {{- with .Params.gallery }}
-    <section class="project-gallery">
+    <section class="project-gallery" id="gallery">
       <h2 class="project-gallery-label">📸 screenshots.zip</h2>
       <div class="project-gallery-grid">
-        {{- range . }}
-        {{- $assetPath := strings.TrimLeft "/" .src }}
+        {{- range $i, $item := . }}
+        {{- $assetPath := strings.TrimLeft "/" $item.src }}
         {{- $imgRes := resources.Get $assetPath }}
         <figure class="project-gallery-item">
           {{- if $imgRes }}
           {{- $sm := $imgRes.Resize "683x webp" }}
           {{- $md := $imgRes.Resize "1024x webp" }}
-          {{- $lg := $imgRes.Resize "1366x webp" }}
-          <a href="{{ $lg.RelPermalink }}" target="_blank" rel="noreferrer noopener">
+          <a href="#img-{{ $i }}" aria-label="{{ $item.caption | default $.Title }}">
             <img src="{{ $sm.RelPermalink }}"
-                 srcset="{{ $sm.RelPermalink }} 683w, {{ $md.RelPermalink }} 1024w, {{ $lg.RelPermalink }} 1366w"
+                 srcset="{{ $sm.RelPermalink }} 683w, {{ $md.RelPermalink }} 1024w"
                  sizes="(max-width: 760px) 100vw, 460px"
-                 alt="{{ .caption | default $.Title }}"
+                 alt="{{ $item.caption | default $.Title }}"
                  width="{{ $sm.Width }}" height="{{ $sm.Height }}"
                  loading="lazy" />
           </a>
           {{- else }}
-          <a href="{{ .src }}" target="_blank" rel="noreferrer noopener"><img src="{{ .src }}" alt="{{ .caption | default $.Title }}" loading="lazy" /></a>
+          <a href="#img-{{ $i }}" aria-label="{{ $item.caption | default $.Title }}"><img src="{{ $item.src }}" alt="{{ $item.caption | default $.Title }}" loading="lazy" /></a>
           {{- end }}
-          {{- with .caption }}<figcaption>{{ . }}</figcaption>{{- end }}
+          {{- with $item.caption }}<figcaption>{{ . }}</figcaption>{{- end }}
         </figure>
         {{- end }}
       </div>
+      {{- range $i, $item := . }}
+      {{- $assetPath := strings.TrimLeft "/" $item.src }}
+      {{- $imgRes := resources.Get $assetPath }}
+      <div id="img-{{ $i }}" class="gallery-lightbox">
+        <a href="#gallery" class="gallery-lb-bg" aria-label="Close lightbox"></a>
+        <div class="gallery-lb-win">
+          <div class="gallery-lb-tbar">
+            <span>{{ $item.caption | default $.Title }}</span>
+            <a href="#gallery" class="gallery-lb-x" aria-label="Close lightbox">✕</a>
+          </div>
+          <div class="gallery-lb-body">
+            {{- if $imgRes }}
+            {{- $lg := $imgRes.Resize "1366x webp" }}
+            <img src="{{ $lg.RelPermalink }}" alt="{{ $item.caption | default $.Title }}" width="{{ $lg.Width }}" height="{{ $lg.Height }}" />
+            {{- else }}
+            <img src="{{ $item.src }}" alt="{{ $item.caption | default $.Title }}" />
+            {{- end }}
+            {{- with $item.caption }}<p class="gallery-lb-cap">{{ . }}</p>{{- end }}
+          </div>
+        </div>
+      </div>
+      {{- end }}
     </section>
     {{- end }}
     {{- $slug := .File.ContentBaseName }}

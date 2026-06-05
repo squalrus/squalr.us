@@ -417,6 +417,33 @@
     else if (shaded) setState(true,  false);
   }
 
+  /* ---------- GALLERY LIGHTBOX (keyboard nav) ---------- */
+  function initGalleryLightbox() {
+    var boxes = document.querySelectorAll('.gallery-lightbox');
+    if (!boxes.length) return;
+    var count = boxes.length;
+
+    function currentIndex() {
+      var m = location.hash.match(/^#img-(\d+)$/);
+      return m ? parseInt(m[1], 10) : -1;
+    }
+
+    document.addEventListener('keydown', function (e) {
+      var idx = currentIndex();
+      if (idx === -1) return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        location.hash = '#img-' + ((idx + 1) % count);
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        location.hash = '#img-' + ((idx - 1 + count) % count);
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        location.hash = '#gallery';
+      }
+    });
+  }
+
   /* ---------- RETRO AD SLOT (random pick) ---------- */
   function initAdSlot() {
     var ads = document.querySelectorAll('.ad-banner');
@@ -470,6 +497,7 @@
     initSparkles();
     initWindowControls();
     initWinampControls();
+    initGalleryLightbox();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);

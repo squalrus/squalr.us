@@ -7,17 +7,17 @@ image: /img/projects/glizzyrelay.com/featured.png
 # Gallery — shown when drilling into this project:
 gallery:
    - src: /img/projects/glizzyrelay.com/1-home.png
-     caption: ""
+     caption: "Homepage"
    - src: /img/projects/glizzyrelay.com/2-events.png
-     caption: ""
+     caption: "Events"
    - src: /img/projects/glizzyrelay.com/3-faq.png
-     caption: ""
+     caption: "FAQ"
    - src: /img/projects/glizzyrelay.com/4-profile.png
-     caption: ""
+     caption: "Profile"
    - src: /img/projects/glizzyrelay.com/5-event.png
-     caption: ""
+     caption: "Event detail"
    - src: /img/projects/glizzyrelay.com/6-scoreboard.png
-     caption: ""
+     caption: "Scoreboard"
 tech: [TypeScript, React, Vite, Tailwind CSS, Supabase, PostgreSQL, Netlify]
 demo: "https://glizzyrelay.com"
 ---

@@ -55,10 +55,7 @@ _No open bug items._
 
 ### Improvements
 
-| Title | Effort | Value |
-| --- | --- | --- |
-| [New tag style variants](#new-tag-style-variants) | M | M |
-| [Refine project detail page layout](#refine-project-detail-page-layout) | M | M |
+_No open improvement items._
 
 ### Cleanup
 
@@ -83,39 +80,6 @@ _No open cleanup items._
 - State: track minimized/closed windows in `cybershack.js` (same place the existing window controls logic lives). The Start menu queries that state to populate "restore" items.
 - Interaction with the existing win controls (v1.6.5): the close/minimize buttons are already functional — wire the Start menu into that same event flow.
 - Open question: should Start always show, or only after first minimize? "Only after first interaction" feels more earned and avoids visual noise on load.
-
----
-
-### New tag style variants
-
-**Type:** improvement
-
-**Why** — Tags currently use a single style across all contexts (post metadata, project cards, tag listing page). Offering a small, compact variant for cards and a larger, more prominent variant for the `/tags/` page improves visual hierarchy and makes tags feel appropriately weighted in each context.
-
-**Notes:**
-
-- Audit current tag usage: post frontmatter/detail, project cards, post body in-line, `/tags/` listing.
-- Consider CSS class variants like `.tag--small` and `.tag--large` (or `.tag.card` / `.tag.listing`).
-- Small version: tighter padding, smaller font, subtle background — fits cleanly on project cards.
-- Large version: roomier, better for scanability on the tags archive page.
-- Keep the visual language consistent; the difference should be scale/breathing room, not color or decoration.
-
----
-
-### Refine project detail page layout
-
-**Type:** improvement
-
-**Why** — The project detail page (single project view) currently mixes status, links (repo/demo/other), and tags together in a cramped header area. Better visual separation and hierarchy makes the page easier to scan and the metadata feel more organized and intentional.
-
-**Notes:**
-
-- Edit `themes/squalr/layouts/projects/single.html` to reorganize the header area.
-- Give status its own visual block with clear labeling.
-- Group repo/demo/custom links together (already being reworked in the "Read more link on project cards" item — coordinate styling).
-- Separate tags into their own section below, using the small tag variant from "New tag style variants" improvement.
-- In CLAUDE.md project section, update the cross-link description: currently says "A post with `projects: [...]` shows a `◇ field notes` cross-link" — change to mention "posts" instead of "field notes".
-- Test across projects with varying amounts of metadata (few tags, many tags, many links, etc.).
 
 ---
 

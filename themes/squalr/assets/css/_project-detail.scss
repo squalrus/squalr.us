@@ -2,17 +2,45 @@
 // Project detail page (projects/single.html)
 // ============================================================
 
-// Meta row: status pill, links, tech tags
+// Meta block: labeled rows for status, links, tech
 .project-detail-meta {
+  margin: 8px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.pdmeta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+}
+
+.pdmeta-label {
   font-family: var(--term);
-  font-size: 16px;
+  font-size: 11px;
+  color: var(--ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  min-width: 40px;
+}
+
+.pdmeta-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 14px;
-  align-items: center;
-  margin: 6px 0 10px;
+  gap: 6px 12px;
+  font-family: var(--term);
+  font-size: 15px;
 
   a { color: var(--link); }
+}
+
+.pdmeta-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 
 .project-status {
@@ -26,23 +54,6 @@
   &.status-wip,
   &.status-paused   { background: var(--fire); }
   &.status-archived { background: var(--chrome-d); color: #fff; }
-}
-
-.project-detail-tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 8px 0 14px;
-
-  // Reuses the same teal pill as .ptags span
-  .tag {
-    font-family: var(--term);
-    font-size: 14px;
-    color: #000;
-    background: #7fe3e3;
-    padding: 1px 8px;
-    border: 1px solid #000;
-  }
 }
 
 // ---- Hero image ----

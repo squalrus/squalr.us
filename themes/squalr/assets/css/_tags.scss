@@ -1,6 +1,6 @@
-// Tag pills — post meta and taxonomy list pages
+// Tag pills — post meta, project cards, taxonomy list pages
 a.tag,
-.tags-list-item-title {
+span.tag {
   font-family: var(--term);
   font-size: 15px;
   color: #000;
@@ -9,8 +9,20 @@ a.tag,
   border: 1px solid #000;
   text-decoration: none;
   white-space: nowrap;
+}
 
-  &:hover { background: var(--zap); color: #000; }
+a.tag:hover { background: var(--zap); color: #000; }
+
+// Compact variant — project cards, detail-page tech stack
+.tag--small {
+  font-size: 12px;
+  padding: 0 6px;
+}
+
+// Spacious variant — /tags/ taxonomy listing page
+.tag--large {
+  font-size: 17px;
+  padding: 2px 11px;
 }
 
 .tags-list {

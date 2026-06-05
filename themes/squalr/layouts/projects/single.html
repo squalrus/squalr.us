@@ -1,21 +1,34 @@
 {{ define "main" }}
+  {{- $statusEmoji := dict "active" "🟢" "wip" "🚧" "archived" "📦" "paused" "⏸️" }}
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">{{ .Title }}</h1>
       <div class="project-detail-meta">
         {{- with .Params.status }}
-        {{- $statusEmoji := dict "active" "🟢" "wip" "🚧" "archived" "📦" "paused" "⏸️" }}
-        <span class="project-status status-{{ . }}">{{ with index $statusEmoji . }}{{ . }} {{ end }}{{ . }}</span>
+        <div class="pdmeta-row">
+          <span class="pdmeta-label">status</span>
+          <span class="project-status status-{{ . }}">{{ with index $statusEmoji . }}{{ . }} {{ end }}{{ . }}</span>
+        </div>
         {{- end }}
-        {{- with .Params.repo }}<a href="{{ . }}" target="_blank" rel="noreferrer noopener">github↗</a>{{ end }}
-        {{- with .Params.demo }}<a href="{{ . }}" target="_blank" rel="noreferrer noopener">live↗</a>{{ end }}
-        {{- range .Params.links }}<a href="{{ .url }}" target="_blank" rel="noreferrer noopener">{{ replaceRE `[↗→\s]+$` "" .label | lower }}↗</a>{{ end }}
+        {{- if or .Params.repo .Params.demo .Params.links }}
+        <div class="pdmeta-row">
+          <span class="pdmeta-label">links</span>
+          <span class="pdmeta-links">
+            {{- with .Params.repo }}<a href="{{ . }}" target="_blank" rel="noreferrer noopener">github↗</a>{{ end }}
+            {{- with .Params.demo }}<a href="{{ . }}" target="_blank" rel="noreferrer noopener">live↗</a>{{ end }}
+            {{- range .Params.links }}<a href="{{ .url }}" target="_blank" rel="noreferrer noopener">{{ replaceRE `[↗→\s]+$` "" .label | lower }}↗</a>{{ end }}
+          </span>
+        </div>
+        {{- end }}
+        {{- with .Params.tech }}
+        <div class="pdmeta-row">
+          <span class="pdmeta-label">tech</span>
+          <div class="pdmeta-tags">
+            {{- range . }}<span class="tag tag--small">{{ . }}</span>{{ end }}
+          </div>
+        </div>
+        {{- end }}
       </div>
-      {{- with .Params.tech }}
-      <div class="project-detail-tech">
-        {{- range . }}<span class="tag">{{ . }}</span>{{ end }}
-      </div>
-      {{- end }}
     </header>
     {{- with .Params.image }}
     {{- $assetPath := strings.TrimLeft "/" . }}
@@ -71,7 +84,7 @@
     {{- $related := where site.RegularPages "Params.projects" "intersect" (slice $slug) }}
     {{- with $related }}
     <div class="related-section">
-      <h2>◇ Field notes about this project</h2>
+      <h2>◇ Posts about this project</h2>
       <ul class="posts">
         {{- range . }}
         {{ partial "post-li.html" (dict "page" .) }}

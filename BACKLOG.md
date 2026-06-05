@@ -50,11 +50,18 @@ _No open bug items._
 | Scheduled rebuild so future-dated posts auto-publish | S | M |
 | CSS-only gallery lightbox | S | M |
 | AIM-style buddy list widget backed by Steam friends API | M | H |
+| [Win95 Start menu](#win95-start-menu) | L | H |
 | Replace fake guestbook with GitHub Discussions (Giscus) | M | M |
 
 ### Improvements
 
-_No open improvement items._
+| Title | Effort | Value |
+| --- | --- | --- |
+| [Add robots.txt](#add-robotstxt) | S | M |
+| [Add sitemap.xml](#add-sitemapxml) | S | M |
+| [Read more link on project cards](#read-more-link-on-project-cards) | S | M |
+| [New tag style variants](#new-tag-style-variants) | M | M |
+| [Refine project detail page layout](#refine-project-detail-page-layout) | M | M |
 
 ### Cleanup
 
@@ -63,6 +70,91 @@ _No open cleanup items._
 ---
 
 ## Open
+
+### Win95 Start menu
+
+**Type:** feature
+
+**Why** — Completing the Win95 desktop illusion: when a window section on the page is closed or minimized, a taskbar "Start" button appears and opens a Win95-style Start menu. Gives the 90s theme a genuine interactive layer beyond static chrome, and provides a natural navigation surface for minimized content.
+
+**Notes:**
+
+- The Start button should appear in the taskbar (already present in `baseof.html`) when at least one window is minimized/closed — mirroring the real Win95 behavior where Start is always accessible.
+- Menu opens on click (not hover); clicking outside dismisses it. Pure JS, no dependencies.
+- Menu structure: a cascade of items — sections of the site (Blog, Projects, Changelog, Backlog) plus any currently-minimized windows as "restore" targets. Classic Win95 left-side icon strip optional but would add charm.
+- CSS: layered above all other content (`z-index`), Win95 raised/sunken border treatment, consistent with existing `.win` chrome in `_win95.scss`.
+- State: track minimized/closed windows in `cybershack.js` (same place the existing window controls logic lives). The Start menu queries that state to populate "restore" items.
+- Interaction with the existing win controls (v1.6.5): the close/minimize buttons are already functional — wire the Start menu into that same event flow.
+- Open question: should Start always show, or only after first minimize? "Only after first interaction" feels more earned and avoids visual noise on load.
+
+---
+
+### New tag style variants
+
+**Type:** improvement
+
+**Why** — Tags currently use a single style across all contexts (post metadata, project cards, tag listing page). Offering a small, compact variant for cards and a larger, more prominent variant for the `/tags/` page improves visual hierarchy and makes tags feel appropriately weighted in each context.
+
+**Notes:**
+
+- Audit current tag usage: post frontmatter/detail, project cards, post body in-line, `/tags/` listing.
+- Consider CSS class variants like `.tag--small` and `.tag--large` (or `.tag.card` / `.tag.listing`).
+- Small version: tighter padding, smaller font, subtle background — fits cleanly on project cards.
+- Large version: roomier, better for scanability on the tags archive page.
+- Keep the visual language consistent; the difference should be scale/breathing room, not color or decoration.
+
+---
+
+### Refine project detail page layout
+
+**Type:** improvement
+
+**Why** — The project detail page (single project view) currently mixes status, links (repo/demo/other), and tags together in a cramped header area. Better visual separation and hierarchy makes the page easier to scan and the metadata feel more organized and intentional.
+
+**Notes:**
+
+- Edit `themes/squalr/layouts/projects/single.html` to reorganize the header area.
+- Give status its own visual block with clear labeling.
+- Group repo/demo/custom links together (already being reworked in the "Read more link on project cards" item — coordinate styling).
+- Separate tags into their own section below, using the small tag variant from "New tag style variants" improvement.
+- In CLAUDE.md project section, update the cross-link description: currently says "A post with `projects: [...]` shows a `◇ field notes` cross-link" — change to mention "posts" instead of "field notes".
+- Test across projects with varying amounts of metadata (few tags, many tags, many links, etc.).
+
+---
+
+### Add robots.txt
+
+**Type:** improvement
+
+**Why** — Without a robots.txt, crawlers have no explicit guidance on what to index. Adding one lets you allow all crawlers (the common case for a public blog) and is a baseline SEO hygiene step that also silences search console warnings.
+
+**Notes:** Hugo has built-in robots.txt templating — set `enableRobotsTXT: true` in `config.yaml` and Hugo generates `public/robots.txt` at build time. The default template allows all crawlers (`User-agent: *`, `Disallow:`). Customize via `layouts/robots.txt` if you ever need to block paths (e.g. `/backlog/`, `/changelog/`).
+
+---
+
+### Add sitemap.xml
+
+**Type:** improvement
+
+**Why** — A sitemap helps search engines discover and crawl all pages on the site, especially less-linked content like old posts or project archives. It's an SEO best practice and a companion to robots.txt.
+
+**Notes:** Hugo also has built-in sitemap generation — set `enableSitemap: true` in `config.yaml` and Hugo generates `public/sitemap.xml` at build time. The default output includes all published pages with `lastmod` dates. No customization needed for a basic setup.
+
+---
+
+### Read more link on project cards
+
+**Type:** improvement
+
+**Why:** Project cards currently link the entire title/header to the detail page. Moving the link out of the header and adding a dedicated "Read more" button alongside GitHub/Demo links makes the card layout clearer and gives the project metadata links a consistent visual weight.
+
+**Notes:**
+
+- Edit `themes/squalr/layouts/partials/pcard.html` to remove the `<a>` wrapper from the title.
+- Add a "Read more" link item in the same location as the `repo` / `demo` / `links` output, following the same styling.
+- Test on a few projects (active, archived, with/without images) to ensure the link placement aligns well with other buttons.
+
+---
 
 ### Scheduled rebuild so future-dated posts auto-publish
 

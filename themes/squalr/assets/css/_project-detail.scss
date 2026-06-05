@@ -54,7 +54,7 @@
   position: relative;
   overflow: hidden;
 
-  img { width: 100%; display: block; }
+  img { width: 100%; display: block; height: auto;}
 
   // CRT overlay — matches .shot::after
   &::after {
@@ -96,7 +96,7 @@
   border: 2px ridge var(--neon-2);
   background: var(--paper-2);
 
-  img { width: 100%; display: block; }
+  img { width: 100%; display: block; height: auto; }
 
   figcaption {
     font-family: var(--term);

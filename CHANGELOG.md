@@ -2,6 +2,14 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.7.1] — 2026-06-04
+
+### Changed
+
+- **Project detail hero image uses 3-size responsive WebP srcset.** Previously generated two sizes (960w, 1366w); now matches the card pipeline at 683w, 1024w, and 1366w so browsers pick the right size across mobile, tablet, and desktop. (`single.html`)
+- **Project gallery images now processed by Hugo's asset pipeline.** Gallery images moved from `static/` to `assets/img/projects/<slug>/` so Hugo can resize and convert them to WebP at build time. Each gallery image now renders a 3-size srcset (683w, 1024w, 1366w) with lazy loading. Falls back to a plain `<img>` if the asset isn't found. (`single.html`)
+- **squalr.us project page corrected and fleshed out.** Tech stack was incorrectly listed as TypeScript/Node.js (copied from merge-bot); updated to Hugo, SCSS, Azure Static Web Apps, and GitHub Actions. Added prose body covering the theme, build pipeline, and deployment setup. (`content/projects/squalr.us.md`)
+
 ## [1.7.0] — 2026-06-04
 
 ### Added

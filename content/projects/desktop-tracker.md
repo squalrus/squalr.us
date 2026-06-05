@@ -6,7 +6,7 @@ status: active
 tech: [Python, JavaScript, SVG, PyInstaller, BambooHR API]
 repo: https://github.com/squalrus/desktop-tracker
 # Featured image — shown on the project card and at the top of this page:
-# image: /img/projects/desktop-tracker/featured.png
+image: /img/projects/desktop-tracker/featured.png
 # Gallery — shown when drilling into this project:
 # gallery:
 #   - src: /img/projects/desktop-tracker/screenshot.png

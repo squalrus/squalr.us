@@ -16,7 +16,7 @@ No npm, no node_modules. The theme stylesheet is **SCSS** compiled through Hugo'
 
 ## Project Structure
 
-```
+```text
 content/
   blog/            # posts (.md); a future date = scheduled (hidden until a build runs after it)
   projects/        # project pages (.md)
@@ -108,7 +108,6 @@ title: "Project Name"
 date: 2026-06-01T00:00:00+00:00   # ISO 8601; used for sorting, not displayed
 description: "One-sentence plain-English summary shown on the project card."
 status: active          # active | wip | paused | archived (colored status pill)
-weight: 10              # sort order (lower = first)
 tech: [TypeScript, Go]  # shown as tags
 repo: https://...       # optional; renders "GitHub ↗"
 demo: https://...       # optional; renders "Demo ↗"
@@ -127,11 +126,13 @@ links:                  # optional; arbitrary labelled links
 ---
 ```
 
+**Project body (required)** — after the closing `---`, write a plain-prose overview of the project (2–4 paragraphs). This is the detail page content. Describe what the project does, why it exists, and what makes it interesting. Use H2s for additional sections (Setup, Options, etc.) as needed.
+
 **Featured image** (`image:`) — put the source file in `assets/img/projects/<slug>/featured.png` (≤1366px wide). Hugo resizes it to WebP at build time and generates a srcset; no manual resizing needed. The `image:` frontmatter value stays as the URL path `/img/projects/<slug>/featured.png` — the template strips the leading `/` to find the asset.
 
-**Gallery images** (`gallery[].src`) — still go in `static/img/projects/<slug>/` (served as-is; Hugo doesn't process them).
+**Gallery images** (`gallery[].src`) — put source files in `assets/img/projects/<slug>/` (same as the featured image). Hugo resizes them to WebP srcset at build time; the `src:` frontmatter value uses the same `/img/projects/<slug>/filename.png` path format.
 
-All of `image`, `gallery`, and `terminal` are optional. Card banner logic: `image` → screenshot; else the `terminal:` block (or an auto-generated one) renders a DOS-style banner so no card is ever blank. A post with `projects: [<this project's filename base>]` shows a `◇ field notes` cross-link on the card.
+All of `image`, `gallery`, and `terminal` are optional. Card banner logic: `image` → screenshot; else the `terminal:` block (or an auto-generated one) renders a DOS-style banner so no card is ever blank. A post with `projects: [<this project's filename base>]` shows a `◇ posts` cross-link on the card.
 
 ## Deployment
 

@@ -152,10 +152,10 @@
 
   /* ---------- GUESTBOOK (localStorage) ---------- */
   var SEED = [
-    { who: 'xX_DialUpDan_Xx', mood: '☎ 56k', msg: 'sick site bro!! took 4 min to load on my modem but worth it. webring 4 life', when: 'Apr 22, 2021' },
-    { who: 'glizzmaster99', mood: '🌭 hungry', msg: 'the Glizzy Relay scoreboard changed my LIFE. see u at regionals chad', when: 'Jun 09, 2023' },
+    { who: 'prog_gandalf', mood: '🎸 in 7/8', msg: 'finally someone with TASTE.  is the correct answer.', when: 'Feb 14, 2026' },
     { who: 'webmaster_kelly', mood: '✨ stoked', msg: 'love the neon. added u to my links page! sign mine back ok??', when: 'Nov 30, 2024' },
-    { who: 'prog_gandalf', mood: '🎸 in 7/8', msg: 'finally someone with TASTE. Dance of Eternity is the correct answer.', when: 'Feb 14, 2026' }
+    { who: 'glizzmaster99', mood: '🌭 hungry', msg: 'the Glizzy Relay scoreboard changed my LIFE. see u at regionals chad', when: 'Jun 09, 2023' },
+    { who: 'xX_DialUpDan_Xx', mood: '☎ 56k', msg: 'sick site bro!! took 4 min to load on my modem but worth it. webring 4 life', when: 'Apr 22, 2021' }
   ];
   function loadGB() {
     try {

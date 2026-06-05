@@ -47,10 +47,11 @@ _No open bug items._
 
 | Title | Effort | Value |
 | --- | --- | --- |
-| Scheduled rebuild so future-dated posts auto-publish | S | M |
-| AIM-style buddy list widget backed by Steam friends API | M | H |
+| [AIM-style buddy list widget backed by Steam friends API](#aim-style-buddy-list-widget-backed-by-steam-friends-api) | M | H |
 | [Win95 Start menu](#win95-start-menu) | L | H |
-| Replace fake guestbook with GitHub Discussions (Giscus) | M | M |
+| [Scheduled rebuild so future-dated posts auto-publish](#scheduled-rebuild-so-future-dated-posts-auto-publish) | S | M |
+| [Columbia House and BMG Music Service ads](#columbia-house-and-bmg-music-service-ads) | S | M |
+| [Replace fake guestbook with GitHub Discussions (Giscus)](#replace-fake-guestbook-with-github-discussions-giscus) | M | M |
 
 ### Improvements
 
@@ -80,6 +81,22 @@ _No open cleanup items._
 - Interaction with the existing win controls (v1.6.5): the close/minimize buttons are already functional — wire the Start menu into that same event flow.
 - Open question: should Start always show, or only after first minimize? "Only after first interaction" feels more earned and avoids visual noise on load.
 - **Planned menu items:** Chillout (`/chillout-with-chad/`) and a new ChatGPT page (`/chatgpt/`) should live here rather than in the main nav — they're fun/secondary destinations that suit a Start menu launcher better than a top-level nav slot.
+
+---
+
+### Columbia House and BMG Music Service ads
+
+**Type:** feature
+
+**Why** — Enhance the 90s aesthetic by adding authentic period-accurate ads for Columbia House and BMG Music Service — nostalgic touchpoints that reinforce the GeoCities theme and make the site feel like a genuine throwback to dial-up-era personal websites.
+
+**Notes:**
+
+- Static ads rendered as banner sections (GIFs or stylized CSS recreations of the original ads).
+- Can appear as sidebar panels or scattered throughout the site — typical placement would be in the sidebar or between sections.
+- Research actual 90s ads for Columbia House and BMG and recreate them visually for authenticity.
+- No functionality needed — purely decorative/nostalgic content.
+- Consider if they link anywhere or are purely visual.
 
 ---
 

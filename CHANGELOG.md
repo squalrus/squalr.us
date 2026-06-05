@@ -2,6 +2,12 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.8.2] — 2026-06-05
+
+### Added
+
+- **Columbia House "Selection of the Month" sidebar.** New panel styled as a vintage Columbia House offer, showing the 5 most recent additions to the Discogs vinyl collection as if they were curated monthly selections. Fetches from the public Discogs REST API on page load and polls every 10 minutes. Includes dark navy header, red accent strip, and period-accurate fine-print disclaimer. Each entry shows cover art thumbnail, artist, title, and release year. (`index.html`, `_discogs.scss`, `cybershack.js`)
+
 ## [1.8.1] — 2026-06-05
 
 ### Removed

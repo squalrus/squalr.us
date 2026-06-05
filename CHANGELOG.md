@@ -2,6 +2,12 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.9.0] — 2026-06-05
+
+### Added
+
+- **Win95 Start menu.** Clicking the taskbar Start button opens a Win95-style menu with navigation links (Blog, Projects, Changelog, Backlog) and buttons to restore minimized/closed windows. Opens on click, dismisses on click-outside, pure CSS and JavaScript. Restores the classic desktop experience when windows are minimized, and provides a natural home for secondary pages like Chillout and ChatGPT. (`baseof.html`, `_win95.scss`, `cybershack.js`)
+
 ## [1.8.0] — 2026-06-05
 
 ### Added

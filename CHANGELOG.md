@@ -2,6 +2,12 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.9.1] — 2026-06-05
+
+### Fixed
+
+- **Discogs album art CSP block.** Added `https://i.discogs.com` to the `img-src` directive. Thumbnail images returned by the Discogs API (`info.thumb`) were blocked, leaving all album art blank in the Columbia House panel. (`staticwebapp.config.json`)
+
 ## [1.9.0] — 2026-06-05
 
 ### Added

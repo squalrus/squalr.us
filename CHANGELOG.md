@@ -9,6 +9,8 @@ User-visible changes to squalr.us, newest first. Format loosely follows [Keep a 
 - **Win95 Start menu.** Clicking the Start button in the taskbar now opens a Win95-style popup menu instead of immediately restoring all windows. Menu contains navigation links (Blog, Projects, Tags, Changelog, Backlog), a Chillout section link (removed from main nav in v1.8.1, now lives here), a dynamic restore section listing any currently minimized/closed windows, and a "Restore All" shutdown item at the bottom. Classic raised-border chrome, header strip, separators, hover highlight. Menu closes on click-outside or Escape. (`cybershack.js`, `_win95.scss`)
 - **Columbia House and BMG Music Service ads.** Two new period-accurate retro ad banners added to the rotating sidebar ad slot — Columbia House (dark navy, "12 CDs for 1¢!") and BMG Music Service (royal blue/gold, "8 CDs FREE!"). Both join the existing 13-ad pool; JS picks one at random on load. (`index.html`, `_sidebar.scss`)
 
+- **Google Analytics event instrumentation.** GA4 `track()` calls added across all interactive elements: Win95 window controls (minimize/maximize/close/restore), WinAmp shade/close/restore, Start menu open + nav clicks + restore + restore-all, guestbook sign, retro ad clicks, and gallery lightbox open/navigate/close. (`cybershack.js`)
+
 ### Fixed
 
 - **Discogs API CSP block.** Added `https://api.discogs.com` to the `connect-src` directive in `staticwebapp.config.json`. The Columbia House collection widget (v1.8.2) was silently failing in the browser console because Discogs API calls were blocked by the site's Content Security Policy. (`staticwebapp.config.json`)

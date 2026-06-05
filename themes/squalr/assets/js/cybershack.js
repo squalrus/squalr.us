@@ -5,6 +5,11 @@
 (function () {
   'use strict';
 
+  /* ---------- GA4 EVENT HELPER ---------- */
+  function track(event, params) {
+    if (typeof window.gtag === 'function') window.gtag('event', event, params || {});
+  }
+
   /* ---------- VISITOR COUNTER (odometer) ---------- */
   // Persists per-browser via localStorage; seeded with a fake "you're the
   // 133,742nd visitor" base so it always looks impressively well-trafficked.
@@ -207,6 +212,7 @@
       list.unshift({ who: name || 'anonymous surfer', mood: mood, msg: msg, when: when });
       saveGB(list);
       renderGB();
+      track('guestbook_sign');
       form.reset();
       // confetti-ish toast
       var btn = form.querySelector('.gb-send');
@@ -299,6 +305,7 @@
           a.href = item.url;
           a.setAttribute('role', 'menuitem');
           a.innerHTML = '<span class="sm-icon" aria-hidden="true">' + item.icon + '</span><span>' + item.label + '</span>';
+          a.addEventListener('click', function () { track('start_menu_nav', { label: item.label }); });
           body.appendChild(a);
         });
 
@@ -317,6 +324,7 @@
           a.href = item.url;
           a.setAttribute('role', 'menuitem');
           a.innerHTML = '<span class="sm-icon" aria-hidden="true">' + item.icon + '</span><span>' + item.label + '</span>';
+          a.addEventListener('click', function () { track('start_menu_nav', { label: item.label }); });
           body.appendChild(a);
         });
 
@@ -333,10 +341,13 @@
             btn.className = 'sm-item';
             btn.setAttribute('role', 'menuitem');
             btn.innerHTML = '<span class="sm-icon" aria-hidden="true">▣</span><span>' + item.title + '</span>';
-            btn.addEventListener('click', function () {
-              item.restoreFn();
-              closeStartMenu();
-            });
+            btn.addEventListener('click', (function (title) {
+              return function () {
+                track('start_menu_restore', { window_title: title });
+                item.restoreFn();
+                closeStartMenu();
+              };
+            })(item.title));
             body.appendChild(btn);
           });
         }
@@ -351,6 +362,7 @@
         shutBtn.setAttribute('role', 'menuitem');
         shutBtn.innerHTML = '<span class="sm-icon" aria-hidden="true">⏻</span><span>Restore All</span>';
         shutBtn.addEventListener('click', function () {
+          track('start_menu_restore_all');
           sessionStorage.clear();
           if (_winReset) _winReset();
           if (_waReset)  _waReset();
@@ -364,6 +376,7 @@
         startMenu.hidden = false;
         startBtn.classList.add('tb-start--active');
         startBtn.setAttribute('aria-expanded', 'true');
+        track('start_menu_open');
       }
 
       function closeStartMenu() {
@@ -431,9 +444,16 @@
     var winData = [];
 
     function applyState(w, newState) {
+      var prevState = w.state;
       w.state = newState;
       if (newState) sessionStorage.setItem(w.key, newState);
       else sessionStorage.removeItem(w.key);
+
+      // track meaningful transitions only (ignore no-op restores on init)
+      if (newState !== prevState) {
+        var action = newState || 'restore';
+        track('window_' + action, { window_title: w.title });
+      }
 
       w.el.classList.remove('win-minimized', 'win-maximized', 'win-closed');
       if (newState) w.el.classList.add('win-' + newState);
@@ -512,14 +532,21 @@
     var closed = sessionStorage.getItem(CK) === '1';
 
     function setState(newShaded, newClosed) {
+      var prevShaded = shaded, prevClosed = closed;
       shaded = newShaded;
       closed = newClosed;
       sessionStorage.setItem(SK, shaded ? '1' : '');
       sessionStorage.setItem(CK, closed ? '1' : '');
       wa.classList.toggle('wa-shaded', shaded);
       wa.classList.toggle('wa-closed', closed);
-      if (closed) _tbAdd(CK, TITLE, function () { setState(false, false); });
-      else        _tbRemove(CK);
+      if (closed) {
+        _tbAdd(CK, TITLE, function () { setState(false, false); });
+        if (!prevClosed) track('winamp_close');
+      } else {
+        _tbRemove(CK);
+        if (prevClosed) track('winamp_restore');
+        else if (newShaded !== prevShaded) track(newShaded ? 'winamp_shade' : 'winamp_unshade');
+      }
     }
 
     // minimize/maximize → toggle shade; close → close player
@@ -554,14 +581,22 @@
       if (idx === -1) return;
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
         e.preventDefault();
+        track('gallery_nav', { direction: 'next' });
         location.hash = '#img-' + ((idx + 1) % count);
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
         e.preventDefault();
+        track('gallery_nav', { direction: 'prev' });
         location.hash = '#img-' + ((idx - 1 + count) % count);
       } else if (e.key === 'Escape') {
         e.preventDefault();
+        track('gallery_close');
         location.hash = '#gallery';
       }
+    });
+
+    // Track lightbox open (hash changes to #img-N)
+    window.addEventListener('hashchange', function () {
+      if (currentIndex() !== -1) track('gallery_open', { index: currentIndex() });
     });
   }
 
@@ -630,7 +665,11 @@
   function initAdSlot() {
     var ads = document.querySelectorAll('.ad-banner');
     if (!ads.length) return;
-    ads[(Math.random() * ads.length) | 0].style.display = 'block';
+    var picked = ads[(Math.random() * ads.length) | 0];
+    picked.style.display = 'block';
+    var adName = (picked.className.match(/ad-(\S+)/) || [])[1] || 'unknown';
+    var link = picked.querySelector('.ad-body');
+    if (link) link.addEventListener('click', function () { track('ad_click', { ad_name: adName }); });
   }
 
   /* ---------- SPARKLE CURSOR TRAIL ---------- */

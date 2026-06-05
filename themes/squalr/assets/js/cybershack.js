@@ -42,6 +42,7 @@
   /* ---------- NOW SPINNING (Last.fm) ---------- */
   var LFM_USER = 'squalrus';
   var LFM_KEY  = 'eeb057078d22855ccfe801b9a69fba67';
+  var DISCOGS_USER = 'squalrus';
   function initNowPlaying() {
     var s     = document.getElementById('np-song'),
         a     = document.getElementById('np-artist'),
@@ -444,6 +445,67 @@
     });
   }
 
+  /* ---------- DISCOGS COLLECTION PANEL ---------- */
+  function initDiscogs() {
+    var listEl = document.getElementById('discogs-list');
+    if (!listEl) return;
+
+    function fetchDiscogs() {
+      fetch('https://api.discogs.com/users/' + DISCOGS_USER + '/collection/folders/0/releases?sort=added&sort_order=desc&per_page=5')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          var releases = data.releases;
+          if (!releases || !releases.length) return;
+          listEl.innerHTML = '';
+          releases.forEach(function (rel) {
+            var info = rel.basic_information;
+            var artist = (info.artists && info.artists[0])
+              ? info.artists[0].name.replace(/\s*\(\d+\)$/, '')
+              : 'Unknown';
+            var li = document.createElement('li');
+            li.className = 'dc-item';
+
+            var img = document.createElement('img');
+            img.className = 'dc-thumb' + (info.thumb ? '' : ' dc-thumb--blank');
+            img.alt = '';
+            img.width = 38;
+            img.height = 38;
+            img.src = info.thumb ||
+              'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
+            var meta = document.createElement('div');
+            meta.className = 'dc-meta';
+
+            var artistEl = document.createElement('span');
+            artistEl.className = 'dc-artist';
+            artistEl.textContent = artist;
+
+            var titleEl = document.createElement('span');
+            titleEl.className = 'dc-title';
+            titleEl.textContent = info.title;
+
+            meta.appendChild(artistEl);
+            meta.appendChild(titleEl);
+
+            if (info.year) {
+              var yearEl = document.createElement('span');
+              yearEl.className = 'dc-year';
+              yearEl.textContent = info.year;
+              meta.appendChild(yearEl);
+            }
+
+            li.appendChild(img);
+            li.appendChild(meta);
+            listEl.appendChild(li);
+          });
+        })
+        .catch(function () {});
+    }
+
+    fetchDiscogs();
+    setInterval(fetchDiscogs, 600000); // poll every 10 min — collection updates are infrequent
+  }
+
   /* ---------- RETRO AD SLOT (random pick) ---------- */
   function initAdSlot() {
     var ads = document.querySelectorAll('.ad-banner');
@@ -492,6 +554,7 @@
   function boot() {
     initCounter();
     initNowPlaying();
+    initDiscogs();
     initGuestbook();
     initAdSlot();
     initSparkles();

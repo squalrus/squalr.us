@@ -25,6 +25,7 @@
 @use 'nav';       // .navrow
 @use 'sidebar';   // .panel, counter, statlist, badges, social icons
 @use 'winamp';    // WinAmp now-playing widget
+@use 'discogs';   // Discogs collection panel
 @use 'homepage';  // .welcome, hr.candy, .sticker, .projgrid
 @use 'projects';  // .pcard, .shot, .termshot, CRT effect
 @use 'posts';     // .posts list, .newgif

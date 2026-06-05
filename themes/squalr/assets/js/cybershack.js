@@ -251,6 +251,8 @@
       var startBtn = document.createElement('button');
       startBtn.className = 'tb-start';
       startBtn.setAttribute('aria-label', 'Start');
+      startBtn.setAttribute('aria-haspopup', 'true');
+      startBtn.setAttribute('aria-expanded', 'false');
       var startImg = document.createElement('img');
       startImg.src = '/img/favicon.ico';
       startImg.alt = '';
@@ -261,11 +263,129 @@
       var startText = document.createElement('span');
       startText.textContent = 'Start';
       startBtn.appendChild(startText);
-      startBtn.addEventListener('click', function () {
-        sessionStorage.clear();
-        if (_winReset) _winReset();
-        if (_waReset)  _waReset();
+
+      // Start menu popup
+      var startMenu = document.createElement('div');
+      startMenu.id = 'start-menu';
+      startMenu.setAttribute('role', 'menu');
+      startMenu.setAttribute('aria-label', 'Start menu');
+      startMenu.hidden = true;
+      document.body.appendChild(startMenu);
+
+      function buildStartMenu() {
+        startMenu.innerHTML = '';
+
+        // Header strip
+        var hdr = document.createElement('div');
+        hdr.className = 'sm-header';
+        hdr.textContent = '✦ SQUALRUS ✦';
+        startMenu.appendChild(hdr);
+
+        var body = document.createElement('div');
+        body.className = 'sm-body';
+        startMenu.appendChild(body);
+
+        // Navigation items
+        var navItems = [
+          { icon: '📁', label: 'Blog',      url: '/blog/' },
+          { icon: '📁', label: 'Projects',  url: '/projects/' },
+          { icon: '📁', label: 'Tags',      url: '/tags/' },
+          { icon: '📄', label: 'Changelog', url: '/changelog/' },
+          { icon: '📄', label: 'Backlog',   url: '/backlog/' },
+        ];
+        navItems.forEach(function (item) {
+          var a = document.createElement('a');
+          a.className = 'sm-item';
+          a.href = item.url;
+          a.setAttribute('role', 'menuitem');
+          a.innerHTML = '<span class="sm-icon" aria-hidden="true">' + item.icon + '</span><span>' + item.label + '</span>';
+          body.appendChild(a);
+        });
+
+        // Separator
+        var sep1 = document.createElement('div');
+        sep1.className = 'sm-sep';
+        body.appendChild(sep1);
+
+        // Hidden/fun destinations
+        var funItems = [
+          { icon: '😎', label: 'Chillout',  url: '/chillout-with-chad/' },
+        ];
+        funItems.forEach(function (item) {
+          var a = document.createElement('a');
+          a.className = 'sm-item';
+          a.href = item.url;
+          a.setAttribute('role', 'menuitem');
+          a.innerHTML = '<span class="sm-icon" aria-hidden="true">' + item.icon + '</span><span>' + item.label + '</span>';
+          body.appendChild(a);
+        });
+
+        // Restore section — minimized/closed windows
+        var restoreKeys = Object.keys(_tbItems);
+        if (restoreKeys.length) {
+          var sep2 = document.createElement('div');
+          sep2.className = 'sm-sep';
+          body.appendChild(sep2);
+
+          restoreKeys.forEach(function (key) {
+            var item = _tbItems[key];
+            var btn = document.createElement('button');
+            btn.className = 'sm-item';
+            btn.setAttribute('role', 'menuitem');
+            btn.innerHTML = '<span class="sm-icon" aria-hidden="true">▣</span><span>' + item.title + '</span>';
+            btn.addEventListener('click', function () {
+              item.restoreFn();
+              closeStartMenu();
+            });
+            body.appendChild(btn);
+          });
+        }
+
+        // Separator + Shut Down
+        var sep3 = document.createElement('div');
+        sep3.className = 'sm-sep';
+        body.appendChild(sep3);
+
+        var shutBtn = document.createElement('button');
+        shutBtn.className = 'sm-item sm-shutdown';
+        shutBtn.setAttribute('role', 'menuitem');
+        shutBtn.innerHTML = '<span class="sm-icon" aria-hidden="true">⏻</span><span>Restore All</span>';
+        shutBtn.addEventListener('click', function () {
+          sessionStorage.clear();
+          if (_winReset) _winReset();
+          if (_waReset)  _waReset();
+          closeStartMenu();
+        });
+        body.appendChild(shutBtn);
+      }
+
+      function openStartMenu() {
+        buildStartMenu();
+        startMenu.hidden = false;
+        startBtn.classList.add('tb-start--active');
+        startBtn.setAttribute('aria-expanded', 'true');
+      }
+
+      function closeStartMenu() {
+        startMenu.hidden = true;
+        startBtn.classList.remove('tb-start--active');
+        startBtn.setAttribute('aria-expanded', 'false');
+      }
+
+      startBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (!startMenu.hidden) { closeStartMenu(); return; }
+        openStartMenu();
       });
+
+      document.addEventListener('click', function (e) {
+        if (!startMenu.hidden && !startMenu.contains(e.target)) closeStartMenu();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !startMenu.hidden) closeStartMenu();
+      });
+
       _tbEl.appendChild(startBtn);
 
       // Task area (window restore buttons go here)

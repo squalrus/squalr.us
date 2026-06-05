@@ -118,7 +118,7 @@
 
     img { width: 16px; height: 16px; image-rendering: pixelated; }
 
-    &:active {
+    &:active, &.tb-start--active {
       border-color: var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd);
     }
   }
@@ -169,5 +169,80 @@
     font-size: 9px;
     color: #000;
     white-space: nowrap;
+  }
+}
+
+// Win95 Start menu popup
+#start-menu {
+  position: fixed;
+  bottom: 30px; // sits just above the taskbar
+  left: 0;
+  z-index: 1100;
+  min-width: 180px;
+  background: var(--chrome);
+  border: 2px solid;
+  border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
+  box-shadow: 4px 4px 0 rgba(0,0,0,.4);
+
+  &[hidden] { display: none; }
+
+  .sm-header {
+    background: linear-gradient(180deg, #1084d0, var(--navy));
+    color: #fff;
+    font-family: var(--pix);
+    font-size: 8px;
+    letter-spacing: 2px;
+    padding: 10px 8px;
+    writing-mode: horizontal-tb;
+    text-align: center;
+    border-bottom: 2px solid var(--chrome-dd);
+  }
+
+  .sm-body {
+    padding: 2px 0;
+  }
+
+  .sm-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 4px 10px 4px 6px;
+    font-family: var(--pix);
+    font-size: 9px;
+    color: #000;
+    background: transparent;
+    border: none;
+    text-decoration: none;
+    text-align: left;
+    cursor: pointer;
+    white-space: nowrap;
+    box-sizing: border-box;
+
+    .sm-icon {
+      font-size: 14px;
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+      font-family: var(--comic);
+    }
+
+    &:hover, &:focus {
+      background: var(--navy);
+      color: #fff;
+      outline: none;
+    }
+  }
+
+  .sm-shutdown {
+    color: #000;
+    font-weight: 700;
+  }
+
+  .sm-sep {
+    height: 1px;
+    margin: 3px 4px;
+    background: var(--chrome-dd);
+    border-top: 1px solid var(--chrome-l);
   }
 }

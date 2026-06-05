@@ -48,9 +48,7 @@ _No open bug items._
 | Title | Effort | Value |
 | --- | --- | --- |
 | [AIM-style buddy list widget backed by Steam friends API](#aim-style-buddy-list-widget-backed-by-steam-friends-api) | M | H |
-| [Win95 Start menu](#win95-start-menu) | L | H |
 | [Scheduled rebuild so future-dated posts auto-publish](#scheduled-rebuild-so-future-dated-posts-auto-publish) | S | M |
-| [Columbia House and BMG Music Service ads](#columbia-house-and-bmg-music-service-ads) | S | M |
 | [Replace fake guestbook with GitHub Discussions (Giscus)](#replace-fake-guestbook-with-github-discussions-giscus) | M | M |
 
 ### Improvements
@@ -64,41 +62,6 @@ _No open cleanup items._
 ---
 
 ## Open
-
-### Win95 Start menu
-
-**Type:** feature
-
-**Why** — Completing the Win95 desktop illusion: when a window section on the page is closed or minimized, a taskbar "Start" button appears and opens a Win95-style Start menu. Gives the 90s theme a genuine interactive layer beyond static chrome, and provides a natural navigation surface for minimized content.
-
-**Notes:**
-
-- The Start button should appear in the taskbar (already present in `baseof.html`) when at least one window is minimized/closed — mirroring the real Win95 behavior where Start is always accessible.
-- Menu opens on click (not hover); clicking outside dismisses it. Pure JS, no dependencies.
-- Menu structure: a cascade of items — sections of the site (Blog, Projects, Changelog, Backlog) plus any currently-minimized windows as "restore" targets. Classic Win95 left-side icon strip optional but would add charm.
-- CSS: layered above all other content (`z-index`), Win95 raised/sunken border treatment, consistent with existing `.win` chrome in `_win95.scss`.
-- State: track minimized/closed windows in `cybershack.js` (same place the existing window controls logic lives). The Start menu queries that state to populate "restore" items.
-- Interaction with the existing win controls (v1.6.5): the close/minimize buttons are already functional — wire the Start menu into that same event flow.
-- Open question: should Start always show, or only after first minimize? "Only after first interaction" feels more earned and avoids visual noise on load.
-- **Planned menu items:** Chillout (`/chillout-with-chad/`) and a new ChatGPT page (`/chatgpt/`) should live here rather than in the main nav — they're fun/secondary destinations that suit a Start menu launcher better than a top-level nav slot.
-
----
-
-### Columbia House and BMG Music Service ads
-
-**Type:** feature
-
-**Why** — Enhance the 90s aesthetic by adding authentic period-accurate ads for Columbia House and BMG Music Service — nostalgic touchpoints that reinforce the GeoCities theme and make the site feel like a genuine throwback to dial-up-era personal websites.
-
-**Notes:**
-
-- Static ads rendered as banner sections (GIFs or stylized CSS recreations of the original ads).
-- Can appear as sidebar panels or scattered throughout the site — typical placement would be in the sidebar or between sections.
-- Research actual 90s ads for Columbia House and BMG and recreate them visually for authenticity.
-- No functionality needed — purely decorative/nostalgic content.
-- Consider if they link anywhere or are purely visual.
-
----
 
 ### Scheduled rebuild so future-dated posts auto-publish
 

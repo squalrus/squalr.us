@@ -502,6 +502,62 @@
   .ad-body:hover .ad-btn { background: #fff; color: #0a0a0a; }
 }
 
+.ad-ch {
+  background: #0e0c1e;
+  border-color: #cc1a00;
+
+  .ad-body { color: #fff; }
+
+  .ad-logo-ch {
+    font-size: 22px;
+    font-family: var(--serif);
+    font-weight: 700;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+
+  .ad-sub    { color: #ccc; font-size: 18px; b { color: #ffcc00; font-size: 28px; } }
+  .ad-promo  { color: #cc1a00; font-size: 14px; }
+  .ad-fine   { font-size: 9px; color: #888; font-family: var(--comic); margin-bottom: 6px; line-height: 1.3; }
+  .ad-btn    { background: #cc1a00; color: #fff; border-color: #fff; font-size: 12px; }
+  .ad-body:hover .ad-btn { background: #fff; color: #cc1a00; }
+}
+
+.ad-bmg {
+  background: #00008b;
+  border-color: #ffcc00;
+
+  .ad-body { color: #fff; }
+
+  .ad-logo-bmg {
+    font-size: 46px;
+    font-family: var(--term);
+    font-weight: 900;
+    color: #ffcc00;
+    line-height: 1;
+    margin-bottom: 2px;
+    letter-spacing: 4px;
+    text-shadow: 2px 2px 0 #000080;
+  }
+
+  .ad-sub-bmg {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-style: italic;
+    color: #a0c0ff;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+
+  .ad-sub    { color: #e0e8ff; font-size: 15px; b { color: #ffcc00; font-size: 22px; } }
+  .ad-promo  { color: #ffcc00; font-size: 13px; }
+  .ad-btn    { background: #ffcc00; color: #00008b; border-color: #fff; }
+  .ad-body:hover .ad-btn { background: #fff; color: #00008b; }
+}
+
 // ---- Social icon buttons ----
 
 .social-icons {

@@ -2,6 +2,12 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.8.1] — 2026-06-05
+
+### Removed
+
+- **About and Chillout removed from main nav.** About linked to GitHub, which is already present as a social icon in the Connect panel — no navigation loss. Chillout is reserved for the planned Win95 Start menu. (`config.yaml`)
+
 ## [1.8.0] — 2026-06-05
 
 ### Added

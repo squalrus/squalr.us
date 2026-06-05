@@ -79,6 +79,7 @@ _No open cleanup items._
 - State: track minimized/closed windows in `cybershack.js` (same place the existing window controls logic lives). The Start menu queries that state to populate "restore" items.
 - Interaction with the existing win controls (v1.6.5): the close/minimize buttons are already functional — wire the Start menu into that same event flow.
 - Open question: should Start always show, or only after first minimize? "Only after first interaction" feels more earned and avoids visual noise on load.
+- **Planned menu items:** Chillout (`/chillout-with-chad/`) and a new ChatGPT page (`/chatgpt/`) should live here rather than in the main nav — they're fun/secondary destinations that suit a Start menu launcher better than a top-level nav slot.
 
 ---
 

@@ -107,7 +107,7 @@
   border: 2px ridge var(--neon-2);
   background: var(--paper-2);
 
-  img { width: 100%; display: block; height: auto; }
+  img { width: 100%; display: block; height: auto; cursor: zoom-in; }
 
   figcaption {
     font-family: var(--term);
@@ -115,4 +115,106 @@
     padding: 3px 6px;
     color: var(--ink-2);
   }
+}
+
+// ---- Gallery lightbox (CSS :target) ----
+
+.gallery-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+
+  &:target { display: flex; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gallery-lightbox:target { animation: lb-fade 0.15s ease; }
+}
+
+.gallery-lb-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  cursor: zoom-out;
+}
+
+.gallery-lb-win {
+  position: relative;
+  z-index: 1;
+  background: var(--chrome);
+  border: 2px solid;
+  border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
+  max-width: min(90vw, 1024px);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.gallery-lb-tbar {
+  background: linear-gradient(90deg, var(--navy), #1084d0);
+  color: #fff;
+  font-family: var(--pix);
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  padding: 4px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  flex-shrink: 0;
+
+  > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.gallery-lb-x {
+  background: var(--chrome);
+  color: #000;
+  border: 1px solid;
+  border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
+  font-family: var(--comic);
+  font-weight: 700;
+  font-size: 10px;
+  width: 15px;
+  height: 13px;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+
+  &:active { border-color: var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd); }
+}
+
+.gallery-lb-body {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #000;
+
+  img {
+    display: block;
+    max-width: 100%;
+    max-height: calc(90vh - 32px);
+    height: auto;
+    width: auto;
+    object-fit: contain;
+  }
+}
+
+.gallery-lb-cap {
+  font-family: var(--term);
+  font-size: 14px;
+  color: #ccc;
+  padding: 4px 8px;
+  margin: 0;
+  text-align: center;
+  width: 100%;
 }

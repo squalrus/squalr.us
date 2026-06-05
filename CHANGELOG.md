@@ -2,6 +2,13 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.8.0] — 2026-06-05
+
+### Added
+
+- **Gallery lightbox with keyboard navigation.** Clicking a project gallery thumbnail now opens a full-screen overlay instead of navigating to a new tab. The lightbox is driven by the CSS `:target` pseudo-class (zero JavaScript for open/close) and styled as a Win95 window (gradient title bar, outset border, pixel-font label). Arrow keys (← →) cycle through images; Escape closes. Fade-in animation respects `prefers-reduced-motion`. (`projects/single.html`, `_project-detail.scss`, `_animations.scss`, `_responsive.scss`, `cybershack.js`)
+- **Glizzy Relay gallery captions.** All six gallery screenshots now have captions (Homepage, Events, FAQ, Profile, Event detail, Scoreboard), visible in the lightbox title bar and caption strip. (`content/projects/glizzyrelay.com.md`)
+
 ## [1.7.3] — 2026-06-05
 
 ### Changed

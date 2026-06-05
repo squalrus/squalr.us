@@ -21,14 +21,15 @@
     {{- $assetPath := strings.TrimLeft "/" . }}
     {{- $imgRes := resources.Get $assetPath }}
     {{- if $imgRes }}
-      {{- $hero := $imgRes.Resize "960x webp" }}
-      {{- $hero2x := $imgRes.Resize "1366x webp" }}
+      {{- $sm := $imgRes.Resize "683x webp" }}
+      {{- $md := $imgRes.Resize "1024x webp" }}
+      {{- $lg := $imgRes.Resize "1366x webp" }}
     <div class="project-hero-media">
-      <img src="{{ $hero.RelPermalink }}"
-           srcset="{{ $hero.RelPermalink }} 960w, {{ $hero2x.RelPermalink }} 1366w"
+      <img src="{{ $sm.RelPermalink }}"
+           srcset="{{ $sm.RelPermalink }} 683w, {{ $md.RelPermalink }} 1024w, {{ $lg.RelPermalink }} 1366w"
            sizes="(max-width: 760px) 100vw, 900px"
            alt="{{ $.Title }}"
-           width="{{ $hero.Width }}" height="{{ $hero.Height }}" />
+           width="{{ $sm.Width }}" height="{{ $sm.Height }}" />
     </div>
     {{- else }}
     <div class="project-hero-media"><img src="{{ . }}" alt="{{ $.Title }}" /></div>
@@ -42,8 +43,24 @@
       <h2 class="project-gallery-label">📸 screenshots.zip</h2>
       <div class="project-gallery-grid">
         {{- range . }}
+        {{- $assetPath := strings.TrimLeft "/" .src }}
+        {{- $imgRes := resources.Get $assetPath }}
         <figure class="project-gallery-item">
+          {{- if $imgRes }}
+          {{- $sm := $imgRes.Resize "683x webp" }}
+          {{- $md := $imgRes.Resize "1024x webp" }}
+          {{- $lg := $imgRes.Resize "1366x webp" }}
+          <a href="{{ $lg.RelPermalink }}" target="_blank" rel="noreferrer noopener">
+            <img src="{{ $sm.RelPermalink }}"
+                 srcset="{{ $sm.RelPermalink }} 683w, {{ $md.RelPermalink }} 1024w, {{ $lg.RelPermalink }} 1366w"
+                 sizes="(max-width: 760px) 100vw, 460px"
+                 alt="{{ .caption | default $.Title }}"
+                 width="{{ $sm.Width }}" height="{{ $sm.Height }}"
+                 loading="lazy" />
+          </a>
+          {{- else }}
           <a href="{{ .src }}" target="_blank" rel="noreferrer noopener"><img src="{{ .src }}" alt="{{ .caption | default $.Title }}" loading="lazy" /></a>
+          {{- end }}
           {{- with .caption }}<figcaption>{{ . }}</figcaption>{{- end }}
         </figure>
         {{- end }}

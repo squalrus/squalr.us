@@ -2,6 +2,17 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.7.2] — 2026-06-05
+
+### Added
+
+- **robots.txt with Sitemap directive.** Hugo's built-in `enableRobotsTXT` was already set, but the default template emits no `Sitemap:` line. A custom `layouts/robots.txt` now outputs `User-agent: *`, an explicit `Disallow:` (all crawlers allowed), and `Sitemap: https://squalr.us/sitemap.xml`. (`layouts/robots.txt`)
+- **sitemap.xml.** Hugo generates a full `sitemap.xml` by default — confirmed working, no config change needed. All published pages are included with `lastmod` dates. (`public/sitemap.xml`)
+
+### Changed
+
+- **"Read more" link on project cards.** Project card titles were the only link to the detail page — easy to miss and visually ambiguous. The title `<h3>` is now plain text, and a dedicated `read more` link appears first in the card footer alongside the existing `live↗` / `github↗` links. (`pcard.html`, `_projects.scss`)
+
 ## [1.7.1] — 2026-06-04
 
 ### Changed

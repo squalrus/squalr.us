@@ -57,9 +57,6 @@ _No open bug items._
 
 | Title | Effort | Value |
 | --- | --- | --- |
-| [Add robots.txt](#add-robotstxt) | S | M |
-| [Add sitemap.xml](#add-sitemapxml) | S | M |
-| [Read more link on project cards](#read-more-link-on-project-cards) | S | M |
 | [New tag style variants](#new-tag-style-variants) | M | M |
 | [Refine project detail page layout](#refine-project-detail-page-layout) | M | M |
 
@@ -119,40 +116,6 @@ _No open cleanup items._
 - Separate tags into their own section below, using the small tag variant from "New tag style variants" improvement.
 - In CLAUDE.md project section, update the cross-link description: currently says "A post with `projects: [...]` shows a `◇ field notes` cross-link" — change to mention "posts" instead of "field notes".
 - Test across projects with varying amounts of metadata (few tags, many tags, many links, etc.).
-
----
-
-### Add robots.txt
-
-**Type:** improvement
-
-**Why** — Without a robots.txt, crawlers have no explicit guidance on what to index. Adding one lets you allow all crawlers (the common case for a public blog) and is a baseline SEO hygiene step that also silences search console warnings.
-
-**Notes:** Hugo has built-in robots.txt templating — set `enableRobotsTXT: true` in `config.yaml` and Hugo generates `public/robots.txt` at build time. The default template allows all crawlers (`User-agent: *`, `Disallow:`). Customize via `layouts/robots.txt` if you ever need to block paths (e.g. `/backlog/`, `/changelog/`).
-
----
-
-### Add sitemap.xml
-
-**Type:** improvement
-
-**Why** — A sitemap helps search engines discover and crawl all pages on the site, especially less-linked content like old posts or project archives. It's an SEO best practice and a companion to robots.txt.
-
-**Notes:** Hugo also has built-in sitemap generation — set `enableSitemap: true` in `config.yaml` and Hugo generates `public/sitemap.xml` at build time. The default output includes all published pages with `lastmod` dates. No customization needed for a basic setup.
-
----
-
-### Read more link on project cards
-
-**Type:** improvement
-
-**Why:** Project cards currently link the entire title/header to the detail page. Moving the link out of the header and adding a dedicated "Read more" button alongside GitHub/Demo links makes the card layout clearer and gives the project metadata links a consistent visual weight.
-
-**Notes:**
-
-- Edit `themes/squalr/layouts/partials/pcard.html` to remove the `<a>` wrapper from the title.
-- Add a "Read more" link item in the same location as the `repo` / `demo` / `links` output, following the same styling.
-- Test on a few projects (active, archived, with/without images) to ensure the link placement aligns well with other buttons.
 
 ---
 

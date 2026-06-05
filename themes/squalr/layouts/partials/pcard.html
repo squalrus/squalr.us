@@ -4,7 +4,7 @@
 {{- $slug := .File.ContentBaseName -}}
 {{- $notes := where site.RegularPages "Params.projects" "intersect" (slice $slug) -}}
 <article class="pcard">
-  <div class="pchrome"><h3 class="pname"><a href="{{ .Permalink }}">{{ .Title }}</a>{{- if ge .Date (now.AddDate 0 0 -45) }} <span class="newgif blink">NEW!</span>{{ end }}</h3><span class="pstat {{ $statusClass }}">{{ .Params.status | upper }}</span></div>
+  <div class="pchrome"><h3 class="pname">{{ .Title }}{{- if ge .Date (now.AddDate 0 0 -45) }} <span class="newgif blink">NEW!</span>{{ end }}</h3><span class="pstat {{ $statusClass }}">{{ .Params.status | upper }}</span></div>
   <div class="shot">
     {{- with .Params.image }}
     {{- $assetPath := strings.TrimLeft "/" . }}
@@ -33,6 +33,7 @@
     {{- with .Params.tech }}<div class="ptags">{{ range . }}<span>{{ . }}</span>{{ end }}</div>{{ end }}
     <div class="pfoot">
       <span class="plinks">
+        <a href="{{ .Permalink }}">read more</a>
         {{- with .Params.demo }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">live↗</a>{{ end }}
         {{- with .Params.repo }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">github↗</a>{{ end }}
         {{- range .Params.links }}<a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ replaceRE `[↗→\s]+$` "" .label | lower }}↗</a>{{ end }}

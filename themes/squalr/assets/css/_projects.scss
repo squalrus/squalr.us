@@ -72,16 +72,6 @@
   &:hover { border-color: var(--hot); box-shadow: 0 4px 14px rgba(91, 26, 166, .22); }
 }
 
-// Tech tag pills (shared between cards and the project detail page)
-.ptags span {
-  font-family: var(--term);
-  font-size: 14px;
-  color: #000;
-  background: #7fe3e3;
-  padding: 0 7px;
-  border: 1px solid #000;
-}
-
 // ============================================================
 // Screenshot + terminal banner containers
 // ============================================================

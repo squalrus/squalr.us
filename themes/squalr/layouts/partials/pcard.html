@@ -30,7 +30,7 @@
   </div>
   <div class="pbody">
     {{- with .Params.description }}<p class="pdesc">{{ . }}</p>{{ end }}
-    {{- with .Params.tech }}<div class="ptags">{{ range . }}<span>{{ . }}</span>{{ end }}</div>{{ end }}
+    {{- with .Params.tech }}<div class="ptags">{{ range . }}<span class="tag tag--small">{{ . }}</span>{{ end }}</div>{{ end }}
     <div class="pfoot">
       <span class="plinks">
         <a href="{{ .Permalink }}">read more</a>

@@ -2,6 +2,13 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.7.3] — 2026-06-05
+
+### Changed
+
+- **Tag size variants.** Tags now come in three sizes: the default pill (post meta), a compact `.tag--small` (project cards and detail-page tech stack), and a spacious `.tag--large` (the `/tags/` taxonomy listing). Visual language — teal pill, black border — stays identical; only scale and padding differ. (`_tags.scss`, `pcard.html`, `terms.html`, `_projects.scss`, `_project-detail.scss`)
+- **Refined project detail page layout.** The header area is reorganized into three explicit labeled rows — `status`, `links`, and `tech` — instead of a single mixed flex row with a floating tech block below. Each row has a small uppercase label (e.g. "status", "links", "tech") for scanability. Tech tags now use the compact `tag--small` variant. The related-posts heading updated from "Field notes" to "Posts about this project". (`projects/single.html`, `_project-detail.scss`)
+
 ## [1.7.2] — 2026-06-05
 
 ### Added

@@ -33,7 +33,7 @@ The tray icon is a small SVG baked into a Python `Icon` object via `pystray`. Ri
 
 Distribution is a single `.exe` via PyInstaller so there's nothing to install or maintain on the target machine.
 
-## Why it's useful
+## Why
 
 Manual time tracking is a friction tax. The more steps between "do the work" and "log the work," the less accurate your data gets. This removes all of them — you set up your desktops once, name them something meaningful, and forget about it.
 

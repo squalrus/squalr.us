@@ -30,6 +30,12 @@ PR management for GitHub repos. merge-bot automates pull request integration by 
 
 It's designed to replace the manual label-watching and back-and-forth of "is this ready?" — wire it up, set your rules, and let the bot handle the rest.
 
+## Why
+
+This came out of a real workflow gap at Microsoft. The team was already using labels to signal when a PR was ready — required labels, blocking labels, reviewer sign-off — but nothing actually pulled the trigger. Someone still had to watch the queue, check the conditions, and click merge. That last mile was manual and annoying.
+
+GitHub Actions were also brand new at the time, which made it a two-for-one: solve the team's problem and figure out what Actions could actually do. Publishing to the Marketplace was the natural next step — if we needed this, other teams did too.
+
 ## Setup
 
 Add a workflow file at `.github/workflows/merge-bot.yml`:

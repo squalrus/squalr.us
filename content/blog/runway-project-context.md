@@ -25,7 +25,7 @@ It started with [Glizzy Relay](https://glizzyrelay.com). I was tracking bugs and
 
 Three files. That was the whole insight.
 
-When I generalized this into a workflow for [squalr.us](https://squalr.us) and validated it on Desktop Tracker, the pattern held. So I packaged it as a Claude Code skill marketplace plugin.
+When I generalized this into a workflow for [squalr.us](/) and validated it on Desktop Tracker, the pattern held. So I packaged it as a Claude Code skill marketplace plugin.
 
 ## The Three Files
 
@@ -39,6 +39,25 @@ Two slash commands drive the whole thing:
 
 - `/add-to-backlog` — describe something in plain English; Claude pulls relevant code context and writes a structured entry
 - `/ship-from-backlog` — pick an item; Claude creates the version branch, writes the changelog entry, bumps the version, builds, commits, and pushes
+
+## The Bigger Picture: Five Docs, One Timeline
+
+Zoom out, and every well-run repo is telling one story across five files.
+
+Three of them describe what the project _is_, frozen at this exact moment:
+
+- **`README.md`** — the front door. What this thing does, how to run it.
+- **`CONTRIBUTING.md`** — the house rules. How a change gets in, what "done" looks like.
+- **`CLAUDE.md`** — the approach. Architecture calls, known gotchas, the stuff you'd tell a new teammate over coffee.
+
+The other two are time-facing, and they move in opposite directions:
+
+- **`CHANGELOG.md`** ramps _up_. It's the accumulated record of what shipped — it only grows.
+- **`BACKLOG.md`** ramps _down_. It's the unshipped future — sprawling and vague out at the horizon, sharper and shorter the closer an item gets to "now."
+
+![Diagram of a runway: a ramp on the left labeled CHANGELOG.md climbs up as the record of what shipped, a flat plateau in the middle holds README.md, CONTRIBUTING.md, and CLAUDE.md as the project's current identity, a ramp on the right labeled BACKLOG.md descends as the future narrows toward "now," and an arrow underneath reads "progress rolls forward — yesterday's backlog becomes today's changelog"](/img/blog/runway-project-context/docs-lifecycle.svg)
+
+Runway doesn't touch `README.md` or `CONTRIBUTING.md` — those are about identity, and identity is yours to write. But it owns the rest of the picture: it keeps `CLAUDE.md` honest as the architecture shifts, keeps `CHANGELOG.md` climbing as you ship, and keeps `BACKLOG.md` converging as the future turns into "now."
 
 ## Why This Works for Solo Devs
 

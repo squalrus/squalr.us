@@ -2,6 +2,24 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.9.2] — 2026-06-08
+
+### Added
+
+- **"Why" section on all project pages.** Every project detail page now has a `## Why` section capturing the motivation behind the project — the problem it solved, the itch it scratched, or what made it worth building. Added to car-rainbow, merge-bot, glizzy-relay, runway, and squalr.us; normalized desktop-tracker's existing "Why it's useful" heading to match. (`content/projects/*.md`)
+- **Runway project diagram.** MS Paint-style SVG diagram added to the Runway project page and blog post illustrating the docs-as-runway metaphor: CHANGELOG.md ramping up, core files on the plateau, BACKLOG.md ramping down, forward-motion arrow below. (`static/img/projects/runway/docs-lifecycle.svg`, `static/img/blog/runway-project-context/docs-lifecycle.svg`)
+- **Runway blog post: "Five Docs, One Timeline" section.** New section added explaining how README.md, CONTRIBUTING.md, and CLAUDE.md anchor what the project is while CHANGELOG.md and BACKLOG.md face in opposite directions along the timeline. (`content/blog/runway-project-context.md`)
+
+### Fixed
+
+- **Internal links used hardcoded production domain.** Five template locations used `.Permalink` / `.Site.BaseURL` (which bake in `https://squalr.us/` at build time) instead of `.RelPermalink` / `relURL`. PR preview deployments and any locally-served `hugo --minify` build would navigate to production when clicking internal links. All internal nav links are now root-relative. (`themes/squalr/layouts/partials/post-li.html`, `pcard.html`, `_default/single.html`, `_default/terms.html`, `_default/baseof.html`)
+- **Markdown content hardcoded production domain.** Prose links and the squalr.us project's `demo:` frontmatter used `https://squalr.us/` directly. Replaced with root-relative `/` so links resolve correctly in any environment. (`content/projects/runway.md`, `content/projects/squalr.us.md`, `content/blog/runway-project-context.md`)
+
+### Changed
+
+- **CLAUDE.md documents relative-link convention.** Added a note to the Deployment section explaining why internal links must always be root-relative (not hardcoded domain), which Hugo functions to use in templates, and how `hugo serve` masks the bug. (`CLAUDE.md`)
+- **CLAUDE.md requires `## Why` on project pages.** "Adding a Project" section updated to make `## Why` an explicit required section, not an implied part of the prose overview. (`CLAUDE.md`)
+
 ## [1.9.1] — 2026-06-05
 
 ### Fixed

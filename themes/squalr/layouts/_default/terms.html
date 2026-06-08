@@ -4,7 +4,7 @@
   <ul class="tags-list">
     {{ range .Data.Terms.ByCount }}
       <li class="tags-list-item">
-        <a class="tag tag--large" href="{{ .Page.Permalink }}">{{ .Page.Title }} ({{ .Count }})</a>
+        <a class="tag tag--large" href="{{ .Page.RelPermalink }}">{{ .Page.Title }} ({{ .Count }})</a>
       </li>
     {{ end }}
   </ul>

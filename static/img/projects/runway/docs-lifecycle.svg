@@ -1,0 +1,51 @@
+<svg viewBox="0 0 920 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rwTitle rwDesc">
+  <title id="rwTitle">Runway's docs sketched MS-Paint style: ramp up, plateau, ramp down, and forward motion</title>
+  <desc id="rwDesc">A crude marker-on-canvas sketch of a runway: a wobbly ramp on the left labeled CHANGELOG.md climbs up (what shipped), a flat yellow plateau in the middle holds a box of the core files README.md, CONTRIBUTING.md, and CLAUDE.md (what the project is, right now), and a wobbly ramp on the right labeled BACKLOG.md descends (what's coming, narrowing toward "now"). Underneath, a hand-drawn arrow points right with the caption: progress rolls forward — yesterday's backlog becomes today's changelog.</desc>
+
+  <rect x="0" y="0" width="920" height="600" fill="#ffffff"/>
+
+  <!-- slope captions, set well above the skyline so they never cross into the shapes below (shape apex points start at y=192) -->
+  <g font-family="'Comic Neue','Comic Sans MS',cursive" font-weight="bold" fill="#cc0000">
+    <g transform="rotate(-7 190 90)">
+      <text x="190" y="84" text-anchor="middle" font-size="24">CHANGELOG.md</text>
+      <text x="190" y="112" text-anchor="middle" font-size="15">ramps UP — what shipped</text>
+    </g>
+
+    <g transform="rotate(6 730 90)">
+      <text x="730" y="84" text-anchor="middle" font-size="24">BACKLOG.md</text>
+      <text x="730" y="112" text-anchor="middle" font-size="15">ramps DOWN — what's next</text>
+    </g>
+  </g>
+
+  <!-- crude skyline: ramp up (green) / plateau (yellow) / ramp down (red), drawn with wobbly outlines -->
+  <polygon points="100,362 152,349 206,323 264,282 322,208 331,258 335,330 333,362"
+           fill="#33cc55" stroke="#000000" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+  <polygon points="332,202 386,193 441,201 497,190 547,199 583,192 587,300 580,362 331,362 334,300"
+           fill="#ffe600" stroke="#000000" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+  <polygon points="585,196 619,236 663,277 713,311 768,339 819,360 581,362 578,300"
+           fill="#ff4040" stroke="#000000" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- baseline: the runway strip, scribbled center dashes -->
+  <path d="M 64,366 L 858,372" stroke="#000000" stroke-width="9" stroke-linecap="round" fill="none"/>
+  <path d="M 110,369 L 168,370" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 250,370 L 308,371" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 600,371 L 658,372" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 740,372 L 798,373" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- core docs box, drawn like a wobbly sticky note on the plateau, with generously spaced lines -->
+  <g transform="rotate(-1.5 460 270)">
+    <rect x="374" y="216" width="172" height="128" fill="#ffffff" stroke="#000000" stroke-width="5"/>
+    <text x="460" y="240" text-anchor="middle" font-family="'Comic Neue','Comic Sans MS',cursive" font-weight="bold" font-size="14" fill="#0000cc">core — what it IS</text>
+    <text x="460" y="266" text-anchor="middle" font-family="'Comic Neue','Comic Sans MS',cursive" font-size="14" fill="#000000">README.md</text>
+    <text x="460" y="292" text-anchor="middle" font-family="'Comic Neue','Comic Sans MS',cursive" font-size="14" fill="#000000">CONTRIBUTING.md</text>
+    <text x="460" y="318" text-anchor="middle" font-family="'Comic Neue','Comic Sans MS',cursive" font-size="14" fill="#000000">CLAUDE.md</text>
+  </g>
+
+  <!-- hand-drawn forward arrow, slightly wobbly -->
+  <path d="M 96,452 C 230,446 410,460 560,449 C 660,442 730,452 786,448"
+        stroke="#000000" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <polygon points="784,433 826,449 780,468" fill="#000000"/>
+
+  <text x="460" y="510" text-anchor="middle" font-family="'Comic Neue','Comic Sans MS',cursive" font-weight="bold" font-size="20" fill="#000000" transform="rotate(-1 460 510)">progress rolls forward —</text>
+  <text x="460" y="546" text-anchor="middle" font-family="'Comic Neue','Comic Sans MS',cursive" font-weight="bold" font-size="20" fill="#000000" transform="rotate(-1 460 546)">yesterday's backlog becomes today's changelog</text>
+</svg>

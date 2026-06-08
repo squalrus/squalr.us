@@ -126,7 +126,9 @@ links:                  # optional; arbitrary labelled links
 ---
 ```
 
-**Project body (required)** — after the closing `---`, write a plain-prose overview of the project (2–4 paragraphs). This is the detail page content. Describe what the project does, why it exists, and what makes it interesting. Use H2s for additional sections (Setup, Options, etc.) as needed.
+**Project body (required)** — after the closing `---`, write a plain-prose overview of the project (2–4 paragraphs). This is the detail page content. Describe what the project does and what makes it interesting. Use H2s for additional sections (Setup, Options, etc.) as needed.
+
+**`## Why` section (required)** — every project gets an explicit `## Why` heading capturing the motivation: the problem that prompted it, the itch it scratched, or the moment that made it worth building. This is the part that doesn't show up in the code or the README — capture it from the person who built it (ask "why did you build this?" if it's not already on record) rather than inferring it from the implementation. A couple of paragraphs is plenty.
 
 **Featured image** (`image:`) — put the source file in `assets/img/projects/<slug>/featured.png` (≤1366px wide). Hugo resizes it to WebP at build time and generates a srcset; no manual resizing needed. The `image:` frontmatter value stays as the URL path `/img/projects/<slug>/featured.png` — the template strips the leading `/` to find the asset.
 
@@ -139,6 +141,8 @@ All of `image`, `gallery`, and `terminal` are optional. Card banner logic: `imag
 Push to `main` → GitHub Actions builds and deploys to Azure Static Web Apps automatically.
 PRs get a preview deployment at a staging URL (posted as a PR comment).
 Review the preview, then merge the PR yourself — merging to `main` triggers the production deploy.
+
+**Always link internally with relative paths, never the hardcoded `https://squalr.us` domain** — in templates *and* in markdown content (`content/**/*.md`). CI runs the same `hugo --minify` for production and PR previews; `.Permalink` / `.Site.BaseURL` bake in the **configured** `baseURL` (`https://squalr.us/`) regardless of where the build is served, so a PR preview's nav would silently point at production. `hugo serve` masks this — it overrides the baseURL to `localhost`, so the bug only shows up in `hugo --minify` output. Use `.RelPermalink` / `{{ "/" | relURL }}` in templates, and root-relative paths like `[squalr.us](/)` or `demo: "/"` in content frontmatter/prose — that way the link always resolves to wherever the page is actually being served from.
 
 ## Process, Backlog & Versioning
 

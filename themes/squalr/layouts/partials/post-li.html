@@ -2,7 +2,7 @@
 {{- $p := .page -}}
 <li>
   <span class="bullet">►</span>
-  <a href="{{ $p.Permalink }}">{{ $p.Title }}</a>
+  <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
   {{- if ge $p.Date (now.AddDate 0 0 -45) }} <span class="newgif blink">NEW!</span>{{ end }}
   {{- range $p.Params.projects }}{{ with site.GetPage (printf "/projects/%s" .) }} <span class="pj">{{ replaceRE `^https?://(www\.)?` "" .Title }}</span>{{ end }}{{ end }}
   <span class="dt">{{ $p.Date.Format "Jan 2 '06" }}</span>

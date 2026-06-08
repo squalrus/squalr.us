@@ -524,7 +524,7 @@
     var wbtns = wa.querySelectorAll('.tb-btn');
     if (!wbtns.length) return;
 
-    var TITLE = '♫ LAST.FM';
+    var TITLE = '♫ WinAmp';
     var SK    = 'wa:s:' + location.pathname; // shaded key
     var CK    = 'wa:c:' + location.pathname; // closed key
 

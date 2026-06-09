@@ -2,6 +2,17 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.10.0] — 2026-06-09
+
+### Added
+
+- **BadgeFor.Me project page.** New project entry for the satirical Presence-as-a-Service™ site — covers what it does, how it's built (vanilla HTML/CSS/JS, no framework), and the RTO-culture motivation behind it. (`content/projects/badgefor.me.md`)
+
+### Removed
+
+- **`terminal:` blocks stripped from project pages that have a featured image.** When an `image:` is set, the card renders the screenshot — the terminal block was dead config. Removed from car-rainbow, desktop-tracker, and merge-bot. (`content/projects/*.md`)
+- **`featured` frontmatter removed from all project pages.** The field was never read by any template. Removed from desktop-tracker, merge-bot, and squalr.us. (`content/projects/*.md`)
+
 ## [1.9.3] — 2026-06-08
 
 ### Added

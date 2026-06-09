@@ -7,9 +7,6 @@ image: /img/projects/car-rainbow/featured.png
 tech: [React, Sass, Parcel, Playwright, Vitest]
 repo: https://github.com/squalrus/car-rainbow
 demo: https://carrainbow.quest/
-terminal:
-  label: 'car-rainbow — v1.14.1'
-  lines: ['$ are we there yet?', '✓ red ✓ orange ✓ yellow', '✓ green ✓ blue ✓ purple', '🎉 you did it!']
 ---
 
 Car Rainbow is a passenger-seat game built for actual car trips: kids (and the adults riding along) look out the window for real cars in each color of the rainbow and tap to check them off as they're spotted. Clear every color and a "you did it" dialog celebrates the win, bumps a running counter, and resets the board for the next stretch of highway. An expanded-colors mode adds trickier shades to hunt for, and hard mode raises the stakes further by requiring cars to be spotted in rainbow order — no skipping ahead to the easy ones.

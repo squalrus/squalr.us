@@ -35,10 +35,11 @@ Runway is built around three markdown files checked into your repo:
 - **`BACKLOG.md`** — bugs, features, and ideas, classified by type and effort
 - **`CLAUDE.md`** — how to approach the project: architecture decisions, known gotchas, project-specific context
 
-Two slash commands drive the whole thing:
+Three slash commands drive the whole thing:
 
 - `/add-to-backlog` — describe something in plain English; Claude pulls relevant code context and writes a structured entry
-- `/ship-from-backlog` — pick an item; Claude creates the version branch, writes the changelog entry, bumps the version, builds, commits, and pushes
+- `/pick-from-backlog` — surface candidates ranked by the backlog's own ordering, get a scope brief on the chosen item, and start the work
+- `/ship-from-backlog` — Claude creates the version branch, writes the changelog entry, bumps the version, builds, commits, and pushes
 
 ## The Bigger Picture: Five Docs, One Timeline
 

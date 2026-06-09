@@ -2,6 +2,16 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.9.3] — 2026-06-08
+
+### Added
+
+- **PNG export of Runway diagram.** The docs-lifecycle diagram is now available as a 1840px PNG alongside the SVG, suitable for sharing on social/LinkedIn. (`static/img/blog/runway-project-context/docs-lifecycle.png`)
+
+### Changed
+
+- **Runway content updated for three-command workflow.** Project page and blog post now describe all three slash commands — `/add-to-backlog`, `/pick-from-backlog`, and `/ship-from-backlog` — as the full capture → pick → ship cycle. Terminal card updated to show `/pick-from-backlog`. (`content/projects/runway.md`, `content/blog/runway-project-context.md`)
+
 ## [1.9.2] — 2026-06-08
 
 ### Added

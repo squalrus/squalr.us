@@ -10,13 +10,13 @@ terminal:
   lines:
     - '$ /add-to-backlog "dark mode flickers on resize"'
     - '✓ classified → bug / effort:low / BACKLOG.md'
-    - '$ /ship-from-backlog'
-    - '✓ v1.1.0 tagged → pushed'
+    - '$ /pick-from-backlog'
+    - '✓ scoped · starting dark-mode fix'
 ---
 
 Runway is a Claude Code skill plugin that solves a specific problem with AI-assisted solo development: context loss between sessions. Every new Claude Code window starts cold. Runway fixes that by keeping three markdown files — `CHANGELOG.md`, `BACKLOG.md`, and `CLAUDE.md` — checked into your repo and continuously current with the code. Open a new session and Claude already knows what shipped, what's coming, and how to approach the project.
 
-The workflow is driven by two slash commands. `/add-to-backlog` takes a plain-English description of a bug, feature, or idea and writes a structured entry — classified by type and effort, with relevant code context pulled in automatically. It's designed to be fast so you can capture ideas while they're flowing without breaking momentum. `/ship-from-backlog` does the full release dance: version branch, changelog entry, version bump, build, commit, and push. Both commands bootstrap their required files on first run, so there's nothing to set up manually.
+Three slash commands drive the full cycle. `/add-to-backlog` captures a bug, feature, or idea in plain English — classified by type and effort, with relevant code context pulled in automatically. Fast enough to use mid-flow without breaking momentum. `/pick-from-backlog` surfaces candidates ranked by the backlog's own ordering, briefs you on scope and the "why" behind the chosen item, and starts the work. `/ship-from-backlog` does the full release dance: version branch, changelog entry, version bump, build, commit, and push. All three commands bootstrap their required files on first run, so there's nothing to set up manually.
 
 What makes this approach interesting is that the files maintain themselves. Because they live in the repo alongside the code, they stay accurate as the project evolves — a bug fixed by a new feature disappears from the backlog, a feature description updates when its implementation path changes. The context is always a snapshot of where things actually stand, which also means meaningful token savings: every session starts from a current state rather than reconstructing history from scratch.
 

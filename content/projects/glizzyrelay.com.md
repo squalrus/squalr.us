@@ -4,7 +4,6 @@ date: 2026-05-09T00:00:00+00:00
 description: "Event management and live scoring app for the Hot Dog Eating Relay — teams of three race a hotdog and a beer, sequentially, against the clock."
 status: active
 image: /img/projects/glizzyrelay.com/featured.png
-# Gallery — shown when drilling into this project:
 gallery:
    - src: /img/projects/glizzyrelay.com/1-home.png
      caption: "Homepage"

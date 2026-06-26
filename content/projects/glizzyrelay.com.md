@@ -19,6 +19,7 @@ gallery:
      caption: "Scoreboard"
 tech: [TypeScript, React, Vite, Tailwind CSS, Supabase, PostgreSQL, Netlify]
 demo: "https://glizzyrelay.com"
+relatedProjects: [runway]
 ---
 
 Glizzy Relay is the full-stack web platform behind the Hot Dog Eating Relay — a team event where three competitors eat a hotdog and drink a beer in sequence, with the combined leg times as the team score. The app handles the entire event lifecycle: scheduling and configuring events, rostering teams with per-member splits, running a spacebar/tap-driven live timer with screen wake lock, and broadcasting an ESPN-style projection scoreboard that syncs in real time.

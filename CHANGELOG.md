@@ -2,6 +2,26 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.11.0] — 2026-06-26
+
+### Added
+
+- **InfinitySpace project page.** New project entry for the Unity Android survival space shooter, resumed in 2026 after the last meaningful work in 2017 — covers the procedural sector gameplay, the Unity 2018.3 → Unity 6 modernization, and the "Why" behind picking it back up. (`content/projects/infinity-space.md`, `assets/img/projects/infinity-space/featured.png`)
+- **Bidirectional related-projects linking on project pages.** Project frontmatter can now declare `relatedProjects: [slug, ...]`; the detail template also reverse-matches any project that lists *this* one, so the link only needs to be written on one side. Runway is now linked from Desktop Tracker, Glizzy Relay, InfinitySpace, and squalr.us, and shows all four back automatically. (`themes/squalr/layouts/projects/single.html`)
+
+### Changed
+
+- **Project statuses corrected.** squalr.us → `active`, Car Rainbow → `archived`, InfinitySpace → `wip`, reflecting actual maintenance state. (`content/projects/squalr.us.md`, `content/projects/car-rainbow.md`, `content/projects/infinity-space.md`)
+- **"Posts about this project" now lists above "Related projects"** on the project detail page. (`themes/squalr/layouts/projects/single.html`)
+
+### Fixed
+
+- **Guestbook entry for `prog_gandalf` had a missing band name.** Filled in "Plini" — `'finally someone with TASTE. Plini is the correct answer.'` (`themes/squalr/assets/js/cybershack.js`)
+
+### Removed
+
+- **Draft post "The three markdown files that replaced my project tools" cut.** Too much overlap with the already-published Runway post — same three-file pitch, same origin story, same spec-driven-development comparison — without enough of its own angle to justify a separate post. (`content/blog/draft/the-three-markdown-files-that-replaced-my-project-tools.md`)
+
 ## [1.10.0] — 2026-06-09
 
 ### Added

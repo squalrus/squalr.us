@@ -138,7 +138,6 @@ Drafted / scheduled posts, with their intended go-live dates. Future-dated posts
 | --- | --- | --- |
 | Still Here. New Chapter. | 2026-06-02 | draft — **needs Chad's review** (personal details / Dura specifics are placeholders) |
 | Modernizing My Hugo Blog in 2026 | 2026-06-04 | queued — the `v1.0.0` explainer |
-| The three markdown files that replaced my project tools | 2026-06-09 | queued — ready |
 | Building a Custom Hugo Theme | 2026-06-11 | queued — ready |
 
 ## Shipped

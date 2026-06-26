@@ -113,5 +113,21 @@
       </ul>
     </div>
     {{- end }}
+    {{- $explicitRelated := .Params.relatedProjects | default slice }}
+    {{- $reverseRelated := slice }}
+    {{- range where site.RegularPages "Params.relatedProjects" "intersect" (slice $slug) }}
+    {{- $reverseRelated = $reverseRelated | append .File.ContentBaseName }}
+    {{- end }}
+    {{- $relatedSlugs := $explicitRelated | append $reverseRelated | uniq }}
+    {{- with $relatedSlugs }}
+    <div class="related-projects">
+      <h2>◇ Related projects</h2>
+      <div class="projgrid">
+        {{- range . }}
+        {{- with site.GetPage (printf "/projects/%s" .) }}{{ partial "pcard.html" . }}{{ end }}
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
   </article>
 {{ end }}

@@ -6,6 +6,7 @@ status: active
 tech: [Python, JavaScript, SVG, PyInstaller, BambooHR API]
 repo: https://github.com/squalrus/desktop-tracker
 image: /img/projects/desktop-tracker/featured.png
+relatedProjects: [runway]
 ---
 
 I work across several Virtual Desktops throughout the day — one for deep work, one for Slack and email, one for whatever side thing I'm poking at. The problem: I had no idea where my time was actually going. Time-tracking tools track apps or windows, not desktops. I wanted desktop-level granularity.

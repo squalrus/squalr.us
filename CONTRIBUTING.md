@@ -72,7 +72,7 @@ The hero is data, not markup — edit `config.yaml › params.hero`:
 hero:
   kicker: '2026'
   lines: ['YEAR', 'OF {SHIPPING}.']   # the word in {braces} becomes the rainbow wordmark
-  subtitle: 'Sr Consultant … {highlighted phrase}.'
+  subtitle: 'Digital Engineering Studio Lead … {highlighted phrase}.'
   status: 'shipping'
   flavorChip: 'hotdogs/wk ∞'
 ```

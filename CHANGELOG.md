@@ -2,6 +2,16 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.12.0] — 2026-08-01
+
+### Added
+
+- **SHRNKR project page.** New project entry for the satirical token-compression-middleware site — covers the live shrink demo, the compression pipeline (DLE/JDSL), and the AI-token-pricing-satire motivation behind it. Related to badgefor.me as a sibling parody production. (`content/projects/shrnkr.dev.md`, `assets/img/projects/shrnkr.dev/featured.png`)
+
+### Changed
+
+- **Chad's title updated to "Digital Engineering Studio Lead"** (was "Sr Consultant") across the site meta description, homepage hero tagline, and welcome paragraph. (`config.yaml`, `themes/squalr/layouts/index.html`, `CONTRIBUTING.md`)
+
 ## [1.11.0] — 2026-06-26
 
 ### Added

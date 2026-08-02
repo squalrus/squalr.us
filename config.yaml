@@ -23,7 +23,7 @@ permalinks:
 
 params:
   author: 'Chad Schulz'
-  description: 'Sr Consultant at Dura Digital. Building tools, breaking prod, learning out loud.'
+  description: 'Digital Engineering Studio Lead at Dura Digital. Building tools, breaking prod, learning out loud.'
   favicon: '/img/favicon.ico'
   images:
     - img/bio.jpg

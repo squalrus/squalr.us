@@ -5,40 +5,42 @@
 {{- $notes := where site.RegularPages "Params.projects" "intersect" (slice $slug) -}}
 <article class="pcard">
   <div class="pchrome"><h3 class="pname">{{ .Title }}{{- if ge .Date (now.AddDate 0 0 -45) }} <span class="newgif blink">NEW!</span>{{ end }}</h3><span class="pstat {{ $statusClass }}">{{ .Params.status | upper }}</span></div>
-  <div class="shot">
-    {{- with .Params.image }}
-    {{- $assetPath := strings.TrimLeft "/" . }}
-    {{- $imgRes := resources.Get $assetPath }}
-    {{- if $imgRes }}
-      {{- $sm := $imgRes.Resize "683x webp" }}
-      {{- $md := $imgRes.Resize "1024x webp" }}
-      {{- $lg := $imgRes.Resize "1366x webp" }}
-    <span class="shothint">⌖ screenshot.gif</span>
-    <img src="{{ $sm.RelPermalink }}"
-         srcset="{{ $sm.RelPermalink }} 683w, {{ $md.RelPermalink }} 1024w, {{ $lg.RelPermalink }} 1366w"
-         sizes="(max-width: 760px) 100vw, 460px"
-         alt="{{ $.Title }} screenshot"
-         width="{{ $sm.Width }}" height="{{ $sm.Height }}"
-         loading="lazy" />
-    {{- else }}
-    <span class="shothint">⌖ screenshot.gif</span>
-    <img src="{{ . }}" alt="{{ $.Title }} screenshot" loading="lazy" />
-    {{- end }}
-    {{- else }}
-    {{ partial "cybershack-terminal.html" . }}
-    {{- end }}
-  </div>
-  <div class="pbody">
-    {{- with .Params.description }}<p class="pdesc">{{ . }}</p>{{ end }}
-    {{- with .Params.tech }}<div class="ptags">{{ range . }}<span class="tag tag--small">{{ . }}</span>{{ end }}</div>{{ end }}
-    <div class="pfoot">
-      <span class="plinks">
-        <a href="{{ .RelPermalink }}">read more</a>
-        {{- with .Params.demo }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">live↗</a>{{ end }}
-        {{- with .Params.repo }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">github↗</a>{{ end }}
-        {{- range .Params.links }}<a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ replaceRE `[↗→\s]+$` "" .label | lower }}↗</a>{{ end }}
-      </span>
-      {{- if $notes }}<a class="pnotes" href="{{ .RelPermalink }}">◇ {{ len $notes }} note{{ if gt (len $notes) 1 }}s{{ end }}</a>{{ else }}<span class="pnotes none">◇ no notes yet</span>{{ end }}
+  <div class="pmain">
+    <div class="shot">
+      {{- with .Params.image }}
+      {{- $assetPath := strings.TrimLeft "/" . }}
+      {{- $imgRes := resources.Get $assetPath }}
+      {{- if $imgRes }}
+        {{- $sm := $imgRes.Resize "683x webp" }}
+        {{- $md := $imgRes.Resize "1024x webp" }}
+        {{- $lg := $imgRes.Resize "1366x webp" }}
+      <span class="shothint">⌖ screenshot.gif</span>
+      <img src="{{ $sm.RelPermalink }}"
+           srcset="{{ $sm.RelPermalink }} 683w, {{ $md.RelPermalink }} 1024w, {{ $lg.RelPermalink }} 1366w"
+           sizes="(max-width: 760px) 100vw, 420px"
+           alt="{{ $.Title }} screenshot"
+           width="{{ $sm.Width }}" height="{{ $sm.Height }}"
+           loading="lazy" />
+      {{- else }}
+      <span class="shothint">⌖ screenshot.gif</span>
+      <img src="{{ . }}" alt="{{ $.Title }} screenshot" loading="lazy" />
+      {{- end }}
+      {{- else }}
+      {{ partial "cybershack-terminal.html" . }}
+      {{- end }}
+    </div>
+    <div class="pbody">
+      {{- with .Params.description }}<p class="pdesc">{{ . }}</p>{{ end }}
+      {{- with .Params.tech }}<div class="ptags">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</div>{{ end }}
+      <div class="pfoot">
+        <span class="plinks">
+          <a href="{{ .RelPermalink }}">read more</a>
+          {{- with .Params.demo }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">live↗</a>{{ end }}
+          {{- with .Params.repo }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">github↗</a>{{ end }}
+          {{- range .Params.links }}<a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ replaceRE `[↗→\s]+$` "" .label | lower }}↗</a>{{ end }}
+        </span>
+        {{- if $notes }}<a class="pnotes" href="{{ .RelPermalink }}">◇ {{ len $notes }} note{{ if gt (len $notes) 1 }}s{{ end }}</a>{{ else }}<span class="pnotes none">◇ no notes yet</span>{{ end }}
+      </div>
     </div>
   </div>
 </article>

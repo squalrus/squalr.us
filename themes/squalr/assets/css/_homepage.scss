@@ -45,9 +45,9 @@ hr.candy {
 // h2 stickers (changelog, inner pages) drop the rotation
 h2.sticker { font-size: 14px; font-weight: bold; }
 
-// Project card grid (2-up on desktop, 1-up on mobile via _responsive.scss)
+// Project card list — single column, full width
 .projgrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }

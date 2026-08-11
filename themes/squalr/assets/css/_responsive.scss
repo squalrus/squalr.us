@@ -27,7 +27,11 @@
 @media (max-width: 760px) {
   // Stack sidebar below main column
   .cols    { grid-template-columns: 1fr; }
-  .projgrid { grid-template-columns: 1fr; }
+  .projgrid { gap: 14px; }
+
+  // Project cards: image-beside-copy collapses to image-above-copy
+  .pmain { flex-direction: column; }
+  .shot  { flex-basis: auto; aspect-ratio: 16 / 9; border-right: none; border-bottom: 2px solid #5b1aa6; }
 
   // Tighter page edges
   .page     { padding: 0 8px 24px; }

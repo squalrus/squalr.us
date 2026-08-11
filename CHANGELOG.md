@@ -2,6 +2,17 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.13.0] — 2026-08-10
+
+### Added
+
+- **Bangers project page.** New project entry for the AI-generated hotdog-themed album made with Google Gemini's music tooling — covers the full 15-track tracklist with per-song commentary and the "tried the new tooling, couldn't stop" origin story. (`content/projects/bangers.md`, `assets/img/projects/bangers/featured.png`)
+- **Spored project page.** New project entry for the hyperlocal neighborhood discovery app (Next.js/Express/Supabase monorepo, launching in Phinneywood, Seattle) — covers check-ins, business coupons, events, badges, and the Foursquare/mycelial-network motivation behind it. (`content/projects/spored.md`, `assets/img/projects/spored/featured.jpg`)
+
+### Changed
+
+- **Project cards redesigned as single-column, full-width, image-beside-copy layout.** Replaced the 2-up grid of stacked screenshot-over-text cards (on both the homepage and `/projects/`) with one card per row: screenshot on one side, title/description/tags/links on the other. Bigger type, bigger tags, more padding throughout. Mobile still collapses to image-above-copy, full width. (`themes/squalr/layouts/partials/pcard.html`, `themes/squalr/assets/css/_projects.scss`, `themes/squalr/assets/css/_homepage.scss`, `themes/squalr/assets/css/_responsive.scss`)
+
 ## [1.12.0] — 2026-08-01
 
 ### Added

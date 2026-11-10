@@ -2,6 +2,12 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.15.1] — 2026-11-10
+
+### Fixed
+
+- **Last.fm album art blocked by the content security policy.** Last.fm now serves some album art from `lastfm-img.freetls.fastly.net`, which wasn't in `img-src`, so the Now Playing cover was blocked. Both Last.fm image hosts are now allowed. (`static/staticwebapp.config.json`)
+
 ## [1.15.0] — 2026-11-10
 
 ### Added

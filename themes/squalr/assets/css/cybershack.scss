@@ -40,6 +40,7 @@
 @use 'tags';            // a.tag, .tags-list
 @use 'project-detail';  // project detail meta, hero image, gallery
 @use 'pagination';      // .pagination, .page-item
+@use 'links';           // /links/ link-tree page
 
 // Media queries (last so they always win over component defaults)
 @use 'responsive'; // prefers-reduced-motion + max-width:760px

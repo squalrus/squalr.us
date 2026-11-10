@@ -1,0 +1,239 @@
+// ============================================================
+// Link-tree page (_default/links.html, /links/)
+// Flat retro: a solid cream card over the site wallpaper, white
+// link cards with an ink outline and a hard offset shadow. Body
+// copy stays full-strength ink for contrast (no opacity tricks).
+// ============================================================
+
+// Fill the viewport so the wallpaper doesn't stop short on tall screens
+.lt-page {
+  min-height: 100vh;
+  display: flow-root;
+}
+
+.lt {
+  max-width: 480px;
+  margin: 32px auto;
+  padding: 28px 20px 22px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  box-shadow: 6px 6px 0 var(--ink);
+
+  @media (max-width: 520px) {
+    margin: 16px;
+    padding: 24px 16px 18px;
+  }
+}
+
+// ---- Header ----
+
+.lt-head {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.lt-avatar {
+  width: 104px;
+  height: 104px;
+  object-fit: cover;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--paper), 0 0 0 6px var(--hot);
+  display: block;
+  margin: 6px auto 14px;
+  image-rendering: auto;
+}
+
+.lt-word {
+  font-size: clamp(22px, 7vw, 30px);
+  margin: 0;
+}
+
+.lt-name {
+  font-family: var(--comic);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--ink);
+  margin: 8px 0 4px;
+}
+
+.lt-bio {
+  font-family: var(--comic);
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0 auto;
+  max-width: 34ch;
+}
+
+// ---- Link list ----
+
+.lt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lt-sec {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--comic);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 14px 0 2px;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    border-top: 2px dashed var(--ink);
+    opacity: .35;
+  }
+}
+
+// Base `a` styles (_base.scss) set :visited purple and a magenta :hover fill;
+// every link state below pins its own color + background so they can't leak in.
+
+.lt-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform .12s ease, box-shadow .12s ease;
+
+  &,
+  &:visited,
+  &:hover {
+    background: #fff;
+    color: var(--ink);
+  }
+
+  &:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--hot);
+  }
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--ink);
+  }
+  &:focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; }
+
+  // Primary (homepage) card: inverted
+  &--home,
+  &--home:visited,
+  &--home:hover {
+    background: var(--ink);
+    color: #fff;
+  }
+  &--home .lt-txt small { color: #e4defa; }
+}
+
+.lt-txt {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+
+  b {
+    font-family: var(--comic);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  small {
+    font-family: var(--comic);
+    font-size: 14px;
+    color: var(--ink-2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.lt-pill {
+  flex-shrink: 0;
+  font-family: var(--comic);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1.5px solid currentColor;
+
+  &--active { color: #005c10; background: #e3f7e5; }
+  &--wip    { color: #6e4600; background: #fff1c9; }
+  &--paused { color: #4a4a4a; background: #ececec; }
+}
+
+.lt-arrow {
+  flex-shrink: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+// ---- Socials ----
+
+.lt-social {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 2px;
+}
+
+.lt-sbtn {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform .12s ease, box-shadow .12s ease, color .12s ease;
+
+  &,
+  &:visited {
+    background: #fff;
+    color: var(--ink);
+  }
+
+  &:hover {
+    background: #fff;
+    color: var(--hot);
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--hot);
+  }
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+  }
+  &:focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; }
+}
+
+.lt-foot {
+  margin-top: 24px;
+  text-align: center;
+  font-family: var(--comic);
+  font-size: 14px;
+  color: var(--ink-2);
+
+  a,
+  a:visited { color: var(--ink); font-weight: 700; }
+  a:hover   { color: #fff; background: var(--hot); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lt-btn, .lt-sbtn { transition: none; }
+}

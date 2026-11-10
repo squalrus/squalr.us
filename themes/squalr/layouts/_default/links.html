@@ -1,0 +1,130 @@
+{{- /* ============================================================
+     Link-tree page (/links/) — standalone, no baseof. One narrow
+     column of big Win95 buttons: home, live projects, socials.
+     Projects are pulled from content/projects: any non-archived
+     project with an absolute `demo:` URL, newest first.
+     ============================================================ */ -}}
+{{- $lit := "SQUALRUS" -}}
+{{- range .Site.Params.hero.lines }}{{ with findRE `\{[^}]+\}` . 1 }}{{ $lit = replaceRE `[{}]` "" (index . 0) }}{{ end }}{{ end -}}
+{{- $statusLabel := dict "active" "live" "wip" "wip" "paused" "paused" }}
+{{- $projects := slice }}
+{{- range $p := (where (where site.RegularPages "Section" "projects") "Params.status" "ne" "archived").ByDate.Reverse }}
+  {{- if hasPrefix ($p.Params.demo | default "") "http" }}{{ $projects = $projects | append $p }}{{ end }}
+{{- end }}
+<!doctype html>
+<html lang="{{ .Site.Language.Locale | default "en-us" }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {{- $author := .Site.Params.author }}
+  {{- $desc := .Description | default .Site.Params.description }}
+  {{- $avatar := "img/bio.jpg" | absURL }}
+  <title>{{ .Title }}</title>
+  {{ hugo.Generator }}
+  <meta name="author" content="{{ $author }}" />
+  <meta name="description" content="{{ $desc }}" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#1a1530" />
+  {{- /* Canonical / og:url are absolute on purpose: they should always name the production URL. */}}
+  <link rel="canonical" href="{{ .Permalink }}" />
+  <link rel="shortcut icon" href="{{ .Site.Params.favicon | default "/favicon.ico" }}" />
+  <link rel="preload" href="/fonts/press-start-2p.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/comic-neue-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ "img/bio.jpg" | relURL }}" as="image" fetchpriority="high">
+  {{- $css := resources.Get "css/cybershack.scss" | toCSS (dict "transpiler" "dartsass") | minify }}
+  <style>{{ $css.Content | safeCSS }}</style>
+
+  <meta property="og:type" content="profile" />
+  <meta property="og:site_name" content="squalr.us" />
+  <meta property="og:url" content="{{ .Permalink }}" />
+  <meta property="og:title" content="{{ .Title }}" />
+  <meta property="og:description" content="{{ $desc }}" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content="{{ $avatar }}" />
+  <meta property="og:image:width" content="400" />
+  <meta property="og:image:height" content="400" />
+  <meta property="og:image:alt" content="{{ $author }}" />
+  <meta property="profile:first_name" content="{{ index (split $author " ") 0 }}" />
+  <meta property="profile:last_name" content="{{ index (split $author " ") 1 }}" />
+  <meta property="profile:username" content="squalrus" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="{{ .Title }}" />
+  <meta name="twitter:description" content="{{ $desc }}" />
+  <meta name="twitter:image" content="{{ $avatar }}" />
+  <meta name="twitter:image:alt" content="{{ $author }}" />
+  {{- range .Site.Params.social }}{{ if eq .icon "twitter" }}
+  <meta name="twitter:creator" content="@{{ path.Base .url }}" />
+  {{- end }}{{ end }}
+
+  {{- /* ProfilePage + Person: ties the name, handle, and every profile/site together for search engines. */}}
+  {{- $sameAs := slice }}
+  {{- range .Site.Params.social }}{{ $sameAs = $sameAs | append .url }}{{ end }}
+  {{- $projectList := slice }}
+  {{- range $i, $p := $projects }}
+    {{- $projectList = $projectList | append (dict "@type" "ListItem" "position" (add $i 1) "name" $p.Title "url" $p.Params.demo) }}
+  {{- end }}
+  {{- $ld := dict
+      "@context" "https://schema.org"
+      "@type" "ProfilePage"
+      "url" .Permalink
+      "name" .Title
+      "description" $desc
+      "mainEntity" (dict
+        "@type" "Person"
+        "name" $author
+        "alternateName" "Squalrus"
+        "url" ("/" | absURL)
+        "image" $avatar
+        "jobTitle" "Digital Engineering Studio Lead"
+        "worksFor" (dict "@type" "Organization" "name" "Dura Digital")
+        "sameAs" $sameAs)
+      "hasPart" (dict "@type" "ItemList" "name" "Projects" "itemListElement" $projectList) }}
+  <script type="application/ld+json">{{ $ld | jsonify | safeJS }}</script>
+</head>
+<body class="lt-page">
+
+<main class="lt" id="main-content">
+  <header class="lt-head">
+    <img class="lt-avatar" src="{{ "img/bio.jpg" | relURL }}" alt="{{ .Site.Params.author }}" width="104" height="104" fetchpriority="high" />
+    <p class="wordmark lt-word"><span class="rainbow">{{ $lit }}</span></p>
+    <h1 class="lt-name">{{ .Site.Params.author }}</h1>
+    <p class="lt-bio">{{ .Site.Params.description }}</p>
+  </header>
+
+  <nav class="lt-list" aria-label="Links">
+    <a class="lt-btn lt-btn--home" href="{{ "/" | relURL }}">
+      <span class="lt-txt"><b>squalr.us</b><small>Blog, projects, and the cyber-shack</small></span>
+      <span class="lt-arrow" aria-hidden="true">→</span>
+    </a>
+
+    {{- with $projects }}
+    <h2 class="lt-sec">Projects</h2>
+    {{- range . }}
+    {{- $host := replaceRE `^https?://(www\.)?([^/]+).*$` "$2" .Params.demo }}
+    {{- $status := .Params.status | default "active" }}
+    <a class="lt-btn" href="{{ .Params.demo }}" target="_blank" rel="noopener noreferrer">
+      <span class="lt-txt"><b>{{ .Title }}</b><small>{{ $host }}</small></span>
+      <span class="lt-pill lt-pill--{{ $status }}">{{ index $statusLabel $status | default $status }}</span>
+      <span class="lt-arrow" aria-hidden="true">↗</span>
+    </a>
+    {{- end }}
+    {{- end }}
+
+    {{- with .Site.Params.social }}
+    <h2 class="lt-sec">Elsewhere</h2>
+    <div class="lt-social">
+      {{- range . }}
+      <a class="lt-sbtn" href="{{ .url }}" target="_blank" rel="me noopener" aria-label="{{ .icon | title }}">
+        {{- partial "icon.html" (dict "name" .icon "title" (.icon | title)) }}
+      </a>
+      {{- end }}
+    </div>
+    {{- end }}
+  </nav>
+
+  <footer class="lt-foot">★ <a href="{{ "/" | relURL }}">squalr.us</a> · geocities approved ★</footer>
+</main>
+
+{{ template "_internal/google_analytics.html" . }}
+</body>
+</html>

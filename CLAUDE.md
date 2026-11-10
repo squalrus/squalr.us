@@ -22,6 +22,7 @@ content/
   projects/        # project pages (.md)
   changelog.md     # thin stub → renders root CHANGELOG.md via the doc layout
   backlog.md       # thin stub → renders root BACKLOG.md via the doc layout
+  links.md         # /links/ link-tree page (layout: links — standalone, auto-lists live projects)
 themes/squalr/
   layouts/
     index.html               # standalone 90s "Cyber-Shack" homepage (does NOT use baseof)
@@ -49,6 +50,7 @@ themes/squalr/
   assets/css/_tags.scss       # a.tag, .tags-list
   assets/css/_project-detail.scss # project detail meta, hero image, gallery
   assets/css/_pagination.scss # .pagination
+  assets/css/_links.scss      # /links/ link-tree page
   assets/css/_responsive.scss # prefers-reduced-motion + max-width:760px
   static/cybershack.js        # visitor counter, guestbook, sparkle cursor, now-playing (localStorage)
 assets/
@@ -117,7 +119,8 @@ links:                  # optional; arbitrary labelled links
 # image: /img/projects/<slug>/featured.png   # featured pic (card + detail header)
                                               # source file lives in assets/img/projects/<slug>/featured.png
                                               # (Hugo resizes to WebP srcset at build time; ≤1366px wide source recommended)
-# gallery:                                    # drill-in gallery on the detail page
+# gallery:                                    # turns the detail-page hero into a carousel (featured image first,
+#                                             #   then each item); clicking a slide opens the Win95 lightbox
 #   - src: /img/projects/<slug>/shot.png      # gallery images still served from static/img/projects/<slug>/
 #     caption: "What this shows"
 # terminal:                                   # image-less cards render a DOS banner from this

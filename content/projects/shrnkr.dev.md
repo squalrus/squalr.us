@@ -2,6 +2,10 @@
 title: "SHRNKR"
 slug: shrnkr.dev
 date: 2026-08-01T00:00:00+00:00
+tags:
+  - ai
+  - website
+  - azure
 description: "Satirical token-compression middleware for AI agents — shrinks every prompt and response into fewer, uglier tokens so your bill (allegedly) goes down."
 status: wip
 image: /img/projects/shrnkr.dev/featured.png

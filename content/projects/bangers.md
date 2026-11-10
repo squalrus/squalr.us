@@ -1,6 +1,8 @@
 ---
 title: "Bangers"
 date: 2026-05-15T00:00:00+00:00
+tags:
+  - ai
 description: "An AI-generated hotdog-themed album, made with Google Gemini's music tooling — one dumb premise stretched across as many genres as possible."
 status: archived
 image: /img/projects/bangers/featured.png

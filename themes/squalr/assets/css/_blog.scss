@@ -1,0 +1,422 @@
+// ============================================================
+// /blog/ "zine" list (layouts/blog/list.html)
+// Masthead + giant outlined year headings + clickable post cards
+// with a colored date stamp. Reuses .pj-kicker / .pj-candy from
+// the project header. Token fallbacks keep it standalone if the
+// readability layer is ever removed.
+// ============================================================
+
+.zine-head {
+  margin: 0 0 8px;
+
+  .zine-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(38px, 7vw, 64px);
+    line-height: 1;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    text-shadow: 3px 3px 0 var(--zap), 6px 6px 0 rgba(0, 139, 139, .5), 9px 9px 0 rgba(212, 0, 156, .35);
+    margin: 0 0 12px;
+  }
+
+  .zine-sub {
+    font-family: var(--sans);
+    font-size: 17px;
+    color: var(--ink);
+    margin: 0 0 16px;
+
+    b { color: var(--hot); }
+  }
+}
+
+// Reuse the project-header bits outside .project-header
+.zine-head .pj-kicker {
+  display: inline-block;
+  font-family: var(--retro);
+  font-size: 13px;
+  color: #fff;
+  background: var(--neon-2);
+  border: var(--edge, 2px solid #1a1530);
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 var(--ink);
+  padding: 3px 10px;
+  margin: 2px 0 14px;
+  transform: rotate(1.5deg);
+}
+
+.zine-head .pj-candy {
+  height: 10px;
+  border: var(--edge, 2px solid #1a1530);
+  border-radius: 999px;
+  margin: 0 0 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    #ff0040  0    24px,
+    #ff6a00 24px  48px,
+    #ffcc00 48px  72px,
+    #00a619 72px  96px,
+    #008b8b 96px 120px,
+    #5b1aa6 120px 144px,
+    #d4009c 144px 168px
+  );
+}
+
+// ---- Year divider: huge outlined numerals riding a dashed rule ----
+
+.zine-year { margin-top: 26px; }
+
+.zine-yr {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 14px;
+  font-family: var(--retro);
+  font-weight: 700;
+  font-size: clamp(40px, 8vw, 64px);
+  line-height: 1;
+  color: var(--paper);
+  -webkit-text-stroke: 2px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 4px 4px 0 var(--hot);
+
+  &::after {
+    content: '';
+    flex: 1;
+    border-top: 3px dashed var(--ink);
+    opacity: .3;
+  }
+}
+
+// ---- Post cards ----
+
+.zine-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.zine-card {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  padding: 14px 16px 14px 14px;
+  border: var(--edge, 2px solid #1a1530);
+  border-radius: var(--round, 14px);
+  box-shadow: var(--lift, 4px 4px 0 #1a1530);
+  text-decoration: none;
+  font-weight: 400;   // whole card is an <a>; don't inherit the global bold link weight
+  transition: transform .14s ease, box-shadow .14s ease;
+
+  &,
+  &:visited,
+  &:hover { background: #fff; color: var(--ink); }
+
+  &:hover {
+    transform: rotate(-.6deg) translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--hot);
+
+    .zc-arrow { transform: translateX(4px); color: var(--hot); }
+  }
+  &:active { transform: translate(3px, 3px); box-shadow: none; }
+  &:focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; }
+}
+
+// Date stamp — colors cycle down the list
+.zc-date {
+  flex: 0 0 64px;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0 8px;
+  border: var(--edge, 2px solid #1a1530);
+  border-radius: 10px;
+  box-shadow: 2px 2px 0 var(--ink);
+  background: var(--zap);
+  color: var(--ink);
+  transform: rotate(-3deg);
+
+  .zc-mon { font-family: var(--retro); font-size: 13px; text-transform: uppercase; line-height: 1.2; }
+  .zc-day { font-family: var(--sans); font-weight: 700; font-size: 28px; line-height: 1; }
+}
+
+.zine-list > li:nth-child(5n+2) .zc-date { background: #7fe3e3; transform: rotate(2deg); }
+.zine-list > li:nth-child(5n+3) .zc-date { background: #ffb3e6; transform: rotate(-1.5deg); }
+.zine-list > li:nth-child(5n+4) .zc-date { background: #b9f5a6; transform: rotate(3deg); }
+.zine-list > li:nth-child(5n+5) .zc-date { background: #ffc58f; transform: rotate(-2.5deg); }
+
+.zc-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.zc-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.zc-sum {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.zc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  margin-top: 2px;
+  font-family: var(--sans);
+  font-size: 13px;
+}
+
+.zc-time { color: var(--ink-2); font-weight: 500; margin-right: 4px; }
+
+.zc-tag,
+.zc-proj {
+  font-weight: 600;
+  padding: 0 9px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.zc-tag  { background: #dcf5f5; color: var(--ink); }
+.zc-proj { background: #e3f7e5; color: #005c10; border-color: currentColor; }
+
+.zc-arrow {
+  align-self: center;
+  flex-shrink: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  transition: transform .14s ease, color .14s ease;
+}
+
+// Year line under the date stamp: hidden on /blog/ (already grouped by
+// year), shown wherever posts from different years are mixed together
+.zc-date .zc-yr { display: none; }
+.zine-list--mixed .zc-date .zc-yr {
+  display: block;
+  font-family: var(--retro);
+  font-size: 11px;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+// ============================================================
+// Blog post page (layouts/blog/single.html)
+// Rides on .project-header (kicker, title, candy, spec card);
+// .zine-post swaps in the zine colors.
+// ============================================================
+
+.zine-post {
+  .pj-kicker { background: var(--neon-2); transform: rotate(1.5deg); }
+
+  .post-title {
+    text-shadow: 3px 3px 0 var(--zap), 6px 6px 0 rgba(0, 139, 139, .5), 9px 9px 0 rgba(212, 0, 156, .3);
+  }
+
+  .zine-dek {
+    font-family: var(--sans);
+    font-size: clamp(18px, 2.3vw, 21px);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 62ch;
+    margin: -4px 0 18px;
+    padding-left: 14px;
+    border-left: 5px solid var(--hot);
+  }
+
+  .pdmeta-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+}
+
+.zp-when { font-family: var(--sans); font-size: 15px; font-weight: 500; color: var(--ink); }
+
+// Calendar stamp pinned to the header's top-right (same look as the card stamp)
+.zine-post { position: relative; }
+
+.zine-post .post-title,
+.zine-post .zine-dek { padding-right: 104px; }
+
+.zp-stamp {
+  position: absolute;
+  top: 0;
+  right: 4px;
+  width: 84px;
+  padding: 8px 0 10px;
+  transform: rotate(4deg);
+
+  .zc-mon { font-size: 15px; }
+  .zc-day { font-size: 38px; }
+  .zc-yr {
+    display: block;
+    font-family: var(--retro);
+    font-size: 13px;
+    line-height: 1.2;
+    margin-top: 2px;
+  }
+
+  // Colors follow the same 5-step cycle as the cards
+  &--c1 { background: var(--zap); }
+  &--c2 { background: #7fe3e3; transform: rotate(-3deg); }
+  &--c3 { background: #ffb3e6; }
+  &--c4 { background: #b9f5a6; transform: rotate(-2deg); }
+  &--c0 { background: #ffc58f; }
+}
+
+@media (max-width: 760px) {
+  .zine-post .post-title,
+  .zine-post .zine-dek { padding-right: 0; }
+  .zine-post .post-title { padding-right: 70px; }
+
+  .zp-stamp {
+    width: 60px;
+    padding: 5px 0 7px;
+    .zc-mon { font-size: 12px; }
+    .zc-day { font-size: 26px; }
+    .zc-yr  { font-size: 10px; }
+  }
+}
+
+// "Keep reading" — newer/older zine cards at the foot of a post
+.zine-more { margin-top: 34px; }
+
+.zine-more-h {
+  font-family: var(--retro);
+  font-size: 18px;
+  color: var(--hot);
+  margin: 0 0 14px;
+}
+
+.zine-more .zine-list > li { position: relative; }
+
+.zm-dir {
+  position: absolute;
+  top: -10px;
+  right: 18px;
+  z-index: 1;
+  font-family: var(--retro);
+  font-size: 11px;
+  color: var(--ink);
+  background: var(--zap);
+  border: 1.5px solid var(--ink);
+  border-radius: 6px;
+  padding: 1px 8px;
+  transform: rotate(2deg);
+}
+
+// ============================================================
+// Tag pages (term.html / terms.html)
+// ============================================================
+
+.zine-back {
+  display: inline-block;
+  margin: 0 12px 10px 0;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 14px;
+
+  &,
+  &:visited { color: var(--ink); }
+}
+
+.zine-sec { margin-top: 28px; }
+
+.zine-sec-h {
+  font-family: var(--retro);
+  font-weight: 700;
+  font-size: clamp(22px, 3.4vw, 28px);
+  color: var(--ink);
+  text-shadow: 3px 3px 0 var(--zap);
+  margin: 0 0 14px;
+}
+
+// Topic tiles on /tags/ — chunky stickers, colors cycle
+.tag-tiles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 14px;
+}
+
+.tag-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  border: var(--edge, 2px solid #1a1530);
+  border-radius: var(--round, 14px);
+  box-shadow: var(--lift, 4px 4px 0 #1a1530);
+  text-decoration: none;
+  font-weight: 400;
+  transition: transform .14s ease, box-shadow .14s ease;
+
+  &,
+  &:visited,
+  &:hover { color: var(--ink); background: #fffbe0; }
+
+  &:hover {
+    transform: rotate(-1deg) translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--hot);
+  }
+  &:focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; }
+
+  .tt-name  { font-family: var(--sans); font-weight: 700; font-size: 22px; line-height: 1.2; }
+  .tt-count { font-family: var(--sans); font-size: 14px; color: var(--ink-2); }
+}
+
+.tag-tiles > li:nth-child(5n+2) .tag-tile { &, &:visited, &:hover { background: #dcf5f5; } }
+.tag-tiles > li:nth-child(5n+3) .tag-tile { &, &:visited, &:hover { background: #ffe3f5; } }
+.tag-tiles > li:nth-child(5n+4) .tag-tile { &, &:visited, &:hover { background: #e3f7e5; } }
+.tag-tiles > li:nth-child(5n+5) .tag-tile { &, &:visited, &:hover { background: #ffecd9; } }
+
+.tag-n {
+  display: inline-block;
+  min-width: 1.5em;
+  margin-left: 4px;
+  padding: 0 5px;
+  font-size: .8em;
+  text-align: center;
+  color: #fff;
+  background: var(--ink);
+  border-radius: 999px;
+}
+
+@media (max-width: 760px) {
+  .tag-tiles { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .tag-tile .tt-name { font-size: 19px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tag-tile { transition: none; }
+  .tag-tile:hover { transform: none; }
+}
+
+@media (max-width: 760px) {
+  .zine-card { gap: 12px; padding: 12px; }
+  .zc-date   { flex-basis: 54px; }
+  .zc-date .zc-day { font-size: 24px; }
+  .zc-title  { font-size: 18px; }
+  .zc-sum    { font-size: 15px; }
+  .zc-arrow  { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zine-card, .zc-arrow { transition: none; }
+  .zine-card:hover { transform: none; }
+}

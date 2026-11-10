@@ -1,11 +1,49 @@
+{{- /* Taxonomy index. /tags/ shows topic tags (posts + projects) AND the
+       project tech stack; /tech/ shows just the tech stack. */ -}}
 {{ define "main" }}
-  <h1 class="page-title">{{ .Title }}</h1>
-  <p class="page-subtitle">pick a tag, surf the archive »</p>
-  <ul class="tags-list">
-    {{ range .Data.Terms.ByCount }}
-      <li class="tags-list-item">
-        <a class="tag tag--large" href="{{ .Page.RelPermalink }}">{{ .Page.Title }} ({{ .Count }})</a>
+  {{- $isTech := eq .Data.Plural "tech" }}
+  <header class="zine-head">
+    <span class="pj-kicker" aria-hidden="true">★ the index ★</span>
+    <h1 class="zine-title">{{ if $isTech }}Tech stack{{ else }}Tags{{ end }}</h1>
+    <p class="zine-sub">
+      {{- if $isTech }}Every tool, language, and platform behind the projects.
+      {{- else }}Topics across <b>{{ len (where site.RegularPages "Section" "blog") }}</b> posts and <b>{{ len (where site.RegularPages "Section" "projects") }}</b> projects, plus the tech they're built with.{{ end -}}
+    </p>
+    <div class="pj-candy" aria-hidden="true"></div>
+  </header>
+
+  {{- if not $isTech }}
+  <section class="zine-sec" aria-labelledby="sec-topics">
+    <h2 class="zine-sec-h" id="sec-topics">▰ topics</h2>
+    <ul class="tag-tiles">
+      {{- range site.Taxonomies.tags.ByCount }}
+      {{- $nPosts := len (where .Pages "Section" "blog") }}
+      {{- $nProj := len (where .Pages "Section" "projects") }}
+      <li>
+        <a class="tag-tile" href="{{ .Page.RelPermalink }}">
+          <span class="tt-name">#{{ .Page.Title | lower }}</span>
+          <span class="tt-count">
+            {{- with $nProj }}{{ . }} project{{ if ne . 1 }}s{{ end }}{{ end }}
+            {{- if and $nProj $nPosts }} · {{ end }}
+            {{- with $nPosts }}{{ . }} post{{ if ne . 1 }}s{{ end }}{{ end -}}
+          </span>
+        </a>
       </li>
-    {{ end }}
-  </ul>
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+
+  {{- with site.Taxonomies.tech }}
+  <section class="zine-sec" aria-labelledby="sec-tech">
+    <h2 class="zine-sec-h" id="sec-tech">▰ tech stack</h2>
+    <ul class="tags-list">
+      {{- range .ByCount }}
+      <li class="tags-list-item">
+        <a class="tag tag--large" href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span class="tag-n">{{ .Count }}</span></a>
+      </li>
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
 {{ end }}

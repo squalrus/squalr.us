@@ -4,9 +4,11 @@
 {{- $slug := .File.ContentBaseName -}}
 {{- $notes := where site.RegularPages "Params.projects" "intersect" (slice $slug) -}}
 <article class="pcard">
-  <div class="pchrome"><h3 class="pname">{{ .Title }}{{- if ge .Date (now.AddDate 0 0 -45) }} <span class="newgif blink">NEW!</span>{{ end }}</h3><span class="pstat {{ $statusClass }}">{{ .Params.status | upper }}</span></div>
+  <div class="pchrome"><h3 class="pname"><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{- if ge .Date (now.AddDate 0 0 -45) }} <span class="newgif blink">NEW!</span>{{ end }}</h3><span class="pstat {{ $statusClass }}">{{ .Params.status | upper }}</span></div>
   <div class="pmain">
-    <div class="shot">
+    {{- /* Screenshot links to the detail page too; kept out of the tab order
+           and accessibility tree since the title link already covers it. */}}
+    <a class="shot" href="{{ .RelPermalink }}" tabindex="-1" aria-hidden="true">
       {{- with .Params.image }}
       {{- $assetPath := strings.TrimLeft "/" . }}
       {{- $imgRes := resources.Get $assetPath }}
@@ -28,7 +30,7 @@
       {{- else }}
       {{ partial "cybershack-terminal.html" . }}
       {{- end }}
-    </div>
+    </a>
     <div class="pbody">
       {{- with .Params.description }}<p class="pdesc">{{ . }}</p>{{ end }}
       {{- with .Params.tech }}<div class="ptags">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</div>{{ end }}

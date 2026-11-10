@@ -1,0 +1,30 @@
+{{- /* /blog/ — "zine" layout: masthead, posts grouped by year under a giant
+       outlined year, each post a fully clickable card with a date stamp.
+       Other lists (homepage, project pages) keep the compact post-li rows. */ -}}
+{{ define "main" }}
+  {{- $posts := where .Pages "Type" "!=" "page" }}
+  {{- $oldest := index ($posts.ByDate) 0 }}
+  <header class="zine-head">
+    <span class="pj-kicker" aria-hidden="true">★ dispatches from the cyber-shack ★</span>
+    <h1 class="zine-title">{{ .Title }}</h1>
+    <p class="zine-sub">
+      <b>{{ len $posts }}</b> posts on cloud, process, tools, and whatever else
+      {{- with $oldest }} · scribbling since <b>{{ .Date.Format "2006" }}</b>{{ end }}
+    </p>
+    <div class="pj-candy" aria-hidden="true"></div>
+  </header>
+  {{- with .Content }}<div class="post-content">{{ . }}</div>{{ end }}
+
+  {{- $paginator := .Paginate ($posts.GroupByDate "2006") }}
+  {{- range $paginator.PageGroups }}
+  <section class="zine-year" aria-labelledby="yr-{{ .Key }}">
+    <h2 class="zine-yr" id="yr-{{ .Key }}"><span>{{ .Key }}</span></h2>
+    <ol class="zine-list">
+      {{- range .Pages }}
+      <li>{{ partial "zine-card.html" . }}</li>
+      {{- end }}
+    </ol>
+  </section>
+  {{- end }}
+  {{ partial "pagination.html" $ }}
+{{ end }}

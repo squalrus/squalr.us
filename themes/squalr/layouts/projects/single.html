@@ -1,18 +1,20 @@
 {{ define "main" }}
   {{- $statusEmoji := dict "active" "🟢" "wip" "🚧" "archived" "📦" "paused" "⏸️" }}
   <article class="post">
-    <header class="post-header">
+    <header class="post-header project-header">
+      <span class="pj-kicker" aria-hidden="true">★ rad project ★</span>
       <h1 class="post-title">{{ .Title }}</h1>
+      <div class="pj-candy" aria-hidden="true"></div>
       <div class="project-detail-meta">
         {{- with .Params.status }}
         <div class="pdmeta-row">
-          <span class="pdmeta-label">status</span>
+          <span class="pdmeta-label pdmeta-label--status">status</span>
           <span class="project-status status-{{ . }}">{{ with index $statusEmoji . }}{{ . }} {{ end }}{{ . }}</span>
         </div>
         {{- end }}
         {{- if or .Params.repo .Params.demo .Params.links }}
         <div class="pdmeta-row">
-          <span class="pdmeta-label">links</span>
+          <span class="pdmeta-label pdmeta-label--links">links</span>
           <span class="pdmeta-links">
             {{- with .Params.repo }}<a href="{{ . }}" target="_blank" rel="noreferrer noopener">github↗</a>{{ end }}
             {{- with .Params.demo }}<a href="{{ . }}" target="_blank" rel="noreferrer noopener">live↗</a>{{ end }}
@@ -20,9 +22,17 @@
           </span>
         </div>
         {{- end }}
+        {{- with .Params.tags }}
+        <div class="pdmeta-row">
+          <span class="pdmeta-label pdmeta-label--tags">tags</span>
+          <div class="pdmeta-tags">
+            {{- range . }}{{ with site.GetPage (printf "/tags/%s" (urlize .)) }}<a class="tag tag--small" href="{{ .RelPermalink }}">#{{ .Title | lower }}</a>{{ end }}{{ end }}
+          </div>
+        </div>
+        {{- end }}
         {{- with .Params.tech }}
         <div class="pdmeta-row">
-          <span class="pdmeta-label">tech</span>
+          <span class="pdmeta-label pdmeta-label--tech">tech</span>
           <div class="pdmeta-tags">
             {{- range . }}<span class="tag tag--small">{{ . }}</span>{{ end }}
           </div>

@@ -1,9 +1,10 @@
 ---
 title: "A blog post about the blog you're reading this post on"
+description: "Resisting the urge to hand-roll my own blog, landing on Hugo and Azure, then tuning it with static caching and real security headers."
 date: 2021-04-21T15:51:27-07:00
 tags:
-  - process
-  - workflow
+  - website
+  - azure
 projects:
   - squalr.us
 ---

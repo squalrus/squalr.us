@@ -1,6 +1,9 @@
 ---
 title: "Car Rainbow"
 date: 2023-01-09T00:00:00+00:00
+tags:
+  - website
+  - gamedev
 description: "A road-trip game for kids: spot a real car of each rainbow color out the window and check it off — with expanded color sets and an in-order 'hard mode'."
 status: archived
 image: /img/projects/car-rainbow/featured.png

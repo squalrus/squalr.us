@@ -1,5 +1,6 @@
 ---
 title: "Runway: How I Stopped Losing Project Context Between Claude Code Sessions"
+description: "Three markdown files and two slash commands that keep Claude Code oriented across sessions, so I stop re-explaining my projects from scratch."
 date: 2026-06-04T00:00:00+00:00
 tags:
   - ai

@@ -1,6 +1,9 @@
 ---
 title: "BadgeFor.Me"
 date: 2026-01-18T00:00:00+00:00
+tags:
+  - website
+  - azure
 description: "Satirical Presence-as-a-Service™ site — certified Attendance Engineers scan your work badge so your employer's system thinks you came in."
 status: active
 image: /img/projects/badgefor.me/featured.png

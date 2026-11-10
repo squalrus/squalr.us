@@ -1,9 +1,9 @@
 ---
 title: Estimating work on a software team
+description: "How long is this going to take? Breaking features into small, estimable chunks so stakeholders get real numbers and the team gets a real plan."
 date: 2021-02-25T00:00:00+00:00
 tags:
   - process
-  - workflow
 ---
 
 How long is this going to take?

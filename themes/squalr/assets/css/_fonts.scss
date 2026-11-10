@@ -1,3 +1,49 @@
+// Self-hosted (CSP font-src 'self'). Latin subsets from Fontsource, all SIL OFL.
+
+// ---- Reading + UI: Space Grotesk (variable, 300–700) ----
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style:  normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('/fonts/space-grotesk-var.woff2') format('woff2');
+}
+
+// ---- Retro headings: Silkscreen ----
+@font-face {
+  font-family: 'Silkscreen';
+  font-style:  normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/silkscreen-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Silkscreen';
+  font-style:  normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/silkscreen-700.woff2') format('woff2');
+}
+
+// ---- Code: Space Mono ----
+@font-face {
+  font-family: 'Space Mono';
+  font-style:  normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/space-mono-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  font-style:  normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/space-mono-700.woff2') format('woff2');
+}
+
+// ---- Decorative only: wordmark + 90s widgets (WinAmp, ads, odometer, marquee) ----
 @font-face {
   font-family: 'Press Start 2P';
   font-style:  normal;
@@ -12,20 +58,4 @@
   font-weight: 400;
   font-display: swap;
   src: url('/fonts/vt323.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Comic Neue';
-  font-style:  normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/comic-neue-400.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Comic Neue';
-  font-style:  normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/comic-neue-700.woff2') format('woff2');
 }

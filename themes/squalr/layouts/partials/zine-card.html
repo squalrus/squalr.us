@@ -1,0 +1,25 @@
+{{- /* Zine post card — whole card is one link. Context (.) is a blog page.
+       Used on /blog/, tag pages, and the "keep reading" strip on posts. */ -}}
+{{- $sum := .Description | default (.Summary | plainify | htmlUnescape) -}}
+<a class="zine-card" href="{{ .RelPermalink }}">
+  <span class="zc-date" aria-hidden="true">
+    <span class="zc-mon">{{ .Date.Format "Jan" }}</span>
+    <span class="zc-day">{{ .Date.Format "02" }}</span>
+    <span class="zc-yr">{{ .Date.Format "2006" }}</span>
+  </span>
+  <span class="zc-body">
+    <span class="zc-title">
+      {{- .Title }}
+      {{- if ge .Date (now.AddDate 0 0 -45) }} <span class="newgif blink">NEW!</span>{{ end }}
+    </span>
+    {{- with $sum }}<span class="zc-sum">{{ . | truncate 170 }}</span>{{ end }}
+    <span class="zc-meta">
+      <span class="zc-time">{{ .Date.Format "Jan 2, 2006" }} · {{ .ReadingTime }} min read</span>
+      {{- range .Params.projects }}{{ with site.GetPage (printf "/projects/%s" .) }}
+      <span class="zc-proj">◇ {{ .Title }}</span>{{ end }}{{ end }}
+      {{- range .Params.tags }}
+      <span class="zc-tag">#{{ . }}</span>{{ end }}
+    </span>
+  </span>
+  <span class="zc-arrow" aria-hidden="true">→</span>
+</a>

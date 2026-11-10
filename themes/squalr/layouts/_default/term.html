@@ -1,0 +1,36 @@
+{{- /* Single taxonomy term (/tags/azure/, /tech/react/): projects + posts
+       carrying this term, in the same card styles used elsewhere. */ -}}
+{{ define "main" }}
+  {{- $isTech := eq .Data.Plural "tech" }}
+  {{- $projects := (where .Pages "Section" "projects").ByDate.Reverse }}
+  {{- $posts := (where .Pages "Section" "blog").ByDate.Reverse }}
+  <header class="zine-head">
+    <a class="zine-back" href="{{ "tags/" | relURL }}">« all tags</a>
+    <span class="pj-kicker" aria-hidden="true">{{ if $isTech }}★ built with ★{{ else }}★ tagged ★{{ end }}</span>
+    <h1 class="zine-title">{{ if $isTech }}{{ .Title }}{{ else }}#{{ .Title | lower }}{{ end }}</h1>
+    <p class="zine-sub">
+      {{- with $projects }}<b>{{ len . }}</b> project{{ if ne (len .) 1 }}s{{ end }}{{ end }}
+      {{- if and $projects $posts }} · {{ end }}
+      {{- with $posts }}<b>{{ len . }}</b> post{{ if ne (len .) 1 }}s{{ end }}{{ end }}
+    </p>
+    <div class="pj-candy" aria-hidden="true"></div>
+  </header>
+
+  {{- with $projects }}
+  <section class="zine-sec" aria-labelledby="sec-projects">
+    <h2 class="zine-sec-h" id="sec-projects">▰ projects</h2>
+    <div class="projgrid">
+      {{- range . }}{{ partial "pcard.html" . }}{{ end }}
+    </div>
+  </section>
+  {{- end }}
+
+  {{- with $posts }}
+  <section class="zine-sec" aria-labelledby="sec-posts">
+    <h2 class="zine-sec-h" id="sec-posts">▰ posts</h2>
+    <ol class="zine-list zine-list--mixed">
+      {{- range . }}<li>{{ partial "zine-card.html" . }}</li>{{ end }}
+    </ol>
+  </section>
+  {{- end }}
+{{ end }}

@@ -26,6 +26,25 @@
     font-size: 15px;
     color: #fff;
     margin: 0;
+
+    // Title links to the detail page; pin every state so the global
+    // a:visited purple / a:hover magenta fill can't leak onto the purple bar
+    a,
+    a:visited {
+      color: #fff;
+      background: none;
+      text-decoration: none;
+      font-weight: inherit;
+    }
+    a:hover {
+      color: #fff;
+      background: none;
+      text-decoration: underline;
+      text-decoration-color: var(--zap);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+    a:focus-visible { outline: 3px solid var(--zap); outline-offset: 3px; }
   }
 
   // Status pill
@@ -90,6 +109,12 @@
   background: #000;
   border-right: 2px solid #5b1aa6;
   overflow: hidden;
+  display: block;
+  cursor: pointer;
+
+  // Rendered as <a>: keep the global link hover fill off the screenshot
+  &:hover { background: #000; }
+  &:hover img { filter: brightness(1.08); }
 
   img {
     width: 100%;

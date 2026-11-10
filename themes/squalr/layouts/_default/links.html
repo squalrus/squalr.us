@@ -28,8 +28,9 @@
   {{- /* Canonical / og:url are absolute on purpose: they should always name the production URL. */}}
   <link rel="canonical" href="{{ .Permalink }}" />
   <link rel="shortcut icon" href="{{ .Site.Params.favicon | default "/favicon.ico" }}" />
+  <link rel="preload" href="/fonts/space-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/silkscreen-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/press-start-2p.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/fonts/comic-neue-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ "img/bio.jpg" | relURL }}" as="image" fetchpriority="high">
   {{- $css := resources.Get "css/cybershack.scss" | toCSS (dict "transpiler" "dartsass") | minify }}
   <style>{{ $css.Content | safeCSS }}</style>

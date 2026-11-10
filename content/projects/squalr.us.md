@@ -2,6 +2,9 @@
 title: "squalr.us"
 slug: squalr-us
 date: 2017-08-12T00:00:00+00:00
+tags:
+  - website
+  - azure
 description: "This very site. A custom Hugo theme with too many neon glows and a healthy disrespect for whitespace."
 status: active
 image: /img/projects/squalr.us/featured.png

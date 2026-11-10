@@ -1,6 +1,9 @@
 ---
 title: "Desktop Tracker"
 date: 2026-04-23T00:00:00+00:00
+tags:
+  - automation
+  - workflow
 description: "Windows tray app that silently tracks time per Virtual Desktop and syncs daily totals to BambooHR."
 status: active
 tech: [Python, JavaScript, SVG, PyInstaller, BambooHR API]

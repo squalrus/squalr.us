@@ -2,6 +2,34 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.15.0] — 2026-11-10
+
+### Added
+
+- **Blog redesign.** `/blog/` is now a zine-style list grouped by year, with a date stamp and summary on each post card. Post pages get a dispatch number, a calendar stamp, a lede from the post description, a details card, and newer/older "keep reading" cards. (`themes/squalr/layouts/blog/list.html`, `themes/squalr/layouts/blog/single.html`, `themes/squalr/layouts/partials/zine-card.html`, `themes/squalr/assets/css/_blog.scss`)
+- **Tag pages.** `/tags/` shows topic tiles with project and post counts, plus the tech stack. Each `/tags/<tag>/` page lists that tag's projects and posts together. `/tech/<thing>/` uses the same layout. (`themes/squalr/layouts/_default/term.html`, `themes/squalr/layouts/_default/terms.html`)
+- **Post descriptions.** All 12 posts have a one- or two-sentence `description:`. It's used for card summaries, post leads, tag-page cards, and search-result meta descriptions. (`content/blog/*.md`)
+- **Project tags.** All 13 projects have 1–3 tags from the shared vocabulary, shown as a TAGS row on project pages and linked to tag pages. (`content/projects/*.md`)
+- **`gamedev` tag.** Added to the tag vocabulary for game work. (`CLAUDE.md`)
+- **Readability layer.** Solid outlines, rounded corners and hard offset shadows replace Win95 bevels across the site, and link colors are pinned in every state. (`themes/squalr/assets/css/_readability.scss`)
+- **Project page header.** A tilted kicker, large title with offset shadows, rainbow candy-stripe rule, and a details card with colored labels. (`themes/squalr/layouts/projects/single.html`)
+
+### Changed
+
+- **Fonts.** Reading text now uses Space Grotesk, retro headings use Silkscreen, and code uses Space Mono. Press Start 2P and VT323 stay only on the wordmark and decorative widgets. (`themes/squalr/assets/css/_fonts.scss`, `themes/squalr/assets/css/_vars.scss`, `themes/squalr/static/fonts/`)
+- **Project cards.** The title and screenshot both link to the project page. Cards get a candy-stripe title bar, and their footer links are pill buttons. (`themes/squalr/layouts/partials/pcard.html`, `themes/squalr/assets/css/_projects.scss`)
+- **Tag tiles.** On `/tags/`, each tile lists projects before posts, matching the tag pages. (`themes/squalr/layouts/_default/terms.html`)
+- **Project and post tags in CLAUDE.md.** The tag section documents that projects share the post vocabulary and that every post needs a description. (`CLAUDE.md`)
+
+### Fixed
+
+- **Link colors on the cards and the links page.** Visited and hovered links keep their intended colors instead of picking up the site-wide purple and magenta. (`themes/squalr/assets/css/_links.scss`, `themes/squalr/assets/css/_projects.scss`)
+- **Card footer on phones.** "No notes yet" moves to its own line instead of wrapping in a narrow column. (`themes/squalr/assets/css/_readability.scss`)
+
+### Removed
+
+- **Unused Comic Neue font files.** Replaced by the Squalrus Games font family. (`themes/squalr/static/fonts/`)
+
 ## [1.14.0] — 2026-11-10
 
 ### Added

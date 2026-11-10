@@ -1,5 +1,6 @@
 ---
 title: GitHub Pull Request Automation with GitHub Actions
+description: "Building a JavaScript GitHub Action that merges pull requests on its own once the labels and reviews line up: the story behind PR Merge Bot."
 date: 2019-10-17T00:00:00+00:00
 tags:
   - automation

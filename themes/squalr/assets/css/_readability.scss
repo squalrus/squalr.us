@@ -1,0 +1,589 @@
+// ============================================================
+// Readability pass — "flat retro" (trial layer)
+// ------------------------------------------------------------
+// Brings the /links/ treatment to the rest of the site:
+//   · solid ink outlines + hard offset shadows + rounded corners
+//     instead of Win95 bevels and ridge borders
+//   · Space Grotesk (--sans) for anything you actually read (nav,
+//     dates, meta, tags, captions, footer, prose); Silkscreen
+//     (--retro) for pixel-style headings; Press Start 2P / VT323
+//     stay only on the wordmark and decorative widgets
+//   · secondary text at near-full ink, link states pinned
+//
+// This file only OVERRIDES earlier partials. To back the whole
+// pass out, delete the `@use 'readability'` line in cybershack.scss.
+// Decorative widgets (WinAmp, odometer, fake ads, 88×31 badges,
+// marquee) are intentionally left as-is.
+// ============================================================
+
+:root {
+  --ink-2:   #2e2650;                  // was #3a2f5c — darker secondary text
+  --edge:    2px solid var(--ink);
+  --lift:    4px 4px 0 var(--ink);
+  --lift-sm: 3px 3px 0 var(--ink);
+  --round:   14px;
+  --round-sm: 10px;
+}
+
+// ---- Retro headings: Silkscreen, sized up (it runs smaller than Press Start 2P) ----
+
+.win .tbar          { font-family: var(--retro); font-size: 14px; letter-spacing: .02em; }
+.gallery-lb-tbar    { font-family: var(--retro); font-size: 13px; }
+.sticker,
+h2.sticker          { font-family: var(--retro); font-size: 20px; font-weight: 700; }
+.page-title         { font-family: var(--retro); font-weight: 700; font-size: clamp(22px, 3.6vw, 30px); }
+.panel h2           { font-family: var(--retro); font-weight: 400; font-size: 15px; letter-spacing: .04em; }
+.newgif             { font-family: var(--retro); font-size: 11px; }
+.constr             { font-family: var(--retro); font-size: 14px; }
+.foot-constr        { font-family: var(--retro); font-size: 14px; }
+.foot .viewed       { font-family: var(--retro); font-weight: 400; font-size: 13px; letter-spacing: .04em; }
+.gb-send            { font-family: var(--retro); font-size: 14px; }
+.error-404-title    { font-family: var(--retro); }
+.error-404 a        { font-family: var(--retro); font-size: 15px; }
+.lt-sec             { font-family: var(--retro); font-weight: 400; font-size: 15px; letter-spacing: .04em; }
+.skip-link          { font-family: var(--sans); font-weight: 700; font-size: 15px; }
+
+// Space Grotesk sets a touch wider than Comic Neue: semibold reads cleaner than bold for small labels
+a.tag, span.tag, .pstat, .project-status, .lt-pill, .pj { font-weight: 600; }
+
+// Shared "flat button" recipe: white card, ink outline, offset shadow
+@mixin flat-btn {
+  font-family: var(--comic);
+  font-weight: 700;
+  text-decoration: none;
+  border: var(--edge);
+  border-radius: var(--round-sm);
+  box-shadow: var(--lift-sm);
+  transition: transform .12s ease, box-shadow .12s ease;
+
+  &,
+  &:visited { background: #fff; color: var(--ink); }
+
+  &:hover {
+    background: #fff;
+    color: var(--ink);
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--hot);
+  }
+  &:active { transform: translate(3px, 3px); box-shadow: none; }
+  &:focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; }
+}
+
+// Wallpaper fills the viewport even on short pages
+body { min-height: 100vh; }
+
+// ---- Top banner ----
+
+.banner-top {
+  border: var(--edge);
+  border-radius: var(--round);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+// ---- Window chrome ----
+
+.win {
+  border: var(--edge);
+  border-radius: var(--round);
+  box-shadow: 6px 6px 0 var(--ink);
+  overflow: hidden;
+  background: var(--paper);
+
+  .tbar {
+    border: 0;
+    border-bottom: var(--edge);
+    padding: 7px 10px;
+  }
+
+  .body { border: 0; padding: 18px; }
+}
+
+// Title-bar buttons: flat squares instead of bevels
+.tb-btns .tb-btn {
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  background: #fff;
+  &:active { border-color: var(--ink); background: var(--zap); }
+}
+
+// ---- Nav ----
+
+.navrow {
+  gap: 10px;
+  margin-bottom: 20px;
+
+  a {
+    @include flat-btn;
+    font-size: 16px;
+    padding: 8px 16px;
+
+    &.cur,
+    &.cur:visited,
+    &.cur:hover { background: var(--ink); color: #fff; }
+  }
+}
+
+// ---- Pagination ----
+
+.page-item {
+  .page-link {
+    @include flat-btn;
+    font-size: 15px;
+    padding: 7px 12px;
+  }
+  &.active .page-link,
+  &.active .page-link:hover { background: var(--ink); color: #fff; }
+}
+
+// ---- Inner-page headings + meta ----
+
+.page-title {
+  border-radius: var(--round-sm);
+  border-width: 2px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.page-subtitle {
+  font-family: var(--comic);
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.post-header { border-bottom: 2px dashed rgba(26, 21, 48, .35); }
+
+.post-meta {
+  font-family: var(--comic);
+  font-size: 15px;
+  color: var(--ink-2);
+  gap: 6px 14px;
+}
+
+// ---- Tags ----
+
+a.tag,
+span.tag {
+  font-family: var(--comic);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink);
+  background: #dcf5f5;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  padding: 1px 10px;
+}
+a.tag:visited { color: var(--ink); }
+a.tag:hover   { background: var(--zap); color: var(--ink); }
+
+.tag--small { font-size: 13px; padding: 0 9px; }
+.tag--large { font-size: 16px; padding: 3px 13px; }
+
+// ---- Sidebar panels ----
+
+.panel {
+  border: var(--edge);
+  border-radius: var(--round);
+  box-shadow: var(--lift);
+  padding: 12px;
+
+  h2 {
+    font-family: var(--comic);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: .1em;
+    color: var(--ink);
+    border-bottom: 2px dashed rgba(26, 21, 48, .3);
+  }
+}
+
+.statlist {
+  font-family: var(--comic);
+  font-size: 15px;
+
+  li { color: var(--ink); line-height: 1.3; }
+}
+
+.counter-wrap .since { font-size: 13px; color: var(--ink-2); }
+
+.social-icon {
+  border: var(--edge);
+  border-radius: 50%;
+  box-shadow: 2px 2px 0 var(--ink);
+  width: 38px;
+  height: 38px;
+
+  &,
+  &:visited { background: #fff; color: var(--ink); }
+  &:hover   { background: #fff; color: var(--hot); border-color: var(--ink); box-shadow: 3px 3px 0 var(--hot); }
+}
+
+// ---- Homepage ----
+
+.welcome { font-size: 17px; line-height: 1.55; }
+
+.sticker {
+  border-radius: var(--round-sm);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+// ---- Project cards ----
+
+.pcard {
+  border: var(--edge);
+  border-radius: var(--round);
+  box-shadow: var(--lift);
+  background: #fff;
+  transition: transform .12s ease, box-shadow .12s ease;
+
+  .pchrome { border-bottom: var(--edge); padding: 10px 16px; }
+
+  .pname {
+    font-family: var(--comic);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.15;
+  }
+
+  .pstat {
+    font-family: var(--comic);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    padding: 2px 10px;
+    border: 1.5px solid currentColor;
+    border-radius: 999px;
+
+    &.on       { color: #005c10; background: #e3f7e5; }
+    &.wip      { color: #6e4600; background: #fff1c9; }
+    &.archived { color: #3d3d3d; background: #ececec; }
+  }
+
+  .pdesc { font-size: 17px; line-height: 1.5; }
+
+  .pfoot {
+    font-family: var(--comic);
+    font-size: 15px;
+    border-top: 2px dashed rgba(26, 21, 48, .2);
+  }
+
+  // Title bar picks up the project-header patterns: candy stripe along the
+  // bottom edge and a hard offset shadow behind the title
+  .pchrome {
+    background:
+      repeating-linear-gradient(
+        90deg,
+        #ff0040  0    20px,
+        #ff6a00 20px  40px,
+        #ffcc00 40px  60px,
+        #00a619 60px  80px,
+        #008b8b 80px 100px,
+        #d4009c 100px 120px
+      ) bottom / 100% 6px no-repeat,
+      linear-gradient(90deg, #5b1aa6, #9b2fb0);
+    padding-bottom: 16px;
+  }
+
+  .pname a,
+  .pname a:visited,
+  .pname a:hover { text-shadow: 2px 2px 0 var(--ink); }
+  .pname a:hover { color: var(--zap); text-decoration: none; }
+
+  // Footer links as pill buttons; "read more" is the filled primary
+  .plinks {
+    flex-wrap: wrap;
+    gap: 8px;
+
+    a {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 3px 12px;
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      box-shadow: 2px 2px 0 var(--ink);
+      text-decoration: none;
+      transition: transform .12s ease, box-shadow .12s ease;
+
+      &,
+      &:visited { background: #fff; color: var(--ink); }
+      &:hover {
+        background: #fff;
+        color: var(--ink);
+        transform: translate(-1px, -1px);
+        box-shadow: 3px 3px 0 var(--hot);
+      }
+      &:focus-visible { outline: 3px solid var(--hot); outline-offset: 2px; }
+
+      &:first-child,
+      &:first-child:visited,
+      &:first-child:hover { background: var(--ink); color: #fff; }
+    }
+  }
+
+  .pfoot { flex-wrap: wrap; row-gap: 10px; }
+
+  .pnotes,
+  .pnotes.none { color: var(--ink-2); white-space: nowrap; margin-left: auto; }
+  a.pnotes,
+  a.pnotes:visited { color: var(--ink); font-weight: 700; }
+  a.pnotes:hover   { color: #fff; background: var(--hot); }
+
+  &:hover {
+    border-color: var(--ink);
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0 var(--hot);
+  }
+}
+
+.shot { border-right: var(--edge); }
+
+@media (max-width: 760px) {
+  .shot { border-right: 0; border-bottom: var(--edge); }
+}
+
+// ---- Post lists ----
+
+.posts {
+  border: var(--edge);
+  border-radius: var(--round);
+  box-shadow: var(--lift);
+  overflow: hidden;
+  background: #fff;
+
+  li {
+    font-size: 16px;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(26, 21, 48, .15);
+  }
+
+  .dt { font-family: var(--comic); font-size: 14px; color: var(--ink-2); }
+
+  .pj {
+    font-family: var(--comic);
+    font-weight: 700;
+    font-size: 12px;
+    color: #005c10;
+    background: #e3f7e5;
+    border: 1.5px solid currentColor;
+    border-radius: 999px;
+    padding: 0 8px;
+  }
+}
+
+@media (max-width: 760px) {
+  .posts .dt { font-size: 13px; }
+}
+
+// ---- Article prose ----
+
+.post-content,
+.doc-content {
+  code {
+    font-family: var(--mono);
+    font-size: .86em;
+    border-radius: 4px;
+    padding: 1px 5px;
+  }
+
+  pre {
+    border: var(--edge);
+    border-radius: var(--round-sm);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 12px 14px;
+
+    code { font-size: 1em; padding: 0; }
+  }
+
+  blockquote { border-radius: 0 var(--round-sm) var(--round-sm) 0; }
+
+  table { font-size: 16px; }
+}
+
+// ---- Project detail page ----
+
+// Header: tilted sticker kicker, big title with stacked offset shadows,
+// candy-stripe rule, then a white "spec sheet" card with colored label chips.
+.project-header {
+  border-bottom: 0;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+
+  .pj-kicker {
+    display: inline-block;
+    font-family: var(--retro);
+    font-size: 13px;
+    color: #fff;
+    background: var(--hot);
+    border: var(--edge);
+    border-radius: 6px;
+    box-shadow: 2px 2px 0 var(--ink);
+    padding: 3px 10px;
+    margin: 2px 0 12px;
+    transform: rotate(-2deg);
+  }
+
+  .post-title {
+    font-size: clamp(32px, 5.4vw, 50px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -.01em;
+    color: var(--ink);
+    text-shadow: 3px 3px 0 var(--zap), 6px 6px 0 rgba(212, 0, 156, .45);
+    margin: 0 0 16px;
+  }
+
+  .pj-candy {
+    height: 10px;
+    border: var(--edge);
+    border-radius: 999px;
+    margin: 0 0 18px;
+    background: repeating-linear-gradient(
+      90deg,
+      #ff0040  0    24px,
+      #ff6a00 24px  48px,
+      #ffcc00 48px  72px,
+      #00a619 72px  96px,
+      #008b8b 96px 120px,
+      #5b1aa6 120px 144px,
+      #d4009c 144px 168px
+    );
+  }
+
+  .project-detail-meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 12px 14px;
+    margin: 0;
+    padding: 16px 18px;
+    background: #fff;
+    border: var(--edge);
+    border-radius: var(--round);
+    box-shadow: var(--lift);
+  }
+
+  // Each row's label + value become the grid's two cells, so labels line up
+  .pdmeta-row { display: contents; }
+
+  // Values hug their content instead of stretching across the grid cell
+  .pdmeta-row > :not(.pdmeta-label) { justify-self: start; }
+}
+
+.pdmeta-label {
+  justify-self: start;
+  font-family: var(--retro);
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--ink);
+  padding: 3px 9px;
+  border: 1.5px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 var(--ink);
+  min-width: 0;
+
+  &--status { background: #7fe3e3; }
+  &--links  { background: #ffb3e6; }
+  &--tech   { background: var(--zap); }
+  &--tags   { background: #b9f5a6; }
+}
+
+.pdmeta-links {
+  gap: 8px 10px;
+
+  a {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 3px 12px;
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    box-shadow: 2px 2px 0 var(--ink);
+    text-decoration: none;
+    transition: transform .12s ease, box-shadow .12s ease;
+
+    &,
+    &:visited { background: #fff; color: var(--ink); }
+    &:hover {
+      background: #fff;
+      color: var(--ink);
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0 var(--hot);
+    }
+    &:focus-visible { outline: 3px solid var(--hot); outline-offset: 2px; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pdmeta-links a { transition: none; }
+}
+
+.project-status {
+  font-family: var(--comic);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 2px 10px;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  color: #005c10;
+  background: #e3f7e5;
+
+  &.status-wip,
+  &.status-paused   { color: #6e4600; background: #fff1c9; }
+  &.status-archived { color: #3d3d3d; background: #ececec; }
+}
+
+.project-hero-media,
+.project-carousel {
+  border: var(--edge);
+  border-radius: var(--round);
+  box-shadow: var(--lift);
+  overflow: hidden;
+}
+
+.pc-bar {
+  background: var(--paper);
+  border-top: var(--edge);
+}
+
+.pc-btn {
+  @include flat-btn;
+  font-size: 13px;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.pc-dot {
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: #fff;
+}
+
+.pc-count { font-family: var(--comic); font-weight: 700; font-size: 15px; color: var(--ink); }
+
+.pc-slide figcaption { font-family: var(--comic); font-size: 15px; }
+
+// ---- Footer ----
+
+.foot {
+  font-family: var(--comic);
+  font-size: 16px;
+  border-top: 0;
+  border: var(--edge);
+  border-radius: var(--round);
+  box-shadow: 6px 6px 0 var(--ink);
+  overflow: hidden;
+  color: #fff;
+
+  .em      { font-size: 16px; }
+  .updated { font-family: var(--comic); font-size: 14px; color: #b8f5c4; }
+  .ver     { font-family: var(--comic); font-size: 14px; }
+  .smol    { font-size: 13px; color: #dcdcf0; }
+  .viewed  { font-family: var(--comic); font-weight: 700; font-size: 12px; color: #c8c8f0; letter-spacing: .12em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navrow a, .page-item .page-link, .pcard, .pc-btn { transition: none; }
+}

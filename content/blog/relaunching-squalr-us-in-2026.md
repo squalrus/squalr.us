@@ -1,5 +1,6 @@
 ---
 title: "Relaunching squalr.us in 2026"
+description: "Google Analytics had been collecting nothing since 2023. The audit, the fixes, and the custom 90s theme that turned this blog back into something I maintain."
 date: 2026-06-02T00:00:00+00:00
 tags:
   - azure

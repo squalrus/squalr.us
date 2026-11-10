@@ -1,5 +1,6 @@
 ---
 title: WTF is NFT
+description: "What NFTs actually are, what happened when I tried to mint and sell one myself, and why the energy bill makes the whole thing hard to love."
 date: 2022-01-29T00:00:00+00:00
 tags:
   - web3

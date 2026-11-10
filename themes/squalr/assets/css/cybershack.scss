@@ -42,5 +42,10 @@
 @use 'pagination';      // .pagination, .page-item
 @use 'links';           // /links/ link-tree page
 
+// Trial "flat retro" readability pass — overrides the partials above.
+// Delete this line to revert the whole pass.
+@use 'readability';
+@use 'blog';            // /blog/ zine list
+
 // Media queries (last so they always win over component defaults)
 @use 'responsive'; // prefers-reduced-motion + max-width:760px

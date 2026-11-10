@@ -1,6 +1,8 @@
 ---
 title: "Chogots"
 date: 2026-09-12T00:00:00+00:00
+tags:
+  - gamedev
 description: "A pixel-art creature-care game for Android with a deadpan sense of humor. Hatch an egg, keep its needs up, furnish its room, and play Gem Match to pay for it all. It's probably fine."
 status: wip
 image: /img/projects/chogots/featured.png

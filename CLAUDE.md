@@ -51,6 +51,10 @@ themes/squalr/
   assets/css/_project-detail.scss # project detail meta, hero image, gallery
   assets/css/_pagination.scss # .pagination
   assets/css/_links.scss      # /links/ link-tree page
+  assets/css/_readability.scss # flat-retro readability layer (overrides earlier partials; @use last)
+  assets/css/_blog.scss       # /blog/ zine list, post pages, tag pages
+  layouts/blog/              # list.html (/blog/), single.html (posts)
+  layouts/_default/term.html # single taxonomy term page (/tags/x/, /tech/x/)
   assets/css/_responsive.scss # prefers-reduced-motion + max-width:760px
   static/cybershack.js        # visitor counter, guestbook, sparkle cursor, now-playing (localStorage)
 assets/
@@ -61,7 +65,7 @@ static/
 config.yaml        # site config, menu, palette (params.style), hero (params.hero)
 ```
 
-The homepage is standalone; every other page renders through `baseof.html`, which wraps the page's content in a Win95 "window" with a cream, **readable** body (Times-serif prose for posts/projects).
+The homepage is standalone; every other page renders through `baseof.html`, which wraps the page's content in a Win95 "window" with a cream, **readable** body (Space Grotesk prose for posts/projects; Silkscreen for retro headings; Space Mono for code; `--pix`/`--term` fonts only on the wordmark and decorative widgets).
 
 ## Adding a New Post
 
@@ -76,6 +80,7 @@ Frontmatter format:
 ```yaml
 ---
 title: "Post Title Here"
+description: "One or two punchy sentences, ≤160 chars. Shown on cards, the post lede, and in search results."
 date: 2026-05-30T00:00:00+00:00
 tags:
   - tag-one
@@ -97,6 +102,11 @@ Use only these tags on new posts. Do not invent new ones without updating this l
 | `documentation` | Documentation practices, specs, READMEs, changelogs |
 | `ai` | AI, LLMs, Claude, prompt engineering |
 | `web3` | NFT, cryptocurrency, blockchain |
+| `gamedev` | Game development, game studio work (Unity, game sites, game-like toys) |
+
+The same vocabulary applies to **projects** (`tags:` in `content/projects/*.md`, 1–3 per project) so `/tags/<tag>/` lists posts and projects together. Project tech stack stays in the separate `tech:` taxonomy.
+
+Every post also gets a `description:` (one or two sentences, ≤160 chars, in the post's voice). It drives the `/blog/` card summary, the post page's lede, tag-page cards, and the meta description.
 
 ## Adding a Project
 
@@ -110,6 +120,7 @@ title: "Project Name"
 date: 2026-06-01T00:00:00+00:00   # ISO 8601; used for sorting, not displayed
 description: "One-sentence plain-English summary shown on the project card."
 status: active          # active | wip | paused | archived (colored status pill)
+tags: [website, azure]  # 1–3 from the canonical tag vocabulary (shared with posts)
 tech: [TypeScript, Go]  # shown as tags
 repo: https://...       # optional; renders "GitHub ↗"
 demo: https://...       # optional; renders "Demo ↗"

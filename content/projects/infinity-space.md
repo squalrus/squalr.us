@@ -1,6 +1,8 @@
 ---
 title: "Infinity Space"
 date: 2026-06-15T00:00:00+00:00
+tags:
+  - gamedev
 description: "A top-down survival space shooter headed for Android, Xbox, and Steam. Fight through procedurally generated sectors and scavenge ship parts to stay fueled, armed, and alive."
 status: wip
 image: /img/projects/infinity-space/featured.png

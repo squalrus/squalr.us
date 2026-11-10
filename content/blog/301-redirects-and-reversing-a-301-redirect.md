@@ -1,5 +1,6 @@
 ---
 title: 301 Redirects and Reversing a 301 Redirect
+description: "When to 301, when to 302, when to just let it 404, and how to back out of a 'permanent' redirect once browsers have already cached it."
 date: 2021-04-20T00:00:00+00:00
 tags:
   - website

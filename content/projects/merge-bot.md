@@ -1,6 +1,9 @@
 ---
 title: "merge-bot"
 date: 2019-09-20T00:00:00+00:00
+tags:
+  - automation
+  - workflow
 description: "GitHub Action for automated PR merging based on labels, blocking labels, and reviewer sign-off."
 status: archived
 repo: https://github.com/squalrus/merge-bot

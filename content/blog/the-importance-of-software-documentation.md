@@ -1,9 +1,9 @@
 ---
 title: "The Importance of Software Documentation"
+description: "Emails and design comps stopped cutting it once our features grew up. Why a central project spec, the 'durable artifact', keeps a growing team aligned."
 date: 2021-03-28T20:55:27-07:00
 tags:
   - process
-  - workflow
   - documentation
 ---
 

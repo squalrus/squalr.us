@@ -1,9 +1,9 @@
 ---
 title: "Prioritization Framework"
+description: "Drowning in backlog? The PIE framework (Potential, Importance, Ease) scores every item so your priority list stops being whoever asked loudest."
 date: 2021-02-21T20:57:43-08:00
 tags:
   - process
-  - workflow
 ---
 
 An overwhelmingly large backlog can be a challenging thing to manage. To get it under control a "prioritization framework" may be the solution.

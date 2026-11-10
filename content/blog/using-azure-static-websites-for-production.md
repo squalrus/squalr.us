@@ -1,5 +1,6 @@
 ---
 title: Using Azure Static Websites for production
+description: "The follow-up to the 99% savings post: CDN rules for HTTPS redirects, HSTS, trailing slashes, and www, so a static Azure site is actually production-ready."
 date: 2019-08-18T00:00:00+00:00
 tags:
   - azure

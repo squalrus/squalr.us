@@ -1,6 +1,8 @@
 ---
 title: "Spored"
 date: 2026-08-10T00:00:00+00:00
+tags:
+  - website
 description: "A hyperlocal neighborhood discovery app — check in at local spots, collect a mushroom species for every place and neighbor you find, follow events, claim coupons, and earn badges. Started in Phinneywood, Seattle; anyone can start their own neighborhood."
 status: active
 image: /img/projects/spored/featured.png

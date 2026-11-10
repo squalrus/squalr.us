@@ -1,5 +1,6 @@
 ---
 title: "Deploying an 11ty Site to Azure Static Web Apps"
+description: "Azure Static Web Apps makes hosting a static site free and painless. Here is how I deployed an Eleventy site to it, start to finish."
 date: 2021-05-13T20:27:15-07:00
 tags:
   - azure

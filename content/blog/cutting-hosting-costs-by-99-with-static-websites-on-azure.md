@@ -1,5 +1,6 @@
 ---
 title: Cutting hosting costs by 99% with static websites on Azure
+description: "A custom domain with SSL on Azure App Service starts around $55 a month. Azure Storage static websites plus a CDN do the same job for about $0.20."
 date: 2018-07-31T00:00:00+00:00
 tags:
   - azure

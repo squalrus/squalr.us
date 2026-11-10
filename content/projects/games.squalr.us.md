@@ -2,6 +2,10 @@
 title: "Squalrus Games"
 slug: games.squalr.us
 date: 2026-09-22T00:00:00+00:00
+tags:
+  - gamedev
+  - website
+  - azure
 description: "The studio site for Squalrus Games, my one-person game studio. It has a section for each game, a press kit, and the privacy and support pages that app stores require."
 status: active
 image: /img/projects/games.squalr.us/featured.png

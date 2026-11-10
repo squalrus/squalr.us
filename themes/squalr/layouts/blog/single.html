@@ -1,0 +1,59 @@
+{{- /* Blog post — shares the project-header kit (kicker, big title, candy
+       stripe, spec-sheet card) in the zine color scheme, then the article,
+       related projects, and a "keep reading" pair of zine cards. */ -}}
+{{ define "main" }}
+  {{- $all := (where site.RegularPages "Section" "blog").ByDate }}
+  {{- $n := 0 }}{{ range $i, $p := $all }}{{ if eq $p.RelPermalink $.RelPermalink }}{{ $n = add $i 1 }}{{ end }}{{ end }}
+  <article class="post">
+    <header class="post-header project-header zine-post">
+      <span class="zc-date zp-stamp zp-stamp--c{{ mod $n 5 }}" aria-hidden="true">
+        <span class="zc-mon">{{ .PublishDate.Format "Jan" }}</span>
+        <span class="zc-day">{{ .PublishDate.Format "02" }}</span>
+        <span class="zc-yr">{{ .PublishDate.Format "2006" }}</span>
+      </span>
+      <span class="pj-kicker" aria-hidden="true">★ dispatch #{{ printf "%03d" $n }} ★</span>
+      <h1 class="post-title">{{ .Title }}</h1>
+      {{- with .Description }}<p class="zine-dek">{{ . }}</p>{{ end }}
+      <div class="pj-candy" aria-hidden="true"></div>
+      <div class="project-detail-meta">
+        <div class="pdmeta-row">
+          <span class="pdmeta-label pdmeta-label--status">posted</span>
+          <span class="zp-when"><time datetime="{{ .PublishDate.Format "2006-01-02" }}">{{ .PublishDate.Format "Jan 2, 2006" }}</time> · {{ .ReadingTime }} min read</span>
+        </div>
+        {{- with .Params.tags }}
+        <div class="pdmeta-row">
+          <span class="pdmeta-label pdmeta-label--tech">tags</span>
+          <div class="pdmeta-tags">
+            {{- range . }}{{ with site.GetPage (printf "/tags/%s" (urlize .)) }}<a class="tag" href="{{ .RelPermalink }}">#{{ .Title | lower }}</a>{{ end }}{{ end }}
+          </div>
+        </div>
+        {{- end }}
+        {{- with .Params.projects }}
+        <div class="pdmeta-row">
+          <span class="pdmeta-label pdmeta-label--links">project</span>
+          <span class="pdmeta-links">
+            {{- range . }}{{ with site.GetPage (printf "/projects/%s" .) }}<a href="{{ .RelPermalink }}">◇ {{ .Title }}</a>{{ end }}{{ end }}
+          </span>
+        </div>
+        {{- end }}
+      </div>
+    </header>
+    <div class="post-content">
+      {{ .Content }}
+    </div>
+    {{ partial "related-projects.html" . }}
+
+    {{- /* $all is oldest-first and $n is 1-based, so neighbours are explicit by date */}}
+    {{- $older := false }}{{ if gt $n 1 }}{{ $older = index $all (sub $n 2) }}{{ end }}
+    {{- $newer := false }}{{ if lt $n (len $all) }}{{ $newer = index $all $n }}{{ end }}
+    {{- if or $older $newer }}
+    <nav class="zine-more" aria-label="More posts">
+      <h2 class="zine-more-h">★ keep reading ★</h2>
+      <ol class="zine-list zine-list--mixed">
+        {{- with $newer }}<li><span class="zm-dir">newer ▲</span>{{ partial "zine-card.html" . }}</li>{{ end }}
+        {{- with $older }}<li><span class="zm-dir">older ▼</span>{{ partial "zine-card.html" . }}</li>{{ end }}
+      </ol>
+    </nav>
+    {{- end }}
+  </article>
+{{ end }}

@@ -30,8 +30,12 @@
   --mq:        18s;
 
   // Font stacks
-  --pix:   'Press Start 2P', monospace;
-  --term:  'VT323', monospace;
-  --comic: 'Comic Neue', 'Comic Sans MS', cursive;
-  --serif: 'Times New Roman', Times, serif;
+  // Same family as games.squalr.us: Space Grotesk / Silkscreen / Space Mono
+  --sans:  'Space Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --retro: 'Silkscreen', 'Press Start 2P', monospace;   // readable pixel headings
+  --mono:  'Space Mono', ui-monospace, Consolas, Menlo, monospace;
+  --pix:   'Press Start 2P', monospace;                 // wordmark + decorative widgets
+  --term:  'VT323', monospace;                          // decorative widgets only
+  --comic: var(--sans);  // legacy name — every former Comic Neue use is now Space Grotesk
+  --serif: 'Times New Roman', Times, serif;             // only the fake BMG ad uses this now
 }

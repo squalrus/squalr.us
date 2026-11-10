@@ -85,36 +85,135 @@
   }
 }
 
-// ---- Screenshot gallery ----
+// ---- Screenshot carousel (replaces the hero when a page has a gallery) ----
+// Scroll-snap track works with swipe/trackpad on its own; cybershack.js
+// unhides .pc-bar and wires up the arrows, dots, and counter.
 
-.project-gallery { margin-top: 18px; }
-
-.project-gallery-label {
-  font-family: var(--comic);
-  font-weight: 700;
-  color: var(--hot);
-  margin: 0 0 8px;
+.project-carousel {
+  border: 3px ridge var(--neon);
+  margin: 12px 0 16px;
+  background: #000;
 }
 
-.project-gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 8px;
+.pc-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+
+  &::-webkit-scrollbar { display: none; }
+  &:focus-visible { outline: 2px dashed var(--hot); outline-offset: -4px; }
 }
 
-.project-gallery-item {
+@media (prefers-reduced-motion: no-preference) {
+  .pc-track { scroll-behavior: smooth; }
+}
+
+.pc-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
   margin: 0;
-  border: 2px ridge var(--neon-2);
-  background: var(--paper-2);
+  position: relative;
+  aspect-ratio: 16 / 10;
 
-  img { width: 100%; display: block; height: auto; cursor: zoom-in; }
+  > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    cursor: zoom-in;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  // CRT overlay — matches .project-hero-media::after
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, .11) 0,
+      rgba(0, 0, 0, .11) 1px,
+      transparent       1px,
+      transparent       3px
+    );
+    box-shadow: inset 0 0 36px rgba(0, 0, 0, .52);
+  }
 
   figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
     font-family: var(--term);
-    font-size: 13px;
-    padding: 3px 6px;
-    color: var(--ink-2);
+    font-size: 16px;
+    color: #fff;
+    background: rgba(0, 0, 0, .72);
+    padding: 3px 10px;
+    pointer-events: none;
   }
+}
+
+.pc-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px;
+  background: var(--chrome);
+  border-top: 2px solid var(--chrome-dd);
+
+  &[hidden] { display: none; }
+}
+
+.pc-btn {
+  background: var(--chrome);
+  color: #000;
+  border: 2px solid;
+  border-color: var(--chrome-l) var(--chrome-dd) var(--chrome-dd) var(--chrome-l);
+  font-size: 12px;
+  min-width: 32px;
+  min-height: 26px;
+  cursor: pointer;
+
+  &:active { border-color: var(--chrome-dd) var(--chrome-l) var(--chrome-l) var(--chrome-dd); }
+}
+
+.pc-dots {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pc-dot {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 1px solid var(--chrome-dd);
+  background: var(--chrome-l);
+  cursor: pointer;
+
+  &[aria-current="true"] { background: var(--hot); }
+}
+
+.pc-count {
+  font-family: var(--term);
+  font-size: 16px;
+  color: #000;
+  white-space: nowrap;
 }
 
 // ---- Gallery lightbox (CSS :target) ----

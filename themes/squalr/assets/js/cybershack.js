@@ -600,6 +600,68 @@
     });
   }
 
+  /* ---------- PROJECT SCREENSHOT CAROUSEL ---------- */
+  // The track is a CSS scroll-snap strip (swipe works without JS); this adds
+  // arrow buttons, dots, a counter, and arrow-key nav when the track is focused.
+  function initCarousels() {
+    var carousels = document.querySelectorAll('.project-carousel');
+    Array.prototype.forEach.call(carousels, function (root) {
+      var strip = root.querySelector('.pc-track');
+      var bar = root.querySelector('.pc-bar');
+      var slides = root.querySelectorAll('.pc-slide');
+      var dots = root.querySelectorAll('.pc-dot');
+      var count = root.querySelector('.pc-count');
+      var n = slides.length;
+      if (!strip || !bar || n < 2) return;
+      bar.hidden = false;
+
+      function current() {
+        return Math.round(strip.scrollLeft / strip.clientWidth);
+      }
+      function go(i) {
+        i = (i + n) % n;
+        strip.scrollTo({ left: i * strip.clientWidth, behavior: reducedMotion ? 'auto' : 'smooth' });
+      }
+      function sync() {
+        var i = Math.min(n - 1, Math.max(0, current()));
+        count.textContent = (i + 1) + ' / ' + n;
+        Array.prototype.forEach.call(dots, function (d, j) {
+          if (j === i) d.setAttribute('aria-current', 'true');
+          else d.removeAttribute('aria-current');
+        });
+      }
+
+      var ticking = false;
+      strip.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () { ticking = false; sync(); });
+      }, { passive: true });
+
+      function nav(how) { track('carousel_nav', { method: how }); }
+      root.querySelector('.pc-prev').addEventListener('click', function () {
+        nav('prev'); go(current() - 1);
+      });
+      root.querySelector('.pc-next').addEventListener('click', function () {
+        nav('next'); go(current() + 1);
+      });
+      Array.prototype.forEach.call(dots, function (d, j) {
+        d.addEventListener('click', function () { nav('dot'); go(j); });
+      });
+      strip.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
+      });
+
+      // Closing the lightbox after paging through it lands the carousel on
+      // the last image viewed.
+      window.addEventListener('hashchange', function () {
+        var m = location.hash.match(/^#img-(\d+)$/);
+        if (m) strip.scrollLeft = parseInt(m[1], 10) * strip.clientWidth;
+      });
+    });
+  }
+
   /* ---------- DISCOGS COLLECTION PANEL ---------- */
   function initDiscogs() {
     var listEl = document.getElementById('discogs-list');
@@ -720,6 +782,7 @@
     initWindowControls();
     initWinampControls();
     initGalleryLightbox();
+    initCarousels();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);

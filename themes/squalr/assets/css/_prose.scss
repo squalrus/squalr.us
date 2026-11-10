@@ -118,9 +118,9 @@
   img { image-rendering: auto; max-width: 100%; height: auto; border: 2px solid var(--ink); background: #fff; }
 }
 
-// Hero and gallery images also render crisp
+// Hero and carousel images also render crisp
 .project-hero-media img,
-.project-gallery-item img { image-rendering: auto; }
+.pc-slide img { image-rendering: auto; }
 
 // ---- Related posts / projects ----
 

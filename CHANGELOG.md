@@ -2,6 +2,27 @@
 
 User-visible changes to squalr.us, newest first. Format loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the site uses [semver](https://semver.org/) — see [BACKLOG.md](./BACKLOG.md#shipping-a-backlog-item) for how each backlog item gets versioned and migrated here.
 
+## [1.14.0] — 2026-11-10
+
+### Added
+
+- **Link page at `/links/`.** A single-column link tree with your photo, a home button, every live project (listed automatically from the project pages), and social icons. Search and social previews get a profile card with your name, role, and links. (`content/links.md`, `themes/squalr/layouts/_default/links.html`, `themes/squalr/assets/css/_links.scss`)
+- **Screenshot carousel on project pages.** Pages with a `gallery:` show a carousel in place of the top image, with the featured image first. Arrow buttons, dots, a counter, swipe, and arrow-key navigation. Clicking a slide opens the existing lightbox. (`themes/squalr/layouts/projects/single.html`, `themes/squalr/assets/css/_project-detail.scss`, `themes/squalr/assets/js/cybershack.js`)
+- **Squalrus Games project page.** The studio site at games.squalr.us, covering its game sections, press kit, and privacy and support pages. (`content/projects/games.squalr.us.md`, `assets/img/projects/games.squalr.us/featured.png`)
+- **Chogots project page.** The pixel-art creature-care game, in closed Android testing. (`content/projects/chogots.md`, `assets/img/projects/chogots/featured.png`)
+- **Spored screenshots.** Ten images of the app: check-in, location, account, badges, collection, mushroom customizer, and the neighborhood admin and monitoring views. (`assets/img/projects/spored/`)
+
+### Changed
+
+- **Project pages with a gallery** now show the carousel instead of a separate screenshot grid below the article. (`themes/squalr/layouts/projects/single.html`)
+- **Spored project page rewritten** for the current app: neighborhoods anyone can start, the mushroom collection, "Here now," events, coupons, the $99 one-time premium upgrade, and the move off Google Maps. (`content/projects/spored.md`)
+- **Infinity Space project page updated** with the platforms it's headed for (Android, Xbox, Steam), the game-loop work since June (ship parts, Relic and Large Threat sectors), and a link to the games site. (`content/projects/infinity-space.md`)
+- **CLAUDE.md** documents the new `gallery:` behavior and the `/links/` page. (`CLAUDE.md`)
+
+### Removed
+
+- **Placeholder Spored hero image.** `featured.jpg` is replaced by a new featured screenshot. (`assets/img/projects/spored/featured.jpg`)
+
 ## [1.13.0] — 2026-08-10
 
 ### Added
